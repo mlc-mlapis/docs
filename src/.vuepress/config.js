@@ -29,7 +29,7 @@ module.exports = {
   themeConfig: {
     repo: '',
     editLinks: false,
-    docsDir: '',
+    docsDir: 'documentation',
     editLinkText: '',
     lastUpdated: false,
     nav: [
@@ -43,103 +43,104 @@ module.exports = {
       }
     ],
     sidebar: {
+
       '/documentation/': [
         {
           title: 'Zerops Overview',
           collapsable: false,
           children: [
             '',
-            '/overview/projects-and-services-structure',
-            '/overview/users',
-            '/overview/made-for-developers',
+            'overview/projects-and-services-structure',
+            'overview/users',
+            'overview/made-for-developers',
           ]
         },
         {
           title: 'Building apps on Zerops',
           collapsable: false,
           children: [
-            '/build/how-zerops-build-works',
-            '/build/build-config',
+            'build/how-zerops-build-works',
+            'build/build-config',
           ]
         },
         {
           title: 'Deploying code to Zerops',
           collapsable: false,
           children: [
-            '/deploy/how-deploy-works',
-            '/deploy/deploy-with-cli',
-            '/deploy/use-in-github-actions',
-            '/deploy/use-in-gitlab-ci',
-            '/deploy/use-in-circle-ci'
+            'deploy/how-deploy-works',
+            'deploy/deploy-with-cli',
+            'deploy/use-in-github-actions',
+            'deploy/use-in-gitlab-ci',
+            'deploy/use-in-circle-ci'
           ]
         },
         {
           title: 'GitHub vs. Zerops',
           collapsable: false,
           children: [
-            '/github/login-with-github',
-            '/github/github-integration',
+            'github/login-with-github',
+            'github/github-integration',
           ]
         },
         {
           title: 'High availability & Realibility',
           collapsable: false,
           children: [
-            '/ha/why-should-i-want-high-availability',
-            '/ha/how-to-make-my-code-ha-enabled',
-            '/ha/zerops-enterprise-grade-realibility',
+            'ha/why-should-i-want-high-availability',
+            'ha/how-to-make-my-code-ha-enabled',
+            'ha/zerops-enterprise-grade-realibility',
           ]
         },
         {
           title: 'Automatic Scaling',
           collapsable: false,
           children: [
-            '/automatic-scaling/how-automatic-scaling-works',
+            'automatic-scaling/how-automatic-scaling-works',
           ]
         },
         {
           title: 'Backup and restore',
           collapsable: false,
           children: [
-            '/backup-restore/backup-restore-databases',
-            '/backup-restore/deploy-versioning',
+            'backup-restore/backup-restore-databases',
+            'backup-restore/deploy-versioning',
           ]
         },
         {
           title: 'Public & private routing',
           collapsable: false,
           children: [
-            '/routing/routing-between-project-services',
-            '/routing/using-your-domain',
-            '/routing/access-through-ip-and-firewall',
-            '/routing/change-synchronization',
-            '/routing/zerops-subdomain',
-            '/routing/unique-ipv4-ipv6-addresses',
+            'routing/routing-between-project-services',
+            'routing/using-your-domain',
+            'routing/access-through-ip-and-firewall',
+            'routing/change-synchronization',
+            'routing/zerops-subdomain',
+            'routing/unique-ipv4-ipv6-addresses',
           ]
         },
         {
           title: 'Logs',
           collapsable: false,
           children: [
-            '/logs/build-logs',
-            '/logs/runtime-logs',
+            'logs/build-logs',
+            'logs/runtime-logs',
           ]
         },
         {
           title: 'Enviroment variables',
           collapsable: false,
           children: [
-            '/environment-variables/how-to-access',
-            '/environment-variables/helper-variables',
-            '/environment-variables/commit-changes',
+            'environment-variables/how-to-access',
+            'environment-variables/helper-variables',
+            'environment-variables/commit-changes',
           ]
         },
         {
           title: 'CLI',
           collapsable: false,
           children: [
-            '/cli/available-commands',
-            '/cli/vpn'
+            'cli/available-commands',
+            'cli/vpn'
           ]
         },
         {
@@ -147,10 +148,10 @@ module.exports = {
           collapsable: false,
           initialOpenGroupIndex: 1,
           children: [
-            '/services/runtimes',
-            '/services/databases',
-            '/services/storage',
-            '/services/managed-linux-container'
+            'services/runtimes',
+            'services/databases',
+            'services/storage',
+            'services/managed-linux-container'
           ]
         }
       ]
