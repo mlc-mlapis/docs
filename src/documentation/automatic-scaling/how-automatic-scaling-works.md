@@ -1,0 +1,1 @@
+# How automatic scaling works

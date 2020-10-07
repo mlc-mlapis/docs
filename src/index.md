@@ -4,7 +4,7 @@ heroImage: /logo.png
 heroText:
 tagline: No-nonsense, developer friendly cloud platform. It can build, deploy, run, and manage your runtimes, databases and storages, all high availability enabled.
 actionText: Learn how to set up your project →
-actionLink: /guide/
+actionLink: /documentation/
 features:
 - title: Runtimes, databases and storages
   details: "Connect Zerops with your GitHub repository to build, deploy and then run your Go, Node, PHP or static code. Add fully managed MySQL, MongoDB, Elasticsearch, RabbitMQ databases to your projects or utilize fully managed S3 compatible object storage."

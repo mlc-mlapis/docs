@@ -1,0 +1,1 @@
+# Automatically generated helper variables
