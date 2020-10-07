@@ -122,8 +122,8 @@ module.exports = {
           title: 'Logs',
           collapsable: false,
           children: [
-            'logs/build-logs',
-            'logs/runtime-logs',
+            'zerops-logs/build-logs',
+            'zerops-logs/runtime-logs',
           ]
         },
         {
