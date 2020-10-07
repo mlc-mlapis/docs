@@ -4,7 +4,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
-  title: 'Zerops.io docs & knowledge base',
+  title: 'docs.zerops.io',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
@@ -36,9 +36,24 @@ module.exports = {
       {
         text: 'Documentation',
         link: '/documentation/',
+      },
+      {
+        text: 'Knowledge base',
+        link: '/knowledge-base/',
       }
     ],
     sidebar: {
+
+      '/knowledge-base/': [
+        {
+          title: 'Knowledge base',
+          collapsable: false,
+          children: [
+            '',
+          ]
+        }
+      ],
+
       '/documentation/': [
         {
           title: 'Zerops Overview',
