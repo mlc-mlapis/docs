@@ -10,7 +10,8 @@
   "repository": "https://github.com/zeropsio/docs/zerops-docs",
   "scripts": {
     "dev": "vuepress dev src",
-    "build": "vuepress build src"
+    "build": "vuepress build src",
+    "deploy": "npm run build"
   },
   "license": "MIT",
   "devDependencies": {

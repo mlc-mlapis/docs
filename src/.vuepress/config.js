@@ -91,6 +91,14 @@ module.exports = {
           ]
         },
         {
+          title: 'Backup and restore',
+          collapsable: false,
+          children: [
+            'backup-restore/backup-restore-databases',
+            'backup-restore/deploy-versioning',
+          ]
+        },
+        {
           title: 'Public & private routing',
           collapsable: false,
           children: [
@@ -100,6 +108,14 @@ module.exports = {
             'routing/change-synchronization',
             'routing/zerops-subdomain',
             'routing/unique-ipv4-ipv6-addresses',
+          ]
+        },
+        {
+          title: 'Logs',
+          collapsable: false,
+          children: [
+            'logs/build-logs',
+            'logs/runtime-logs',
           ]
         },
         {
@@ -122,6 +138,7 @@ module.exports = {
         {
           title: 'Services in zerops',
           collapsable: false,
+          initialOpenGroupIndex: 1,
           children: [
             'services/runtimes',
             'services/databases',
