@@ -64,6 +64,9 @@ module.exports = {
           children: [
             'deploy/how-deploy-works',
             'deploy/deploy-with-cli',
+            'deploy/use-in-github-actions',
+            'deploy/use-in-gitlab-ci',
+            'deploy/use-in-circle-ci'
           ]
         },
         {
