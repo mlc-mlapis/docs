@@ -43,17 +43,6 @@ module.exports = {
       }
     ],
     sidebar: {
-
-      '/knowledge-base/': [
-        {
-          title: 'Knowledge base',
-          collapsable: false,
-          children: [
-            '',
-          ]
-        }
-      ],
-
       '/documentation/': [
         {
           title: 'Zerops Overview',
