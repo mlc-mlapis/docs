@@ -141,6 +141,10 @@ export default {
     p
       color lighten($textColor, 25%)
       line-height 2em
+    a
+      border-bottom: 1px dotted $accentColor
+    a:hover
+      background lighten($textColor, 95%)
   .feature-title
     min-height 55px
   .footer

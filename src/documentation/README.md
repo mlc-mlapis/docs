@@ -15,7 +15,7 @@ All databases Zerops manages are running on at least [three hardware separated n
 
 ### 3. Take care of internal and public routing
 
-Each service can [securely communite]() with other services inside the same project using their hostnames and ports, i.e. your Golang app service (`myapp:3000`) can access a mongo database service(`mydatabase:27017`) using `mongodb://mydatabase:27017` connection string. You can manage which ports are open inside the Zerops.io app.
+Each service can [securely communicate]() with other services inside the same project using their hostnames and ports, i.e. your Golang app service (`myapp:3000`) can access a mongo database service(`mydatabase:27017`) using `mongodb://mydatabase:27017` connection string. You can manage which ports are open inside the Zerops.io app.
 
 If your application needs to be publicly accesible, Zerops can easily set up access from your [domains](), as well as direct access thru [unique IPv4 or IPv6 address](), with ability to setup [firewall]() rules. Zerops also generates a [*.zerops.io subdomain]() if you just needs to test things out.
 
