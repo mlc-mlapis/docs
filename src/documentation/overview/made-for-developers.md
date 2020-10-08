@@ -1,3 +1,3 @@
 # Made for Developers
 
-# Empower your local development
+## Empower your local development

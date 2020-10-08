@@ -59,8 +59,7 @@ body
   > *:first-child
     margin-top $navbarHeight
 
-  a:hover
-    text-decoration underline
+
 
   p.demo
     padding 1rem 1.5rem
@@ -81,6 +80,13 @@ a
   font-weight 500
   color $accentColor
   text-decoration none
+
+.content__default a
+  border-bottom 1px dotted $accentColor
+
+.content__default a:hover
+  background lighten($textColor, 95%)
+  text-decoration none!important
 
 p a code
   font-weight 400
