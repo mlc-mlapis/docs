@@ -44,8 +44,8 @@
         :key="index"
         class="feature"
       >
-        <h2>{{ feature.title }}</h2>
-        <p>{{ feature.details }}</p>
+        <h2 v-html="feature.title" class="feature-title"></h2>
+        <p v-html="feature.details"></p>
       </div>
     </div>
 
@@ -121,6 +121,7 @@ export default {
     border-top 1px solid $borderColor
     padding 1.2rem 0
     margin-top 2.5rem
+    margin-bottom 1rem
     display flex
     flex-wrap wrap
     align-items flex-start
@@ -132,12 +133,20 @@ export default {
     max-width 30%
     h2
       font-size 1.4rem
+      line-height 1.6em
       font-weight 500
       border-bottom none
       padding-bottom 0
       color lighten($textColor, 10%)
     p
       color lighten($textColor, 25%)
+      line-height 2em
+    a
+      border-bottom: 1px dotted $accentColor
+    a:hover
+      background lighten($textColor, 95%)
+  .feature-title
+    min-height 55px
   .footer
     padding 2.5rem
     border-top 1px solid $borderColor

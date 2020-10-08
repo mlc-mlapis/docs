@@ -1,18 +1,17 @@
 ---
 home: true
-heroImage: /logo.png
 heroText:
 tagline: No-nonsense, developer friendly cloud platform. It can build, deploy, run, and manage your runtimes, databases and storages, all high availability enabled.
 actionText: Learn how to set up your project →
 actionLink: /documentation/
 features:
-- title: Runtimes, databases and storages
-  details: "Connect Zerops with your GitHub repository to build, deploy and then run your Go, Node, PHP or static code. Add fully managed MySQL, MongoDB, Elasticsearch, RabbitMQ databases to your projects or utilize fully managed S3 compatible object storage."
-- title: To developers by developers
-  details: "Zerops.io app is built with developer in mind, set up complex infrastructures for your projects in seconds. Use VPN build into our CLI to securely connect to your services for local development, use our CLI inside your favorite CI/CD services to deploy"
-- title: Autoscaling & reliability
-  details: "All your services will run on multiple containers and automatically scale up and down, both horizontally and vertically in matter of seconds. Your code and databases will always run on the most optimal setting."
+- title: Runtimes, databases <br/>and storages
+  details: 'Connect Zerops with your <a href="/documentation/github/github-integration.html">GitHub repository</a> to <a href="/documentation/build/how-zerops-build-works.html">build</a>, <a href="/documentation/deploy/how-deploy-works.html">deploy</a> and then run your <a href="/documentation/services/runtimes.html#golang">Golang</a>, <a href="/documentation/services/runtimes.html#node-js">Node.js</a>, <a href="/documentation/services/runtimes.html#php">PHP</a> apps <br/> or <a href="/documentation/services/static-server.html">static code</a>. Add fully managed <a href="/documentation/services/databases.html#mariadb-mysql">MySQL</a>, <a href="/documentation/services/databases.html#mongodb">MongoDB</a>, <a href="/documentation/services/databases.html#elasticsearch">Elasticsearch</a>, <a href="/documentation/services/databases.html#rabbitmq">RabbitMQ</a> databases to your projects or utilize a fully managed S3 compatible <a href="documentation/services/storage.html#s3-compatible-object-storage">object storage</a>.'
+- title: From developers <br/> to developers
+  details: 'Zerops.io app is <a href="/documentation/overview/made-for-developers.html">built with developers in mind</a>, set up complex, production ready infrastructure for your projects in seconds. Use <a href="/documentation/cli/vpn.html">VPN</a> built into our <a href="/documentation/cli/available-commands.html">CLI</a> to securely connect to your services for <a href="/documentation/overview/made-for-developers.html#empower-your-local-development">easy local development</a> or use our CLI inside your favorite <a href="/documentation/deploy/deploy-with-cli.html">CI/CD services to deploy</a> your code to Zerops'
+- title: Autoscaling <br/> & reliability
+  details: 'Your services will run on <a href="/documentation/ha/why-should-i-want-high-availability.html">multiple containers</a> and <a href="/documentation/automatic-scaling/how-automatic-scaling-works.html">automatically scale</a> up and down, both horizontally and vertically in seconds, always running on the <a href="/documentation/ha/zerops-enterprise-grade-realibility.html">most optimal setting</a>. A powerful <a href="/documentation/backup-restore/backup-restore-databases.html">backup</a> and <a href="/documentation/backup-restore/deploy-versioning.html">versioning</a> system will make sure you can always get back up and running quickly.'
 
 
-footer:
+footer: Zerops.io
 ---

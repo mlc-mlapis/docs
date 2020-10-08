@@ -27,11 +27,12 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
-    repo: '',
+    repo: 'https://github.com/zeropsio',
     editLinks: false,
     docsDir: 'documentation',
     editLinkText: '',
     lastUpdated: false,
+    logo: '/logo.png',
     nav: [
       {
         text: 'Documentation',
@@ -140,7 +141,7 @@ module.exports = {
           collapsable: false,
           children: [
             'cli/available-commands',
-            'cli/vpn'
+            'cli/vpn',
           ]
         },
         {
@@ -149,9 +150,10 @@ module.exports = {
           initialOpenGroupIndex: 1,
           children: [
             'services/runtimes',
+            'services/static-server',
             'services/databases',
             'services/storage',
-            'services/managed-linux-container'
+            'services/managed-linux-container',
           ]
         }
       ]

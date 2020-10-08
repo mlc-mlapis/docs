@@ -94,7 +94,7 @@ function css (el, property) {
 
 <style lang="stylus">
 $navbar-vertical-padding = 0.7rem
-$navbar-horizontal-padding = 1.5rem
+$navbar-horizontal-padding = 0.9rem
 
 .navbar
   padding $navbar-vertical-padding $navbar-horizontal-padding
@@ -104,10 +104,11 @@ $navbar-horizontal-padding = 1.5rem
   .logo
     height $navbarHeight - 1.4rem
     min-width $navbarHeight - 1.4rem
-    margin-right 0.8rem
+    margin-right 0.1rem
     vertical-align top
   .site-name
     font-size 1.3rem
+    line-height 1.5em
     font-weight 600
     color $textColor
     position relative
