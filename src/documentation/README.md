@@ -6,9 +6,11 @@ Zerops is a cloud **platform-as-a-service** (PaaS) made [by developers for devel
 
 ### 1. Build, deploy and run your applications or serve static files
 
-A good build and deploy setup is hard, so we try to make it easy no matter your usecase. You can connect a service with a GitHub repository to automatically trigger build and deploy pipeline using the `zerops.yml` build definition file. Or use [Zerops CLI]() to manully trigger [zcli deploy]() of your build artefacts, or `zcli push` cli [command]() to start build and deploy pipeline. No matter if you do it locally from you terminal, or from [GitHub Actions](), [Gitlab CD/CI]() or any other [CI service]().
+A good build and deploy setup is hard, so we try to make it easy no matter your usecase. You can [connect your service with a GitHub repository]() to automatically trigger build and deploy pipeline using the [`zerops.yml`]() build definition file.
 
-Whether you need to server a [JAMSTACK]() or run an environment, we have you covered. Serve a static [Angular](), [Vue]() or [react]() app from our [nginx server](), run multiple [Node.js](), [Golang]() or [PHP]() applications on Zerops [runtime services]().
+Alternatively use [Zerops CLI]() to manully trigger [deploy]() of your build artefacts, or `zcli push` cli [command]() to start build and deploy pipeline. No matter if you do it locally from you terminal, or from [GitHub Actions](), [Gitlab CD/CI]() or any other [CI service]().
+
+Whether you need to serve a [JAMSTACK]() app or run an environment, we have you covered. Serve a static [Angular](), [Vue]() or [react]() app from our [nginx server](), run multiple [Node.js](), [Golang]() or [PHP]() applications on Zerops [runtime services]().
 
 
 ### 2. Fully manage databases
