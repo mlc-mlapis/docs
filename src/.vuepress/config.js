@@ -53,6 +53,7 @@ module.exports = {
             '',
             'overview/projects-and-services-structure',
             'overview/users',
+            'overview/pricing',
             'overview/made-for-developers',
           ]
         },
@@ -166,5 +167,15 @@ module.exports = {
   plugins: [
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
+    [
+      'vuepress-plugin-zooming',
+      {
+        delay: 1000,
+        options: {
+          bgColor: 'black',
+          zIndex: 10000,
+        },
+      },
+    ],
   ]
 }
