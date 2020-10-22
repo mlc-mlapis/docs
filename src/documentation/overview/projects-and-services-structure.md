@@ -4,7 +4,7 @@
 
 Zerops project is a group of zerops services united by a name, it can for example consist of a nodejs [runtime]() with a mongo [database]() and an object storage.
 
-We [encourage]() you to create a project for each environemnt, i.e. `myapp-production`, `myapp-stage`, `myapp-devel`, or even for [each developer](), i.e. `myapp-ales`. You can add unlimited number of projects, you only [pay for the usage]() over the [free basic performance](). So each developer can have their own copy of a project to develop on, utilizing our powerfull [dev tools]().
+We [encourage]() you to create a project for each environemnt, i.e. `myapp-production`, `myapp-stage`, `myapp-devel`, or even for [each developer](), i.e. `myapp-johnd`. You can add unlimited number of projects, you only [pay for the usage]() over the [free basic performance](). So each developer can have their own copy of a project to develop on, utilizing our powerfull [dev tools]().
 
 All services inside the project share a [private network]() and can see and reference [environment variables]() from other services.
 
