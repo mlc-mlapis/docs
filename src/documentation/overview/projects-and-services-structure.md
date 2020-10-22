@@ -8,7 +8,7 @@ We [encourage]() you to create a project for each environemnt, i.e. `myapp-produ
 
 All services inside the project share a [private network]() and can see and reference [environment variables]() from other services.
 
-Each project is assigned a unique [IPv6 address]() and optionally an [IPv4 address](). These can be used to set up public access to any of the project's services, either by your [custom domain]() or [direct access through public ports]() of the unique IP managed by a built in [firewall]().
+Each project is assigned a unique [IPv6 address]() and optionally an [IPv4 address](). You can then either set up public access through [domains]()  and point your DNS records to the assigned IP addresses, or set up direct access to the service through the IP by [opening public ports](). Direct access can be managed by a built in [firewall]().
 
 <br />
 
