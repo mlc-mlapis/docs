@@ -19,6 +19,18 @@
       />
     </div>
 
+    <!-- discord link -->
+    <a
+      v-if="discordLink"
+      :href="discordLink"
+      class="repo-link"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Discord
+      <OutboundLink />
+    </a>
+
     <!-- repo link -->
     <a
       v-if="repoLink"
@@ -30,6 +42,19 @@
       {{ repoLabel }}
       <OutboundLink />
     </a>
+
+    <!-- discord link -->
+    <a
+      href="https://app.zerops.dev"
+      class="repo-link"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Zerops
+      <OutboundLink />
+    </a>
+
+
   </nav>
 </template>
 
@@ -97,6 +122,16 @@ export default {
         return /^https?:/.test(repo)
           ? repo
           : `https://github.com/${repo}`
+      }
+      return null
+    },
+
+    discordLink () {
+      const { discord } = this.$site.themeConfig
+      if (discord) {
+        return /^https?:/.test(discord)
+          ? repo
+          : `https://discord.gg/${discord}`
       }
       return null
     },

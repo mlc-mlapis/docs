@@ -31,6 +31,7 @@ module.exports = {
     editLinks: false,
     docsDir: 'documentation',
     editLinkText: '',
+    discord: 'c58kMZaEuS',
     lastUpdated: false,
     logo: '/logo.png',
     nav: [
