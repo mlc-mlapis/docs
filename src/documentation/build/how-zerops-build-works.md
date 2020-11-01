@@ -8,8 +8,8 @@ Internally Zerops creates a new temporal build container inside your project, ru
 
 ### Example
 
-- Runtime Service — nginx (to serve stack files)
-- Application - Angular (built using nodejs and npm)
+- Runtime Service — [nginx static]() (to serve stack files)
+- Application to build and [deploy]() - Angular (using nodejs and npm)
 
 ```yaml
 # select what technology your build uses
