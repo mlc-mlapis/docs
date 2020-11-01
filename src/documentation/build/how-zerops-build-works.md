@@ -6,6 +6,8 @@ Build can be triggered either using our [CLI]() or by connecting a service to a 
 
 Internally Zerops creates a new temporal build container inside your project, runs the defined commands and uses [deploy]() to deploy the result to your runtime container. Running build (and its log) can be monitored inside our [application]().
 
+Build container has access to the project's [environment variables](), so you can utilize them.
+
 ### Example
 
 - Runtime Service — [nginx static]() (to serve stack files)
