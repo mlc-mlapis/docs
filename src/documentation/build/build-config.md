@@ -2,9 +2,9 @@
 sidebarDepth: 3
 ---
 
-# Build config (zerops.yml)
+# Build Config (zerops.yml)
 
-Zerops uses a yaml definition file to build your application. This file, `zerops.yml` has to be placed at the root of your project.
+Zerops uses a yaml definition file to build your application. This file, `zerops.yml`, has to be placed at the root of your project.
 
 ## Example
 
@@ -23,7 +23,7 @@ deploy: [ dist, node_modules, package.json ]
 
 ### `uses`
 
-List which technologies your build uses zerops will, zerops will it as a base pack for the [build container](). Leave empty, if you can to install everything yourself inside the `run` property.
+List the technologies your build uses. Zerops will use this as a base pack for the [build container](). Leave this field empty if you prefer to install everything yourself inside the `run` property.
 
 #### Supported base packs:
 
@@ -38,7 +38,7 @@ Includes `go`, `git`.
 
 #### Example of `uses`
 
-##### Uses multiple base packs:
+##### Using multiple base packs:
 
 ```yaml
 uses: [ nodejs@13, go@1 ]
@@ -49,7 +49,7 @@ uses: [ nodejs@13, go@1 ]
 uses: [ php@7.3 ]
 ```
 
-##### Using empty container (install everything yourself):
+##### Using an empty container (install everything yourself):
 ```yaml
 uses: []
 ```
@@ -63,7 +63,7 @@ uses: []
 
 ### `run`
 
-Which commands to `run` to produce you final build file. Use to install additional dependencies, prepare your files, run build commands.
+Specify which commands to `run` to produce your final build file. Use this to install additional dependencies, prepare your files, run build commands.
 
 #### Examples
 
@@ -92,7 +92,7 @@ runs:
 
 ### `deploy`
 
-Which of the files producted by your build should be [deploy]()ed to your runtime service. Path starts from the root (location of zerops.yml).
+Direct which of the files producted by your build should be [deploy]()ed to your runtime service. Path starts from the root (location of zerops.yml).
 
 #### Examples
 
