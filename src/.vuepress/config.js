@@ -56,6 +56,8 @@ module.exports = {
             'overview/users',
             'overview/pricing',
             'overview/made-for-developers',
+            'overview/roadmap',
+            'overview/release-log',
           ]
         },
         {
