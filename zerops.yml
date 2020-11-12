@@ -6,4 +6,4 @@ run:
   - npm i -g vuepress
   - vuepress build src
 # which files / folders to deploy after build
-deploy: [ dist ]
+deploy: [ src/.vuepress/dist ]
