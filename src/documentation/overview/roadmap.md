@@ -2,4 +2,4 @@
 
 We are nearing Public Beta release (December 2020), with release candidate expected by March, 2021.
 
-![Pricing](/pricing.png "Pricing")
+![Pricing](/roadmap.png "Roadmap")

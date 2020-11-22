@@ -15,7 +15,5 @@ Zerops takes care of the __no-shutdown__ deploy process by creating a new contai
 
 #### Example of the `deploy` command:
 
-- deploy from [local]()
 - deploy from [GitHub Actions]()
 - deploy from [GitLab CI/CD]()
-- deploy from [CircleCI]()

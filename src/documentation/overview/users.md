@@ -1,3 +1,7 @@
+---
+sidebarDepth: 3
+---
+
 # Company & Users
 
 You can sign up using your email or your [GitHub]() or [GitLab]() account. You will then be able to create a company account of which you will be an administrator. You can then invite other team members to this company account. There is no limit on the number of team members you can invite, as we [encourage]() each developer to have their own account and their own copy of each project.
@@ -9,3 +13,13 @@ Currently, in the private beta version, we do not have a role / restriction syst
 <br />
 
 ![User list](/users.png "User list")
+
+
+## Your account
+You account is separate from a user belonging to a company. You can be user in multiple companies under the same account (login).
+
+## Password change
+Password can by changed by clicking on your avatar in the upper right corner and going to the account setting page.
+
+## Password recovery
+You can recover your password (or set password to an account created through GitHub or GitLab) at app.zerops.io/password-recovery. Confirmation mail will be sent to your email address.

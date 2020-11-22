@@ -73,10 +73,8 @@ module.exports = {
           collapsable: false,
           children: [
             'deploy/how-deploy-works',
-            'deploy/deploy-with-cli',
             'deploy/use-in-github-actions',
-            'deploy/use-in-gitlab-ci',
-            'deploy/use-in-circle-ci'
+            'deploy/use-in-gitlab-ci'
           ]
         },
         {
@@ -85,6 +83,14 @@ module.exports = {
           children: [
             'github/login-with-github',
             'github/github-integration',
+          ]
+        },
+        {
+          title: 'GitLab vs. Zerops',
+          collapsable: false,
+          children: [
+            'gitlab/login-with-gitlab',
+            'gitlab/gitlab-integration',
           ]
         },
         {
@@ -107,6 +113,7 @@ module.exports = {
           title: 'Backup and restore',
           collapsable: false,
           children: [
+            'backup-restore/snapshot-backup',
             'backup-restore/backup-restore-databases',
             'backup-restore/deploy-versioning',
           ]
@@ -144,6 +151,7 @@ module.exports = {
           title: 'CLI',
           collapsable: false,
           children: [
+            'cli/authorization',
             'cli/available-commands',
             'cli/vpn',
           ]
