@@ -4,10 +4,13 @@ From the very beginning, our goal was to make DevOps as easy and straightforward
 
 We took our 14 years of [experience]() providing managed cloud solutions for developers and turned it into Zerops. Not only do we aim to make Zerops a great solution for production, but also a helpful tool for local development. As such, we [encourange]() for each environment and for each team member to have their own copy of infastructure. On Zerops, there is no limit for the number of team members or projects you can add. On top of that, each service is free on the basic level.
 
+### Each developer should have his own account, no artificial pricing boosting
+
+To be able to fully utilize Zerops, each developer should have his own account and if it makes sense for the project, even his own copy of the project. That's why we don't charge or put limits on number of projects or number of team members. You only pay for the performance and addons.
+
 ### Empower you local development
 
 Using our CLI, you can securely connect to your project using a built in VPN. This means you can locally connect to a database running on Zerops, so you don't need to have it running locally. Each developer can have their own copy of the project. This can also be used to securely import data to a database - any service running inside the project will instantenously became securely available on your network.
-
 
 ### Always open to new ideas
 
