@@ -40,32 +40,9 @@ $ zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
 
 ---
 
-## `push`
+## `push [project name] [service name]`
 
 Used to trigger build pipeline defined in `zerops.yml`, by default it will take in account your `gitignore`.
-
-
-### Attributes
-
-Have be be in this exact order, both required.
-
-#### `project name`
-
-Name of the project.
-
-```bash
-$ zcli push myproject myservice --versionName="v0.0.1"
-```
-
-
-#### `service name`
-
-Name of the service.
-
-```bash
-$ zcli push myproject myservice --versionName="v0.0.1"
-```
-
 
 ### Flags
 
@@ -87,7 +64,7 @@ Used to securely connect / disconnect into a Zerops project network.
 
 ### Commands
 
-#### `start <project name>`
+#### `start [project name]`
 
 Used to securely connect into project network, requires `project name` to be defined.
 
@@ -110,3 +87,11 @@ Prints vpn status
 ```bash
 $ zcli vpn status
 ```
+
+
+---
+
+## `deploy [project name] [service name] [files or paths]`
+
+Used to deploy files to zerops. Internally is used after [build pipeline]() finishes.
+

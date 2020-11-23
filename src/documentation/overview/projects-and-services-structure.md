@@ -2,13 +2,13 @@
 
 ## Project
 
-Zerops project is a group of Zerops services united by a name. It can for example consist of a nodejs [runtime]() with a mongo [database]() and an object storage.
+Zerops project is a group of Zerops services united by a name. It can for example consist of a nodejs [runtime](/documentation/services/runtimes.html) with a mongo [database](/documentation/services/databases.html) and an object storage.
 
-We [encourage]() you to create a project for each environemnt, i.e. `myapp-production`, `myapp-stage`, `myapp-devel`, or even for [each developer](), i.e. `myapp-johnd`. You can add unlimited number of projects, you only [pay for the usage]() that goes over the [free basic performance](). So each developer can have their own copy of a project to develop on, utilizing our powerful [dev tools]().
+We [encourage](/documentation/overview/made-for-developers.html#each-developer-should-have-his-own-account-no-artificial-pricing-boosting) you to create a project for each environemnt, i.e. `myapp-production`, `myapp-stage`, `myapp-devel`, or even for each developer, i.e. `myapp-johnd`. You can add unlimited number of projects, you only [pay for the usage](/documentation/overview/pricing.html) that goes over the [free basic performance](/documentation/overview/pricing.html#free-tier-unlimited-projects-and-team-members). So each developer can have their own copy of a project to develop on, utilizing our powerful [dev tools](/documentation/cli/vpn.html).
 
-All services inside the project share a [private network]() and can see and reference [environment variables]() from other services.
+All services inside the project share a [private network](/documentation/routing/routing-between-project-services.html) and can see and reference [environment variables](/documentation/environment-variables/how-to-access.html) from other services.
 
-Each project is assigned a unique [IPv6 address]() and optionally an [IPv4 address](). You can then either set up public access through [domains]()  and point your DNS records to the assigned IP addresses, or set up direct access to the service through the IP by [opening public ports](). Direct access can be managed by a built in [firewall]().
+Each project is assigned a unique [IPv6 address](/documentation/routing/unique-ipv4-ipv6-addresses.html) and optionally an [IPv4 address](/documentation/routing/unique-ipv4-ipv6-addresses.html). You can then either set up public access through [domains](/documentation/routing/using-your-domain.html)  and point your DNS records to the assigned IP addresses, or set up direct access to the service through the IP by [opening public ports](/documentation/routing/access-through-ip-and-firewall.html). Direct access can be managed by a built in [firewall](/documentation/routing/access-through-ip-and-firewall.html).
 
 <br />
 
@@ -17,13 +17,13 @@ Each project is assigned a unique [IPv6 address]() and optionally an [IPv4 addre
 
 ## Service
 
-Services are the most important part of Zerops. Each service consists of a [cluster]() of replicated linux containers running a technology, whether it's a [runtime](), [database](), [storage]() or a [static webserver]()). Each service has a hostname and an _n_ number of [ports](), it can be made [public by a domain](), or by an [IP adress and a port]().
+Services are the most important part of Zerops. Each service consists of a cluster of replicated linux containers running a zerops managed image of a technology, whether it's a [runtime](/documentation/services/runtimes.html), [database](/documentation/services/databases.html), [storage](/documentation/services/storage.html) or a [static webserver](/documentation/services/static-server.html)). Each service has a hostname and an _n_ number of [ports](/documentation/routing/routing-between-project-services.html), it can be made [public by a domain](/documentation/routing/using-your-domain.html), or by an [IP adress and a port](/documentation/routing/access-through-ip-and-firewall.html).
 
 ![Service card](/service-card.png "Service card")
 
 <br />
 
-A project can have [unlimited number of services](). Services are of different types and depending on the type they are either fully managed by Zerops, or partially managed by Zerops while giving you straighforward management abilities through our app.
+A project can have [unlimited number of services](/documentation/overview/made-for-developers.html#each-developer-should-have-his-own-account-no-artificial-pricing-boosting). Services are of different types and depending on the type they are either fully managed by Zerops, or partially managed by Zerops while giving you straighforward management abilities through our app.
 
 <br />
 
@@ -32,16 +32,16 @@ A project can have [unlimited number of services](). Services are of different t
 <br />
 
 ### Runtime services
-[Node.js](), [Golang](), [PHP]()
+[Node.js](/documentation/services/runtimes.html#node-js), [Golang](/documentation/services/runtimes.html#golang), [PHP](/documentation/services/runtimes.html#php)
 
 ### Database and broker services
-[MariaDB (MySQL)](), [MongoDB](), [Redis](), [Elasticsearch](), [RabbitMQ]()
+[MariaDB (MySQL)](/documentation/services/databases.html#mariadb-mysql), [MongoDB](/documentation/services/databases.html#mongodb), [Redis](/documentation/services/databases.html#redis), [Elasticsearch](/documentation/services/databases.html#elasticsearch), [RabbitMQ](/documentation/services/databases.html#rabbitmq)
 
 ### Static webserver
-[Nginx]()
+[Nginx](/documentation/services/static-server.html)
 
 ### Storage services
-[Shared storage](), [S3 compatible Object Storage]()
+[Shared storage](/documentation/services/storage.html#shared-storage), [S3 compatible Object Storage](/documentation/services/storage.html#s3-compatible-object-storage)
 
 <br />
 

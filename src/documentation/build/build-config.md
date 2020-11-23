@@ -23,7 +23,7 @@ deploy: [ dist, node_modules, package.json ]
 
 ### `uses`
 
-List the technologies your build uses. Zerops will use this as a base pack for the [build container](). Leave this field empty if you prefer to install everything yourself inside the `run` property.
+List the technologies your build uses. Zerops will use this as a base pack for the build container. Leave this field empty if you prefer to install everything yourself inside the `run` property.
 
 #### Supported base packs:
 
@@ -101,12 +101,3 @@ Direct which of the files producted by your build should be [deploy]()ed to your
 ```yaml
 deploy: [ dist, package.json ]
 ```
-
-<br/>
-<br/>
-<br/>
-<br/>
-
-::: tip WIP
-TODO other examples
-:::

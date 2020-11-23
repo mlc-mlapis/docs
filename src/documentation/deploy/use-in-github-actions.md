@@ -1,10 +1,10 @@
 # Use in Github Actions
 
-Our CLI can be [installed]() on GitHub Actions runners, enabling you to integrate deploy to Zerops to your existing actions. It is however preffered to [build]() directly on Zerops, either by [connecting]() your service with a GitHub repository or by using [push]() command of zcli to trigger the build pipeline.
+Our CLI can be [installed](/documentation/cli/installation-authorization.html#installation) on GitHub Actions runners, enabling you to integrate deploy to Zerops to your existing actions. It is however preffered to [build](/documentation/build/how-zerops-build-works.html) directly on Zerops, either by connecting your service with a [GitHub repository](/documentation/github/github-integration.html) or by using [push](/documentation/cli/available-commands.html#push-project-name-service-name) command of zcli to trigger the build pipeline.
 
 ### Example GitHub Deploy Action
 
-See full [zcli]() [login]() and [deploy]() documentation.
+See full [zcli](/documentation/cli/available-commands.html) [login](/documentation/cli/available-commands.html#login) and [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-files-or-paths) documentation.
 
 ```yaml
 name: Build and then deploy to zerops.io
