@@ -10,6 +10,8 @@ See full [zcli]() [login]() and [deploy]() documentation.
 build_and_deploy:
   script:
     - npm i -g @zerops/zcli
+    - npm ci
+    - npm run build
     # add ZEROPSTOKEN to your CI/CD env variables
     # at https://docs.gitlab.com/ee/ci/variables/
     # as a safer alternative to --zeropsToken=<token>
