@@ -1,10 +1,10 @@
 # Using your domain to access service
 
-You can easilly set up routing rules — which domains and their locations should point to which service inside your [project]().
+You can easilly set up routing rules — which domains and their locations should point to which service inside your [project](/documentation/overview/projects-and-services-structure.html#project).
 
 ![Domain add](/domain-add.png "Domain add")
 
-All you need to do it point your domains A and / or AAAA records to one of the [unique IP addresses]() assigned to your [project]().
+All you need to do it point your domains A and / or AAAA records to one of the [unique IP addresses](/documentation/routing/unique-ipv4-ipv6-addresses.html) assigned to your [project](/documentation/overview/projects-and-services-structure.html#project).
 
 **[Let's encrypt](https://letsencrypt.org/) SSL Certificate can be automatically installed for you.**
 

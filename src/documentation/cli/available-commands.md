@@ -19,7 +19,7 @@ All login parameters can be used as both parameter `--parameterName` or be put i
 Personal token you created in zerops app. Token should be passed preferably as `ZEROPSTOKEN` environment variable, so it doesn't show up in logs.
 
 ```bash
-$ zcli login --zeropsToken=my@mail.com --zeropsPassword=foobar123
+$ zcli login --zeropsToken=AC750cs64sas897sabs65sasbbas9asbdbasd65sadNa
 ```
 
 #### `zeropsLogin`
@@ -50,7 +50,7 @@ All push parameters are optional and can be used as both parameter `--parameterN
 
 #### `versionName`
 
-Will be used to name the resulting [deploy]() inside the GUI.
+Will be used to name the resulting [deploy](/documentation/deploy/how-deploy-works.html) inside the GUI.
 
 ```bash
 $ zcli push myproject myservice --versionName="v0.0.1"
@@ -93,5 +93,5 @@ $ zcli vpn status
 
 ## `deploy [project name] [service name] [files or paths]`
 
-Used to deploy files to zerops. Internally is used after [build pipeline]() finishes.
+Used to deploy files to zerops. Internally is used after [build pipeline](/documentation/build/how-zerops-build-works.html) finishes.
 

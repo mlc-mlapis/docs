@@ -1,6 +1,6 @@
 # Runtime logs
 
-Each container your [service]() is running on gets their own runtime log, you can view each inside **Runtime log** tab of your service detail.
+Each container your [service](/documentation/overview/projects-and-services-structure.html#service) is running on gets their own runtime log, you can view each inside **Runtime log** tab of your service detail.
 
 <br/>
 

@@ -4,7 +4,7 @@ There are two main rules when it comes to writting HA-enabled code:
 
 ### Whatever you deploy has to be the source of truth
 
-Since you application will possibly run on multiple containers as it [automatically scales]() up and down, it is absolutely essential they all run the same code. Which means your application should NOT change itself (as is the case with "installers" and setups). Take WordPress for example, you'd deploy your WordPress to Zerops and then ran the setup configuration. This would modify your code on that single container the balancer sent you to, but it would still be unmodified on any other or new container.
+Since you application will possibly run on multiple containers as it [automatically scales](/documentation/automatic-scaling/how-automatic-scaling-works.html) up and down, it is absolutely essential they all run the same code. Which means your application should NOT change itself (as is the case with "installers" and setups). Take WordPress for example, you'd deploy your WordPress to Zerops and then ran the setup configuration. This would modify your code on that single container the balancer sent you to, but it would still be unmodified on any other or new container.
 
 ### Do not use local filesystem
 

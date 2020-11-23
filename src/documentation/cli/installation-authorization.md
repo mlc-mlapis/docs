@@ -5,7 +5,7 @@ Zerops CLI is open source that is hosted on GitHub ([zeropsio/zcli](https://gith
 <br/>
 
 ::: warning ONLY MAC AND LINUX SUPPORTED FOR NOW
-Currently zcli is supported only on MacOS and linux (amd64 and i386), windows support is coming. See [roadmap]().
+Currently zcli is supported only on MacOS and linux (amd64 and i386), windows support is coming. See [roadmap](/documentation/overview/roadmap.html).
 :::
 
 <br/>
@@ -18,7 +18,7 @@ Zerops zcli can be installed using **npm**
 $ npm i -g @zerops/zcli
 ```
 
-it will then be available under the `zcli` command. List of commmands can be found at available [commands list]().
+it will then be available under the `zcli` command. List of commmands can be found at available [commands list](/documentation/cli/available-commands.html).
 
 Alternatively zcli binary can be downloaded from [GitHub releases](https://github.com/zeropsio/zcli/releases) but you have to make sure you select proper version coresponding to the system you want to run zcli on.
 
@@ -33,7 +33,7 @@ $ chmod +x zcli
 
 ## Login using Personal Token
 
-If you are using zcli outside of your computer, like in a [GitHub Action]() or [GitLab job]() you might want to use **personal token** to [`login`](), these can be created by clicking your avatar at the right upper corner and going to Token management page.
+If you are using zcli outside of your computer, like in a [GitHub Action](/documentation/deploy/use-in-github-actions.html) or [GitLab job](/documentation/deploy/use-in-gitlab-ci.html) you might want to use **personal token** to [`login`](/documentation/cli/installation-authorization.html#login-using-personal-token), these can be created by clicking your avatar at the right upper corner and going to Token management page.
 
 ![token management](/token-management.png "token management")
 

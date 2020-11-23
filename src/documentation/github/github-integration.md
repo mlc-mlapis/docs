@@ -1,6 +1,6 @@
 # Connecting Zerops to a GitHub repository
 
-While creating a [runtime service]() you have an option connect the service with a GitHub repository to automatically trigger the [build pipeline]() defined in [zerops.yml]() inside your project root. The pipeline can be triggered either upon either a new tag or push to a particular branch of your project. GitHub integration requires additional GitHub permission and works by creating a [GitHub webhook](https://developer.github.com/webhooks/).
+While creating a [runtime service](/documentation/services/runtimes.html) you have an option connect the service with a GitHub repository to automatically trigger the [build pipeline](/documentation/build/how-zerops-build-works.html) defined in [zerops.yml](/documentation/build/build-config.html) inside your project root. The pipeline can be triggered either upon either a new tag or push to a particular branch of your project. GitHub integration requires additional GitHub permission and works by creating a [GitHub webhook](https://developer.github.com/webhooks/).
 
 ![GitHub Connection](/github-connection.png "GitHub connnection")
 
