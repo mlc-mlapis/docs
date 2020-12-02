@@ -12,9 +12,9 @@ Should be used after you install zcli you usually need to login only once per a 
 
 ### Flags
 
-All login parameters can be used as both parameter `--parameterName` or be put inside your enviroment variables as `PARAMETERNAME`
+All login parameters can be used as command line parameter `--parameterName` or enviroment variables as `PARAMETERNAME`
 
-#### `zeropsToken`
+#### `--zeropsToken`
 
 Personal token you created in zerops app. Token should be passed preferably as `ZEROPSTOKEN` environment variable, so it doesn't show up in logs.
 
@@ -22,17 +22,17 @@ Personal token you created in zerops app. Token should be passed preferably as `
 $ zcli login --zeropsToken=AC750cs64sas897sabs65sasbbas9asbdbasd65sadNa
 ```
 
-#### `zeropsLogin`
+#### `--zeropsLogin`
 
-E-mail address you registered your account with. Use alongside `zeropsPassword`
+E-mail address you registered your account with. Use alongside `--zeropsPassword`
 
 ```bash
 $ zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
 ```
 
-#### `zeropsPassword`
+#### `--zeropsPassword`
 
-Password you registered your account with. Use alongside `zeropsLogin`. Pasword should be passed preferably as `ZEROPSPASSWORD` environment variable, so it doesn't show up in logs.
+Password you registered your account with. Use alongside `--zeropsLogin`. Password should be passed preferably as `ZEROPSPASSWORD` environment variable, so it doesn't show up in logs.
 
 ```bash
 $ zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
@@ -42,15 +42,15 @@ $ zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
 
 ## `push [project name] [service name]`
 
-Used to trigger build pipeline defined in `zerops.yml`, by default it will take in account your `gitignore`.
+Used to trigger build pipeline defined in `zerops.yml`.
 
 ### Flags
 
 All push parameters are optional and can be used as both parameter `--parameterName` or be put inside your enviroment variables as `PARAMETERNAME`
 
-#### `versionName`
+#### `--versionName`
 
-Will be used to name the resulting [deploy](/documentation/deploy/how-deploy-works.html) inside the GUI.
+Will be used to name the resulting [deploy](/documentation/deploy/how-deploy-works.html) application version.
 
 ```bash
 $ zcli push myproject myservice --versionName="v0.0.1"
@@ -58,29 +58,23 @@ $ zcli push myproject myservice --versionName="v0.0.1"
 
 ---
 
-## `vpn`
+## `vpn start [project name]`
 
-Used to securely connect / disconnect into a Zerops project network.
-
-### Commands
-
-#### `start [project name]`
-
-Used to securely connect into project network, requires `project name` to be defined.
+Used to establish secure connection into your project network. Requires `project name` to be defined.
 
 ```bash
 $ zcli vpn start <project name>
 ```
 
-#### `stop`
+## `vpn stop`
 
-Disconnects from the project.
+Disconnects actually established vpn connection.
 
 ```bash
 $ zcli vpn stop
 ```
 
-#### `status`
+## `vpn status`
 
 Prints vpn status
 
@@ -93,5 +87,7 @@ $ zcli vpn status
 
 ## `deploy [project name] [service name] [files or paths]`
 
-Used to deploy files to zerops. Internally is used after [build pipeline](/documentation/build/how-zerops-build-works.html) finishes.
+Used to deploy files to zerops service.
+ 
+??? Internally is used after [build pipeline](/documentation/build/how-zerops-build-works.html) finishes.
 

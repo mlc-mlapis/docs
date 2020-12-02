@@ -92,7 +92,7 @@ runs:
 
 ### `deploy`
 
-Direct which of the files producted by your build should be [deploy]()ed to your runtime service. Path starts from the root (location of zerops.yml).
+Directories and files, produced by your build, witch should be [deploy]()ed to your runtime service. Path starts from the root of your project (location of zerops.yml). By default it will take in account your `gitignore` file.
 
 #### Examples
 

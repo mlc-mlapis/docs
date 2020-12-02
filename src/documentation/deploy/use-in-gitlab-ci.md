@@ -1,6 +1,6 @@
 # Use in GitLab CD/CI
 
-Our CLI can be [installed](/documentation/cli/installation-authorization.html#installation) on GitLab CI runners, enabling you to integrate deploy to Zerops to your existing actions. It is however preffered to [build](/documentation/build/how-zerops-build-works.html) directly on Zerops, either by connecting your service with a [GitLab repository](/documentation/gitlab/gitlab-integration.html) or by using [push](/documentation/cli/available-commands.html#push-project-name-service-name) command of zcli to trigger the build pipeline.
+Our zcli can be [installed](/documentation/cli/installation-authorization.html#installation) on GitLab CI runners, enabling you to integrate deploy to Zerops to your existing actions. It is however preffered to [build](/documentation/build/how-zerops-build-works.html) directly on Zerops, either by connecting your service with a [GitLab repository](/documentation/gitlab/gitlab-integration.html) or by using [push](/documentation/cli/available-commands.html#push-project-name-service-name) command of zcli to trigger the build pipeline.
 
 ### Example GitLab Job
 
