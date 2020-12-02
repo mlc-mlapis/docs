@@ -4,6 +4,6 @@ You can sign up and then login to Zerops using your GitHub account. For signup, 
 
 <br/><br/>
 
-::: tip Loging in using email and password after sign up through GitHub
+::: tip Logging in using email and password after sign up through GitHub
 You will be able to login using your email after you set up your password, that can currently be done only by using the [forgotten password](https://app.zerops.dev/forgotten-password).
 :::
