@@ -14,8 +14,7 @@ from another service we would reference that variable using `mariadb_connectionS
 
 ### Variables by technology
 
-// FIXME ???
-Service environment variables are available via environment variables inside runtime services. Other services cannot use these variables at the moment to configure themselves.
+Service environment variables are available via environment variables inside runtime services.
 
 - PHP — `$_ENV['key']`
 - Node.js — `process.env.key`

@@ -1,6 +1,6 @@
-# Installation ~~and Authorization~~ 
+# Installation
 
-Zerops zcli is open sourced command line client that is hosted on GitHub ([zeropsio/zcli](https://github.com/zeropsio/zcli)).
+Zerops zcli is open sourced command line client that is hosted on GitHub ([zeropsio/zcli](https://github.com/zeropsio/zcli)) and build and published to package managers through a [GitHub Action](https://github.com/zeropsio/zcli/actions?query=workflow%3A%22Upload+build+asset%22).
 
 <br/>
 
@@ -20,7 +20,7 @@ Zerops zcli can be installed using **npm**
 $ npm i -g @zerops/zcli
 ```
 
-it will be available under the `zcli` command. 
+it will be available under the `zcli` command.
 
 ### Static binary
 
@@ -31,4 +31,3 @@ Alternatively zcli binary can be downloaded from [GitHub releases](https://githu
 $ wget -O zcli <github release url>
 $ chmod +x zcli
 ```
-
