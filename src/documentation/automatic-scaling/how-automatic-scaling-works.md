@@ -4,14 +4,15 @@ Each [service](/documentation/overview/projects-and-services-structure.html#serv
 
 Zerops will automatically change settings of the services to always run as optimally as possible for given state of horizontal and vertical autoscaling.
 
-### Horizontal scaling
-
-To be done..
-
 ### Vertical scaling
 
-To be done..
+Each service start at the minimum resources required, this usually means 1 vCPU 1 GB RAM and 5 GB of Disc space (see [services](/documentation/service/runtimes.html) for detailed list). Zerops can automatically scale up to 64 CPUs, 2 TB RAM and 10 TB of Disk scale in matter in matter of seconds and then safely back down to minimum is minutes. Each metric is scaled separately, each container (when [HA](/ha/why-should-i-want-high-availability.html) is enabled) is scaled separately. Zerops scales by minimum steps (1 CPU, 1 GB RAM, 1 GB Disk), so there are no tiers or pricing packages, you always pay only for as much as your service currently requires. Vertical scaling is seamless, no downtime, no affecting your apps.
+
+### Horizontal scaling
+
+Once containers are fully scalled up vertically they start scaling horizontally by creating a new container with the last active deployed application version and start balancing requests between them. Ssee [services](/documentation/service/runtimes.html) for detailed list of minimal and maximal number of containers. When [HA](/documentation/ha/why-should-i-want-high-availability.html) is enabled, the minimal number of containers is 3.
+
 
 ### Performance tunning
 
-To be done..
+Zerops is not just mindlessly scaling up and down, each service managed by Zerops is configured to scale up to its limits and tuned to perform as good as possible at the given configuration.
