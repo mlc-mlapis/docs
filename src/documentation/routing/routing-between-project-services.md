@@ -6,6 +6,6 @@ Ports on [runtime](/documentation/services/runtimes.html) services can be change
 
 This private network can be securely accessed using [VPN](/documentation/cli/vpn.html) capabilities of our [CLI](/documentation/cli/installation-authorization.html).
 
-Public access to each of project's services can be set up using up [direct IPv6 access](/documentation/routing/unique-ipv4-ipv6-addresses.html) along with a [firewall](/documentation/routing/access-through-ip-and-firewall.html) or, if it's a http application, under a [domain](/documentation/routing/using-your-domain.html), if it's a .
+Public access to each of project's services can be set up using up [direct IPv6 access](/documentation/routing/unique-ipv4-ipv6-addresses.html) along with a [firewall](/documentation/routing/access-through-ip-and-firewall.html) or, if it's a http application, under a [domain](/documentation/routing/using-your-domain.html).
 
 ![Internal ports](/internal-ports.png "Internal ports")
