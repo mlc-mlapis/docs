@@ -89,3 +89,6 @@ $ zcli vpn status
 
 Used to deploy files to zerops service. Alternative to `push` which triggers [build pipeline](/documentation/build/how-zerops-build-works.html). Use when you want to deploy already built files to Zerops.
 
+```bash
+$ zcli deploy dist package.json
+```

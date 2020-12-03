@@ -78,7 +78,7 @@ module.exports = {
           ]
         },
         {
-          title: 'GitHub vs. Zerops',
+          title: 'GitHub and Zerops',
           collapsable: false,
           children: [
             'github/login-with-github',
@@ -86,7 +86,7 @@ module.exports = {
           ]
         },
         {
-          title: 'GitLab vs. Zerops',
+          title: 'GitLab and Zerops',
           collapsable: false,
           children: [
             'gitlab/login-with-gitlab',
