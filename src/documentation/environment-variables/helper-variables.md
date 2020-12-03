@@ -59,10 +59,10 @@ Folder from which php scripts should be executed. Deployed files are unpacked at
 🔒 Connection string.
 
 #### `user`
-Database admin username.
+Database admin username (changing won't affect value in database settings, that needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
 
 #### `password`
-Database admin password.
+Database admin password (changing won't affect value in database settings, that needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
 
 
 ### Elasticsearch
