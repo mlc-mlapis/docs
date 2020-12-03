@@ -151,7 +151,8 @@ module.exports = {
           title: 'CLI',
           collapsable: false,
           children: [
-            'cli/installation-authorization',
+            'cli/installation',
+            'cli/authorization',
             'cli/available-commands',
             'cli/vpn',
           ]

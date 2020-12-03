@@ -46,11 +46,11 @@ Used to trigger build pipeline defined in `zerops.yml`.
 
 ### Flags
 
-All push parameters are optional and can be used as both parameter `--parameterName` or be put inside your enviroment variables as `PARAMETERNAME`
+All push parameters are optional and can be used as both parameter `--parameterName` or be put inside your enviroment variables as `PARAMETERNAME`. **By default it will take in account your `gitignore`**.
 
 #### `--versionName`
 
-Will be used to name the resulting [deploy](/documentation/deploy/how-deploy-works.html) application version.
+Will be used to name the resulting [deployed](/documentation/deploy/how-deploy-works.html) application version.
 
 ```bash
 $ zcli push myproject myservice --versionName="v0.0.1"
@@ -87,7 +87,5 @@ $ zcli vpn status
 
 ## `deploy [project name] [service name] [files or paths]`
 
-Used to deploy files to zerops service.
- 
-??? Internally is used after [build pipeline](/documentation/build/how-zerops-build-works.html) finishes.
+Used to deploy files to zerops service. Alternative to `push` which triggers [build pipeline](/documentation/build/how-zerops-build-works.html). Use when you want to deploy already built files to Zerops.
 

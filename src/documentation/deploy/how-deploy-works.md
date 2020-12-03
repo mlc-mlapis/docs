@@ -2,7 +2,7 @@
 
 ::: tip ZEROPS CAN BUILD AND DEPLOY FOR YOU
 
-While it's certainly possible for you to deploy to Zerops, we recommend you run your [builds](/documentation/build/how-zerops-build-works.html) on Zerops as well. 
+While it's certainly possible for you to deploy to Zerops, we recommend you run your [builds](/documentation/build/how-zerops-build-works.html) on Zerops as well. Build can be triggered by connecting service with a GitHub or GitLab repository or by using the `push` command of our CLI.
 :::
 
 <br />
