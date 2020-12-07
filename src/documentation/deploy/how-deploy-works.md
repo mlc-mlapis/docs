@@ -11,7 +11,7 @@ Deploy is triggered automatically at the end of the [Zerops build pipeline](/doc
 
 Each deployed application is then saved and you can freely switch between any of the previously deployed versions.
 
-Zerops takes care of the __no-shutdown__ deploy process by creating a new version of application. After that zerops starts switching incoming requests to the new version and shutting and removing the old one.
+Zerops takes care of the __no-shutdown__ deploy process by creating a new version of application. After that Zerops starts switching incoming requests to the new version and shutting and removing the old one.
 
 #### Example of the `deploy` command:
 
