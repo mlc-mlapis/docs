@@ -1,12 +1,12 @@
 # Made for Developers
 
-From the very beginning, our goal was to make DevOps as easy and straightforward for the developers as possible. It's great when you can move your infrastructure to a cloud, but not so great when you need to hire that-cloud-app certified engineer to set everything up properly. And wait forever while he does so. Not even mentioning the invoice they'll inevitably send.
+From the very beginning, our goal was to make DevOps as easy and straightforward for the developers as possible. It's great when you can move your infrastructure to a cloud, but not so great when you need to hire that cloud app certified engineer to set everything up properly. And wait forever while he does so. Not even mentioning the invoice they'll inevitably send.
 
-We took our 13 years of [experience](https://vshosting.eu/about) providing managed cloud solutions for developers and turned it into Zerops. Not only do we aim to make Zerops a great solution for production, but also a helpful tool for local development. As such, we [encourage](/documentation/overview/made-for-developers.html#each-developer-should-have-his-own-account-no-artificial-pricing-boosting) for each environment and for each team member to have their own copy of infrastructure. On Zerops, there is no limit for the number of team members or projects you can add. On top of that, each service is free on the basic level.
+We took our 14 years of [experience](https://vshosting.eu/about) providing managed cloud solutions for developers and turned it into Zerops. Not only do we aim to make Zerops a great solution for production, but also a helpful tool for local development. As such, we [encourage](/documentation/overview/made-for-developers.html#each-developer-should-have-his-own-account-no-artificial-pricing-boosting) for each environment and for each team member to have their own copy of infrastructure. On Zerops, there is no limit for the number of team members or projects you can add. On top of that, each service is free on the basic level.
 
 ### Each developer should have his own account, no artificial pricing boosting
 
-To be able to fully utilize Zerops, each developer should have his own account and if it makes sense for the project, even his own copy of the project. That's why we don't charge or put limits on number of projects or number of team members. You only pay for the performance and addons.
+To be able to fully utilize Zerops, each developer should have his own account and if it makes sense for the project, even his own copy of the project. That's why we don't charge extra or put limits on the number of projects or number of team members. You only pay for the performance and add-ons.
 
 ### Empower you local development
 
