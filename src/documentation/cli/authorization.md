@@ -1,18 +1,18 @@
 # Authorization
 
-## Login using Personal Token
+## Login Using Personal Token
 
-If you are using zcli outside of your computer, like in a [GitHub Action](/documentation/deploy/use-in-github-actions.html) or [GitLab job](/documentation/deploy/use-in-gitlab-ci.html) you might want to use **personal token** to [`login`](/documentation/cli/installation-authorization.html#login-using-personal-token), these can be created by clicking your avatar at the right upper corner and going to Token management page.
+If you are using zcli outside of your computer, as in a [GitHub Action](/documentation/deploy/use-in-github-actions.html) or a [GitLab Job](/documentation/deploy/use-in-gitlab-ci.html) you might want to use a **personal token** to [`log in`](/documentation/cli/installation-authorization.html#login-using-personal-token). These can be created by clicking on your avatar in the right upper corner and going to the Token management page.
 
 ![token management](/token-management.png "token management")
 
-After you create your personal token, you can login using
+After you create your personal token, you can log in using
 
 ```bash
 $ zcli login --zeropsToken=<personal token>
 ```
 
-or better yet by adding `ZEROPSTOKEN` to your enviroment variables, in which case the token doesn't need to be passed as a parameter. *This is preffered* and more secure option, as then the token doesn't show up in logs.
+or better yet by adding `ZEROPSTOKEN` to your enviroment variables, in which case the token doesn't need to be passed as a parameter. *This is hte preferred* and more secure option, as the token doesn't show up in logs this way.
 
 ```bash
 $ zcli login
@@ -21,7 +21,7 @@ $ zcli login
 <br/>
 <br/>
 
-## Login using E-mail and Password
+## Login Using E-mail and Password
 
 You can also log in using your email and password.
 
@@ -35,6 +35,6 @@ or by adding `ZEROPSLOGIN` and `ZEROPSPASSWORD` to your environment variables.
 <br/>
 <br/>
 
-::: tip LOGIN ONLY ONCE
+::: tip LOG IN ONLY ONCE
 You need to log in only once. Auth token will be saved securely in your `var` folder inside your filesystem.
 :::
