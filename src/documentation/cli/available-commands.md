@@ -2,21 +2,21 @@
 sidebarDepth: 1
 ---
 
-# Available commands
+# Available Commands
 
 [[toc]]
 
 ## `login`
 
-Should be used after you install zcli you usually need to login only once per a device.
+Should be used after you install zcli. yYou usually need to log in only once per device.
 
 ### Flags
 
-All login parameters can be used as command line parameter `--parameterName` or enviroment variables as `PARAMETERNAME`
+All login parameters can be used as command line parameters `--parameterName` or enviroment variables as `PARAMETERNAME`
 
 #### `--zeropsToken`
 
-Personal token you created in zerops app. Token should be passed preferably as `ZEROPSTOKEN` environment variable, so it doesn't show up in logs.
+The personal token you created in the Zerops app. The token should be passed preferably as the `ZEROPSTOKEN` environment variable, so that it doesn't show up in logs.
 
 ```bash
 $ zcli login --zeropsToken=AC750cs64sas897sabs65sasbbas9asbdbasd65sadNa
@@ -24,7 +24,7 @@ $ zcli login --zeropsToken=AC750cs64sas897sabs65sasbbas9asbdbasd65sadNa
 
 #### `--zeropsLogin`
 
-E-mail address you registered your account with. Use alongside `--zeropsPassword`
+THe e-mail address you registered your account with. Use alongside your `--zeropsPassword`
 
 ```bash
 $ zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
@@ -32,7 +32,7 @@ $ zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
 
 #### `--zeropsPassword`
 
-Password you registered your account with. Use alongside `--zeropsLogin`. Password should be passed preferably as `ZEROPSPASSWORD` environment variable, so it doesn't show up in logs.
+The password you registered your account with. Use alongside your `--zeropsLogin`. The password should be passed preferably as the `ZEROPSPASSWORD` environment variable, so that it doesn't show up in logs.
 
 ```bash
 $ zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
@@ -46,7 +46,7 @@ Used to trigger build pipeline defined in `zerops.yml`.
 
 ### Flags
 
-All push parameters are optional and can be used as both parameter `--parameterName` or be put inside your enviroment variables as `PARAMETERNAME`. **By default it will take in account your `gitignore`**.
+All push parameters are optional and can be used both as parameter `--parameterName` or be put inside your enviroment variables as `PARAMETERNAME`. **By default, it will take in account your `gitignore`**.
 
 #### `--versionName`
 
@@ -60,7 +60,7 @@ $ zcli push myproject myservice --versionName="v0.0.1"
 
 ## `vpn start [project name]`
 
-Used to establish secure connection into your project network. Requires `project name` to be defined.
+Used to establish a secure connection to your project network. Requires the `project name` to be defined.
 
 ```bash
 $ zcli vpn start <project name>
@@ -68,7 +68,7 @@ $ zcli vpn start <project name>
 
 ## `vpn stop`
 
-Disconnects actually established vpn connection.
+Disconnects the established VPN connection.
 
 ```bash
 $ zcli vpn stop
@@ -76,7 +76,7 @@ $ zcli vpn stop
 
 ## `vpn status`
 
-Prints vpn status
+Prints the VPN status
 
 ```bash
 $ zcli vpn status
@@ -87,7 +87,7 @@ $ zcli vpn status
 
 ## `deploy [project name] [service name] [files or paths]`
 
-Used to deploy files to zerops service. Alternative to `push` which triggers [build pipeline](/documentation/build/how-zerops-build-works.html). Use when you want to deploy already built files to Zerops.
+Used to deploy files to the Zerops service. Alternative to `push`, which triggers hte [build pipeline](/documentation/build/how-zerops-build-works.html). Use when you want to deploy already built files to Zerops.
 
 ```bash
 $ zcli deploy dist package.json
