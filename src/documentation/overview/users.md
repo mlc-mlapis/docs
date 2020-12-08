@@ -16,10 +16,10 @@ Currently, in the private beta version, we do not have a role / restriction syst
 
 
 ## Your account
-You account is separate from a user belonging to a company. You can be user in multiple companies under the same account (login).
+You account is separate from a user belonging to a company. You can be a user in multiple companies under the same account (login).
 
 ## Password change
-Password can be changed by clicking on your avatar in the upper right corner and going to the account setting page.
+Your password can be changed by clicking on your avatar in the upper right corner and going to the account setting page.
 
 ## Password recovery
-You can recover your password (or set password to an account created through GitHub or GitLab) at app.zerops.io/password-recovery. Confirmation mail will be sent to your email address.
+You can recover your password (or set a password for an account created through GitHub or GitLab) at app.zerops.io/password-recovery. The confirmation email will be sent to your email address.
