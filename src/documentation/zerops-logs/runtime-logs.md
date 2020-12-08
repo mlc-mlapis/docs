@@ -1,6 +1,6 @@
-# Runtime logs
+# Runtime Logs
 
-Each container your [service](/documentation/overview/projects-and-services-structure.html#service) is running on gets their own runtime log, you can view each inside **Runtime log** tab of your service detail.
+Each container your [service](/documentation/overview/projects-and-services-structure.html#service) is running on gets its own runtime log. You can view each one inside the **Runtime log** tab of your service detail.
 
 <br/>
 
@@ -8,4 +8,4 @@ Each container your [service](/documentation/overview/projects-and-services-stru
 
 <br/>
 
-When an important event happens, such as exits and fails, you will get a notification with a button pointing to a particular container and at the correct timestamp.
+Whenever an important event happens, such as an exit or a failure, you will get a notification with a button pointing to the particular container and to the relevant timestamp.
