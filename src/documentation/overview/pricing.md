@@ -23,7 +23,7 @@ All services are [automatically scaled](/documentation/automatic-scaling/how-aut
 
 ### Project add-ons for production
 
-For hte production version of you project, you can activate a couple of add-ons:
+For the production version of you project, you can activate a couple of add-ons:
 
 - a unique IPv4 address — $1 / month
 - longer-stored and more frequent backups — $10 / month
