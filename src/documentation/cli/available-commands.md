@@ -8,7 +8,7 @@ sidebarDepth: 1
 
 ## `login`
 
-Should be used after you install zcli. yYou usually need to log in only once per device.
+Should be used after you install zcli. you usually need to log in only once per device.
 
 ### Flags
 
