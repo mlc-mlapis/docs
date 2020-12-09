@@ -5,5 +5,5 @@ You can sign up and then log in to Zerops using your GitLab account. For signup,
 <br/><br/>
 
 ::: tip Logging in using email and password after signup through GitLab
-You will be able to log in using your email after you set up your password. This can currently be done only by using the [forgotten password](https://app.zerops.dev/forgotten-password) pathway.
+You will be able to log in using your email after you set up your password. This can currently be done only by using the [forgotten password](https://app.zerops.dev/forgotten-password).
 :::
