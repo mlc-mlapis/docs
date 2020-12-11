@@ -21,7 +21,7 @@ deploy: [ dist, node_modules, package.json ]
 
 ## Properties
 
-### `uses`
+### `use`
 
 List the technologies your build uses. Zerops will use this as a base pack for the build container. Leave this field empty if you prefer to install everything yourself inside the `run` property.
 
@@ -36,22 +36,22 @@ Includes `composer`, `git`, `php`.
 ##### `go@<1>`
 Includes `go`, `git`.
 
-#### Example of `uses`
+#### Example of `use`
 
 ##### Using multiple base packs:
 
 ```yaml
-uses: [ nodejs@13, go@1 ]
+use: [ nodejs@13, go@1 ]
 ```
 
 ##### Using a single base packs:
 ```yaml
-uses: [ php@7.3 ]
+use: [ php@7.3 ]
 ```
 
 ##### Using an empty container (install everything yourself):
 ```yaml
-uses: []
+use: []
 ```
 
 <br />
