@@ -36,5 +36,5 @@ or by adding `ZEROPSLOGIN` and `ZEROPSPASSWORD` to your environment variables.
 <br/>
 
 ::: tip LOG IN ONLY ONCE
-You need to log in only once. Auth token will be saved securely in your `var` folder inside your filesystem.
+You need to log in only once. Auth token will be saved in your `~/.config/zerops/cli.data` folder inside your filesystem.
 :::
