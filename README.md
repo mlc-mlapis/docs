@@ -3,4 +3,4 @@
 https://docs.zerops.io
 
 
-(c) 2021
+2021
