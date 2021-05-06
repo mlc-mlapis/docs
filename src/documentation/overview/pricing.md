@@ -21,7 +21,7 @@ All services are [automatically scaled](/documentation/automatic-scaling/how-aut
 
 For the production version of your project, you can activate the following paid add-ons:
 
-- a unique IPv4 address — $8 per 30 days
+- [a unique IPv4 address](/documentation/routing/unique-ipv4-ipv6-addresses.html): $8 per 30 days
 
 ___
 *The add-ons list will be growing up in time, and the next one in a row is longer-stored and more frequent backup.*
