@@ -10,7 +10,7 @@ There is always a new idea at the beginning of something. To make it a reality, 
 
 ## Credit and free Zerops credit
 
-Our free Zerops credit of \$100 on the beginning should allow you to start with less stress and more creativity to discover all features and added value for you and your team. It can be used for everything except for some add-ons, like the IPv4 address. After that, you can manually top up your credit using a credit card or set up weekly/monthly automatic payments. The VAT rate is 21% for EU countries. We will also notify you by e-mail at moments when your credit is too low.
+Our free Zerops credit of \$100 on the beginning should allow you to start with less stress and more creativity to discover all features and added value for you and your team. It can be used for everything except for some add-ons, like the IPv4 address. After that, you can manually top up your credit using a credit card or set up weekly/monthly automatic payments. The VAT rate is 21% for EU countries. We will also notify you by e-mail at moments when your credit is too low (i.e., less than calculated 10%).
 
 ## Projects
 
