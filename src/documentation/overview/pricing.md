@@ -36,4 +36,4 @@ For the production version of your project, you can activate the following paid 
 - [a unique IPv4 address](/documentation/routing/unique-ipv4-ipv6-addresses.html): **\$8 per 30 days**
 
 ___
-*The add-ons list will be growing up in time, and the next one in a row is longer-stored and more frequent backup.*
+> *The add-ons list will be growing up in time, and the next one in a row is longer-stored and more frequent backup.*
