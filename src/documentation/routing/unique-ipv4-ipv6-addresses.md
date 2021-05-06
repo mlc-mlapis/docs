@@ -4,7 +4,7 @@ Each [project]() you create gets assigned a **unique IPv6 address** for free tha
 
 As IPv6 is not widely used, you can activate **unique IPv4 address** as a paid add-on for each project. It is helpful for production environment, as this address can be used as your **A record**. A unique IPv4 address costs [$8 per 30 days]() and it's not possible to use free Zerops credit for that.
 
-If you need to access your development / stage / preview projects, you should use a [Zerops sub-domain]().
+If you need to access your development/stage/preview projects, you should use a free functionality of the [Zerops sub-domains]().
 
 <br />
 <br />
