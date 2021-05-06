@@ -2,8 +2,11 @@
 
 ![Pricing](/pricing.png "Pricing")
 
-## Credit and free Zerops credit
+## Fundamental concept
 
+The Zerops has three high-level pricing concepts. A credit that can be topped up by you manually or automatically, projects and services cost deducted daily or hourly, and paid add-ons working as subscriptions for 30 days following their activation.
+
+Our free Zerops credit of \$100 on the beginning should allow you to start with less stress and more creativity to discover all features and added value for you and your team.
 
 ## Team members
 
@@ -21,7 +24,7 @@ That way you can easily have 5 copies of a project out of which only the `myapp-
 
 All services are [automatically scaled](/documentation/automatic-scaling/how-automatic-scaling-works.html) both [horizontally](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (by increasing or decreasing the number of containers), and [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (by separately adding or removing CPUs, RAM size or disk space). Scaling happens in a matter of seconds and is continually optimized to run on the [best possible settings](/documentation/automatic-scaling/how-automatic-scaling-works.html#performance-tunning). Your credit is charged hourly, and the cost calculation takes into account the ratio changes during that time.
 
-## Project add-ons for production
+## Add-ons for production
 
 For the production version of your project, you can activate the following paid add-ons:
 
