@@ -26,7 +26,7 @@ There is a temporary limitation that doesn't allow you to switch back & forth be
 
 Remember that only disk space cost is being calculated and charged if you stop any service because it still occupies the reserved resources.
 
-#### Hardware resource cost
+#### Hardware resources cost
 
 - 1 vCPU: **\$2,5 per 30 days** (~ $0.00347 per hour)
 - 250 MB RAM: **\$1.5 per 30 days** (~ $0.00208 per hour)
