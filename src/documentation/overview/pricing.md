@@ -24,11 +24,15 @@ Each [service](/documentation/overview/projects-and-services-structure.html#serv
 
 While adding a new service, you can choose whether you want it in HA (3 containers) or non-HA (1 container) mode, and the hourly cost will change accordingly. HA mode can't be changed later. We, however, plan to implement service cloning, allowing you safe migration back. Currently, it's not possible to create non-HA database/messenger services, and this limitation will be removed soon.
 
+<!-- markdownlint-disable DOCSMD004 -->
 ::: tip Cost of stopped services
 Remember that only disk space cost is being calculated and charged if you stop any service because it still occupies the reserved resources.
 :::
+<!-- markdownlint-enable DOCSMD004 -->
 
+<!-- markdownlint-disable MD001 -->
 #### Hardware resources cost and autoscaling
+<!-- markdownlint-enable MD001 -->
 
 All services are [automatically scaled](/documentation/automatic-scaling/how-automatic-scaling-works.html) both [horizontally](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (by increasing or decreasing the number of containers), and [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (by separately adding or removing CPUs, RAM size or disk space). Scaling happens in a matter of seconds and is continually optimized to run on the [best possible settings](/documentation/automatic-scaling/how-automatic-scaling-works.html#performance-tunning). Your credit is charged hourly for each resource on each container, and the cost calculation considers the ratio of changes during that time.
 
@@ -44,7 +48,9 @@ For the production version of your project, you can activate the following paid 
 
 ## Examples (on regular basis)
 
+<!-- markdownlint-disable MD001 -->
 #### An application in a production phase
+<!-- markdownlint-enable MD001 -->
 
 |Package / Service    |Hardware resources                   |  ~ per hour|   ~ per day|per 30 days|
 |:--------------------|:------------------------------------|-----------:|-----------:|----------:|
