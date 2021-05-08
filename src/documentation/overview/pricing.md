@@ -56,8 +56,8 @@ For the production version of your project, you can activate the following paid 
 |:----------------|:-------------------------------|----------:|----------:|----------:|
 |basic package    |                                |    $0.0069|    $0.1667|      $5.00|
 |add-on IPv4      |                                |    $0.0111|    $0.2667|      $8.00|
-|non-HA Nginx     |3x vCPU + 3x250 MB + 3x5 GB Disk|    $0.0208|    $0.5000|     $15.00|
-|non-HA NodeJS    |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0271|    $0.6500|     $19.50|
+|HA Nginx         |3x vCPU + 3x250 MB + 3x5 GB Disk|    $0.0208|    $0.5000|     $15.00|
+|HA NodeJS        |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0271|    $0.6500|     $19.50|
 |HA MongoDB       |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0271|    $0.6500|     $19.50|
 |                 |                      **Total**:|**$0.0931**|**$2.2333**| **$67.00**|
 
