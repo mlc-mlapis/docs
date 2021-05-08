@@ -36,9 +36,9 @@ Remember that only disk space cost is being calculated and charged if you stop a
 
 All services are [automatically scaled](/documentation/automatic-scaling/how-automatic-scaling-works.html) both [horizontally](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (by increasing or decreasing the number of containers), and [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (by separately adding or removing CPUs, RAM size or disk space). Scaling happens in a matter of seconds and is continually optimized to run on the [best possible settings](/documentation/automatic-scaling/how-automatic-scaling-works.html#performance-tunning). Your credit is charged hourly for each resource on each container, and the cost calculation considers the ratio of changes during that time.
 
-- 1 vCPU: **\$2,5 per 30 days** (~ $0.00347 per hour)
-- 250 MB RAM: **\$1.5 per 30 days** (~ $0.00208 per hour)
-- 1 GB Disk: **\$0.2 per 30 days** (~ $0.00027 per hour)
+- 1 vCPU: **\$2,5 per 30 days** ($0.00347 per hour)
+- 250 MB RAM: **\$1.5 per 30 days** ($0.00208 per hour)
+- 1 GB Disk: **\$0.2 per 30 days** ($0.00027 per hour)
 
 ## Add-ons for production
 
@@ -52,24 +52,24 @@ For the production version of your project, you can activate the following paid 
 #### An application in a production phase
 <!-- markdownlint-enable MD001 -->
 
-|Package / Service    |Hardware resources                | ~ per hour|  ~ per day|per 30 days|
-|:--------------------|:---------------------------------|----------:|----------:|----------:|
-|project basic package|                                  |    $0.0069|    $0.1667|      $5.00|
-|add-on IPv4          |                                  |    $0.0111|    $0.2667|      $8.00|
-|non-HA Nginx         |3x vCPU + 3x 250 MB + 3x 5 GB Disk|    $0.0208|    $0.5000|     $15.00|
-|non-HA NodeJS        |3x vCPU + 3x 500 MB + 3x 5 GB Disk|    $0.0271|    $0.6500|     $19.50|
-|HA MongoDB           |3x vCPU + 3x 500 MB + 3x 5 GB Disk|    $0.0271|    $0.6500|     $19.50|
-|                     |                        **Total**:|**$0.0931**|**$2.2333**| **$67.00**|
+|Package / Service|Hardware resources              |     [hour]|      [day]|  [30 days]|
+|:----------------|:-------------------------------|----------:|----------:|----------:|
+|basic package    |                                |    $0.0069|    $0.1667|      $5.00|
+|add-on IPv4      |                                |    $0.0111|    $0.2667|      $8.00|
+|non-HA Nginx     |3x vCPU + 3x250 MB + 3x5 GB Disk|    $0.0208|    $0.5000|     $15.00|
+|non-HA NodeJS    |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0271|    $0.6500|     $19.50|
+|HA MongoDB       |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0271|    $0.6500|     $19.50|
+|                 |                      **Total**:|**$0.0931**|**$2.2333**| **$67.00**|
 
 #### An application in a development/stage phase
 
-|Package / Service    |Hardware resources                | ~ per hour|  ~ per day|per 30 days|
-|:--------------------|:---------------------------------|----------:|----------:|----------:|
-|project basic package|                                  |    $0.0069|    $0.1667|      $5.00|
-|non-HA Nginx         |1x vCPU + 1x 250 MB + 1x 5 GB Disk|    $0.0069|    $0.1667|      $5.00|
-|non-HA NodeJS        |1x vCPU + 1x 250 MB + 1x 5 GB Disk|    $0.0069|    $0.1667|      $5.00|
-|HA MongoDB           |3x vCPU + 3x 250 MB + 3x 5 GB Disk|    $0.0208|    $0.5000|     $15.00|
-|                     |                        **Total**:|**$0.0417**|**$1.0000**| **$30.00**|
+|Package / Service|Hardware resources              |     [hour]|      [day]|  [30 days]|
+|:----------------|:-------------------------------|----------:|----------:|----------:|
+|basic package    |                                |    $0.0069|    $0.1667|      $5.00|
+|non-HA Nginx     |1x vCPU + 1x250 MB + 1x5 GB Disk|    $0.0069|    $0.1667|      $5.00|
+|non-HA NodeJS    |1x vCPU + 1x250 MB + 1x5 GB Disk|    $0.0069|    $0.1667|      $5.00|
+|HA MongoDB       |3x vCPU + 3x250 MB + 3x5 GB Disk|    $0.0208|    $0.5000|     $15.00|
+|                 |                      **Total**:|**$0.0417**|**$1.0000**| **$30.00**|
 
 ___
 > *The add-ons list will be growing up in time, and the next one in a row is a longer-stored and more frequent backup.*
