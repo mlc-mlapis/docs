@@ -20,21 +20,21 @@ Any team member can create as many projects as necessary to cover each environme
 
 ## Services
 
-Each [service](/documentation/overview/projects-and-services-structure.html#service) you include into the [project](/documentation/overview/projects-and-services-structure.html#project) can be added either as non-HA [High Availability] (useful for development / test projects), which means it will run on a single container, or HA (mostly must-have for production projects), which means it will run on at least [three containers](/documentation/ha/why-should-i-want-high-availability.html). Each container starts with 1 vCPU, 250 MB RAM (with scaling up by 250 MB), and 5 GB of SSD disk space (with scaling up by 5 GB). The initial disk space will be changed to 1 GB with scaling up by 1 GB up soon to allow more dynamic configuration. All hardware resources can be automatically scaled both horizontally (increasing the number of containers) and vertically (adding resources).
+Each [service](/documentation/overview/projects-and-services-structure.html#service) you include into the [project](/documentation/overview/projects-and-services-structure.html#project) can be added either as non-HA [High Availability] (useful for development / test projects), which means it will run on a single container, or HA (mostly must-have for production projects), which means it will run on at least [three containers](/documentation/ha/why-should-i-want-high-availability.html). Each container starts with 1 vCPU, 250 MB RAM (with scaling up by 250 MB), and 5 GB of SSD disk space (with scaling up by 1 GB). All hardware resources can be automatically scaled both horizontally (increasing the number of containers) and vertically (adding resources).
 
-There is a temporary limitation that doesn't allow you to switch back & forth between non-HA and HA modes on an individual service level. In the beginning, after adding such a service (that allows HA mode), you can decide if you switch to HA mode, but when you do it, you can't go back to non-HA mode (it will be removed soon by a new service cloning feature). For all database services (MariaDB, MongoDB, Redis), the HA mode is set up automatically, and you can't change it now (it will be allowed soon).
+While adding a new service, you can choose whether you want it in HA (3 containers) or non-HA (1 container) mode, and the hourly cost will change accordingly. HA mode can't be changed later. We, however, plan to implement service cloning, allowing you safe migration back. Currently, it's not possible to create non-HA database/messenger services, and this limitation will be removed soon.
 
+::: Tip: Cost of stopped services
 Remember that only disk space cost is being calculated and charged if you stop any service because it still occupies the reserved resources.
+:::
 
-#### Hardware resources cost
+#### Hardware resources cost and autoscaling
+
+All services are [automatically scaled](/documentation/automatic-scaling/how-automatic-scaling-works.html) both [horizontally](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (by increasing or decreasing the number of containers), and [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (by separately adding or removing CPUs, RAM size or disk space). Scaling happens in a matter of seconds and is continually optimized to run on the [best possible settings](/documentation/automatic-scaling/how-automatic-scaling-works.html#performance-tunning). Your credit is charged hourly for each resource on each container, and the cost calculation considers the ratio of changes during that time.
 
 - 1 vCPU: **\$2,5 per 30 days** (~ $0.00347 per hour)
 - 250 MB RAM: **\$1.5 per 30 days** (~ $0.00208 per hour)
 - 1 GB Disk: **\$0.2 per 30 days** (~ $0.00027 per hour)
-
-## Automatic scaling in a matter of seconds
-
-All services are [automatically scaled](/documentation/automatic-scaling/how-automatic-scaling-works.html) both [horizontally](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (by increasing or decreasing the number of containers), and [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (by separately adding or removing CPUs, RAM size or disk space). Scaling happens in a matter of seconds and is continually optimized to run on the [best possible settings](/documentation/automatic-scaling/how-automatic-scaling-works.html#performance-tunning). Your credit is charged hourly, and the cost calculation considers the ratio of changes during that time.
 
 ## Add-ons for production
 
