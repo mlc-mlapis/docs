@@ -24,7 +24,7 @@ Each [service](/documentation/overview/projects-and-services-structure.html#serv
 
 While adding a new service, you can choose whether you want it in HA (3 containers) or non-HA (1 container) mode, and the hourly cost will change accordingly. HA mode can't be changed later. We, however, plan to implement service cloning, allowing you safe migration back. Currently, it's not possible to create non-HA database/messenger services, and this limitation will be removed soon.
 
-::: Tip: Cost of stopped services
+::: tip Cost of stopped services
 Remember that only disk space cost is being calculated and charged if you stop any service because it still occupies the reserved resources.
 :::
 
