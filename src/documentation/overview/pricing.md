@@ -52,24 +52,24 @@ For the production version of your project, you can activate the following paid 
 #### An application in a production phase
 <!-- markdownlint-enable MD001 -->
 
-|Package / Service    |Hardware resources                   |  ~ per hour|   ~ per day|per 30 days|
-|:--------------------|:------------------------------------|-----------:|-----------:|----------:|
-|project basic package|                                     |    $0.00694|    $0.16667|      $5.00|
-|add-on IPv4          |                                     |    $0.01111|    $0.26667|      $8.00|
-|non-HA Nginx         |3 x vCPU + 3 x 250 MB + 3 x 5 GB Disk|    $0.02083|    $0.50000|     $15.00|
-|non-HA NodeJS        |3 x vCPU + 3 x 500 MB + 3 x 5 GB Disk|    $0.02708|    $0.65000|     $19.50|
-|HA MongoDB           |3 x vCPU + 3 x 500 MB + 3 x 5 GB Disk|    $0.02708|    $0.65000|     $19.50|
-|                     |                           **Total**:|**$0.09306**|**$2.23333**| **$67.00**|
+|Package / Service    |Hardware resources                | ~ per hour|  ~ per day|per 30 days|
+|:--------------------|:---------------------------------|----------:|----------:|----------:|
+|project basic package|                                  |    $0.0069|    $0.1667|      $5.00|
+|add-on IPv4          |                                  |    $0.0111|    $0.2667|      $8.00|
+|non-HA Nginx         |3x vCPU + 3x 250 MB + 3x 5 GB Disk|    $0.0208|    $0.5000|     $15.00|
+|non-HA NodeJS        |3x vCPU + 3x 500 MB + 3x 5 GB Disk|    $0.0271|    $0.6500|     $19.50|
+|HA MongoDB           |3x vCPU + 3x 500 MB + 3x 5 GB Disk|    $0.0271|    $0.6500|     $19.50|
+|                     |                        **Total**:|**$0.0931**|**$2.2333**| **$67.00**|
 
 #### An application in a development/stage phase
 
-|Package / Service    |Hardware resources                   |  ~ per hour|   ~ per day|per 30 days|
-|:--------------------|:------------------------------------|-----------:|-----------:|----------:|
-|project basic package|                                     |    $0.00694|    $0.16667|      $5.00|
-|non-HA Nginx         |1 x vCPU + 1 x 250 MB + 1 x 5 GB Disk|    $0.00694|    $0.16667|      $5.00|
-|non-HA NodeJS        |1 x vCPU + 1 x 250 MB + 1 x 5 GB Disk|    $0.00694|    $0.16667|      $5.00|
-|HA MongoDB           |3 x vCPU + 3 x 250 MB + 3 x 5 GB Disk|    $0.02083|    $0.50000|     $15.00|
-|                     |                           **Total**:|**$0.04167**|**$1.00000**| **$30.00**|
+|Package / Service    |Hardware resources                | ~ per hour|  ~ per day|per 30 days|
+|:--------------------|:---------------------------------|----------:|----------:|----------:|
+|project basic package|                                  |    $0.0069|    $0.1667|      $5.00|
+|non-HA Nginx         |1x vCPU + 1x 250 MB + 1x 5 GB Disk|    $0.0069|    $0.1667|      $5.00|
+|non-HA NodeJS        |1x vCPU + 1x 250 MB + 1x 5 GB Disk|    $0.0069|    $0.1667|      $5.00|
+|HA MongoDB           |3x vCPU + 3x 250 MB + 3x 5 GB Disk|    $0.0208|    $0.5000|     $15.00|
+|                     |                        **Total**:|**$0.0417**|**$1.0000**| **$30.00**|
 
 ___
 > *The add-ons list will be growing up in time, and the next one in a row is a longer-stored and more frequent backup.*
