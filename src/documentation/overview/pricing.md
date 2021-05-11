@@ -20,7 +20,7 @@ Any team member can create as many projects as necessary to cover each environme
 
 ## Services
 
-Each [service](/documentation/overview/projects-and-services-structure.html#service) you include into the [project](/documentation/overview/projects-and-services-structure.html#project) can be added either as non-HA [High Availability] (useful for development / test projects), which means it will run on a single container, or HA (mostly must-have for production projects), which means it will run on at least [three containers](/documentation/ha/why-should-i-want-high-availability.html). Each container starts with 1 vCPU, 250 MB RAM (with scaling up by 250 MB), and 5 GB of SSD disk space (with scaling up by 1 GB). All hardware resources can be automatically scaled both horizontally (increasing the number of containers) and vertically (adding resources).
+Each [service](/documentation/overview/projects-and-services-structure.html#service) you include into the [project](/documentation/overview/projects-and-services-structure.html#project) can be added either as non-HA [High Availability] (useful for development / test projects), which means it will run on a single container, or HA (mostly must-have for production projects), which means it will run on at least [three containers](/documentation/ha/why-should-i-want-high-availability.html). Each container starts with 1 vCPU, 250 MB RAM (with scaling up by 250 MB), and 5 GB of SSD disk space (with scaling up by 0.5 GB). All hardware resources can be automatically scaled both horizontally (increasing the number of containers) and vertically (adding resources).
 
 While adding a new service, you can choose whether you want it in HA (3 containers) or non-HA (1 container) mode, and the hourly cost will change accordingly. HA mode can't be changed later. We, however, plan to implement service cloning, allowing you safe migration back. Currently, it's not possible to create non-HA database/messenger/shared storage services, and this limitation will be removed soon.
 
@@ -38,7 +38,7 @@ All services are [automatically scaled](/documentation/automatic-scaling/how-aut
 
 - 1 vCPU: **\$2,5 per 30 days** ($0.00347 per hour)
 - 250 MB RAM: **\$1.5 per 30 days** ($0.00208 per hour)
-- 1 GB Disk: **\$0.2 per 30 days** ($0.00027 per hour)
+- 0.5 GB Disk: **\$0.1 per 30 days** ($0.00014 per hour)
 
 ## Add-ons for production
 
