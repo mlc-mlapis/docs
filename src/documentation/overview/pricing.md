@@ -20,9 +20,9 @@ Any team member can create as many projects as necessary to cover each environme
 
 ## Services
 
-Each [service](/documentation/overview/projects-and-services-structure.html#service) you include into the [project](/documentation/overview/projects-and-services-structure.html#project) can be added either as non-HA [High Availability] (useful for development / test projects), which means it will run on a single container, or HA (mostly must-have for production projects), which means it will run on at least [three containers](/documentation/ha/why-should-i-want-high-availability.html). Each container starts with 1 vCPU, 250 MB RAM (with scaling up by 250 MB), and 5 GB of SSD disk space (with scaling up by 0.5 GB). All hardware resources can be automatically scaled both horizontally (increasing the number of containers) and vertically (adding resources).
+Each [service](/documentation/overview/projects-and-services-structure.html#service) (except S3 object storage) you include into the [project](/documentation/overview/projects-and-services-structure.html#project) can be added either as non-HA [High Availability] (useful for development / test projects), which means it will run on a single container, or HA (mostly must-have for production projects), which means it will run on at least [three containers](/documentation/ha/why-should-i-want-high-availability.html). Each container starts with 1 vCPU, 250 MB RAM (with scaling up/down by 250 MB), and 5 GB of SSD disk space (with scaling up/down by 0.5 GB). All hardware resources can be automatically scaled both horizontally (increasing the number of containers) and vertically (adding resources).
 
-While adding a new service, you can choose whether you want it in HA (3 containers) or non-HA (1 container) mode, and the hourly cost will change accordingly. HA mode can't be changed later. We, however, plan to implement service cloning, allowing you safe migration back. Currently, it's not possible to create non-HA database/messenger/shared storage services, and this limitation will be removed soon.
+While adding any new service (except S3 object storage), you can choose whether you want it in HA (3 containers) or non-HA (1 container) mode, and the hourly cost will change accordingly. HA mode can't be changed later. We, however, plan to implement service cloning, allowing you safe migration back. Currently, it's not possible to create non-HA database / messenger / shared storage, and this limitation will be removed soon.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Cost of stopped services
@@ -31,14 +31,21 @@ Remember that only disk space cost is being calculated and charged if you stop a
 <!-- markdownlint-enable DOCSMD004 -->
 
 <!-- markdownlint-disable MD001 -->
-#### Hardware resources cost and autoscaling
+#### S3 Object storage service
 <!-- markdownlint-enable MD001 -->
 
-All services are [automatically scaled](/documentation/automatic-scaling/how-automatic-scaling-works.html) both [horizontally](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (by increasing or decreasing the number of containers), and [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (by separately adding or removing CPUs, RAM size or disk space). Scaling happens in a matter of seconds and is continually optimized to run on the [best possible settings](/documentation/automatic-scaling/how-automatic-scaling-works.html#performance-tunning). Your credit is charged hourly for each resource on each container, and the cost calculation considers the ratio of changes during that time.
+Unlike all other services, it is a specific one, in a sense, that is provided by a permanently running HA service based on 6 containers, among which data is replicated synchronously before confirming that the data has been successfully stored. Therefore, adding this service to the project does not create any new containers but creates a new user account accessible only to this service and makes the required storage size known as a bucket. Deleting this service means removing that account with all its data.
 
-- 1 vCPU: **\$2,5 per 30 days** ($0.00347 per hour)
-- 250 MB RAM: **\$1.5 per 30 days** ($0.00208 per hour)
-- 0.5 GB Disk: **\$0.1 per 30 days** ($0.00014 per hour)
+#### Hardware resources cost and autoscaling
+
+All services (except S3 object storage) are [automatically scaled](/documentation/automatic-scaling/how-automatic-scaling-works.html) both [horizontally](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (by increasing or decreasing the number of containers), and [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (by separately adding or removing vCPUs, RAM size or disk space). The S3 object store service is scaled vertically only and just in the sense of its object store space (with scaling up/down by 1 GB), respecting the fact that it always runs on 6 containers (vCPUs and RAM size are irrelevant here from the project point of view). Scaling happens in a matter of seconds and is continually optimized to run on the [best possible settings](/documentation/automatic-scaling/how-automatic-scaling-works.html#performance-tunning). Your credit is charged hourly for each resource on each container, and the cost calculation considers the ratio of changes during that time.
+
+|Hardware       |Scaling|[30 days]|   [day]|  [hour]|          Multiplier|
+|:--------------|------:|--------:|-------:|-------:|-------------------:|
+|vCPU           | 1 unit| **$2.5**|$0.08333|$0.00347|number of containers|
+|RAM            | 250 MB| **$1.5**|$0.05000|$0.00208|number of containers|
+|Disk space     | 0.5 GB| **$0.1**|$0.00333|$0.00014|number of containers|
+|S3 Object store| 1.0 GB| **$0.2**|$0.00667|$0.00028|                   1|
 
 ## Add-ons for production
 
