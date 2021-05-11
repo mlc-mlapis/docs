@@ -34,7 +34,7 @@ Remember that only disk space cost is being calculated and charged if you stop a
 #### S3 Object storage service
 <!-- markdownlint-enable MD001 -->
 
-Unlike all other services, it is a specific one, in a sense, that is provided by a permanently running HA service based on 6 containers, among which data is replicated synchronously before confirming that the data has been successfully stored. Therefore, adding this service to the project does not create any new containers but creates a new user account accessible only to this service and makes the required storage size known as a bucket. Deleting this service means removing that account with all its data.
+Unlike all other services, it is a specific one, in a sense, that is provided by a permanently running HA service based on 6 containers, among which data is replicated synchronously before confirming that the data has been successfully stored. Therefore, adding this service to the project does not create any new containers but creates a new user account accessible only to it and makes the required storage size known as a bucket. Deleting this service means removing that account with all its data.
 
 #### Hardware resources cost and autoscaling
 
