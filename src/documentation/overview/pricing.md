@@ -56,7 +56,7 @@ For the production version of your project, you can activate the following paid 
 ## Examples (on regular basis)
 
 <!-- markdownlint-disable MD001 -->
-#### An application in a production phase
+#### Production application
 <!-- markdownlint-enable MD001 -->
 
 |Package / Service|Hardware resources              |     [hour]|      [day]|  [30 days]|
@@ -68,7 +68,7 @@ For the production version of your project, you can activate the following paid 
 |HA MongoDB       |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0271|    $0.6500|     $19.50|
 |                 |                      **Total**:|**$0.0931**|**$2.2333**| **$67.00**|
 
-#### An application in a development/stage phase
+#### Development / Stage application
 
 |Package / Service|Hardware resources              |     [hour]|      [day]|  [30 days]|
 |:----------------|:-------------------------------|----------:|----------:|----------:|
