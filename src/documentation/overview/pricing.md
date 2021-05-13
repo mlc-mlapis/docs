@@ -2,7 +2,7 @@
 
 ![Pricing](/pricing.png "Pricing")
 
-Zerops has three high-level pricing concepts. Credit that you can top up manually or automatically, project and service costs deducted daily or hourly, and paid add-ons working as subscriptions for 30 days following their activation. Nothing else, no hidden or artificial costs.
+Zerops has three high-level pricing concepts. Credit that you can top up manually or automatically, deducted project and service costs, and paid add-ons working as subscriptions for 30 days following their activation. Nothing else, no hidden or artificial costs.
 
 ## Team members
 
@@ -47,9 +47,9 @@ All services (except S3 object storage) are [automatically scaled](/documentatio
 |Disk space     | 0.5 GB| **$0.1**|$0.00333|$0.00014|number of containers|
 |S3 Object store| 1.0 GB| **$0.2**|$0.00667|$0.00028|                   1|
 
-## Add-ons for production
+## Project add-ons
 
-For the production version of your project, you can activate the following paid add-ons:
+You can activate the following paid add-ons:
 
 - [a unique IPv4 address](/documentation/routing/unique-ipv4-ipv6-addresses.html): **\$8 per 30 days**
 
