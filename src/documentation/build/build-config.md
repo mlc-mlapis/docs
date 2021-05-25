@@ -10,7 +10,7 @@ Zerops uses a yaml definition file to build your application. This file, `zerops
 
 ```yaml
 # select what technology your build uses
-use: [ nodejs@13 ]
+use: [ nodejs@14 ]
 # which commands to run to build
 run:
   - npm i
@@ -27,7 +27,7 @@ List the technologies your build uses. Zerops will use this as a base pack for t
 
 #### Supported base packs:
 
-##### `nodejs@<10, 12, 13>`
+##### `nodejs@<10, 12, 14>`
 Includes `npm`, `yarn`, `git`, `npx`.
 
 ##### `php@<7.2, 7.3>`
@@ -41,7 +41,7 @@ Includes `go`, `git`.
 ##### Using multiple base packs:
 
 ```yaml
-use: [ nodejs@13, go@1 ]
+use: [ nodejs@14, go@1 ]
 ```
 
 ##### Using a single base packs:

@@ -15,7 +15,7 @@ Build service has access to the project's [environment variables](/documentation
 
 ```yaml
 # select what technology your build uses
-use: [ nodejs@13 ]
+use: [ nodejs@14 ]
 # which commands to run to build
 run:
   - npm i
