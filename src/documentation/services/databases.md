@@ -8,6 +8,8 @@ Information on the compatibility of MariaDB software with similar, competing sof
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
+![Zerops MariaDB Service](./images/Zerops-MariaDB-Service-Base.png "Zerops MariaDB Service")
+
 ## MongoDB
 
 ## Redis
