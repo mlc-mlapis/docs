@@ -18,6 +18,8 @@ Zerops MariaDB Service shares the [same price structure](/documentation/overview
 
 Both application balancers or MariaDB service containers are located on **different physical computers** to prevent service outages in the event of any fatal failure on a single physical computer.
 
+Below you can see the same schema but with all relations among internal parts. And the legend can help you with understanding.
+
 ![Zerops MariaDB Service](./images/Zerops-MariaDB-Service-Detail.png "Zerops MariaDB Service")
 
 <!-- markdownlint-disable DOCSMD004 -->
