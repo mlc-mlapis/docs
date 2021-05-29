@@ -18,13 +18,13 @@ Zerops MariaDB Service shares the [same price structure](/documentation/overview
 
 Both application balancers or MariaDB service containers are located on **different physical computers** to prevent service outages in the event of any fatal failure on a single physical computer.
 
-Below you can see the same schema but with all relations among internal parts. And the legend can help you with understanding.
+Below you can see the same schema but with all relations among internal parts. You can also see details about project core controllers. The statistics one is used for storing metrics of operational parameters of all project and services containers, and the logger one for recording all events. And the legend can help you with understanding.
 
 ![Zerops MariaDB Service](./images/Zerops-MariaDB-Service-Detail.png "Zerops MariaDB Service")
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: details Primary & Replica MariaDB instances
-There is always only one primary instance with write access. The reason is to minimize the risk for data drift and errant transactions.
+There is always only one primary instance with write access. The reason is to minimize the risk for data drift and errant transactions. If the primary instance has failed for any reason, the replication mechanism will activate a new one using any of the available replica instances.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
