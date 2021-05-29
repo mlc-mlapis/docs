@@ -18,6 +18,12 @@ Zerops MariaDB Service shares the [same price structure](/documentation/overview
 
 ![Zerops MariaDB Service](./images/Zerops-MariaDB-Service-Detail.png "Zerops MariaDB Service")
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: details Primary & Replica MariaDB instances
+There is always only one primary instance with write access. The reason is to minimize the risk for data drift and errant transactions.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ## MongoDB
 
 ## Redis
