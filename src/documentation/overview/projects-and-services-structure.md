@@ -16,7 +16,7 @@ Each project has a free unique [IPv6 address](/documentation/routing/unique-ipv4
 
 #### Without external access
 
-This means no access from outside of Zerops project infrastructure, such as the Internet. In this case, there's only communication between Zerops Project Core Service and any of Zerops Services ([databases](/documentation/services/databases.html), runtimes environments, storages, search engines, web servers, message brokers) through the private network. Zerops Project Core Service is the heart of each Zerops project. It's a part of [Project Basic Package](/documentation/overview/pricing.html#projects) pricing logic.
+This means no access from outside of Zerops project infrastructure, such as the Internet. In this case, there's only communication between Zerops Project Core Service and any of Zerops Services ([databases](/documentation/services/databases.html), runtimes environments, web servers, storages, search engines, message brokers) through the private network. Zerops Project Core Service is the heart of each Zerops project. It's a part of [Project Basic Package](/documentation/overview/pricing.html#projects) pricing logic.
 
 The essential parts are two running instances of a **project balancer** (one in an active state and the other in a standby backup state) through which all communication is passing.
 
@@ -39,6 +39,10 @@ You can also see details regarding the two remaining project core controllers. T
 #### With external access
 
 This means access from outside of Zerops project infrastructure, such as the Internet. The role of a **project balancer** is extended to public port routing and firewall. Again, all communication is passing through, either private network traffic or traffic concerning the Internet.
+
+As mentioned earlier, the optional [firewall](/documentation/routing/access-through-ip-and-firewall.html) allows you to explicitly deny or allow access from the external Internet to each of the project's [public accessible ports](/documentation/routing/access-through-ip-and-firewall.html). For runtime environments or web servers services, it essentially means that any port (except 80 or 443 ports) in combination with an assigned IPv4 or IPv6 address can be made public in this way (each project has only one free IPv6 or optionally one paid IPv4 as an add-on). For the rest of services (databases, storages, search engines, message brokers), you have to use our [dev tools](/documentation/cli/vpn.html) (VPN access and Zerops CLI). It is, for example, a case when you want to access database MariaDB Service on its native 3306 port.
+
+In addition, as a general principle, you can use activated Zerops [subdomains](/documentation/routing/zerops-subdomain.html) (`subdomain.app.zerops.io`) or [your public domains](/documentation/routing/using-your-domain.html) if you have pointed their DNS A or AAAA records to those assigned IPv4 or IPv6 addresses on HTTP (80) or HTTPS (443) ports. Zerops Routing Service is started with defining the first of these public routing rules. This service, among other things, also takes care of the internal translation of HTTPS protocol to HTTP.
 
 :::: tabs
 ::: tab Schema of Zerops Project
