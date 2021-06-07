@@ -24,7 +24,7 @@ The essential parts are two running instances of a **project balancer** (one in 
 ::: tab Schema of Zerops Project
 ![Without external access](./images/Zerops-Project-Base-NoAccess.png "Project without external access")
 :::
-::: tab Detail of the Project Core Service
+::: tab Detail of Project Core Service
 
 Technically, the project balancer is a Layer 3 balancer (establishing connections only on the transport layer, i.e., TCP, UDP). An independent **scaling controller** monitors and controls [vertical scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (vCPU, RAM, Disk) for both project balancer container. An independent **repair controller** is then responsible for removing any container that exhibit abnormal behavior and subsequently replacing them with new one.
 
@@ -44,10 +44,10 @@ This means access from outside of Zerops project infrastructure, such as the Int
 ::: tab Schema of Zerops Project
 ![With external access](./images/Zerops-Project-Base-Internet.png "Project with external access")
 :::
-::: tab Detail of the Project Core Service
+::: tab Detail of Project Core Service
 ![With external access](./images/Zerops-Project-Core-Detail-Internet.png "Project with external access")
 :::
-::: tab Detail of the Routing Service
+::: tab Detail of Routing Service
 ![With external access](./images/Zerops-Project-Routing-Detail-Internet.png "Project with external access")
 :::
 ::::
