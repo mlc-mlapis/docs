@@ -2,17 +2,15 @@
 
 ## Project
 
-The Zerops project is a group of services united by a name. It can, for example, consist of a nodejs [runtime](/documentation/services/runtimes.html) with a mongo [database](/documentation/services/databases.html) and an object storage.
+Zerops project is a group of services united by a name. It can, for example, consist of a NodeJS [runtime environment](/documentation/services/runtimes.html) with a MongoDB [database](/documentation/services/databases.html) and S3 [object storage](/documentation/services/storage.html).
 
-We [encourage](/documentation/overview/made-for-developers.html#each-developer-should-have-his-own-account-no-artificial-pricing-boosting) you to create a project for each environment, i.e. `myapp-production`, `myapp-stage`, `myapp-devel`, or even for each developer, i.e. `myapp-johnd`. You can add an unlimited number of projects, you only [pay for the usage](/documentation/overview/pricing.html) that goes over the [free basic performance](/documentation/overview/pricing.html#free-tier-unlimited-projects-and-team-members). That way, each developer can have their own copy of a project to develop on, utilizing our powerful [dev tools](/documentation/cli/vpn.html).
+Your project [team](/documentation/overview/pricing.html#html#team-members) can be as big as you want and need. You can create a [separate project](/documentation/overview/pricing.html) for any environment (development, stage, production) or even for each developer if you want. Or benefit from a [single project](/documentation/overview/pricing.html) shared among all developers reducing the cost. In both ways, developers can still utilize our powerful [dev tools](/documentation/cli/vpn.html).
 
-All services inside the project share a [private network](/documentation/routing/routing-between-project-services.html) and can see and reference [environment variables](/documentation/environment-variables/how-to-access.html) from other services.
+All services inside such a project share a [dedicated private network](/documentation/routing/routing-between-project-services.html) and can see and reference [environment variables](/documentation/environment-variables/how-to-access.html) from other services.
 
-Each project has a unique [IPv6 address](/documentation/routing/unique-ipv4-ipv6-addresses.html) assigned and optionally an [IPv4 address](/documentation/routing/unique-ipv4-ipv6-addresses.html) as well. You can then either set up public access through [domains](/documentation/routing/using-your-domain.html) and point your DNS records to the assigned IP addresses, or set up direct access to the service through the IP by [opening public ports](/documentation/routing/access-through-ip-and-firewall.html). Direct access can be managed by a built in [firewall](/documentation/routing/access-through-ip-and-firewall.html).
+Each project has a free unique [IPv6 address](/documentation/routing/unique-ipv4-ipv6-addresses.html) assigned and optionally an [IPv4 address](/documentation/overview/pricing.html#project-add-ons) applied as a paid add-on. You can then either set up public access through [domains](/documentation/routing/using-your-domain.html) and point your DNS records to the assigned IP addresses, or set up direct access to the service through the IP by [opening public ports](/documentation/routing/access-through-ip-and-firewall.html). A built-in [firewall](/documentation/routing/access-through-ip-and-firewall.html) can manage the direct access by defining a list of allowed and denied IP addresses for each open public port.
 
-<br />
-
-![Project card](/project-card.png "Project card")
+![Zerops Project](./images/Project-Collapsed-iKBase.png "Zerops Project in a collapsed form")
 
 ### Typical functional schemas of Zerops Projects
 
@@ -20,13 +18,15 @@ Each project has a unique [IPv6 address](/documentation/routing/unique-ipv4-ipv6
 
 This means no access from outside of Zerops project infrastructure, such as the Internet. In this case, there's only communication between Zerops Project Core Service and any of Zerops Services ([databases](/documentation/services/databases.html), runtimes environments, storages, search engines, web servers, message brokers) through the private network. Zerops Project Core Service is the heart of each Zerops project. It's a part of [Project Basic Package](/documentation/overview/pricing.html#projects) pricing logic.
 
+The essential parts are two running instances of a **project balancer** (one in an active state and the other in a standby backup state) through which all communication is passing.
+
 :::: tabs
 ::: tab Schema of Zerops Project
 ![Without external access](./images/Zerops-Project-Base-NoAccess.png "Project without external access")
 :::
 ::: tab Detail of the Project Core Service
 
-The essential parts are two running instances of a **project balancer** (one in an active state and the other in a standby backup state) through which all communication is passing. Technically it's a Layer 3 balancer (establishing connections only on the transport layer, i.e., TCP, UDP). An independent **scaling controller** monitors and controls [vertical scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (vCPU, RAM, Disk) for both project balancer container. An independent **repair controller** is then responsible for removing any container that exhibit abnormal behavior and subsequently replacing them with new one.
+Technically, the project balancer is a Layer 3 balancer (establishing connections only on the transport layer, i.e., TCP, UDP). An independent **scaling controller** monitors and controls [vertical scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (vCPU, RAM, Disk) for both project balancer container. An independent **repair controller** is then responsible for removing any container that exhibit abnormal behavior and subsequently replacing them with new one.
 
 This ensures a high degree of reliability and stability for all traffic at any time. Each of them runs in a different container located on a **different physical machine**. An independent **activity controller** continuously monitors critical operating parameters of both project balancers. If the currently active instance shows any abnormalities, the running standby backup gets activated instead. From an external perspective, this change is not noticeable in any way.
 
