@@ -25,10 +25,10 @@ This ensures a high degree of reliability and stability for all traffic at any t
 An independent **scaling controller** monitors and controls [vertical scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (vCPU, RAM, Disk) for both project balancer container. An independent **repair controller** is then responsible for removing any container that exhibit abnormal behavior and subsequently replacing them with new one.
 
 :::: tabs
-::: tab Simplified schema of Zerops Project
+::: tab Schema of Zerops Project
 ![Without external access](./images/Zerops-Project-Base-NoAccess.png "Project without external access")
 :::
-::: tab Detail of Zerops Project Core Service
+::: tab Detail of Project Core Service
 ![Without external access](./images/Zerops-Project-Core-Detail-NoAccess.png "Project without external access")
 :::
 ::::
@@ -38,13 +38,13 @@ An independent **scaling controller** monitors and controls [vertical scaling](/
 This means access from outside of Zerops project infrastructure, such as the Internet. The role of a **project balancer** is extended to public port routing and firewall. Again, all communication is passing through, either private network traffic or traffic concerning the Internet.
 
 :::: tabs
-::: tab Simplified schema of Zerops Project
+::: tab Schema of Zerops Project
 ![With external access](./images/Zerops-Project-Base-Internet.png "Project with external access")
 :::
-::: tab Detail of Zerops Project Core Service
+::: tab Detail of Project Core Service
 ![With external access](./images/Zerops-Project-Core-Detail-Internet.png "Project with external access")
 :::
-::: tab Detail of Zerops Routing Service
+::: tab Detail of Routing Service
 ![With external access](./images/Zerops-Project-Routing-Detail-Internet.png "Project with external access")
 :::
 ::::
