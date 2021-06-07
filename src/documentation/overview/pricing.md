@@ -14,7 +14,7 @@ In the beginning, you'll get \$100 worth of Zerops credit. This should allow you
 
 ## Projects
 
-Each [project](/documentation/overview/projects-and-services-structure.html#project) you add activates the **project basic package for \$5 per 30 days**. This includes a unique IPv6 address, core services with built-in logging, an L7 balancer that takes care of SSL certification, and daily backups kept two days back. Further add-ons can be activated for each project, depending on your use case, whether it's a production project or any other environment.
+Each [project](/documentation/overview/projects-and-services-structure.html#project) you add activates the **Project Basic Package for \$5 per 30 days**. This includes a unique IPv6 address, core services with built-in logging, an L7 balancer that takes care of SSL certification, and daily backups kept two days back. Further add-ons can be activated for each project, depending on your use case, whether it's a production project or any other environment.
 
 Any team member can create as many projects as necessary to cover each environment, even for a single hour. Your credit is charged for a project basic package once the first project's service is added, but the unused portion of the amount is refundable if the project is deleted. The calculation is based on a daily logic, and it also respects the time of activation. That's why a project created on Monday at 5 PM and deleted on Tuesday at 11 AM, costs only \$5 / 30 \* 1, and the rest is refunded back to your credit balance. Also, creating a project and deleting it after one hour of activity, and repeating this pattern X-times during the same day, leads to the cost of X \* \$5 / 30 * 1.
 

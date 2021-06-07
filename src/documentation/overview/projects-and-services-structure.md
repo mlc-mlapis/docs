@@ -18,17 +18,18 @@ Each project has a unique [IPv6 address](/documentation/routing/unique-ipv4-ipv6
 
 #### Without external access
 
-This means no access from outside of Zerops project infrastructure, such as the Internet. Zerops Project Core Service is the heart of each Zerops project. It has its own [pricing logic](/documentation/overview/pricing.html#projects). The essential parts are two running instances of a **project balancer** (one in an active state and the other in a standby backup state) through which all communication is passing. Technically it's a Layer 3 balancer (establishing connections only on the transport layer, i.e., TCP, UDP). In this case it's communication between Zerops Project Core Service and any of Zerops Services ([databases](/documentation/services/databases.html), runtimes environments, storages, search engines, web servers, message brokers) through the private network.
-
-This ensures a high degree of reliability and stability for all traffic at any time. Each of them runs in a different container located on a **different physical machine**. An independent **activity controller** continuously monitors critical operating parameters of both project balancers. If the currently active instance shows any abnormalities, the running standby backup gets activated instead. From an external perspective, this change is not noticeable in any way.
-
-An independent **scaling controller** monitors and controls [vertical scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (vCPU, RAM, Disk) for both project balancer container. An independent **repair controller** is then responsible for removing any container that exhibit abnormal behavior and subsequently replacing them with new one.
+This means no access from outside of Zerops project infrastructure, such as the Internet. In this case, there's only communication between Zerops Project Core Service and any of Zerops Services ([databases](/documentation/services/databases.html), runtimes environments, storages, search engines, web servers, message brokers) through the private network. Zerops Project Core Service is the heart of each Zerops project. It's a part of [Project Basic Package](/documentation/overview/pricing.html#projects) pricing logic.
 
 :::: tabs
 ::: tab Schema of Zerops Project
 ![Without external access](./images/Zerops-Project-Base-NoAccess.png "Project without external access")
 :::
-::: tab Detail of Project Core Service
+::: tab Detail of the Project Core Service
+
+The essential parts are two running instances of a **project balancer** (one in an active state and the other in a standby backup state) through which all communication is passing. Technically it's a Layer 3 balancer (establishing connections only on the transport layer, i.e., TCP, UDP). An independent **scaling controller** monitors and controls [vertical scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (vCPU, RAM, Disk) for both project balancer container. An independent **repair controller** is then responsible for removing any container that exhibit abnormal behavior and subsequently replacing them with new one.
+
+This ensures a high degree of reliability and stability for all traffic at any time. Each of them runs in a different container located on a **different physical machine**. An independent **activity controller** continuously monitors critical operating parameters of both project balancers. If the currently active instance shows any abnormalities, the running standby backup gets activated instead. From an external perspective, this change is not noticeable in any way.
+
 ![Without external access](./images/Zerops-Project-Core-Detail-NoAccess.png "Project without external access")
 :::
 ::::
@@ -41,10 +42,10 @@ This means access from outside of Zerops project infrastructure, such as the Int
 ::: tab Schema of Zerops Project
 ![With external access](./images/Zerops-Project-Base-Internet.png "Project with external access")
 :::
-::: tab Detail of Project Core Service
+::: tab Detail of the Project Core Service
 ![With external access](./images/Zerops-Project-Core-Detail-Internet.png "Project with external access")
 :::
-::: tab Detail of Routing Service
+::: tab Detail of the Routing Service
 ![With external access](./images/Zerops-Project-Routing-Detail-Internet.png "Project with external access")
 :::
 ::::
