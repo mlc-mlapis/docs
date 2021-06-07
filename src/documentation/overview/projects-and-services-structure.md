@@ -1,10 +1,10 @@
-# Project & Service Structure
+# Project & Services Structure
 
 ## Project
 
 Zerops project is a group of services united by a name. It can, for example, consist of a NodeJS [runtime environment](/documentation/services/runtimes.html) with a MongoDB [database](/documentation/services/databases.html) and S3 [object storage](/documentation/services/storage.html).
 
-Your project [team](/documentation/overview/pricing.html#html#team-members) can be as big as you want and need. You can create a [separate project](/documentation/overview/pricing.html) for any environment (development, stage, production) or even for each developer if you want. Or benefit from a [single project](/documentation/overview/pricing.html) shared among all developers reducing the cost. In both ways, developers can still utilize our powerful [dev tools](/documentation/cli/vpn.html).
+Your project [team](/documentation/overview/pricing.html#html#team-members) can be as big as you want and need. You can create a [separate project](/documentation/overview/pricing.html#projects) for any environment (development, stage, production) or even for each developer if you want. Or benefit from a [single project](/documentation/overview/pricing.html#projects) shared among all developers reducing the cost. In both ways, developers can still utilize our powerful [dev tools](/documentation/cli/vpn.html).
 
 All services inside such a project share a [dedicated private network](/documentation/routing/routing-between-project-services.html) and can see and reference [environment variables](/documentation/environment-variables/how-to-access.html) from other services.
 
@@ -50,7 +50,7 @@ This means access from outside of Zerops project infrastructure, such as the Int
 :::
 ::::
 
-## Service
+## Services
 
 Services are the most important part of Zerops. Each service consists of a cluster of Linux containers running a Zerops managed image of a technology, whether it's a [runtime](/documentation/services/runtimes.html), [database](/documentation/services/databases.html), [storage](/documentation/services/storage.html) or a [static webserver](/documentation/services/static-server.html)). Each service has a hostname and an _n_ number of [ports](/documentation/routing/routing-between-project-services.html), it can be made [public via a domain](/documentation/routing/using-your-domain.html) in case of HTTP(s) services, or via an [IP adress and a port](/documentation/routing/access-through-ip-and-firewall.html).
 
