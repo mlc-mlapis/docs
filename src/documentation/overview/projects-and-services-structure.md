@@ -1,6 +1,6 @@
 # Project & Service Structure
 
-## Proj
+## Project
 
 The Zerops project is a group of services united by a name. It can, for example, consist of a nodejs [runtime](/documentation/services/runtimes.html) with a mongo [database](/documentation/services/databases.html) and an object storage.
 
@@ -14,7 +14,7 @@ Each project has a unique [IPv6 address](/documentation/routing/unique-ipv4-ipv6
 
 ![Project card](/project-card.png "Project card")
 
-### Typical functional schemas of Zerops Project
+### Typical functional schemas of Zerops Projects
 
 #### Without external access
 
@@ -25,10 +25,10 @@ This ensures a high degree of reliability and stability for all traffic at any t
 An independent **scaling controller** monitors and controls [vertical scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (vCPU, RAM, Disk) for both project balancer container. An independent **repair controller** is then responsible for removing any container that exhibit abnormal behavior and subsequently replacing them with new one.
 
 :::: tabs
-::: tab Simplified project schema
+::: tab Simplified schema of Zerops Project
 ![Without external access](./images/Zerops-Project-Base-NoAccess.png "Project without external access")
 :::
-::: tab Detail of Project Core Service
+::: tab Detail of Zerops Project Core Service
 ![Without external access](./images/Zerops-Project-Core-Detail-NoAccess.png "Project without external access")
 :::
 ::::
@@ -38,13 +38,13 @@ An independent **scaling controller** monitors and controls [vertical scaling](/
 This means access from outside of Zerops project infrastructure, such as the Internet. The role of a **project balancer** is extended to public port routing and firewall. Again, all communication is passing through, either private network traffic or traffic concerning the Internet.
 
 :::: tabs
-::: tab Simplified project schema
-![With external access](./images/Zerops-Project-Services-Base-Internet.png "Project with external access")
+::: tab Simplified schema of Zerops Project
+![With external access](./images/Zerops-Project-Base-Internet.png "Project with external access")
 :::
-::: tab Detail of Project Core Service
-![With external access](./images/Zerops-Project-Services-Detail-Internet.png "Project with external access")
+::: tab Detail of Zerops Project Core Service
+![With external access](./images/Zerops-Project-Detail-Internet.png "Project with external access")
 :::
-::: tab Detail of Routing Service
+::: tab Detail of Zerops Routing Service
 ![With external access](./images/Zerops-Project-Routing-Detail-Internet.png "Project with external access")
 :::
 ::::
