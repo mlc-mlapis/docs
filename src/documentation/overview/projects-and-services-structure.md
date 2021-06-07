@@ -42,7 +42,7 @@ This means access from outside of Zerops project infrastructure, such as the Int
 ![With external access](./images/Zerops-Project-Base-Internet.png "Project with external access")
 :::
 ::: tab Detail of Zerops Project Core Service
-![With external access](./images/Zerops-Project-Detail-Internet.png "Project with external access")
+![With external access](./images/Zerops-Project-Core-Detail-Internet.png "Project with external access")
 :::
 ::: tab Detail of Zerops Routing Service
 ![With external access](./images/Zerops-Project-Routing-Detail-Internet.png "Project with external access")
