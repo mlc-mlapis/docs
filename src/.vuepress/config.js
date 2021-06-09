@@ -58,6 +58,7 @@ module.exports = {
             'overview/made-for-developers',
             'overview/roadmap',
             'overview/release-log',
+            'overview/how-zerops-works-inside'
           ]
         },
         {
