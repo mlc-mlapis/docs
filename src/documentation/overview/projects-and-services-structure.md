@@ -10,7 +10,7 @@ All services inside such a project share a [dedicated private network](/document
 
 By default, nothing outside the project can access any of the services inside. Each service can be made publicly accessible through Zerops subdomains (*.app.zerops.io) or [domains](/documentation/routing/using-your-domain.html), pointing your DNS records to the [IPv6](/documentation/routing/unique-ipv4-ipv6-addresses.html) or [IPv4](/documentation/overview/pricing.html#project-add-ons) addresses assigned to the project, or by setting up direct access by [opening public ports](/documentation/routing/access-through-ip-and-firewall.html) on the assigned IP addresses. A built-in optional [firewall](/documentation/routing/access-through-ip-and-firewall.html) can manage the direct access by defining a list of allowed and denied IP addresses for each open public port.
 
-![Zerops Web Project](./images/Zerops-Web-Production.png "Zerops Web Project in production")
+![Zerops Web Project](./images/Zerops-Web-Production-Cards.png "Zerops Web Project in production")
 
 ## Services
 
