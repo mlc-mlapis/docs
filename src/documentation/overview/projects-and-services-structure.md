@@ -25,7 +25,7 @@ Each project has the following items included in its [Basic Package](/documentat
 
 More details can be found in the [pricing](/documentation/overview/pricing.html) document.
 
-## Services and their containers
+## Services & Containers
 
 Services are the most important part of Zerops. Each service consists of one, or multiple Linux containers (depending on your HA preference), each container running a Zerops managed image of technology, whether it’s a [runtime environment](/documentation/services/runtimes.html), a [static web server](/documentation/services/static-servers.html), a [database](/documentation/services/databases.html), [storage](/documentation/services/storage.html), a [search engine](/documentation/services/storage.html), or a [message broker](/documentation/services/storage.html). Each service has a hostname and an N number of ports. It can be made public via [Zerops subdomains](/documentation/routing/zerops-subdomain.html) or [public domains](/documentation/routing/using-your-domain.html) (HTTP/S communication) or direct [IPv6/IPv4 addresses and ports](/documentation/routing/access-through-ip-and-firewall.html) mapping.
 
