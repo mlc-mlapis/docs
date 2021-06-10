@@ -12,7 +12,14 @@ By default, nothing outside the project can access any of the services inside. E
 
 The screenshot below shows an example of such a project, our own website. The project is called **zerops-web-prod**, and it consists of 2 runtimes (Node.js and Golang), a static web server (Nginx), a database (MongoDB), and an S3 object storage services. It is made accessible to the public through our domain (`zerops.io`).
 
-![Zerops Web Project](./images/Zerops-Web-Production.png "Zerops Web Project in production")
+:::: tabs
+::: tab Zerops Web Project in GUI
+![Zerops Web Project](./images/Zerops-Web-Production.png "Zerops Web Project in GUI")
+:::
+::: tab Schema of Zerops Web Project
+![Zerops Web Project](./images/Zerops-Web-Production-Schema.png "Schema of Zerops Web Project")
+:::
+::::
 
 Each project has the following items included in its [Basic Package](/documentation/overview/pricing.html#projects):
 
@@ -27,7 +34,7 @@ More details can be found in the [pricing](/documentation/overview/pricing.html)
 
 ## Services & Containers
 
-Services are the most important part of Zerops. Each service consists of one, or multiple Linux containers (depending on your HA preference), each container running a Zerops managed image of technology, whether it’s a [runtime environment](/documentation/services/runtimes.html), a [static web server](/documentation/services/static-servers.html), a [database](/documentation/services/databases.html), [storage](/documentation/services/storage.html), a [search engine](/documentation/services/storage.html), or a [message broker](/documentation/services/storage.html). Each service has a hostname and an N number of ports. It can be made public via [Zerops subdomains](/documentation/routing/zerops-subdomain.html) or [public domains](/documentation/routing/using-your-domain.html) (HTTP/S communication) or direct [IPv6/IPv4 addresses and ports](/documentation/routing/access-through-ip-and-firewall.html) mapping.
+Services are the most important part of Zerops. Each service consists of one, or multiple Linux containers (depending on your HA preference), each container running a Zerops managed image of technology, whether it’s a [runtime environment](/documentation/services/runtimes.html), a [static web server](/documentation/services/static-servers.html), a [database](/documentation/services/databases.html), a [storage](/documentation/services/storage.html), a [search engine](/documentation/services/storage.html), or a [message broker](/documentation/services/storage.html). Each service has a hostname and an N number of ports. It can be made public via [Zerops subdomains](/documentation/routing/zerops-subdomain.html) or [public domains](/documentation/routing/using-your-domain.html) (HTTP/S communication) or direct [IPv6/IPv4 addresses and ports](/documentation/routing/access-through-ip-and-firewall.html) mapping.
 
 ![Services](./images//Zerops-Services-Catalogue.png "Available Services")
 
