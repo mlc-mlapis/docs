@@ -1,5 +1,7 @@
 # How Zerops works inside
 
+Zerops infrastructure is built from the ground up based on the experience we acquired over more than 13 years running our own Tier 3 data center at VSHosting. It’s built on open source and well-tested technologies, such as the lightweight [Linux Containers](https://linuxcontainers.org) we chose over more clunky VM solutions. Let’s take a look at how the Zerops project looks inside ... :point_down:
+
 ## Typical functional schemas of Zerops Projects
 
 ### Without external access
