@@ -43,7 +43,3 @@ When data is stored in a MariaDB cluster (through its actual primary database in
 ## MongoDB
 
 ## Redis
-
-## Elasticsearch
-
-## RabbitMQ

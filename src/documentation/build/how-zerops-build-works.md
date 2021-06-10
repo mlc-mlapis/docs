@@ -10,7 +10,7 @@ Build service has access to the project's [environment variables](/documentation
 
 ### Example
 
-- Runtime Service — [nginx static](/documentation/services/static-server.html) (to serve static files)
+- Runtime Service — [nginx static](/documentation/services/static-servers.html) (to serve static files)
 - Application source code to build and [deploy](/documentation/deploy/how-deploy-works.html) - Angular (using nodejs and npm)
 
 ```yaml
