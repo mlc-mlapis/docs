@@ -164,10 +164,11 @@ module.exports = {
           initialOpenGroupIndex: 1,
           children: [
             'services/runtimes',
-            'services/static-server',
+            'services/static-servers',
             'services/databases',
-            'services/storage',
-            'services/managed-linux-container',
+            'services/search-engines',
+            'services/message-brokers',
+            'services/storage'
           ]
         }
       ]

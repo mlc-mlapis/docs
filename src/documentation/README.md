@@ -1,6 +1,6 @@
 # Introduction
 
-Zerops is a cloud **platform-as-a-service** (PaaS) made [by developers for developers](/documentation/overview/made-for-developers.html). All of Zerops' services, whether it's a [runtime](/documentation/services/runtimes.html), [static server](/documentation/services/static-server.html), [database](/documentation/services/databases.html) or [storage](/documentation/services/storage.html), are HA ([high availability](/documentation/ha/why-should-i-want-high-availability.html)) enabled by default and [automatically scaled](/documentation/automatic-scaling/how-automatic-scaling-works.html) and **optimized** to always run in the [most efficient and reliable setting](/documentation/ha/zerops-enterprise-grade-reliability.html).
+Zerops is a cloud **platform-as-a-service** (PaaS) made [by developers for developers](/documentation/overview/made-for-developers.html). All of Zerops' services, whether it's a [runtime](/documentation/services/runtimes.html), [static server](/documentation/services/static-servers.html), [database](/documentation/services/databases.html) or [storage](/documentation/services/storage.html), are HA ([high availability](/documentation/ha/why-should-i-want-high-availability.html)) enabled by default and [automatically scaled](/documentation/automatic-scaling/how-automatic-scaling-works.html) and **optimized** to always run in the [most efficient and reliable setting](/documentation/ha/zerops-enterprise-grade-reliability.html).
 
 **Here are the main things Zerops aims to solve for you:**
 
@@ -10,7 +10,7 @@ A good build and deploy setup is hard, so we try to make it easy no matter your 
 
 Alternatively, you can use [Zerops CLI](/documentation/cli/installation-authorization.html) to manually trigger [deploy](/documentation/deploy/how-deploy-works.html) of your build artefacts, or `zcli push` cli [command](/documentation/cli/available-commands.html#push) to start the build and deploy pipeline. No matter if you do it locally from you terminal, from [GitHub Actions](/documentation/deploy/use-in-github-actions.html), [Gitlab CD/CI](/documentation/gitlab/gitlab-integration.html) or any other [CI service](/documentation/cli/available-commands.html#deploy).
 
-Whether you need to serve a [JAMSTACK](https://jamstack.org/) app or run an environment, we have you covered. Serve a static Angular, Vue or react app from our [nginx server](/documentation/services/static-server.html), run multiple [Node.js](/documentation/services/runtimes.html#node-js), [Golang](/documentation/services/runtimes.html#golang) or [PHP](/documentation/services/runtimes.html#php) applications on Zerops [runtime services](/documentation/services/runtimes.html).
+Whether you need to serve a [JAMSTACK](https://jamstack.org/) app or run an environment, we have you covered. Serve a static Angular, Vue or react app from our [nginx server](/documentation/services/static-servers.html), run multiple [Node.js](/documentation/services/runtimes.html#node-js), [Golang](/documentation/services/runtimes.html#golang) or [PHP](/documentation/services/runtimes.html#php) applications on Zerops [runtime services](/documentation/services/runtimes.html).
 
 
 ### 2. Fully managed databases
