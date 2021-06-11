@@ -50,7 +50,7 @@ When data is stored in a MariaDB cluster (through its actual primary database in
 
 ---
 
-ccc
+![Deploy versioning](/deploy-versioning.png "Deploy versioning")
 
 @slideend
 
