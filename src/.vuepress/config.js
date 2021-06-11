@@ -201,8 +201,12 @@ module.exports = {
         sup: true,
         footnote: true,
         mark: true,
-        demo: true
-      },
+        demo: true,
+        revealConfig: {
+          margin: 0.04,
+          slideNumber: false
+        }
+      }
     ]
   ]
 }
