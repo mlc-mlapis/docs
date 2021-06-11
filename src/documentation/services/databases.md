@@ -40,6 +40,20 @@ When data is stored in a MariaDB cluster (through its actual primary database in
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
+@slidestart
+
+aaaa
+
+---
+
+bbb
+
+---
+
+ccc
+
+@slideend
+
 ## MongoDB
 
 ## Redis
