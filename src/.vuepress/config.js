@@ -195,7 +195,13 @@ module.exports = {
     [
       "md-enhance",
       {
-        presentation: true
+        presentation: true,
+        align: true,
+        sub: true,
+        sup: true,
+        footnote: true,
+        mark: true,
+        demo: true
       },
     ]
   ]

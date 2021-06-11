@@ -42,6 +42,10 @@ When data is stored in a MariaDB cluster (through its actual primary database in
 
 @slidestart
 
+::: center
+STEP 1: On the project level, choose the button **Add a new Service**.
+:::
+
 ![MariaDB Service](/services/Add-New-Service.png "Add a New Service")
 
 ---
