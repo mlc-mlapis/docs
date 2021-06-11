@@ -197,9 +197,11 @@ module.exports = {
       {
         presentation: {
           revealConfig: {
-            margin: 0.04,
+            margin: 0.0,
             slideNumber: false,
-            disableLayout: true
+            minScale: 1.0,
+            maxScale: 2.0,
+            disableLayout: false
           }
         },
         align: true,
