@@ -40,16 +40,16 @@ When data is stored in a MariaDB cluster (through its actual primary database in
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-@slidestart sky
+@slidestart simple
 
-On the project level, choose the button **Add a new Service**.
-
+STEP 1
+On the project level, click the button **Add a new Service**.
 ![MariaDB Service](/services/Add-New-Service.png "Add a New Service")
 
 ---
 
+STEP 2
 Choose **MariaDB** card from the services catalog.
-
 ![MariaDB Service](/services/New-Service-MariaDB-Category.png "Select MariaDB")
 
 @slideend
