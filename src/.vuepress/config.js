@@ -199,8 +199,6 @@ module.exports = {
           revealConfig: {
             margin: 0.0,
             slideNumber: false,
-            minScale: 1.0,
-            maxScale: 2.0,
             disableLayout: false
           }
         },
