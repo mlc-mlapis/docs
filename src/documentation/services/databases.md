@@ -42,11 +42,11 @@ When data is stored in a MariaDB cluster (through its actual primary database in
 
 @slidestart
 
-aaaa
+![MariaDB Service](./images/Add-New-Service.png "Add a New Service")
 
 ---
 
-bbb
+![MariaDB Service](./images/New-Service-MariaDB-Category.png "Select MariaDB")
 
 ---
 
