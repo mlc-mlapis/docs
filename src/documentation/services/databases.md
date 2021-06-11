@@ -42,13 +42,14 @@ When data is stored in a MariaDB cluster (through its actual primary database in
 
 @slidestart simple
 
-### Click the button **Add a new Service**
+<!-- markdownlint-disable MD001 -->
+#### Click the button Add a new Service
 
 ![MariaDB Service](/services/Add-New-Service.png "Add a New Service")
 
 ---
 
-### Choose **MariaDB** card from the services catalog
+#### Choose MariaDB card from the services catalog
 
 ![MariaDB Service](/services/New-Service-MariaDB-Category.png "Select MariaDB")
 
