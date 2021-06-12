@@ -193,13 +193,21 @@ module.exports = {
       },
     ],
     [
-      "md-enhance",
+      'md-enhance',
       {
         presentation: {
           revealConfig: {
-            margin: 0.0,
+            margin: 0,
+            controlsLayout: 'edges',
             slideNumber: false
-          }
+          },
+          plugins: [
+            'highlight',
+            'math',
+            'search',
+            'notes',
+            'zoom'
+          ]
         },
         align: true,
         sub: true,
