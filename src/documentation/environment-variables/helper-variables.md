@@ -9,7 +9,7 @@ use. They cannot be deleted, their keys cannot be changed and those marked with 
 
 [[toc]]
 
-### Node.js, Golang
+### Node.js®, Golang
 
 #### `hostname`
 🔒 Service hostname.

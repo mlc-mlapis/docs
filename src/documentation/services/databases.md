@@ -50,7 +50,7 @@ Use this hostname and the internal port, i.e., <b>mariadb:3306</b>, <br /> for a
 ---
 
 <span class="r-fit-text">
-Zerops MariaDB service is actually configured always in HA mode [1].<br />
+Zerops **MariaDB service** is actually configured always in **HA mode** [1].<br />
 Unfortunately, you can't change it, but this limitation will be removed soon.
 </span>
 
@@ -85,7 +85,7 @@ readable password [3], and pay attention to Connection String [4].
 
 As shown in the previous presentation, after creating a new MariaDB service, there are database access details (hostname, port, user, password, connection string) that you can use in other Zerops services. You can use them because all services have access to [environment variables](/documentation/environment-variables/how-to-access.html) of other services inside the same project prefixed by their name. For **MariaDB** there are automatically generated [helper variables](/documentation/environment-variables/helper-variables.html#mariadb).
 
-#### Example for NodeJS runtime
+#### Example for Node.js® runtime
 
 The global **process** object is always available to applications without using **require()**.
 
@@ -93,12 +93,13 @@ The global **process** object is always available to applications without using 
 const dbServiceName = 'mariadb';
 const env = process.env;
 const dbConnectionString = env.`${dbServiceName}_connectionString`;
-const dbHostname = env.`${dbServiceName}_hostname`;
+const dbHost = env.`${dbServiceName}_hostname`;
+const dbPort = env.`${dbServiceName}_port`;
 const dbUser = env.`${dbServiceName}_user`;
 const dbPassword = env.`${dbServiceName}_password`;
 ```
 
-The value of **dbConnectionString** variable is **user:password@mariadb:3306** then. When using NodeJS driver **mysql**, it's possible to use this value directly to establish a connection.
+The value of **dbConnectionString** variable is **user:password@mariadb:3306** then. When using Node.js® driver **mysql**, it's possible to use this value directly to establish a connection.
 
 ```TypeScript
 const mysql = require('mysql');
@@ -112,7 +113,8 @@ You can certainly also use more structured syntax with an object.
 const mysql = require('mysql');
 const dbName = 'db';
 const connection = mysql.createConnection({
-  host: ${dbHostname},
+  host: ${dbHost},
+  port: ${dbPort},
   user: ${dbUser},
   password: ${dbPassword},
   database : ${dbName}
