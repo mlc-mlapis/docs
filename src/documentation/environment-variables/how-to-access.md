@@ -17,7 +17,7 @@ from another service we would reference that variable using `mariadb_connectionS
 Service environment variables are available via environment variables inside runtime services.
 
 - PHP — `$_ENV['key']`
-- Node.js — `process.env.key`
+- Node.js® — `process.env.key`
 - Golang — `os.LookupEnv('key')`
 
 
