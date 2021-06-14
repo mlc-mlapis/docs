@@ -39,10 +39,17 @@ Each container has a separate disk space, which can theoretically be used by app
 * runs on a single container, higher risk of data loss,
 * not recommended for production projects.
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Recommendation
+Even when using a non-HA mode for a production project, you should still respect all [HA mode limitations](#mariadb-service-limitations-in-ha-mode) because you never know when you'll need to switch to it.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 #### Database in HA mode
 
 * will run on three containers as a [Galera cluster](https://mariadb.com/kb/en/galera-cluster),
 * with two load balancers ([MaxScale](https://mariadb.com/kb/en/maxscale)) in [readwritesplit](https://mariadb.com/kb/en/mariadb-maxscale-25-readwritesplit) mode,
+* some [limitations](#mariadb-service-limitations-in-ha-mode) related to a Galore cluster,
 * recommended for production projects.
   
 #### HA quirks
@@ -113,7 +120,7 @@ Create a new [PHP service](/documentation/services/runtimes.html#php) and upload
 
 First, connect to the database using [zcli](/documentation/cli/installation.html). You can use a connection string of MariaDB service inside your tool then.
 
-### MariaDB service limitations
+### MariaDB service limitations in HA mode
 
 * Only InnoDB storage engine is supported.
 * No support for explicit locks, including LOCK TABLES, FLUSH TABLES {explicit table list} WITH READ LOCK, GET_LOCK, RELEASE_LOCK, etc. **These problems can be avoided by using transactions.** Global locking operators like FLUSH TABLES WITH READ LOCK are supported.
