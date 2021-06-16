@@ -140,7 +140,7 @@ module.exports = {
           ]
         },
         {
-          title: 'Enviroment variables',
+          title: 'Environment variables',
           collapsable: false,
           children: [
             'environment-variables/how-to-access',
@@ -159,13 +159,22 @@ module.exports = {
           ]
         },
         {
-          title: 'Services in zerops',
+          title: 'Services in Zerops',
           collapsable: false,
           initialOpenGroupIndex: 1,
           children: [
             'services/runtimes',
             'services/static-servers',
-            'services/databases',
+            {
+              "type": "group",
+              "title": "Databases",
+              "collapsable": false,
+              "children": [
+                'services/databases/mariadb',
+                'services/databases/mongodb',
+                'services/databases/redis'
+              ]
+            },
             'services/search-engines',
             'services/message-brokers',
             'services/storage'

@@ -6,7 +6,7 @@ Zerops infrastructure is built from the ground up based on the experience we acq
 
 ### Without external access
 
-This means no access from outside of Zerops project infrastructure, such as the Internet. In this case, there's only communication between Zerops Project Core Service and any of Zerops Services ([databases](/documentation/services/databases.html), runtimes environments, web servers, storages, search engines, message brokers) through the private network. Zerops Project Core Service is the heart of each Zerops project. It's a part of [Project Basic Package](/documentation/overview/pricing.html#projects) pricing logic.
+This means no access from outside of Zerops project infrastructure, such as the Internet. In this case, there's only communication between Zerops Project Core Service and any of Zerops Services databases(([MariaDB (MySQL)](/documentation/services/databases/mariadb.html), ([MongoDB](/documentation/services/databases/mongodb.html), ([Redis](/documentation/services/databases/redis.html))), runtimes environments, web servers, storages, search engines, message brokers) through the private network. Zerops Project Core Service is the heart of each Zerops project. It's a part of [Project Basic Package](/documentation/overview/pricing.html#projects) pricing logic.
 
 The essential parts are two running instances of a **project balancer** (one in an active state and the other in a standby backup state) through which all communication is passing.
 

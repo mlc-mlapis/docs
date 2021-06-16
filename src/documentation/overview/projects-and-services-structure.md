@@ -2,7 +2,7 @@
 
 ## Project
 
-Zerops structure has three levels. At the top is a project, which can have services, which are made of containers. It can, for example, consist of a NodeJS [runtime environment](/documentation/services/runtimes.html), a MongoDB [database](/documentation/services/databases.html), and an S3 [object storage](/documentation/services/storage.html) services.
+Zerops structure has three levels. At the top is a project, which can have services, which are made of containers. It can, for example, consist of a NodeJS [runtime environment](/documentation/services/runtimes.html), a MongoDB [database](/documentation/services/databases/mongodb.html), and an S3 [object storage](/documentation/services/storage.html) services.
 
 You can create a separate project for any environment (development, stage, production) or even for each developer if you want. Or benefit from a single project shared among all developers reducing the cost. In both ways, developers can still utilize our powerful [dev tools](/documentation/cli/vpn.html).
 
@@ -50,15 +50,15 @@ A project can contain an [unlimited number of services](/documentation/overview/
 
 ### Database services
 
-[MariaDB (MySQL)](/documentation/services/databases.html#mariadb-mysql), [MongoDB](/documentation/services/databases.html#mongodb), [Redis](/documentation/services/databases.html#redis)
+[MariaDB (MySQL)](/documentation/services/databases/mariadb.html), [MongoDB](/documentation/services/databases/mongodb.html), [Redis](/documentation/services/databases/redis.html)
 
 ### Search engine services
 
-[Elasticsearch](/documentation/services/databases.html#elasticsearch)
+[Elasticsearch](/documentation/services/search-engines.html#elasticsearch)
 
 ### Message broker services
 
-[RabbitMQ](/documentation/services/databases.html#rabbitmq)
+[RabbitMQ](/documentation/services/message-brokers.html#rabbitmq)
 
 ### Storage services
 
