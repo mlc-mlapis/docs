@@ -49,7 +49,7 @@ Typical operations from this point of view can be a functionality of [SELECT INT
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Recommendation
-Even when using a non-HA mode for a production project, you should still respect all [HA mode specifics](#mariadb-service-limitations-in-ha-mode) because you never know when you'll need to switch to it. It's also true from the used storage engine as InnoDB is the only option in HA mode.
+Even when using a non-HA mode for a production project, you should still respect all [HA mode specifics](#what-you-should-remember-when-using-ha-mode) because you never know when you'll need to switch to it. It's also true from the used storage engine as InnoDB is the only option in HA mode.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -57,17 +57,9 @@ Even when using a non-HA mode for a production project, you should still respect
 
 * will run on three containers as a [Galera cluster](https://mariadb.com/kb/en/galera-cluster),
 * with two load balancers ([MaxScale](https://mariadb.com/kb/en/maxscale)) in [readwritesplit](https://mariadb.com/kb/en/mariadb-maxscale-25-readwritesplit) mode,
-* some [specifics](#mariadb-service-limitations-in-ha-mode) related to a Galore HA cluster,
+* some [specifics](#what-you-should-remember-when-using-ha-mode) related to a Galore HA cluster,
 * recommended for production projects.
   
-### HA quirks (make your apps work with HA databases)
-
-#### Asynchronous behavior of MariaDB HA cluster
-
-When data is stored in a MariaDB cluster (through its actual primary database instance), it is replicated across other replica instances asynchronously. This means that if one SQL statement stores some data, the next immediate statement may not retrieve the same data. The reason is that the given statement will be executed against another replica instance. If required to get the same data, it's necessary to encapsulate both commands into a single SQL transaction, which will always be executed against the primary instance.
-
-You can also force synchronization waits for causality checks on a cluster by [wsrep_sync_wait](https://mariadb.com/docs/reference/mdb/system-variables/wsrep_sync_wait) bitmask. Enabling it ensures that certain types of queries always execute against the most up to date database state, at the expense of query performance.
-
 ## How to connect to MariaDB database
 
 ### From other services inside the project
@@ -124,7 +116,15 @@ Create a new [PHP service](/documentation/services/runtimes.html#php) and upload
 
 First, connect to the database using [zcli](/documentation/cli/installation.html). You can use a connection string of MariaDB service inside your tool then.
 
-## What specifics you should remember when using HA mode
+## What you should remember when using HA mode
+
+### Asynchronous behavior of MariaDB in HA mode
+
+When data is stored in a MariaDB cluster (through its actual primary database instance), it is replicated across other replica instances asynchronously. This means that if one SQL statement stores some data, the next immediate statement may not retrieve the same data. The reason is that the given statement will be executed against another replica instance. If required to get the same data, it's necessary to encapsulate both commands into a single SQL transaction, which will always be executed against the primary instance.
+
+You can also force synchronization waits for causality checks on a cluster by [wsrep_sync_wait](https://mariadb.com/docs/reference/mdb/system-variables/wsrep_sync_wait) bitmask. Enabling it ensures that certain types of queries always execute against the most up to date database state, at the expense of query performance.
+
+### Picked out specifics of a Galore HA cluster
 
 * Only InnoDB storage engine is supported.
 * No support for explicit locks, including LOCK TABLES, FLUSH TABLES {explicit table list} WITH READ LOCK, GET_LOCK, RELEASE_LOCK, etc. **These problems can be avoided by using transactions.** Global locking operators like FLUSH TABLES WITH READ LOCK are supported.
