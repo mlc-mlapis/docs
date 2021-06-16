@@ -110,7 +110,7 @@ mysql -u root -p[root_password] [database_name] < filename.dump
 
 ### Using Adminer / phpMyAdmin
 
-Create a new [PHP service](/documentation/services/runtimes.html#php) and upload the PHP script file. You can access the MariaDB database service by its connection string or its hostname, port, user, and password.
+Create a new [PHP service](/documentation/services/runtimes.html#php) and upload the PHP script file. You can access the MariaDB database service by its connection string or its hostname, port, user, and password. After that, you can use its export/import built-in functions to backup/restore database data to/from your local file system.
 
 ### Using your favorite database management tool
 
