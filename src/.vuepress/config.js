@@ -58,7 +58,15 @@ module.exports = {
             'overview/made-for-developers',
             'overview/roadmap',
             'overview/release-log',
-            'overview/how-zerops-works-inside'
+            {
+              "type": "group",
+              "title": "How Zerops works inside",
+              "collapsable": false,
+              "children": [
+                'overview/how-zerops-works-inside/typical-schemas-of-zerops-projects',
+                'overview/how-zerops-works-inside/mariadb-galera-cluster-internally'
+              ]
+            }
           ]
         },
         {
