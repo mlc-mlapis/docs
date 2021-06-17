@@ -1,10 +1,8 @@
-# How Zerops works inside
+# Typical schemas of Zerops Projects
 
 Zerops infrastructure is built from the ground up based on the experience we acquired over more than 13 years running our own Tier 3 data center at VSHosting. It’s built on open source and well-tested technologies, such as the lightweight [Linux Containers](https://linuxcontainers.org) we chose over more clunky VM solutions. Let’s take a look at how the Zerops project looks inside ... :point_down:
 
-## Typical functional schemas of Zerops Projects
-
-### Without external access
+## Without external access
 
 This means no access from outside of Zerops project infrastructure, such as the Internet. In this case, there's only communication between Zerops Project Core Service and any of Zerops Services databases(([MariaDB (MySQL)](/documentation/services/databases/mariadb.html), ([MongoDB](/documentation/services/databases/mongodb.html), ([Redis](/documentation/services/databases/redis.html))), runtimes environments, web servers, storages, search engines, message brokers) through the private network. Zerops Project Core Service is the heart of each Zerops project. It's a part of [Project Basic Package](/documentation/overview/pricing.html#projects) pricing logic.
 
@@ -26,7 +24,7 @@ You can also see details regarding the two remaining project core controllers. T
 :::
 ::::
 
-### With external access
+## With external access
 
 This means access from outside of Zerops project infrastructure, such as the Internet. The role of a **project balancer** is extended to public port routing and firewall and provides secure data communication between the Internet and your project. Again, all communication is passing through, either private network traffic or traffic concerning the Internet.
 

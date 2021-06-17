@@ -27,7 +27,7 @@ The port will automatically be set to the value of **==3306==** and can't be cha
 
 ### HA / non-HA database mode
 
-When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, using 3 containers, or **non-HA mode**, using only 1 container. To help you to decide, look at the [Choosing the right database mode](#choosing-right-database-mode) section below. The chosen database mode can't be changed later. We, however, plan to implement service cloning, allowing you safe migration.
+When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, using 3 containers, or **non-HA mode**, using only 1 container. To help you to decide, look at the [Choosing the right database mode](#choosing-right-database-mode) section below. The chosen database mode can't be changed later. We, however, plan to implement service cloning, allowing you safe migration. If you want to learn more technical details, how this service is internally built, look at [MariaDB service in HA mode internally](/documentation/overview/how-zerops-works-inside/mariadb-galera-cluster-internally.html).
 
 ## Choosing the right database mode
 
@@ -70,7 +70,7 @@ Other services can access the database using its **hostname** and **port**, as t
 
 To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [CLI](/documentation/cli/installation.html). This allows you to access the database the same way as other services inside the project, but you can not use references to the environment variables, unlike other services. Therefore you should copy the values manually through the „**How To Access** / **Database access details**“ section of the service detail in your application.
 
-![MariaDB Service](/services/MariaDB/Database-Access-Details.png "Database Access Details")
+![MariaDB Service](./images/MariaDB-Database-Access-Details.png "Database Access Details")
 
 ## Default MariaDB user and password
 
@@ -80,7 +80,7 @@ Zerops automatically creates the root access when creating the service, where th
 ::: warning Zerops doesn’t keep both places in sync
 If you change your password inside the MariaDB database directly, the change is not reflected in the environment variable and vice versa. It’s up to you to keep these up to date through the „**Service env. Variables**“ section of the service detail in your application.
 
-![MariaDB Service](/services/MariaDB/Database-Access-Change-Password.png "Database Access Change Password")
+![MariaDB Service](./images/MariaDB-Database-Access-Change-Password.png "Database Access Change Password")
 :::
 
 ## Default hardware configuration and autoscaling
@@ -110,7 +110,7 @@ mysql -u root -p[root_password] [database_name] < filename.dump
 
 ### Using Adminer / phpMyAdmin
 
-Create a new [PHP service](/documentation/services/runtimes.html#php) and upload the PHP script file. You can access the MariaDB database service by its connection string or its hostname, port, user, and password.
+Create a new [PHP service](/documentation/services/runtimes.html#php) and upload the PHP script file. You can access the MariaDB database service by its connection string or its hostname, port, user, and password. After that, you can use its export/import built-in functions to backup/restore database data to/from your local file system.
 
 ### Using your favorite database management tool
 
