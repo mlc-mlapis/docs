@@ -2,13 +2,13 @@
 
 Zerops provides a fully managed and scaled MariaDB (MySQL) database service, suitable for both development and production projects on any load. You can choose any variant you want, and you can be sure that it will work. Your certainty and peaceful sleep are our top priority.
 
-[[toc]]
-
 <!-- markdownlint-disable DOCSMD004 -->
 ::: details Compatibility & Differences to MySQL
 Information on the compatibility of MariaDB software with similar, competing software, as well as their differences, can be found [here](https://mariadb.com/kb/en/compatibility-differences).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
+
+[[toc]]
 
 ## Adding MariaDB service in Zerops
 
@@ -22,6 +22,12 @@ Choose a short and descriptive URL-friendly name, for example, **db**. The follo
 
 * maximum length **==25==** characters
 * only lower ASCII letter **==a-z==** and numbers **==0-9==**
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Hostname is also used as a default admin user name
+A chosen **hostname** is automatically used to create an [admin user account](#default-mariadb-user-and-password) with root privileges for accessing the database. You can change it later if you want.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
 
 The port will automatically be set to the value of **==3306==** and can't be changed.
 
@@ -85,7 +91,7 @@ If you change your password inside the MariaDB database directly, the change is 
 
 ## Default hardware configuration and autoscaling
 
-* Each MariaDB container (1 in non-HA, 3 in HA) and each load balancer container will start with 1 vCPU, 0.25 GB RAM, and 0.5 GB of disk space.
+* Each MariaDB container (1 in non-HA, 3 in HA) and each load balancer container will start with 1 vCPU, 1 GB RAM, and 5 GB of disk space.
 * Zerops will automatically scale the database only [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (both of non-HA and HA).
 * The [horizontal autoscaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) in HA mode is not applied because of the optimal performance.
 * Each container runs on a **different physical machine**.
