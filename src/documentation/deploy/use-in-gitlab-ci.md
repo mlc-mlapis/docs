@@ -4,7 +4,7 @@ Our zcli can be [installed](/documentation/cli/installation-authorization.html#i
 
 ### Example: GitLab Job
 
-See full [zcli](/documentation/cli/available-commands.html) [login](/documentation/cli/available-commands.html#login) and [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-files-or-paths) documentation.
+See full [zcli](/documentation/cli/available-commands.html) [login](/documentation/cli/available-commands.html#login) and [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) documentation.
 
 ```yaml
 build_and_deploy:
