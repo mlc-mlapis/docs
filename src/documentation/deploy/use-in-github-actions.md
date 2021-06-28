@@ -41,5 +41,5 @@ jobs:
           # login to zcli (automatically passes the ZEROPSTOKEN env)
           zcli login
           # deploy dist folder to service `myservice` of `myproject` project
-          zcli deploy myproject myservice ./dist
+          zcli deploy myproject myservice './dist'
 ```
