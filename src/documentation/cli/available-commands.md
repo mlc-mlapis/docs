@@ -69,8 +69,9 @@ If for example your application is built into the folder `dist/app` and you want
 ### Example
 ```bash
 # note use of quotes, especially required
-# when using using 'path/to/*' syntay to
-# strip directories
+# when using the star - 'path/to/*' - syntax
+# to strip directories and only deploy
+# the files inside
 $ zcli deploy myproject myservice './dist' 'package.json'
 ```
 
