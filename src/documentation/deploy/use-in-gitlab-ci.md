@@ -9,15 +9,18 @@ See full [zcli](/documentation/cli/available-commands.html) [login](/documentati
 ```yaml
 build_and_deploy:
   script:
+    # install zerops cli to your runner
     - npm i -g @zerops/zcli
-    - npm ci
+    # build your application
+    - npm i
     - npm run build
     # add ZEROPSTOKEN to your CI/CD env variables
     # at https://docs.gitlab.com/ee/ci/variables/
     # as a safer alternative to --zeropsToken=<token>
     # as your token will not show up in job logs
     - zcli login
-    - zcli deploy my-project my-service ./
+    # deploy dist folder to service `myapp` of `myproject` project
+    - zcli deploy myproject myservice ./dist
   only:
     - tag
 

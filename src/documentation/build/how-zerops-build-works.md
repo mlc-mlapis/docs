@@ -24,5 +24,4 @@ run:
 deploy: [ dist, node_modules, package.json ]
 ```
 
-
 See the full [zerops.yml documentation](/documentation/build/build-config.html).

@@ -101,3 +101,44 @@ Directories and files, produced by your build, witch should be [deploy]()ed to y
 ```yaml
 deploy: [ dist, package.json ]
 ```
+
+
+#### Deploy paths configurations
+
+You can pass multiple different files to the `deploy` param, depending on the structure you want to deploy.
+
+##### Deploy **everything**
+
+```yaml
+# deploys everything
+deploy: [ '.' ]
+```
+
+##### Deploy single file
+
+```yaml
+# deploys `path/to/file.txt` including path directories
+deploy: [ './path/to/file.txt' ]
+```
+
+##### Deploy all files in directory
+
+```yaml
+# deploys everything inside `path/to/dir`
+# includes the path directories
+deploy: [ './path/to/dir/' ]
+```
+
+##### Deploy single file, strip directory
+
+```yaml
+# deploys `file.txt`
+deploy: [ './path/to/*/file.txt' ]
+```
+
+##### Deploy all files in directory, strip directory path
+
+```yaml
+# deploys everything, strip the path directories
+deploy: [ './path/to/*' ]
+```

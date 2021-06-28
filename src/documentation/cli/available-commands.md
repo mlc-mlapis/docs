@@ -42,11 +42,11 @@ $ zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
 
 ## `push [project name] [service name]`
 
-Used to trigger build pipeline defined in `zerops.yml`.
+Used to trigger build pipeline defined in `zerops.yml`. **By default, it will take in account your `gitignore`**, so the same files as you are tracking in your resository will be used to build the application.
 
 ### Flags
 
-All push parameters are optional and can be used both as parameter `--parameterName` or be put inside your enviroment variables as `PARAMETERNAME`. **By default, it will take in account your `gitignore`**.
+All push parameters are optional and can be used both as parameter `--parameterName` or be put inside your enviroment variables as `PARAMETERNAME`.
 
 #### `--versionName`
 
@@ -54,6 +54,19 @@ Will be used to name the resulting [deployed](/documentation/deploy/how-deploy-w
 
 ```bash
 $ zcli push myproject myservice --versionName="v0.0.1"
+```
+
+---
+
+## `deploy [project name] [service name] [space separated files or directories]`
+
+Used to deploy files to the Zerops service. Alternative to `push`, which triggers the [build pipeline](/documentation/build/how-zerops-build-works.html). Use when you want to deploy already built files to Zerops.
+
+Note that the space separated files and / or directories can be stripped of their paths the same way as when using `zerops.yml`, see [documentation here](/build/build-config.html#deploy-paths-configurations).
+
+### Example
+```bash
+$ zcli deploy myproject myservice dist package.json
 ```
 
 ---
@@ -66,6 +79,8 @@ Used to establish a secure connection to your project network. Requires the `pro
 $ zcli vpn start <project name>
 ```
 
+---
+
 ## `vpn stop`
 
 Disconnects the established VPN connection.
@@ -73,6 +88,8 @@ Disconnects the established VPN connection.
 ```bash
 $ zcli vpn stop
 ```
+
+---
 
 ## `vpn status`
 
@@ -82,13 +99,3 @@ Prints the VPN status
 $ zcli vpn status
 ```
 
-
----
-
-## `deploy [project name] [service name] [files or paths]`
-
-Used to deploy files to the Zerops service. Alternative to `push`, which triggers hte [build pipeline](/documentation/build/how-zerops-build-works.html). Use when you want to deploy already built files to Zerops.
-
-```bash
-$ zcli deploy dist package.json
-```
