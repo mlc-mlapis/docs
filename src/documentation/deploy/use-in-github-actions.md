@@ -32,14 +32,14 @@ jobs:
           # safer alternative to --zeropsToken=<token>
           # as your token will not show up in job logs
           ZEROPSTOKEN: ${{ secrets.ZEROPSTOKEN }}
-        run:
+        run: |
           # install zerops cli to your runner
-          - npm i -g @zerops/zcli
+          npm i -g @zerops/zcli
           # build your application
-          - npm i
-          - npm run build
+          npm i
+          npm run build
           # login to zcli (automatically passes the ZEROPSTOKEN env)
-          - zcli login
+          zcli login
           # deploy dist folder to service `myservice` of `myproject` project
-          - zcli deploy myproject myservice ./dist
+          zcli deploy myproject myservice ./dist
 ```
