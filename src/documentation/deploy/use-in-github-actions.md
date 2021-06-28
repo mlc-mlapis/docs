@@ -35,11 +35,14 @@ jobs:
         run: |
           # install zerops cli to your runner
           npm i -g @zerops/zcli
+
           # build your application
           npm i
           npm run build
+
           # login to zcli (automatically passes the ZEROPSTOKEN env)
           zcli login
+
           # deploy dist folder to service `myservice` of `myproject` project
           zcli deploy myproject myservice './dist'
 ```

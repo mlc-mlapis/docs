@@ -94,7 +94,9 @@ runs:
 
 Directories and files, produced by your build, which should be deployed to your runtime service. Path starts from the root of your project (location of zerops.yml).
 
-#### Examples
+Quotes have to be used when using the `*` syntax to strip paths.
+
+#### Examples of different deploy settings
 
 ##### Deploy folder and a file:
 

@@ -62,16 +62,14 @@ $ zcli push myproject myservice --versionName="v0.0.1"
 
 Used to deploy files to the Zerops service. Alternative to `push`, which triggers the [build pipeline](/documentation/build/how-zerops-build-works.html). Use when you want to deploy already built files to Zerops.
 
-::: tip `deploy` file and directories can have path stripped
-If for example your application is built into the folder `dist/app` and you want to deploy the files inside without the path, see [deploy attribute documentation here](/documentation/build/build-config.html#deploy-paths-configurations).
+::: tip strip paths of `deploy`ed files
+If for example your application is built into the folder `dist/app` and you want to deploy the files inside without the path, you can use `'dist/app/*'`, see [deploy attribute documentation here](/documentation/build/build-config.html#examples-of-different-deploy-settings).
 :::
 
 ### Example
 ```bash
 # note use of quotes, especially required
 # when using the star - 'path/to/*' - syntax
-# to strip directories and only deploy
-# the files inside
 $ zcli deploy myproject myservice './dist' 'package.json'
 ```
 
