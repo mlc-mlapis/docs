@@ -92,7 +92,7 @@ runs:
 
 ### `deploy`
 
-Directories and files, produced by your build, witch should be [deploy]()ed to your runtime service. Path starts from the root of your project (location of zerops.yml).
+Directories and files, produced by your build, which should be deployed to your runtime service. Path starts from the root of your project (location of zerops.yml).
 
 #### Examples
 
@@ -101,11 +101,6 @@ Directories and files, produced by your build, witch should be [deploy]()ed to y
 ```yaml
 deploy: [ dist, package.json ]
 ```
-
-
-#### Deploy paths configurations
-
-You can pass multiple different files to the `deploy` param, depending on the structure you want to deploy.
 
 ##### Deploy **everything**
 
@@ -139,6 +134,7 @@ deploy: [ './path/to/*/file.txt' ]
 ##### Deploy all files in directory, strip directory path
 
 ```yaml
-# deploys everything, strip the path directories
+# deploys everything inside `path/to`
+# strip the path directories
 deploy: [ './path/to/*' ]
 ```
