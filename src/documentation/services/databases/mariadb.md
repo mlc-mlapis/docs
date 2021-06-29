@@ -14,18 +14,24 @@ Information on the compatibility of MariaDB software with similar, competing sof
 
 ### Version to choose
 
-You can actually choose **v10.4** or **v10.3**. The chosen version of the database **can't be changed afterward**, and switching has to be done manually by creating a new service with another version and migrating data. We, however, plan to implement service cloning, allowing you safe migration so that this limitation will be removed soon.
+You can currently choose **v10.4** or **v10.3**. The chosen version of the database **can't be changed afterward**. Switching must be done manually by creating a new service with another version and migrating data using a [backup / restore](#how-to-backup-restore-database-data) pattern.
 
 ### Hostname and port
 
 Choose a short and descriptive URL-friendly name, for example, **db**. The following rules are required:
 
-* maximum length **==25==** characters
-* only lower ASCII letter **==a-z==** and numbers **==0-9==**
+* maximum length **==25==** characters,
+* only lower ASCII letter **==a-z==** and numbers **==0-9==**,
+* **==has to be unique==** among other existed project's hostnames,
+* the hostname **==can't be renamed==** later.
+
+For more flexibility with future potential hostnames changes, it's always recommended to use them indirectly via a [wrapper variable](#example-for-node-js-runtime-environment) (referencing a required environment variable) in the code of [other project services](#how-to-connect-to-mariadb-database)). It allows minimizing the number of places for such a change and makes things easier and safer.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Hostname is also used as a default admin user name
-A chosen **hostname** is automatically used to create an [admin user account](#default-mariadb-user-and-password) with root privileges for accessing the database. You can change it later if you want.
+A chosen **hostname** is automatically used to create an [admin user account](#default-mariadb-user-and-password) with all privileges and grant options for accessing the database. You can change it later if you want.
+
+As system user is added
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -63,7 +69,7 @@ Even when using a non-HA mode for a production project, you should still respect
 
 * will run on three containers as a [Galera cluster](https://mariadb.com/kb/en/galera-cluster),
 * with two load balancers ([MaxScale](https://mariadb.com/kb/en/maxscale)) in [readwritesplit](https://mariadb.com/kb/en/mariadb-maxscale-25-readwritesplit) mode,
-* some [specifics](#what-you-should-remember-when-using-ha-mode) related to a Galore HA cluster,
+* some [specifics](#what-you-should-remember-when-using-ha-mode) related to a Galera HA cluster,
 * recommended for production projects.
   
 ## How to connect to MariaDB database
@@ -71,6 +77,20 @@ Even when using a non-HA mode for a production project, you should still respect
 ### From other services inside the project
 
 Other services can access the database using its **hostname** and **port**, as they are part of the same private project network, but it’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using HA mode, as it makes sure to include all the info required for HA, more info in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also a list of all automatically generated [variables](/documentation/environment-variables/helper-variables.html#mariadb) for MariaDB service.
+
+#### Example for Node.js runtime environment
+
+Where `mariaDbServiceName` contains the actual Zerops service hostname and `DB_CONNECTION_STRING`, `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD` are wrapped variables used later in the application code:
+
+```typescript
+const mariaDbServiceHostname = 'db'; // Update for another Zerops MariaDB service
+const env = process.env;
+const DB_CONNECTION_STRING = env[`${mariaDbServiceHostname}_connectionString`];
+const DB_HOSTNAME = env[`${mariaDbServiceHostname}_hostname`];
+const DB_PORT = env[`${mariaDbServiceHostname}_port`];
+const DB_USER = env[`${mariaDbServiceHostname}_user`];
+const DB_PASSWORD = env[`${mariaDbServiceHostname}_password`];
+```
 
 ### From local development environment
 
@@ -130,7 +150,7 @@ When data is stored in a MariaDB cluster (through its actual primary database in
 
 You can also force synchronization waits for causality checks on a cluster by [wsrep_sync_wait](https://mariadb.com/docs/reference/mdb/system-variables/wsrep_sync_wait) bitmask. Enabling it ensures that certain types of queries always execute against the most up to date database state, at the expense of query performance.
 
-### Picked out specifics of a Galore HA cluster
+### Picked out specifics of a Galera HA cluster
 
 * Only InnoDB storage engine is supported.
 * No support for explicit locks, including LOCK TABLES, FLUSH TABLES {explicit table list} WITH READ LOCK, GET_LOCK, RELEASE_LOCK, etc. **These problems can be avoided by using transactions.** Global locking operators like FLUSH TABLES WITH READ LOCK are supported.
