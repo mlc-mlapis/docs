@@ -25,13 +25,13 @@ Choose a short and descriptive URL-friendly name, for example, **db**. The follo
 * **==has to be unique==** among other existed project's hostnames,
 * the hostname **==can't be renamed==** later.
 
-For more flexibility with future potential hostnames changes, it's always recommended to use them indirectly via a [wrapper variable](#example-for-node-js-runtime-environment) (referencing a required environment variable) in the code of [other project services](#how-to-connect-to-mariadb-database)). It allows minimizing the number of places for such a change and makes things easier and safer.
+For more flexibility with future potential hostnames changes, it's always recommended to use them indirectly via [wrapper variables](#example-for-node-js-runtime-environment) (referencing required environment variables) in the code of [other project services](#how-to-connect-to-mariadb-database)). It allows minimizing the number of places for such a change and makes things easier and safer.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Hostname is also used as a default admin user name
 A chosen **hostname** is automatically used to create an [admin user account](#default-mariadb-user-and-password) with all privileges and grant options for accessing the database. You can change it later if you want.
 
-As system user is added
+For system maintenance reasons, the `zps` user is also automatically created with all privileges. It's necessary not to change it in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -39,57 +39,52 @@ The port will automatically be set to the value of **==3306==** and can't be cha
 
 ### HA / non-HA database mode
 
-When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, using 3 containers, or **non-HA mode**, using only 1 container. To help you to decide, look at the [Choosing the right database mode](#choosing-right-database-mode) section below. The chosen database mode can't be changed later. We, however, plan to implement service cloning, allowing you safe migration. If you want to learn more technical details, how this service is internally built, look at [MariaDB service in HA mode internally](/documentation/overview/how-zerops-works-inside/mariadb-galera-cluster-internally.html).
+When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, using 3 containers, or **non-HA mode**, using only 1 container. ==**The chosen database mode can't be changed later.**== If you want to learn more technical details, how this service is internally built, look at [MariaDB service in HA mode internally](/documentation/overview/how-zerops-works-inside/mariadb-galera-cluster-internally.html).
 
-## Choosing the right database mode
-
-<!-- markdownlint-disable DOCSMD004 -->
-::: warning Volatile non-database storage
-Each container has a separate disk space, which can theoretically be used by appropriate APIs of the database service and thus store data outside the replicated contents of the database. It should be noted that such data is considered volatile (reserved for this particular instance only). It will not be migrated if such a container is deleted due to a failure of this container. If it is necessary to store and share such data at the database level permanently, developers should use Zerops object storage or shared storage services. Also, separate direct access to an individual MariaDB instance is not supported in any way.
-
-Typical operations from this point of view can be a functionality of [SELECT INTO OUTFILE](https://mariadb.com/kb/en/select-into-outfile), [SELECT INTO DUMPFILE](https://mariadb.com/kb/en/select-into-dumpfile), [LOAD_FILE](https://mariadb.com/kb/en/load_file), or [LOAD DATA](https://dev.mysql.com/doc/refman/8.0/en/load-data.html).
-:::
-<!-- markdownlint-enable DOCSMD004 -->
-
-### Database in non-HA mode
+#### MariaDB in non-HA mode
 
 * great for local development to save money,
 * it doesn’t require any changes to the existed code,
-* theoretically no limitations, but see the recommendation tip below,
-* runs on a single container, higher risk of data loss,
+* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-ha-mode), but see the recommendation tip below,
+* data is stored only in a single container, higher risk of data loss,
+* all data changes since the last backup are not recoverable,
 * not recommended for production projects.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Recommendation
-Even when using a non-HA mode for a production project, you should still respect all [HA mode specifics](#what-you-should-remember-when-using-ha-mode) because you never know when you'll need to switch to it. It's also true from the used storage engine as InnoDB is the only option in HA mode.
+Even when using a non-HA mode for a production project, you should still respect all [HA mode specifics](#what-you-should-remember-when-using-ha-mode) (earlier or later) because you never know when you'll need to switch to it. It's also true for the used storage engine, as InnoDB is the only option in HA mode.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-### Database in HA mode
+#### MariaDB in HA mode
 
-* will run on three containers as a [Galera cluster](https://mariadb.com/kb/en/galera-cluster),
-* with two load balancers ([MaxScale](https://mariadb.com/kb/en/maxscale)) in [readwritesplit](https://mariadb.com/kb/en/mariadb-maxscale-25-readwritesplit) mode,
-* some [specifics](#what-you-should-remember-when-using-ha-mode) related to a Galera HA cluster,
+* will run on three containers as a [Galera cluster](https://mariadb.com/kb/en/galera-cluster), each on a **different physical machine**,
+* so the data is stored redundantly in three places, no risk of data loss,
+* when one container fails, it's automatically replaced with a new one,
+* with two load balancers ([MaxScale](https://mariadb.com/kb/en/maxscale)) in [readwritesplit](https://mariadb.com/kb/en/mariadb-maxscale-25-readwritesplit) mode (no additional cost),
+* [asynchronous behavior](#asynchronous-behavior) of a Galera HA cluster,
+* only InnoDB storage engine is supported,
+* the need to respect all the [specifics](#what-you-should-remember-when-using-ha-mode) related to a Galera HA cluster,
 * recommended for production projects.
   
 ## How to connect to MariaDB database
 
 ### From other services inside the project
 
-Other services can access the database using its **hostname** and **port**, as they are part of the same private project network, but it’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using HA mode, as it makes sure to include all the info required for HA, more info in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also a list of all automatically generated [variables](/documentation/environment-variables/helper-variables.html#mariadb) for MariaDB service.
+Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using HA mode, as it makes sure to include all the info required for HA. More info in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also a list of all automatically generated [variables](/documentation/environment-variables/helper-variables.html#mariadb) for MariaDB service.
 
 #### Example for Node.js runtime environment
 
-Where `mariaDbServiceName` contains the actual Zerops service hostname and `DB_CONNECTION_STRING`, `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD` are wrapped variables used later in the application code:
+Where `mariaDbHostname` contains the actual Zerops service hostname and `DB_CONNECTION_STRING`, `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD` are wrapper variables used later in the application code:
 
 ```typescript
-const mariaDbServiceHostname = 'db'; // Update for another Zerops MariaDB service
+const mariaDbHostname = 'db'; // Update for another Zerops MariaDB service
 const env = process.env;
-const DB_CONNECTION_STRING = env[`${mariaDbServiceHostname}_connectionString`];
-const DB_HOSTNAME = env[`${mariaDbServiceHostname}_hostname`];
-const DB_PORT = env[`${mariaDbServiceHostname}_port`];
-const DB_USER = env[`${mariaDbServiceHostname}_user`];
-const DB_PASSWORD = env[`${mariaDbServiceHostname}_password`];
+const DB_CONNECTION_STRING = env[`${mariaDbHostname}_connectionString`];
+const DB_HOSTNAME = env[`${mariaDbHostname}_hostname`];
+const DB_PORT = env[`${mariaDbHostname}_port`];
+const DB_USER = env[`${mariaDbHostname}_user`];
+const DB_PASSWORD = env[`${mariaDbHostname}_password`];
 ```
 
 ### From local development environment
@@ -111,10 +106,9 @@ If you change your password inside the MariaDB database directly, the change is 
 
 ## Default hardware configuration and autoscaling
 
-* Each MariaDB container (1 in non-HA, 3 in HA) and each load balancer container will start with 1 vCPU, 1 GB RAM, and 5 GB of disk space.
+* Each MariaDB container (1 in non-HA, 3 in HA) starts with 1 vCPU, 1 GB RAM, and 5 GB of disk space.
 * Zerops will automatically scale the database only [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (both of non-HA and HA).
 * The [horizontal autoscaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) in HA mode is not applied because of the optimal performance.
-* Each container runs on a **different physical machine**.
 
 ## How to backup / restore database data
 
@@ -144,11 +138,28 @@ First, connect to the database using [zcli](/documentation/cli/installation.html
 
 ## What you should remember when using HA mode
 
-### Asynchronous behavior of MariaDB in HA mode
+### Asynchronous behavior
 
-When data is stored in a MariaDB cluster (through its actual primary database instance), it is replicated across other replica instances asynchronously. This means that if one SQL statement stores some data, the next immediate statement may not retrieve the same data. The reason is that the given statement will be executed against another replica instance. If required to get the same data, it's necessary to encapsulate both commands into a single SQL transaction, which will always be executed against the primary instance.
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Be sure you understand correctly
+When data is stored in a MariaDB cluster (through its actual primary database instance), it is replicated across other replica instances asynchronously. This means that if one SQL statement stores some data, the next immediate statement may not retrieve the same data. The reason is that the given statement will be executed against another replica instance. If required to get the same data, it's necessary to encapsulate both commands into a single SQL transaction, which will always be executed against the primary instance (because of the write operation that is included). The same would be the case with two immediately following SELECT statements to get the same data. Again, encapsulation of both commands into a single SQL transaction guarantees their execution against a selected but the same replica instance.
 
-You can also force synchronization waits for causality checks on a cluster by [wsrep_sync_wait](https://mariadb.com/docs/reference/mdb/system-variables/wsrep_sync_wait) bitmask. Enabling it ensures that certain types of queries always execute against the most up to date database state, at the expense of query performance.
+You can also force synchronization waits for causality checks on a cluster by [wsrep_sync_wait](https://mariadb.com/docs/reference/mdb/system-variables/wsrep_sync_wait) bitmask. Enabling it ensures that certain types of queries always execute against the most up to date database state, at the expense of query performance. [Sample usage](https://mariadb.com/kb/en/galera-cluster-system-variables/#wsrep_sync_wait) for a critical read that must have the most up-to-date data:
+
+```sql
+ SET SESSION wsrep_sync_wait=1;
+ SELECT ...;
+ SET SESSION wsrep_sync_wait=0;
+```
+
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+### Non-database local data
+
+Each container has a separate disk space, which can theoretically be used by appropriate APIs of the database service and thus store data outside the replicated contents of the database. It should be noted that such data is reserved only for this particular instance only. It will not be migrated if such a container is deleted due to a failure of this container. If it is necessary to store and share such non-database permanently, developers should use Zerops shared storage services. Also, separate direct access to an individual MariaDB instance is not supported in any way.
+
+Typical operations from this point of view can be a functionality of [SELECT INTO OUTFILE](https://mariadb.com/kb/en/select-into-outfile), [SELECT INTO DUMPFILE](https://mariadb.com/kb/en/select-into-dumpfile), [LOAD_FILE](https://mariadb.com/kb/en/load_file), or [LOAD DATA](https://dev.mysql.com/doc/refman/8.0/en/load-data.html).
 
 ### Picked out specifics of a Galera HA cluster
 
