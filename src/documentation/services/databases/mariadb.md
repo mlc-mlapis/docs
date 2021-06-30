@@ -30,8 +30,6 @@ For more flexibility with future potential hostnames changes, it's always recomm
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Hostname is also used as a default admin user name
 A chosen **hostname** is automatically used to create an [admin user account](#default-mariadb-user-and-password) with all privileges and grant options for accessing the database. You can change it later if you want.
-
-For system maintenance reasons, the `zps` user is also automatically created with all privileges. It's necessary not to change it in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -94,7 +92,9 @@ To connect to the database from your local workspace, you can utilize the [VPN](
 
 ## Default MariaDB user and password
 
-Zerops automatically creates the root access when creating the service, where the **==user==** is based on the selected **hostname**, and the **==password==** is randomly generated. These are saved to environment variables **user** and **password** and can be referenced from other services the same way as **connectionString**.
+Zerops automatically creates a user with all privileges and grant options when creating the service, where the name of **==user==** is based on the selected **hostname**, and the **==password==** is randomly generated. These are saved to environment variables **user** and **password** and can be referenced from other services the same way as **connectionString**.
+
+For system maintenance reasons, the `zps` user is also automatically created with all privileges. It's necessary not to change it in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Zerops doesn’t keep both places in sync
