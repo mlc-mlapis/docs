@@ -25,7 +25,7 @@ Choose a short and descriptive URL-friendly name, for example, **db**. The follo
 * **==has to be unique==** among other existed project's hostnames,
 * the hostname **==can't be renamed==** later.
 
-For more flexibility with future potential hostnames changes, it's always recommended to use them indirectly via [custom environment variables](#using-custom-variables-for-indirect-referencing) (referencing implicit Zerops environment variables) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased security.
+For more flexibility with future potential hostnames changes, it's always recommended to use them indirectly via [custom environment variables](#using-custom-variables-for-indirect-referencing) (referencing implicit Zerops environment variables) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Hostname is also used as a default admin user name
