@@ -11,8 +11,16 @@ const DB_CONNECTION_STRING = env['DEFAULT_DB_CONNECTION_STRING'];
 
 When a new MariaDB service is created with a different hostname in the future (with **hostname** set to **==dbnew==**), and it's required to switch to it, the only change would be in the definition of that custom variable to `${dbnew_connectionString}`, and no application code changes are necessary at all.
 
-If **Golang** is used instead of Node.js, the principle is the same.
+If **Golang** is used instead of Node.js.
 
 ```go
 const DB_CONNECTION_STRING = os.LookupEnv('DEFAULT_DB_CONNECTION_STRING')
+```
+
+If **PHP** is used instead of Node.js.
+
+```php
+<?php
+  $DB_CONNECTION_STRING = getenv('DEFAULT_DB_CONNECTION_STRING');
+?>
 ```
