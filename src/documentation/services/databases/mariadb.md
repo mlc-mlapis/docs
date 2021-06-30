@@ -45,7 +45,7 @@ When creating a new service, you can choose whether the database should be run i
 
 * great for local development to save money,
 * it doesn’t require any changes to the existed code,
-* theoretically no limitations, but see the recommendation tip below,
+* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-ha-mode), but see the recommendation tip below,
 * data is stored only in a single container, higher risk of data loss,
 * all data changes since the last backup are not recoverable,
 * not recommended for production projects.
