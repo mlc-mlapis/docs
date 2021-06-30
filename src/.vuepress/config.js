@@ -45,7 +45,6 @@ module.exports = {
       }
     ],
     sidebar: {
-
       '/documentation/': [
         {
           title: 'Zerops Overview',
@@ -186,6 +185,22 @@ module.exports = {
             'services/search-engines',
             'services/message-brokers',
             'services/storage'
+          ]
+        }
+      ],
+      '/knowledge-base/': [
+        {
+          title: 'Best practices',
+          collapsable: false,
+          children: [
+            'best-practices/how-to-use-environment-variables-efficiently'
+          ]
+        },
+        {
+          title: 'How to do',
+          collapsable: false,
+          children: [
+            'how-to-do/build-and-deploy-and-run-nestjs-angular-app'
           ]
         }
       ]
