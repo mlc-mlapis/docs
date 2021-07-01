@@ -69,7 +69,7 @@ Even when using a non-HA mode for a production project, you should still respect
 
 Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using HA mode, as it makes sure to include all the info required for HA. More info in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also a list of all automatically generated [variables](/documentation/environment-variables/helper-variables.html#mariadb) for MariaDB service.
 
-For more flexibility with future potential hostnames changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment variables) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility.
+For more flexibility with future potential hostnames changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#mariadb)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility.
 
 ### From local development environment
 
