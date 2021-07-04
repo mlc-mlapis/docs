@@ -100,18 +100,30 @@ If you change your password inside the MariaDB database directly, the change is 
 
 ### Using mysql CLI
 
-First, connect to the database service using [zcli](/documentation/cli/installation.html).
+First, connect to the database service using [zcli](/documentation/cli/installation.html). It's supposed that a MySQL client program was already installed locally. You can use, for example, [DataGrip](https://www.jetbrains.com/datagrip), [MySQL Shell](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html) multi-platform database administration tools, or [Sequel Pro](https://www.sequelpro.com), [Querious](https://www.araelium.com/querious), specifically on the Mac platform.
 
 #### Logical database backup
 
 ```powershell
-mysqldump -u root -p[root_password] -x [database_name] > filename.dump
+mysqldump -h [hostname] -u [user] -p[password] -x [database] > filename.dump
+```
+
+And when used values:
+
+* hostname = **==db==** (specified when MariaDb service was created)
+* user = **==db==** (automatically created with the name same as the hostname)
+* password = **==xxxxxxxxxxxxxxxx==** (automatically created as a random value)
+* database = **==main==** (created by a user later as a part of the project)
+* filename = **==main==** (specified filename to store the database backup)
+
+```powershell
+mysqldump -h db -u db -pxxxxxxxxxxxxxxxx -x main > main.dump
 ```
 
 #### Logical database restore
 
 ```powershell
-mysql -u root -p[root_password] [database_name] < filename.dump
+mysql -h [hostname] -u [user] -p[password] [database] < filename.dump
 ```
 
 ### Using Adminer / phpMyAdmin
