@@ -100,7 +100,7 @@ If you change your password inside the MariaDB database directly, the change is 
 
 ### Using your favorite database management tool
 
-It's supposed that you install locally any of your favorite database administration tools. You can use, for example, [DataGrip](https://www.jetbrains.com/datagrip), [DbVisualizer](https://www.dbvis.com/) multi-platform database administration tools, or [Sequel Pro](https://www.sequelpro.com), [Querious](https://www.araelium.com/querious), specifically on the Mac platform. You can find the list with many others on the [Graphical and Enhanced Clients](https://mariadb.com/kb/en/graphical-and-enhanced-clients) page.
+It's supposed that you install locally any of your favorite database administration tools. You can use, for example, [DataGrip](https://www.jetbrains.com/datagrip), [DbVisualizer](https://www.dbvis.com/), [MySQL Workbench](https://dev.mysql.com/downloads/workbench) multi-platform database administration tools, or [Sequel Pro](https://www.sequelpro.com), [Querious](https://www.araelium.com/querious), specifically on the Mac platform. You can find the list with many others on the [Graphical and Enhanced Clients](https://mariadb.com/kb/en/graphical-and-enhanced-clients) page.
 
 First, connect to the database service using [zcli](/documentation/cli/installation.html). After that connect to the database service from your installed database management tool, like the example below with Querious tool:
 
@@ -114,7 +114,7 @@ Now it's already easy to use its export/import built-in functions to backup/rest
 
 ### Using mariadb/mysql CLI
 
-Again, firstly connect to the database service using [zcli](/documentation/cli/installation.html). It's supposed that a MariaDB/MySQL CLI client program was already installed locally (it comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads)). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version).
+Again, firstly connect to the database service using [zcli](/documentation/cli/installation.html). It's supposed that a MariaDB/MySQL CLI client program was already installed locally (it comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads)). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version). The client CLI is also a part of [MySQL Workbench](https://dev.mysql.com/downloads/workbench).
 
 #### Logical database backup
 
