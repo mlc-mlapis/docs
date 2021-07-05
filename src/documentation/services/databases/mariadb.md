@@ -81,14 +81,19 @@ To connect to the database from your local workspace, you can utilize the [VPN](
 
 Zerops automatically creates a user with all privileges and grant options when creating the service, where the name of **==user==** is based on the selected **hostname**, and the **==password==** is randomly generated. These are saved to environment variables **user** and **password** and can be referenced from other services the same way as **connectionString**.
 
-For system maintenance reasons, the `zps` user is also automatically created with all privileges. It's necessary not to change it in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode.
-
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Zerops doesn’t keep both places in sync
 If you change your password inside the MariaDB database directly, the change is not reflected in the environment variable and vice versa. It’s up to you to keep these up to date through the „**Service env. Variables**“ section of the service detail in your application.
 
 ![MariaDB Service](./images/MariaDB-Database-Access-Change-Password.png "Database Access Change Password")
 :::
+<!-- markdownlint-enable DOCSMD004 -->
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Default Zerops maintenance user
+For system maintenance reasons, the `zps` user is also automatically created with all privileges. It's necessary not to change it in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
 
 ## Default hardware configuration and autoscaling
 
@@ -100,13 +105,17 @@ If you change your password inside the MariaDB database directly, the change is 
 
 ### Using your favorite database management tool
 
-It's supposed that you install locally any of your favorite database administration tools. You can use, for example, [DataGrip](https://www.jetbrains.com/datagrip), [DbVisualizer](https://www.dbvis.com/), [MySQL Workbench](https://dev.mysql.com/downloads/workbench) multi-platform database administration tools, or [Sequel Pro](https://www.sequelpro.com), [Querious](https://www.araelium.com/querious), specifically on the Mac platform. You can find the list with many others on the [Graphical and Enhanced Clients](https://mariadb.com/kb/en/graphical-and-enhanced-clients) page.
+Install locally any of your favorite database administration tools. You can use, for example, [DataGrip](https://www.jetbrains.com/datagrip), [DbVisualizer](https://www.dbvis.com/), [MySQL Workbench](https://dev.mysql.com/downloads/workbench) multi-platform database administration tools, or [Sequel Pro](https://www.sequelpro.com), [Querious](https://www.araelium.com/querious), specifically on the Mac platform. You can find the list with many others on the [Graphical and Enhanced Clients](https://mariadb.com/kb/en/graphical-and-enhanced-clients) page.
 
-First, connect to the database service using [zcli](/documentation/cli/installation.html). After that connect to the database service from your installed database management tool, like the example below with Querious tool:
+First, connect to your Zerops project using [zcli](/documentation/cli/installation.html). After that connect to the database service from your installed database management tool, like the example below with **Querious** tool:
 
 ![Querious](./images/Querious-Connect.png "Querious Connect Dialog")
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Connection security setting
 As you are using a secure VPN channel already, and the database service is located on the internal Zerops project private secured network, it's unnecessary to apply any additional security layer as SSH or SSL here.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
 
 Now it's already easy to use its export/import built-in functions to backup/restore database data to/from your local file system.
 
@@ -114,7 +123,7 @@ Now it's already easy to use its export/import built-in functions to backup/rest
 
 ### Using mariadb/mysql CLI
 
-Again, firstly connect to the database service using [zcli](/documentation/cli/installation.html). It's supposed that a MariaDB/MySQL CLI client program was already installed locally (it comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads)). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version). The client CLI is also a part of [MySQL Workbench](https://dev.mysql.com/downloads/workbench).
+Again, firstly connect to your Zerops project using [zcli](/documentation/cli/installation.html). MariaDB/MySQL CLI client has to be already installed locally. It comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version). The client CLI is a part of [MySQL Workbench](https://dev.mysql.com/downloads/workbench) either.
 
 #### Logical database backup
 
