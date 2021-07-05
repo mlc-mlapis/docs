@@ -98,9 +98,23 @@ If you change your password inside the MariaDB database directly, the change is 
 
 ## How to backup / restore database data
 
-### Using mysql CLI
+### Using your favorite database management tool
 
-First, connect to the database service using [zcli](/documentation/cli/installation.html). It's supposed that a MySQL client program was already installed locally. You can use, for example, [DataGrip](https://www.jetbrains.com/datagrip), [MySQL Shell](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html) multi-platform database administration tools, or [Sequel Pro](https://www.sequelpro.com), [Querious](https://www.araelium.com/querious), specifically on the Mac platform.
+It's supposed that you install locally any of your favorite database administration tools. You can use, for example, [DataGrip](https://www.jetbrains.com/datagrip), [DbVisualizer](https://www.dbvis.com/) multi-platform database administration tools, or [Sequel Pro](https://www.sequelpro.com), [Querious](https://www.araelium.com/querious), specifically on the Mac platform. You can find the list with many others on the [Graphical and Enhanced Clients](https://mariadb.com/kb/en/graphical-and-enhanced-clients) page.
+
+First, connect to the database service using [zcli](/documentation/cli/installation.html). After that connect to the database service from your installed database management tool, like the example below with Querious tool:
+
+![Querious](./images/Querious-Connect.png "Querious Connect Dialog")
+
+As you are using a secure VPN channel already, and the database service is located on the internal Zerops project private secured network, it's unnecessary to apply any additional security layer as SSH or SSL here.
+
+Now it's already easy to use its export/import built-in functions to backup/restore database data to/from your local file system.
+
+![Querious](./images/Querious-Export.png "Querious Export")
+
+### Using mariadb/mysql CLI
+
+Again, firstly connect to the database service using [zcli](/documentation/cli/installation.html). It's supposed that a MariaDB/MySQL CLI client program was already installed locally (it comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads)). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version).
 
 #### Logical database backup
 
@@ -126,13 +140,17 @@ mysqldump -h db -u db -pxxxxxxxxxxxxxxxx -x main > main.dump
 mysql -h [hostname] -u [user] -p[password] [database] < filename.dump
 ```
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Available aliases in the command-line client
+Starting with MariaDB 10.4.6, `mariadb` is a [symlink](https://mariadb.com/kb/en/mariadb-command-line-client) to `mysql`. The same is true for `mariadb-dump` as a [symlink](https://mariadb.com/kb/en/mariadb-dump) to `mysqldump`.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ### Using Adminer / phpMyAdmin
 
-Create a new [PHP service](/documentation/services/runtimes.html#php) and upload the PHP script file. You can access the MariaDB database service by its connection string or its hostname, port, user, and password. After that, you can use its export/import built-in functions to backup/restore database data to/from your local file system.
+Create a new Zerops [PHP service](/documentation/services/runtimes.html#php) and upload the PHP script file `index.php` for Adminer or phpMyAdmin (placed in a zipped file `*.zip` at the same sub-directory as the chosen name for the PHP document root directory). You can access the MariaDB database service by its hostname, port, user, and password. After that, you can use its export/import built-in functions to backup/restore database data to/from your local file system.
 
-### Using your favorite database management tool
-
-First, connect to the database using [zcli](/documentation/cli/installation.html). You can use a connection string of MariaDB service inside your tool then.
+![Adminer](./images/Adminer-Login.png "Adminer Login")
 
 ## What you should remember when using HA mode
 
