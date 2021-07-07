@@ -8,10 +8,17 @@ You can create a separate project for any environment (development, stage, produ
 
 All services inside such a project share a [dedicated private network](/documentation/routing/routing-between-project-services.html) and can see and reference [environment variables](/documentation/environment-variables/how-to-access.html) from other services.
 
-By default, nothing outside the project can access any of the services inside. Each service can be made publicly accessible through Zerops subdomains (*.app.zerops.io) or [domains](/documentation/routing/using-your-domain.html), pointing your DNS records to the [IPv6](/documentation/routing/unique-ipv4-ipv6-addresses.html) or [IPv4](/documentation/overview/pricing.html#project-add-ons) addresses assigned to the project, or by setting up direct access by [opening public ports](/documentation/routing/access-through-ip-and-firewall.html) on the assigned IP addresses. A built-in optional [firewall](/documentation/routing/access-through-ip-and-firewall.html) can manage the direct access by defining a list of allowed and denied IP addresses for each open public port.
+**By default, nothing outside the project can access any of the services inside.** Each service can be made publicly accessible through Zerops subdomains (*.app.zerops.io) or [domains](/documentation/routing/using-your-domain.html), pointing your DNS records to the [IPv6](/documentation/routing/unique-ipv4-ipv6-addresses.html) or [IPv4](/documentation/overview/pricing.html#project-add-ons) addresses assigned to the project, or by setting up direct access by [opening public ports](/documentation/routing/access-through-ip-and-firewall.html) on the assigned IP addresses. A built-in optional [firewall](/documentation/routing/access-through-ip-and-firewall.html) can manage the direct access by defining a list of allowed and denied IP addresses for each open public port.
 
-The screenshot below shows an example of such a project, our own website. The project is called **zerops-web-prod**, and it consists of 2 runtimes (Node.js® and Golang), a static web server (Nginx), a database (MongoDB), and an S3 object storage services. It is made accessible to the public through our domain (`zerops.io`).
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Communication between different Zerops projects
+Any communication between the various Zerops projects at the level of their services is in principle identical to access directly from the Internet (the same features and rules), and there are no exceptions or specifics. More about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
+:::
+<!-- markdownlint-enable DOCSMD004 -->
 
+The screenshot below shows an example of such a project, our own website. The project is called **zerops-web-prod**, and it consists of 2 runtimes (Node.js and Golang), a static web server (Nginx), a database (MongoDB), and an S3 object storage services. It is made accessible to the public through our domain (`zerops.io`).
+
+<!-- markdownlint-disable DOCSMD004 -->
 :::: tabs
 ::: tab Zerops Web Project in GUI
 ![Zerops Web Project](./images/Zerops-Web-Production.png "Zerops Web Project in GUI")
@@ -20,6 +27,7 @@ The screenshot below shows an example of such a project, our own website. The pr
 ![Zerops Web Project](./images/Zerops-Web-Production-Schema.png "Schema of Zerops Web Project")
 :::
 ::::
+<!-- markdownlint-enable DOCSMD004 -->
 
 Each project has the following items included in its [Basic Package](/documentation/overview/pricing.html#projects):
 
@@ -42,7 +50,7 @@ A project can contain an [unlimited number of services](/documentation/overview/
 
 ### Runtime environments
 
-[Node.js®](/documentation/services/runtimes.html#node-js), [Golang](/documentation/services/runtimes.html#golang), [PHP](/documentation/services/runtimes.html#php)
+[Node.js](/documentation/services/runtimes.html#node-js), [Golang](/documentation/services/runtimes.html#golang), [PHP](/documentation/services/runtimes.html#php)
 
 ### Static web server services
 
