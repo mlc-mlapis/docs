@@ -1,6 +1,6 @@
 # Runtime environments
 
-## Node.js®
+## Node.js
 
 ## Golang
 

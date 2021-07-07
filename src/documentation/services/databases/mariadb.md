@@ -65,6 +65,12 @@ Even when using a non-HA mode for a production project, you should still respect
   
 ## How to connect to MariaDB database
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Don't use additional security protocols
+The database service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. It's also true for access using [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ### From other services inside the project
 
 Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using HA mode, as it makes sure to include all the info required for HA. More info in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also a list of all automatically generated [variables](/documentation/environment-variables/helper-variables.html#mariadb) for MariaDB service.
@@ -113,7 +119,7 @@ First, connect to your Zerops project using [zcli](/documentation/cli/installati
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Connection security setting
-As you are using a secure VPN channel already, and the database service is located on the internal Zerops project private secured network, it's unnecessary to apply any additional security layer as SSH or SSL here.
+As you are using a secure VPN channel already, and the database service is located on the internal Zerops project private secured network, it's unnecessary to apply any additional security layer as SSH or SSL/TLS here. For these reasons, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. More about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 

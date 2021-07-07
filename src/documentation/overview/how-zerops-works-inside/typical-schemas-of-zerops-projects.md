@@ -44,7 +44,7 @@ The functionality is principally the same as in the case of Project Core Service
 :::
 ::: tab Detail of Routing Service
 
-Technically, the **http balancers** (both in an active state) are Layer 7 balancers (handling all HTTP/S traffic for your project). Again, a **scaling controller** manages [vertical scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (vCPU, RAM, Disk) for both http balancer containers and a **repair controller** to fix an abnormal behavior of them.
+Technically, the **http balancers** (both in an active state) are Layer 7 balancers (handling all HTTP/S traffic for your project from outside environments). Again, a **scaling controller** manages [vertical scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (vCPU, RAM, Disk) for both http balancer containers and a **repair controller** to fix an abnormal behavior of them.
 
 ![With external access](./images/Zerops-Project-Routing-Detail-Internet.png "Project with external access")
 :::
