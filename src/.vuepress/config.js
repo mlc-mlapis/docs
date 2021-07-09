@@ -170,7 +170,16 @@ module.exports = {
           collapsable: false,
           initialOpenGroupIndex: 1,
           children: [
-            'services/runtimes',
+            {
+              "type": "group",
+              "title": "Runtime environments",
+              "collapsable": false,
+              "children": [
+                'services/runtimes/nodejs',
+                'services/runtimes/golang',
+                'services/runtimes/php'
+              ]
+            },
             'services/static-servers',
             {
               "type": "group",
@@ -200,7 +209,8 @@ module.exports = {
           title: 'How to do',
           collapsable: false,
           children: [
-            'how-to-do/build-and-deploy-and-run-nestjs-angular-app'
+            'how-to-do/build-and-deploy-and-run-nestjs-angular-app',
+            'how-to-do/how-to-customize-phpmyadmin-kit-in-windows'
           ]
         }
       ]

@@ -1,7 +1,5 @@
 # Runtime environments
 
-## Node.js
-
-## Golang
-
-## PHP
+* [Node.js](/documentation/services/runtimes/nodejs.html)
+* [Golang](/documentation/services/runtimes/golang.html)
+* [PHP](/documentation/services/runtimes/php.html)
