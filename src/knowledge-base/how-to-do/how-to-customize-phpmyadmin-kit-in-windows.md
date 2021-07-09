@@ -16,49 +16,49 @@ The prerequisite for using the following steps is to perform a standard installa
 
 2. Open a new **Bash** command window (coming from the WSL2 installation). It will be open in `/root` directory by default.
 
-3. Install **zip** program by the command `apt install zip` (also **unzip** dependency will be installed automatically).
+3. Install **zip** program by the command ==`apt install zip`== (also **unzip** dependency will be installed automatically).
 
-4. Now create a new directory by the command: `mkdir install`.
+4. Now create a new directory by the command: ==`mkdir install`== .
 
-5. Switch to the directory where you previously downloaded the **phpMyAdmin** installation kit by the command: `cd /mnt/c/Install/phpMyAdmin`.
+5. Switch to the directory where you previously downloaded the **phpMyAdmin** installation kit by the command: ==`cd /mnt/c/Install/phpMyAdmin`== .
 
-6. Copy `phpMyAdmin-5.1.1-english.zip` file to `/root/install` directory by the command: `cp phpMyAdmin-5.1.1-english.zip /root/install`.
+6. Copy `phpMyAdmin-5.1.1-english.zip` file to `/root/install` directory by the command: ==`cp phpMyAdmin-5.1.1-english.zip /root/install`== .
 
-7. Switch back by the command: `cd /root/install`.
+7. Switch back by the command: ==`cd /root/install`== .
 
-8. Extract the zipped file content to the `public` subdirectory (it'll be created automatically) by the command: `unzip phpMyAdmin-5.1.1-english.zip -d public`. The name `public` has to be the same name as the chosen document root name when creating your Zerops [PHP + Apache service](/documentation/services/runtimes/php.html). You can choose a different name, of course, but it has to be used the same in both places again.
+8. Extract the zipped file content to the `public` subdirectory (it'll be created automatically) by the command: ==`unzip phpMyAdmin-5.1.1-english.zip -d public`== . The name `public` has to be the same name as the chosen document root name when creating your Zerops [PHP + Apache service](/documentation/services/runtimes/php.html). You can choose a different name, of course, but it has to be used the same in both places again.
 
-9.  Delete the zipped file `phpMyAdmin-5.1.1-english.zip` by the command `rm phpMyAdmin-5.1.1-english.zip`.
+9. Delete the zipped file `phpMyAdmin-5.1.1-english.zip` by the command ==`rm phpMyAdmin-5.1.1-english.zip`== .
 
-10. Switch to the directory `public` by the command: `cd public`.
+10. Switch to the directory `public` by the command: ==`cd public`== .
 
-11. Switch to the directory `phpMyAdmin-5.1.1-english` by the command: `cd phpMyAdmin-5.1.1-english` (it's a subdirectory coming from the extracted content of the downloaded file).
+11. Switch to the directory `phpMyAdmin-5.1.1-english` by the command: ==`cd phpMyAdmin-5.1.1-english`== (it's a subdirectory coming from the extracted content of the downloaded file).
 
-12. Rename the filename `config.sample.inc.php` to `config.inc.php` by the command: `mv config.sample.inc.php config.inc.php`.
+12. Rename the filename `config.sample.inc.php` to `config.inc.php` by the command: ==`mv config.sample.inc.php config.inc.php`== .
 
-13. Open the content of the file `config.inc.php` in the VIM editor by the command: `vim config.inc.php`.
+13. Open the content of the file `config.inc.php` in the VIM editor by the command: ==`vim config.inc.php`== .
 
-14. Press `i` on the keyboard to activate INSERT edit mode.
+14. Press ==`i`== on the keyboard to activate INSERT edit mode.
 
 15. Update the line `$cfg['Servers'][$i]['host'] = 'localhost';` where instead of `localhost` value use a real **hostname** of your Zerops [MariaDB (MySQL) service](/documentation/services/databases/mariadb.html).
 
 16. Update the line `$cfg['blowfish_secret'] = '';` where instead of the empty string value insert a random generated value of 32 characters at least.
 
-17. Press `ESC` on the keyboard to leave INSERT edit mode.
+17. Press ==`ESC`== on the keyboard to leave INSERT edit mode.
 
-18. Press `:wq!` to save the file and close the VIM editor.
+18. Press ==`:wq!`== to save the file and close the VIM editor.
 
-19. Move the whole content of the current directory `phpMyAdmin-5.1.1-english` to the `public` parent directory by the command `mv * ../` (to eliminate an unnecessary directory nesting).
+19. Move the whole content of the current directory `phpMyAdmin-5.1.1-english` to the `public` parent directory by the command ==`mv * ../`== (to eliminate an unnecessary directory nesting).
 
-20. Switch to the `public` directory by the command `cd ..`.
+20. Switch to the `public` directory by the command ==`cd ..`== .
 
-21. Remove that unnecessary directory `phpMyAdmin-5.1.1-english` by the command `rm -r phpMyAdmin-5.1.1-english`.
+21. Remove that unnecessary directory `phpMyAdmin-5.1.1-english` by the command ==`rm -r phpMyAdmin-5.1.1-english`== .
 
-22. Switch to the parent directory by the command `cd ..`.
+22. Switch to the parent directory by the command ==`cd ..`== .
 
-23. Zip the content of the current directory (it contains only `public` directory + its content) by the command: `zip -r phpMyAdmin-5.1.1.zip .`.
+23. Zip the content of the current directory (it contains only `public` directory + its content) by the command: ==`zip -r phpMyAdmin-5.1.1.zip .`== .
 
-24. Copy the zipped file `phpMyAdmin-5.1.1.zip` to the download directory from the first step by the command: `cp phpMyAdmin-5.1.1.zip /mnt/c/Install/phpMyAdmin`. From this directory you can upload it to the Zerops [PHP + Apache service](/documentation/services/runtimes/php.html).
+24. Copy the zipped file `phpMyAdmin-5.1.1.zip` to the download directory from the first step by the command: ==`cp phpMyAdmin-5.1.1.zip /mnt/c/Install/phpMyAdmin`== . From this directory you can upload it to the Zerops [PHP + Apache service](/documentation/services/runtimes/php.html).
 
 ## Example of correct permissions using WSL2
 
