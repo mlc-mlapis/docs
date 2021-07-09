@@ -16,9 +16,9 @@ The prerequisite for using the following steps is to perform a standard installa
 
 2. Open a new **Bash** command window (coming from the WSL2 installation). It will be open in `/root` directory by default.
 
-3. Now create a new directory by the command: `mkdir install`.
+3. Install **zip** program by the command `apt install zip` (also **unzip** dependency will be installed automatically).
 
-4. Install **zip** program by the command `apt install zip` (also **unzip** dependency will be installed automatically).
+4. Now create a new directory by the command: `mkdir install`.
 
 5. Switch to the directory where you previously downloaded the **phpMyAdmin** installation kit by the command: `cd /mnt/c/Install/phpMyAdmin`.
 
@@ -28,7 +28,7 @@ The prerequisite for using the following steps is to perform a standard installa
 
 8. Extract the zipped file content to the `public` subdirectory (it'll be created automatically) by the command: `unzip phpMyAdmin-5.1.1-english.zip -d public`. The name `public` has to be the same name as the chosen document root name when creating your Zerops [PHP + Apache service](/documentation/services/runtimes/php.html). You can choose a different name, of course, but it has to be used the same in both places again.
 
-9. Delete the zipped file `phpMyAdmin-5.1.1-english.zip` by the command `rm phpMyAdmin-5.1.1-english.zip`.
+9.  Delete the zipped file `phpMyAdmin-5.1.1-english.zip` by the command `rm phpMyAdmin-5.1.1-english.zip`.
 
 10. Switch to the directory `public` by the command: `cd public`.
 
@@ -56,9 +56,9 @@ The prerequisite for using the following steps is to perform a standard installa
 
 22. Switch to the parent directory by the command `cd ..`.
 
-23. Zip the content of the current directory (it contains only `public` directory + its content) by the command: `zip -r phpMyAdmin-5.1.1.zip`.
+23. Zip the content of the current directory (it contains only `public` directory + its content) by the command: `zip -r phpMyAdmin-5.1.1.zip .`.
 
-24. Copy the zipped file `phpMyAdmin-5.1.1.zip` to the download directory from the first step by the command: `cp phpMyAdmin-5.1.1.zip /mnt/c/Install`. From this directory you can upload it to the Zerops [PHP + Apache service](/documentation/services/runtimes/php.html).
+24. Copy the zipped file `phpMyAdmin-5.1.1.zip` to the download directory from the first step by the command: `cp phpMyAdmin-5.1.1.zip /mnt/c/Install/phpMyAdmin`. From this directory you can upload it to the Zerops [PHP + Apache service](/documentation/services/runtimes/php.html).
 
 ## Example of correct permissions using WSL2
 
