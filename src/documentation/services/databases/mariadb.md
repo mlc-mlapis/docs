@@ -10,7 +10,7 @@ Information on the compatibility of MariaDB software with similar, competing sof
 
 [[toc]]
 
-## Adding the MariaDB service in Zerops
+## Adding the MariaDB Service in Zerops
 
 ### Version to choose
 
@@ -41,14 +41,14 @@ When creating a new service, you can choose whether the database should be run i
 
 * great for local development to save money,
 * doesn’t require any changes to the existing code,
-* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-ha-mode), but see the recommendation tip below,
+* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-the-ha-mode), but see the recommendation tip below,
 * data is stored only in a single container, higher risk of data loss,
 * all data changes since the last backup is not recoverable,
 * not recommended for production projects.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Recommendation
-Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-ha-mode) because you never know when you'll need to switch to the HA mode. This is also true for the used storage engine, as InnoDB is the only option in HA mode.
+Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-the-ha-mode) because you never know when you'll need to switch to the HA mode. This is also true for the used storage engine, as InnoDB is the only option in HA mode.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -60,7 +60,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 * with two load balancers ([MaxScale](https://mariadb.com/kb/en/maxscale)) in [readwritesplit](https://mariadb.com/kb/en/mariadb-maxscale-25-readwritesplit) mode (no additional cost),
 * [asynchronous behavior](#asynchronous-behavior) of a Galera HA cluster,
 * only InnoDB storage engine is supported,
-* the need to respect all of the [specifics](#what-you-should-remember-when-using-ha-mode) related to a Galera HA cluster,
+* the need to respect all of the [specifics](#what-you-should-remember-when-using-the-ha-mode) related to a Galera HA cluster,
 * recommended for production projects.
   
 ## How to access a MariaDB database
@@ -73,7 +73,7 @@ The database service is not configured to support direct access using SSL/TLS or
 
 ### From other services inside the project
 
-Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using the HA mode, as it makes sure to include all the info required for HA. More info in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also the list of all automatically generated [variables](/documentation/environment-variables/helper-variables.html#mariadb) for the MariaDB service.
+Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using the HA mode, as it makes sure to include all the info required for HA. More info in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also the list of all automatically generated [variables](/documentation/environment-variables/helper-variables.html#mariadb) for the MariaDB Service.
 
 For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#mariadb)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility.
 
@@ -127,9 +127,9 @@ Now it's already easy to use its export/import built-in functions to backup/rest
 
 ![Querious](./images/Querious-Export.png "Querious Export")
 
-### Using MariaDB/MySQL CLI
+### Using mariadb/mysql CLI
 
-Again, first access your Zerops project using [zcli](/documentation/cli/installation.html). The MariaDB/MySQL CLI client has to be already installed locally. It comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version). The client CLI is a part of [MySQL Workbench](https://dev.mysql.com/downloads/workbench) as well.
+Again, first access your Zerops project using [zcli](/documentation/cli/installation.html). The `mariadb`/`mysql` CLI client has to be already installed locally. It comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version). The client CLI is a part of [MySQL Workbench](https://dev.mysql.com/downloads/workbench) as well.
 
 #### Logical database backup
 
@@ -139,7 +139,7 @@ mysqldump -h [hostname] -u [user] -p[password] -x [database] > filename.dump
 
 And when used values:
 
-* hostname = **==db==** (specified when MariaDB service was created)
+* hostname = **==db==** (specified when MariaDB Service was created)
 * user = **==db==** (automatically created with the name same as the hostname)
 * password = **==xxxxxxxxxxxxxxxx==** (automatically created as a random value)
 * database = **==main==** (created by a user later as a part of the project)
