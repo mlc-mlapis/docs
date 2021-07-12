@@ -192,7 +192,7 @@ Each container has separate disk space, which can theoretically be used by appro
 
 Typical operations from this point of view can be a functionality of [SELECT INTO OUTFILE](https://mariadb.com/kb/en/select-into-outfile), [SELECT INTO DUMPFILE](https://mariadb.com/kb/en/select-into-dumpfile), [LOAD_FILE](https://mariadb.com/kb/en/load_file), or [LOAD DATA](https://dev.mysql.com/doc/refman/8.0/en/load-data.html).
 
-### Select specifics of a Galera HA cluster
+### Selected specifics of a Galera HA cluster
 
 * Only InnoDB storage engine is supported.
 * No support for explicit locks, including LOCK TABLES, FLUSH TABLES {explicit table list} WITH READ LOCK, GET_LOCK, RELEASE_LOCK, etc. is provided. **These problems can be avoided by using transactions.** Global locking operators like FLUSH TABLES WITH READ LOCK are supported.
