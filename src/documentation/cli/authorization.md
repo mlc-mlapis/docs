@@ -12,7 +12,7 @@ After you create your personal token, you can log in using
 $ zcli login --zeropsToken=<personal token>
 ```
 
-or better yet by adding `ZEROPSTOKEN` to your enviroment variables, in which case the token doesn't need to be passed as a parameter. *This is hte preferred* and more secure option, as the token doesn't show up in logs this way.
+or better yet by adding `ZEROPSTOKEN` to your environment variables, in which case the token doesn't need to be passed as a parameter. *This is the preferred* and more secure option, as the token doesn't show up in logs this way.
 
 ```bash
 $ zcli login
