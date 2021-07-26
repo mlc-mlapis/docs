@@ -39,15 +39,28 @@ You set it through a separate input.
 
 #### Setting PHP/Nginx document root
 
-You set it through a project Nginx configuration file at marked point [**2**] (with the pre-defined content specific for each PHP engine version) that you can modify as you want with one exception, **==don't modify the port 80==** at marked point [**1**]. Otherwise, you will break the project.
+You set it through a project Nginx configuration file at the following part. More on how this config looks and means, see the section [Default Nginx config](#default-nginx-config).
+
+```nginx
+# Be sure that you set up a correct document root!
+root /var/www/public;
+```
+
+### Three variants how to deploy the project code
+
+### Default Nginx config
 
 ![PHP+Nginx](./images/PHP-Nginx-Document-Root.png "Document root")
 
-The Nginx configuration above also defines which file (**index.php** here) at marked point [**3**] is used for serving a document root content.
+* You can change the default config (with the pre-defined content specific for each PHP engine version) as you want if you respect correct syntax and valid paths with one exception. **==Don't modify port 80==** at the marked point [**1**]. Otherwise, you will break the project.
 
-The location defined at the marked point [**4**] blocks access to any `*.php` file for external requests (case insensitive) using the directive **internal** at the marked point [**5**]. Any try to access leads to a **404 Not Found** response then.
+* Defined separated **document root** as a subdirectory like **public** `/var/www/public` (optional name) or keeping it identical with the **project code root** `/var/www` at the marked point [**2**].
 
-If you want to allow an external access to `*.php` files in a subdirectory, for example, `app`, you need to add a new location:
+* Which file (`index.php` here) at the marked point [**3**] is used for serving a **document root content**.
+
+* The location defined at the marked point [**4**] blocks access to any `*.php` file for external requests (case insensitive) using the directive **internal** at the marked point [**5**]. Any try to access leads to a **404 Not Found** response then.
+
+* If you would like to allow external access to `*.php` files in a subdirectory, for example, the `app`, you need to add a new location:
 
 ```nginx
 location ^~ /app/ {
@@ -60,4 +73,5 @@ location ^~ /app/ {
 }
 ```
 
-### Three variants how to deploy the project code
+* Ensure that used **storage log paths** at the marked point [**6**] for **access_log** and **error_log** are correct.
+  
