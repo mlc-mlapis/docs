@@ -52,15 +52,13 @@ root /var/www/public;
 
 ![PHP+Nginx](./images/PHP-Nginx-Document-Root.png "Document root")
 
-* You can change the default config (with the pre-defined content specific for each PHP engine version) as you want if you respect correct syntax and valid paths with one exception. **==Don't modify port 80==** at the marked point [**1**]. Otherwise, you will break the project.
+* You can change the default config (with the pre-defined content specific for each PHP engine version) as you want if you respect correct syntax and valid paths with one exception. **==Don't modify port 80==** at the marked point <span style="background-color: #ff8080">&nbsp;[**1**]&nbsp;</span>. Otherwise, you will break the project.
 
-* Defined separated **document root** as a subdirectory like **public** `/var/www/public` (optional name) or keeping it identical with the **project code root** `/var/www` at the marked point [**2**].
+* Defined separated **document root** as a subdirectory like **public** `/var/www/public` (optional name) or keeping it identical with the **project code root** `/var/www` at the marked point <span style="background-color: #ffff00">&nbsp;[**2**]&nbsp;</span>.
 
-* Which file (`index.php` here) at the marked point [**3**] is used for serving a **document root content**.
+* Which file (`index.php` here) at the marked point <span style="background-color: #00ff40">&nbsp;[**3**]&nbsp;</span> is used for serving a **document root content**.
 
-* The location defined at the marked point [**4**] blocks access to any `*.php` file for external requests (case insensitive) using the directive **internal** at the marked point [**5**]. Any try to access leads to a **404 Not Found** response then.
-
-* If you would like to allow external access to `*.php` files in a subdirectory, for example, the `app`, you need to add a new location:
+* The location defined at the marked point <span style="background-color: #00ffff">&nbsp;[**4**]&nbsp;</span> blocks access to any `*.php` file for external requests (case insensitive) using the directive **internal** at the marked point <span style="background-color: #00ffff">&nbsp;[**5**]&nbsp;</span>. Any try to access leads to a **404 Not Found** response then. If you would like to allow external access to `*.php` files in a subdirectory, for example, the `app`, you need to add a new location:
 
 ```nginx
 location ^~ /app/ {
@@ -73,5 +71,5 @@ location ^~ /app/ {
 }
 ```
 
-* Ensure that used **storage log paths** at the marked point [**6**] for **access_log** and **error_log** are correct.
+* Ensure that used **storage log paths** at the marked point <span style="background-color: #8000ff; color: white">&nbsp;[**6**]&nbsp;</span> for **access_log** and **error_log** are correct.
   
