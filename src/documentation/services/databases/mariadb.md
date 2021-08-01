@@ -163,9 +163,17 @@ Starting with MariaDB 10.4.6, `mariadb` is a [symlink](https://mariadb.com/kb/en
 
 ### Using Adminer / phpMyAdmin
 
-Create a new Zerops [PHP service](/documentation/services/runtimes.html#php) and upload the PHP script file `index.php` for Adminer or phpMyAdmin (placed in a zipped file `*.zip` at the same sub-directory as the chosen name for the PHP document root directory). You can access the MariaDB database service using its hostname, port, user, and password. After that, you can use its built-in export/import functions to backup/restore database data to/from your local file system.
+Create a new Zerops [PHP service](/documentation/services/runtimes.html#php) and [deploy](/documentation/services/runtimes/php.html#deployment-variants-how-to-deliver-the-project-code) a prepared [Adminer](/knowledge-base/how-to-do/how-to-prepare-adminer-application-kit.html) or [phpMyAdmin](/knowledge-base/how-to-do/how-to-prepare-phpmyadmin-application-kit.html) application kit. After enabling a [Zerops subdomain](/documentation/routing/zerops-subdomain.html) on such a service, you can access the application on its root URL. You can access the MariaDB database service using its hostname, port, user, and password. After that, you can use its built-in export/import functions to backup/restore database data to/from your local file system.
 
 ![Adminer](./images/Adminer-Login.png "Adminer Login")
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Explanation of the phpMyAdmin security warning
+Zerops Routing Service (see the schema of a Zerops project with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access)) takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project services. That's the reason why **phpMyAdmin** can see the difference between using HTTPS protocol on a client-side and HTTP protocol on a server-side. **From the Zerops point of view, it's not a security risk**. It's the only positive falsy notification from the phpMyAdmin side (not supporting the `HTTP_X_FORWARDED_PROTO` HTTP header that says it has happened).
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+![phpMyAdmin](./images/phpMyAdmin-Login.png "phpMyAdmin Login")
 
 ## What you should remember when using the HA mode
 

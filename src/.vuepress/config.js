@@ -210,7 +210,8 @@ module.exports = {
           collapsable: false,
           children: [
             'how-to-do/build-and-deploy-and-run-nestjs-angular-app',
-            'how-to-do/how-to-customize-phpmyadmin-kit-in-windows'
+            'how-to-do/how-to-prepare-phpmyadmin-application-kit',
+            'how-to-do/how-to-prepare-adminer-application-kit'
           ]
         }
       ]
