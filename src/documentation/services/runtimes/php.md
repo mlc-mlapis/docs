@@ -6,7 +6,7 @@
 
 ### Version to choose
 
-You can currently choose a PHP engine **v8.0**, **v7.4**, or **v7.3**. The chosen version of it **can't be changed afterward**. Switching must be done manually by creating a new service with another version and migrating project code using a new [build](/documentation/build/how-zerops-build-works.html)/[deploy](/documentation/deploy/how-deploy-works.html) process.
+You can currently choose a PHP engine **v8.0**, **v7.4**, or **v7.3**. The chosen version of it **can't be changed afterward**. Switching must be done manually by creating a new service with another version and migrating project code using a new [deploy](/documentation/deploy/how-deploy-works.html) or [build & deploy](/documentation/build/how-zerops-build-works.html) process.
 
 Along with the choice of the engine, you can also choose between two host web servers in which it can run. It's either **Apache v2.4** or **Nginx v1.18**. There are specific configuration differences between both that need to be perceived and respected. These will always be listed and explained below.
 
@@ -23,7 +23,7 @@ The port will automatically be set to the value of **==80==** and can't be chang
 
 ### Project code root and Document root
 
-The **project code** will always be placed in ==**/var/www**== folder, regardless of which deployment variant you choose. Another thing is where you place the so-called **document root** (usual location of the ==index.php== or ==index.html== file), which is the user configuration setting. You can place it, for example, in a subdirectory like **public** (optional name) or keep it identical with the project code root.
+The **project code** will always be placed in ==**/var/www**== folder, regardless of which [deployment variant](#deployment-variants-how-to-deliver-the-project-code) you choose. Another thing is where you place the so-called **document root** (usual location of the ==index.php== or ==index.html== file), which is the user configuration setting. You can place it, for example, in a subdirectory like **public** (optional name) or keep it identical with the project code root.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Recommendation
@@ -45,8 +45,6 @@ You set it through a project Nginx configuration file at the following part. Mor
 # Be sure that you set up a correct document root!
 root /var/www/public;
 ```
-
-### Three variants how to deploy the project code
 
 ### Default Nginx config
 
@@ -72,4 +70,13 @@ location ^~ /app/ {
 ```
 
 * Ensure that used **storage log paths** at the marked point <span style="background-color: #8000ff; color: white">&nbsp;[**6**]&nbsp;</span> for **access_log** and **error_log** are correct.
-  
+
+### Deployment variants how to deliver the project code
+
+You have **two ways** how you can deliver your project code to the service. Either a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or using the Zerops [zcli](/documentation/cli/installation.html) command-line client.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Delivering code via drag & drop
+The last additional way is using a drag & drop operation in the Zerops GUI to transfer a zipped file of a project code. This one is not preferred because of several reasons
+:::
+<!-- markdownlint-enable DOCSMD004 -->
