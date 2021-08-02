@@ -10,9 +10,9 @@ Without the possibility to get any native Linux or Mac platform, or if you're no
 
 The following step-by-step instructions can help you to go through the process easily.
 
-1. Open a new **Bash** command window (coming also from the WSL2 installation). It will be open in `/home/<username>` directory by default.
+1. Open a new **Bash** / **Zsh** terminal window (coming also from the WSL2 installation). It will be open in `/home/<username>` on Linux or `/Users/<username>` on Mac directory by default.
 
-2. Install **curl** program by the command ==`sudo apt install curl`== (if you didn't do it before).
+2. Install **curl** program by the command ==`sudo apt install curl`== on Linux or ==`brew install curl`== on Mac if you didn't do it before.
 
 3. Now create a new subdirectory `install` by the command: ==`mkdir install`== and switch to it by the command ==`cd install`== . Here, create another new subdirectory `adminer` by the command ==`mkdir adminer`== , and again switch to it by the command ==`cd adminer`== . Now, you should be in the directory `/home/<username>/install/adminer`.
 
@@ -26,7 +26,7 @@ The following step-by-step instructions can help you to go through the process e
 
 8. Switch back to the parent directory by the command ==`cd ..`== .
 
-9. Deploy the application kit prepared in this way to the Zerops [PHP service](/documentation/services/runtimes/php.html) using the [Zerops zcli](/documentation/cli/installation.html) by the [deploy command](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) ==`zcli deploy '<project name>' <service> '.'`== (after using the [login command](/documentation/cli/available-commands.html#login)). This command creates a zipped file from the [current directory content](/documentation/build/build-config.html#deploy-everything) first and then deploys it to the Zerops through HTTPS protocol (without triggering a build pipeline).
+9. Deploy the application kit prepared in this way to the Zerops [PHP service](/documentation/services/runtimes/php.html) using the [Zerops zcli](/documentation/cli/installation.html) by the [deploy command](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) ==`zcli deploy "<project name>" <service> "."`== (after using the [login command](/documentation/cli/available-commands.html#login)). This command creates a zipped file from the [current directory content](/documentation/build/build-config.html#deploy-everything) first and then deploys it to the Zerops through HTTPS protocol (without triggering a build pipeline).
 
 10. You should see the following output while the deployment process is working:
 
