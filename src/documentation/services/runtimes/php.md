@@ -74,9 +74,3 @@ location ^~ /app/ {
 ### Deployment variants how to deliver the project code
 
 You have **two ways** how you can deliver your project code to the service. Either a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or using the Zerops [zcli](/documentation/cli/installation.html) command-line client.
-
-<!-- markdownlint-disable DOCSMD004 -->
-::: tip Delivering code via drag & drop
-The last additional way is using a drag & drop operation in the Zerops GUI to transfer a zipped file of a project code. This one is not preferred because of several reasons
-:::
-<!-- markdownlint-enable DOCSMD004 -->
