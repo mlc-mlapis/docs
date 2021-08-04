@@ -79,6 +79,10 @@ location ^~ /app/ {
 
 You have **two ways** how you can deliver your code to the service. Either a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or using the Zerops **zcli** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
 
+When a Zerops service has been connected to a GitHub or GitLab repository, you have to make a **new commit/tag** to invoke the first [deploy](http://localhost:8081/documentation/deploy/how-deploy-works.html) or [build & deploy](http://localhost:8081/documentation/build/how-zerops-build-works.html) pipeline task.
+
+![Service connected to a Repository](./images/Repository-Triggering-Tag-Commit.png "Repository triggering on a Tag/Commit")
+
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Simple projects and how to deploy them using the Zerops zcli
 You can look at the two step-by-step described real projects, **Adminer** and **phpMyAdmin** web tools, used to administer the Zerops MariaDB (MySQL) databases. How to create and deploy them with the Zerops **zcli**.
@@ -88,11 +92,24 @@ You can look at the two step-by-step described real projects, **Adminer** and **
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-## Pre-installed PHP extensions
+## Accessing a Zerops Shared Storage Service
+
+When a Zerops PHP Service is created, you can mount a **Zerops Shared Storage Service** to it. If you don't have any of such yet, create a new one. You can then **enable** the switch on the right service card (here only ==`php`== Zerops Service) that you want to connect to the storage. When it already exists, go to its **Storage configuration card** and do the same change.
+
+The path to the root is ==`/mnt/php`== , then. Here, you can create any directory structure you need. Because PHP code runs under the **`www-data`** user account, any saved file has `-rw-r--r-- www-data www-data` permissions and created directories `drwxr-xr-x www-data www-data`.
+
+![Shared Storage](./images/Mount-Shared-Storage.png "Mount a Shared Storage")
+
+## Default hardware configuration and autoscaling
+
+* Each PHP container (1 in non-HA, 3 in HA) starts with 1 vCPU, 0.25 GB RAM, and 5 GB of disk space.
+* Zerops will automatically scale the resources vertically (both in non-HA and HA mode up to 32 vCPU, 128 GB RAM, 1 TB disk space) and horizontally (HA mode only up to 64 containers).
+
+## Pre-installed PHP modules and extensions
 
 Zerops PHP service includes the most used PHP extensions by default. If you need to use another one, not on the list, let us know through a new issue on the Zerops.io [GitHub Documentation Repository](https://github.com/zeropsio/docs).
 
-|Extension                                                      |Extension                                                    |Extension                                                      |Extension                                                    |Extension                                                    |
+|Module / Extension                                             |Module / Extension                                           |Module / Extension                                             |Module / Extension                                           |Module / Extension                                           |
 |:--------------------------------------------------------------|:------------------------------------------------------------|:--------------------------------------------------------------|:------------------------------------------------------------|:------------------------------------------------------------|
 |[calendar](https://www.php.net/manual/en/book.calendar.php)    |[gettext](https://www.php.net/manual/en/book.gettext.php)    |[pcntl](https://www.php.net/manual/en/book.pcntl.php)          |[session](https://www.php.net/manual/en/book.session.php)    |[tidy](https://www.php.net/manual/en/book.tidy.php)          |
 |[bcmath](https://www.php.net/manual/en/book.bc.php)            |[hash](https://www.php.net/manual/en/book.hash.php)          |[pcre](https://www.php.net/manual/en/book.pcre.php)            |[shmop](https://www.php.net/manual/en/ref.shmop.php)         |[mysqli](https://www.php.net/manual/en/book.mysqli.php)      |
@@ -125,7 +142,7 @@ You can also use the path **`:`** separator to define the relative order to the 
 
 The recommendation is to create a directory ==`php.d`== in the [code root](#code-root-and-document-root) (always in `/var/www`) and place all custom `*.ini` files there.
 
-### A real example of PHP_INI_SCAN_DIR using
+### A real example of `PHP_INI_SCAN_DIR` using
 
 If you want to block a file upload possibility at a service level, you need to set ==`file_uploads = Off`== directive. Do the following steps to get it:
 
@@ -162,3 +179,19 @@ if (
    // Here, you know that HTTPS protocol is used.
 }
 ```
+
+## Known specifics
+
+* Configuration through the **.htaccess** file is supported only on Apache-based services.
+* Default `php.ini` resource limitations (for example, **max_execution_time**, **max_input_time**, **memory_limit**, **post_max_size**, **upload_max_size**, …) can be changed through a [PHP_INI_SCAN_DIR](#how-to-customize-php-ini-setting-from-a-user-s-service-code) environment variable and `*.ini` files in user's code.
+* Default value of [error_reporting](https://www.php.net/manual/en/errorfunc.configuration.php#ini.error-reporting) directive has been set to **E_ALL** (except **E_DEPRECATED** and **E_STRICT**) and can be changed through a [PHP_INI_SCAN_DIR](#how-to-customize-php-ini-setting-from-a-user-s-service-code) environment variable again.
+* The following functions are disabled on the Zerops environment for security reasons:
+
+|Function        |Function          |Function                |Function           |
+|:---------------|:-----------------|:-----------------------|:------------------|
+|pcntl_alarm     |pcntl_wifsignaled |pcntl_signal_get_handler|pcntl_sigtimedwait |
+|pcntl_fork      |pcntl_wifcontinued|pcntl_signal_dispatch   |pcntl_exec         |
+|pcntl_waitpid   |pcntl_wexitstatus |pcntl_get_last_error    |pcntl_getpriority  |
+|pcntl_wait      |pcntl_wtermsig    |pcntl_strerror          |pcntl_setpriority  |
+|pcntl_wifexited |pcntl_wstopsig    |pcntl_sigprocmask       |pcntl_async_signals|
+|pcntl_wifstopped|pcntl_signal      |pcntl_sigwaitinfo       |                   |
