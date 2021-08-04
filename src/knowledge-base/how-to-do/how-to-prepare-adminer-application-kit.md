@@ -1,4 +1,4 @@
-# Preparing Adminer application kit
+# Preparing and deploying Adminer application kit
 
 If you are used to using **Adminer** for the administration of MariaDB (MySQL) databases, you will probably be interested in how to install it within the Zerops [PHP service](/documentation/services/runtimes/php.html) to administrate the Zerops [MariaDB (MySQL) service](/documentation/services/databases/mariadb.html).
 
