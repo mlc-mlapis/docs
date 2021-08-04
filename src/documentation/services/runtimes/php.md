@@ -1,5 +1,7 @@
 # PHP
 
+Zerops provides a fully managed and scaled PHP runtime service, suitable for both development and production projects using any load. You can choose any option you want and be sure that it will work. Your certainty and peace of mind are our top priority.
+
 [[toc]]
 
 ## Adding the PHP Service in Zerops
@@ -92,7 +94,7 @@ You can look at the two step-by-step described real projects, **Adminer** and **
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-## Accessing a Zerops Shared Storage Service
+## Accessing a Zerops Shared Storage
 
 When a Zerops PHP Service is created, you can mount a **Zerops Shared Storage Service** to it. If you don't have any of such yet, create a new one. You can then **enable** the switch on the right service card (here only ==`php`== Zerops Service) that you want to connect to the storage. When it already exists, go to its **Storage configuration card** and do the same change.
 
@@ -180,12 +182,18 @@ if (
 }
 ```
 
+## What you should remember when using the HA mode
+
+### Non-temporary local data
+
+Each container has separate local disk space, which can be used by the runtime application code and thus store data. It should be noted that such data is reserved only for this particular instance, not mirrored across the PHP cluster nor backup-ed. It will not be migrated if such a container is deleted due to its failure. If it is necessary to permanently store and share such non-temporary data, we recommend developers use Zerops shared or object store services.
+
 ## Known specifics
 
 * Configuration through the **.htaccess** file is supported only on Apache-based services.
 * Default `php.ini` resource limitations (for example, **max_execution_time**, **max_input_time**, **memory_limit**, **post_max_size**, **upload_max_size**, …) can be changed through a [PHP_INI_SCAN_DIR](#how-to-customize-php-ini-setting-from-a-user-s-service-code) environment variable and `*.ini` files in user's code.
 * Default value of [error_reporting](https://www.php.net/manual/en/errorfunc.configuration.php#ini.error-reporting) directive has been set to **E_ALL** (except **E_DEPRECATED** and **E_STRICT**) and can be changed through a [PHP_INI_SCAN_DIR](#how-to-customize-php-ini-setting-from-a-user-s-service-code) environment variable again.
-* The following functions are disabled on the Zerops environment for security reasons:
+* The following functions have been disabled on the Zerops environment for security reasons through **disable_functions** directive by default in `php.ini`:
 
 |Function        |Function          |Function                |Function           |
 |:---------------|:-----------------|:-----------------------|:------------------|
