@@ -89,8 +89,8 @@ When a Zerops service has been connected to a GitHub or GitLab repository, you h
 ::: info Simple projects and how to deploy them using the Zerops zcli
 You can look at the two step-by-step described real projects, **Adminer** and **phpMyAdmin** web tools, used to administer the Zerops MariaDB (MySQL) databases. How to create and deploy them with the Zerops **zcli**.
 
-* [Preparing and deploying phpMyAdmin application kit](\knowledge-base\how-to-do\how-to-prepare-phpmyadmin-application-kit.html)
-* [Preparing and deploying Adminer application kit](\knowledge-base\how-to-do\how-to-prepare-adminer-application-kit.html)
+* [Preparing and deploying phpMyAdmin application kit](/knowledge-base/how-to-do/how-to-prepare-phpmyadmin-application-kit.html)
+* [Preparing and deploying Adminer application kit](/knowledge-base/how-to-do/how-to-prepare-adminer-application-kit.html)
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
