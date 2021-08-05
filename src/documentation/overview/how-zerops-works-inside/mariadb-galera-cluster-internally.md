@@ -2,7 +2,7 @@
 
 The following image shows a simplified schema of a standalone Zerops MariaDB Service in HA mode (with a default of 3 database instances in a [Galera cluster](https://mariadb.com/kb/en/galera-cluster)) without external access. This means no access from outside of the Zerops project infrastructure, such as the Internet. There is only native access through a private network using a [default port](/documentation/services/databases/mariadb.html#hostname-and-port) **==3306==** from the [Zerops Project Core Service](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html) itself, which is the heart of each user-defined Zerops project.
 
-## Simplified schema
+## Simplified schema (no external access)
 
 ![Zerops MariaDB Service](./images/Zerops-MariaDB-Service-Base.png "Zerops MariaDB Service")
 
@@ -10,7 +10,7 @@ The following image shows a simplified schema of a standalone Zerops MariaDB Ser
 
 Both load balancers or MariaDB service containers are located on **different physical computers** to prevent service outages in the event of any fatal failure on a single physical computer. Below, you can see the same schema as before, this time including all relations among the internal parts.
 
-## Extended schema
+## Extended schema (no external access)
 
 ![Zerops MariaDB Service](./images/Zerops-MariaDB-Service-Detail.png "Zerops MariaDB Service")
 
