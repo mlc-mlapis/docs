@@ -55,7 +55,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 #### MariaDB in HA mode
 
 * will run on three containers as a [Galera cluster](https://mariadb.com/kb/en/galera-cluster), each on a **different physical machine**,
-* so the data is stored redundantly in three places, no risk of data loss,
+* so the data is stored redundantly in three places, with no risk of data loss,
 * when one container fails, it's automatically replaced with a new one,
 * with two load balancers ([MaxScale](https://mariadb.com/kb/en/maxscale)) in [readwritesplit](https://mariadb.com/kb/en/mariadb-maxscale-25-readwritesplit) mode (no additional cost),
 * [asynchronous behavior](#asynchronous-behavior) of a Galera HA cluster,

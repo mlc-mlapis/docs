@@ -77,6 +77,32 @@ location ^~ /app/ {
 
 * Ensure that used **storage log paths** at the marked point <span style="background-color: #8000ff; color: white">&nbsp;[**6**]&nbsp;</span> for **access_log** and **error_log** are correct.
 
+### HA / non-HA runtime environment mode
+
+When creating a new service, you can choose whether the runtime environment should be run in **HA** (High Availability) mode, using 3 or more containers, or **non-HA mode**, using only 1 container. ==**The chosen runtime environment mode can't be changed later.**== If you would like to learn more about the technical details and how this service is internally built, take a look at the [PHP Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/php-cluster-internally.html).
+
+#### PHP runtime in non-HA mode
+
+* great for local development to save money,
+* doesn’t require any changes to the existing code,
+* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-the-ha-mode), but see the recommendation tip below,
+* not recommended for production projects.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Recommendation
+Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-the-ha-mode) because you never know when you'll need to switch to the HA mode.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+#### PHP runtime in HA mode
+
+* will start to run on three containers, each on a **different physical machine**,
+* with increasing operating load, the number of containers can reach up to 64,
+* so the application runs redundantly in 3 or more places, with no risk of total failure,
+* when one container fails, it's automatically replaced with a new one,
+* the need to respect all of the [specifics](#what-you-should-remember-when-using-the-ha-mode) related to a PHP cluster,
+* recommended for production projects.
+
 ### Deployment variants how to deliver the service code
 
 You have **two ways** how you can deliver your code to the service. Either a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or using the Zerops **zcli** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
@@ -160,7 +186,7 @@ file_uploads = Off
 <!-- markdownlint-disable MD029 -->
 3. Deploy your changed code to the service.
 
-4. Create a new service environment variable `PHP_INI_SCAN_DIR` with the value `:/var/www/php.d`.
+4. Create a new service environment variable `PHP_INI_SCAN_DIR` with the value ==`:/var/www/php.d`== .
 
 5. Restart the PHP service.
 
