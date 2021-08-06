@@ -126,7 +126,27 @@ When a Zerops PHP Service is created, you can mount a **Zerops Shared Storage Se
 
 The path to the root is ==`/mnt/php`== , then. Here, you can create any directory structure you need. Because PHP code runs under the **`www-data`** user account, any saved file has `-rw-r--r-- www-data www-data` permissions and created directories `drwxr-xr-x www-data www-data`.
 
+The **`zeropsSharedStorageMounts`** environment variable allows you to get the list of mounted shared storage services (separated by a pipe, if there are more than only one). For more flexibility, it's always recommended to use such environment variables indirectly, as shown in an example of [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), in each project service separately.
+
 ![Shared Storage](./images/Mount-Shared-Storage.png "Mount a Shared Storage")
+
+## How to access a PHP runtime environment
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Don't use additional security protocols for internal communication
+The runtime environment service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+### From other services inside the project
+
+Other services can access the PHP application using its **hostname** and **port**, as they are part of the same private project network.
+
+For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [PHP + Apache variables](/documentation/environment-variables/helper-variables.html#php-apache) or [PHP + Nginx variables](/documentation/environment-variables/helper-variables.html#php-nginx)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility.
+
+### From local development environment
+
+To connect to the runtime environment from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html). This allows you to access the runtime environment the same way other services inside the project can, but unlike other services, you cannot use references to the environment variables. Therefore, you should copy the values manually if you need some of them and use them in your private local configuration strategy.
 
 ## Default hardware configuration and autoscaling
 
