@@ -66,20 +66,20 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 ## How to access a MariaDB database
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: warning Don't use additional security protocols
-The database service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+::: warning Don't use additional security protocols for internal communication
+The database service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ### From other services inside the project
 
-Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using the HA mode, as it makes sure to include all the info required for HA. More info in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also the list of all automatically generated [variables](/documentation/environment-variables/helper-variables.html#mariadb) for the MariaDB Service.
+Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using the HA mode, as it makes sure to include all the info required for HA. More info in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also the list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#mariadb) for the MariaDB Service.
 
 For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#mariadb)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility.
 
 ### From local development environment
 
-To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [CLI](/documentation/cli/installation.html). This allows you to access the database the same way as other services inside the project, but you cannot use references to the environment variables, unlike other services. Therefore, you should copy the values manually through the „**How To Access** / **Database access details**“ section of the service detail in your application.
+To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html). This allows you to access the database the same way other services inside the project can, but unlike other services, you cannot use references to the environment variables. Therefore, you should copy the values manually through the „**How To Access** / **Database access details**“ section of the service detail in your application if you need some of them and use them in your private local configuration strategy.
 
 ![MariaDB Service](./images/MariaDB-Database-Access-Details.png "Database Access Details")
 
