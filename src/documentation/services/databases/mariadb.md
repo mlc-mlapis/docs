@@ -14,7 +14,7 @@ Information on the compatibility of MariaDB software with similar, competing sof
 
 ### Version to choose
 
-You can currently choose **v10.4** or **v10.3**. The chosen version of the database **can't be changed afterward**. Switching must be done manually by creating a new service with another version and migrating data using a [backup / restore](#how-to-backup-restore-database-data) pattern.
+You can currently choose **v10.4** or **v10.3**. The chosen version of the database **can't be changed afterward**.
 
 ### Hostname and port
 
@@ -25,13 +25,19 @@ Choose a short and descriptive URL-friendly name, for example, **db**. The follo
 * **==has to be unique==** in relation to other existing project's hostnames,
 * the hostname **==can't be changed==** later.
 
+The port will automatically be set to the value of **==3306==** and can't be changed.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Changing version
+Switching must be done manually by creating a new service with another version and migrating data using a [backup / restore](#how-to-backup-restore-database-data) pattern.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Hostname is also used as the default admin user name
 The chosen **hostname** is automatically used to create an [admin user account](#default-mariadb-user-and-password) with all privileges and grant options for accessing the database. You can change it later if you prefer.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
-
-The port will automatically be set to the value of **==3306==** and can't be changed.
 
 ### HA / non-HA database mode
 
@@ -163,7 +169,7 @@ Starting with MariaDB 10.4.6, `mariadb` is a [symlink](https://mariadb.com/kb/en
 
 ### Using Adminer / phpMyAdmin
 
-Create a new Zerops [PHP service](/documentation/services/runtimes.html#php) and [deploy](/documentation/services/runtimes/php.html#deployment-variants-how-to-deliver-the-project-code) a prepared [Adminer](/knowledge-base/how-to-do/how-to-prepare-adminer-application-kit.html) or [phpMyAdmin](/knowledge-base/how-to-do/how-to-prepare-phpmyadmin-application-kit.html) application kit. After enabling a [Zerops subdomain](/documentation/routing/zerops-subdomain.html) on such a service, you can access the application on its root URL. You can access the MariaDB database service using its hostname, port, user, and password. After that, you can use its built-in export/import functions to backup/restore database data to/from your local file system.
+Create a new Zerops [PHP service](/documentation/services/runtimes.html#php) and [deploy](/documentation/services/runtimes/php.html#how-to-deploy-application-code) a prepared [Adminer](/knowledge-base/how-to-do/how-to-prepare-adminer-application-kit.html) or [phpMyAdmin](/knowledge-base/how-to-do/how-to-prepare-phpmyadmin-application-kit.html) application kit. After enabling a [Zerops subdomain](/documentation/routing/zerops-subdomain.html) on such a service, you can access the application on its root URL. You can access the MariaDB database service using its hostname, port, user, and password. After that, you can use its built-in export/import functions to backup/restore database data to/from your local file system.
 
 ![Adminer](./images/Adminer-Login.png "Adminer Login")
 
