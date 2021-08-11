@@ -8,13 +8,11 @@ Zerops provides a fully managed and scaled PHP runtime service, suitable for bot
 
 ### Version to choose
 
-You can currently choose a PHP engine **v8.0**, **v7.4**, or **v7.3**. The chosen version of it **can't be changed afterward**. Switching must be done manually by creating a new service with another version and migrating a user's service code using a new [deploy](/documentation/deploy/how-deploy-works.html) or [build & deploy](/documentation/build/how-zerops-build-works.html) process.
-
-Along with the choice of the engine, you can also choose between two host web servers in which it can run. It's either **Apache v2.4** or **Nginx v1.18**. There are specific configuration differences between both that need to be perceived and respected. These will always be listed and explained below.
+You can currently choose PHP version **v8.0**, **v7.4**, or **v7.3**. The chosen version of it **can't be changed afterward**. The service is always combined with a web server. It can be either **Apache v2.4** or **Nginx v1.18**. Differences and configuration specifics to each web server are listed below.
 
 ### Hostname and port
 
-Choose a short and descriptive URL-friendly name, for example, **php**. The following rules apply:
+Choose a short and descriptive URL-friendly name, for example, **app**. The following rules apply:
 
 * maximum length **==25==** characters,
 * only lowercase ASCII letters **==a-z==** and numbers **==0-9==**,
@@ -23,13 +21,19 @@ Choose a short and descriptive URL-friendly name, for example, **php**. The foll
 
 The port will automatically be set to the value of **==80==** and can't be changed.
 
-### Code root and Document root
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Changing version
+Switching must be done manually by creating a new service with another version and migrating service code using a new [deploy](/documentation/deploy/how-deploy-works.html) or [build & deploy](/documentation/build/how-zerops-build-works.html) process.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
 
-**User's service code** will always be placed in ==**/var/www**== folder, regardless of which [deployment variant](#deployment-variants-how-to-deliver-the-project-code) you choose. Another thing is where you place the so-called **document root** (usual location of the ==index.php== or ==index.html== file), which is the user configuration setting. You can place it, for example, in a subdirectory like **public** (optional name) or keep it identical with the user's service code root.
+### Application code root and document root
+
+The application code you deploy will always be placed in the ==**/var/www**== **code root** folder. You can choose a **document root** (the publicly accessible folder, usually the location of your ==index.php==). By default, the document root is set to the folder ==**/var/www/public**== , which you can change.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Recommendation
-Using a subdirectory like ==**/var/www/public**== for a document root is always a good idea. This allows you to use the user's service code root level for overhead stuff and improve the readability of the directory structure so.
+Using a subdirectory like ==**/var/www/public**== for a document root is always a good idea. This allows you to use service code root level for overhead stuff and improve the readability of the directory structure so.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -58,14 +62,14 @@ Later change of the **document root** you can do through a separate **Nginx conf
 
 * You can change the default config (with the pre-defined content specific for each PHP engine version) as you want if you respect correct syntax and valid paths with one exception. **==Don't modify port 80==** at the marked point <span style="background-color: #ff8080">&nbsp;[**1**]&nbsp;</span>. Otherwise, you will break the project.
 
-* Defined separated **document root** as a subdirectory like **public** `/var/www/public` (optional name) or keeping it identical with the **user's service code root** `/var/www` at the marked point <span style="background-color: #ffff00">&nbsp;[**2**]&nbsp;</span>.
+* Defined separated **document root** as a subdirectory like **public** `/var/www/public` (optional name) or keeping it identical with the service **code root** `/var/www` at the marked point <span style="background-color: #ffff00">&nbsp;[**2**]&nbsp;</span>.
 
 * Which file (`index.php` here) at the marked point <span style="background-color: #00ff40">&nbsp;[**3**]&nbsp;</span> is used for serving a **document root content**.
 
-* The location defined at the marked point <span style="background-color: #00ffff">&nbsp;[**4**]&nbsp;</span> blocks access to any `*.php` file for external requests (case insensitive) using the directive **internal** at the marked point <span style="background-color: #00ffff">&nbsp;[**5**]&nbsp;</span>. Any try to access leads to a **404 Not Found** response then. If you would like to allow external access to `*.php` files in a subdirectory, for example, the `app`, you need to add a new location:
+* The location defined at the marked point <span style="background-color: #00ffff">&nbsp;[**4**]&nbsp;</span> blocks access to any `*.php` file for external requests (case insensitive) using the directive **internal** at the marked point <span style="background-color: #00ffff">&nbsp;[**5**]&nbsp;</span>. Any try to access leads to a **404 Not Found** response then. If you would like to allow external access to `*.php` files in a subdirectory, for example, the `uploads`, you need to add a new location:
 
 ```nginx
-location ^~ /app/ {
+location ^~ /uploads/ {
    fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
    fastcgi_split_path_info ^(.+\.php)(/.*)$;
    include fastcgi_params;
@@ -103,9 +107,9 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 * the need to respect all of the [specifics](#what-you-should-remember-when-using-the-ha-mode) related to a PHP cluster,
 * recommended for production projects.
 
-### Deployment variants how to deliver the service code
+### How to deploy application code
 
-You have **two ways** how you can deliver your code to the service. Either a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or using the Zerops **zcli** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
+You have **two ways** how you can deliver application code to the service. Either a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or using the Zerops **zcli** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
 
 When a Zerops service has been connected to a GitHub or GitLab repository, you have to make a **new commit/tag** to invoke the first [deploy](http://localhost:8081/documentation/deploy/how-deploy-works.html) or [build & deploy](http://localhost:8081/documentation/build/how-zerops-build-works.html) pipeline task.
 
@@ -120,11 +124,15 @@ You can look at the two step-by-step described real projects, **Adminer** and **
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
+## Accessing a Zerops S3 Object Storage
+
+
+
 ## Accessing a Zerops Shared Storage
 
-When a Zerops PHP Service is created, you can mount a **Zerops Shared Storage Service** to it. If you don't have any of such yet, create a new one. You can then **enable** the switch on the right service card (here only ==`php`== Zerops Service) that you want to connect to the storage. When it already exists, go to its **Storage configuration card** and do the same change.
+When a Zerops PHP Service is created, you can mount a **Zerops Shared Storage Service** to it. If you don't have any of such yet, create a new one. You can then **enable** the switch on the right service card (here only ==`app`== Zerops Service) that you want to connect to the storage. When it already exists, go to its **Storage configuration card** and do the same change.
 
-The path to the root is ==`/mnt/php`== , then. Here, you can create any directory structure you need. Because PHP code runs under the **`www-data`** user account, any saved file has `-rw-r--r-- www-data www-data` permissions and created directories `drwxr-xr-x www-data www-data`.
+The path to the root is ==`/mnt/app`== , then. Here, you can create any directory structure you need. Because PHP code runs under the **`www-data`** user account, any saved file has `-rw-r--r-- www-data www-data` permissions and created directories `drwxr-xr-x www-data www-data`.
 
 The **`zeropsSharedStorageMounts`** environment variable allows you to get the list of mounted shared storage services (separated by a pipe, if there are more than only one). For more flexibility, it's always recommended to use such environment variables indirectly, as shown in an example of [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), in each project service separately.
 
@@ -142,7 +150,7 @@ The runtime environment service is not configured to support direct access using
 
 Other services can access the PHP application using its **hostname** and **port**, as they are part of the same private project network.
 
-For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [PHP + Apache variables](/documentation/environment-variables/helper-variables.html#php-apache) or [PHP + Nginx variables](/documentation/environment-variables/helper-variables.html#php-nginx)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility.
+It's always recommended not to place configuration values as constants directly into the application code. The better way is to use them indirectly, for example, via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), referencing Zerops [implicit environment variables](/documentation/environment-variables/helper-variables.htm) and given that [all environment variables](/documentation/environment-variables/how-to-access.html) are shared within the project across all services.
 
 ### From local development environment
 
@@ -172,9 +180,9 @@ Zerops PHP service includes the most used PHP extensions by default. If you need
 |[filter](https://www.php.net/manual/en/book.filter.php)        |[mysqlnd](https://www.php.net/manual/en/book.mysqlnd.php)    |[redis](https://github.com/phpredis/phpredis)                  |[sysvsem](https://www.php.net/manual/en/sem.installation.php)|                                                             |
 |[gd](https://www.php.net/manual/en/book.image.php)             |[openssl](https://www.php.net/manual/en/book.openssl.php)    |[Reflection](https://www.php.net/manual/en/book.reflection.php)|[sysvshm](https://www.php.net/manual/en/sem.installation.php)|                                                             |
 
-## How to customize php.ini setting from a user's service code
+## How to customize php.ini setting from application code
 
-You have several options for how to customize PHP configuration settings. The list of `php.ini` [directives](https://www.php.net/manual/en/ini.list.php) also contains a column with `Changeable` header that shows [modes determining](https://www.php.net/manual/en/configuration.changes.modes.php) when and where a directive may be set. Directives with `PHP_INI_USER`, `PHP_INI_PERDIR`, or `PHP_INI_ALL` mode can be easily controlled from a user's service code. But directives marked with `PHP_INI_SYSTEM` can be set only through `php.ini` configuration to which you don't have direct access.
+You have several options for how to customize PHP configuration settings. The list of `php.ini` [directives](https://www.php.net/manual/en/ini.list.php) also contains a column with `Changeable` header that shows [modes determining](https://www.php.net/manual/en/configuration.changes.modes.php) when and where a directive may be set. Directives with `PHP_INI_USER`, `PHP_INI_PERDIR`, or `PHP_INI_ALL` mode can be easily controlled from application code. But directives marked with `PHP_INI_SYSTEM` can be set only through `php.ini` configuration to which you don't have direct access.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info 
@@ -182,9 +190,9 @@ To see the current `php.ini` configuration, use the `phpinfo()` function.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-To overwrite current `php.ini` settings, it's necessary to create a new `PHP_INI_SCAN_DIR` [environment variable](/documentation/environment-variables/how-to-access.html). As its value, you have to enter a full path to a directory located in a user's service code scanned by the system for all files ending in `.ini` in alphabetical order, where you can place any directive and its value.
+To overwrite current `php.ini` settings, it's necessary to create a new `PHP_INI_SCAN_DIR` [environment variable](/documentation/environment-variables/how-to-access.html). As its value, you have to enter a full path to a directory located in application code scanned by the system for all files ending in `.ini` in alphabetical order, where you can place any directive and its value.
 
-You can also use the path **`:`** separator to define the relative order to the pre-defined `php.ini` [configuration](https://www.php.net/manual/en/configuration.file.php). Placing it at the beginning means that `.ini` files coming from a user's service code will overwrite the existed `php.ini` settings. Placing it at the end means the reversed logic. Pre-defined `php.ini` configuration will overwrite `.ini` files from a user's service code.
+You can also use the path **`:`** separator to define the relative order to the pre-defined `php.ini` [configuration](https://www.php.net/manual/en/configuration.file.php). Placing it at the beginning means that `.ini` files coming from application code will overwrite the existed `php.ini` settings. Placing it at the end means the reversed logic. Pre-defined `php.ini` configuration will overwrite `.ini` files from application code.
 
 ![Settings php.ini](./images/Env-Var-PHP_INI_SCAN_DIR.png "Environment variable PHP_INI_SCAN_DIR")
 
