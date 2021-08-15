@@ -154,16 +154,22 @@ It's always recommended not to place configuration values as constants directly 
 
 ### From local development environment
 
-To connect to the runtime environment from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html). This allows you to access the runtime environment the same way other services inside the project can, but unlike other services, you cannot use references to the environment variables. Therefore, you should copy the values manually if you need some of them and use them in your private local configuration strategy.
+You can access the Zerops PHP Service from your local workspace by using the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html). This might be handy if you, for example, use the service as a REST API and you don’t want it publicly available (via [public domains](/documentation/routing/using-your-domain.html) or Zerops [subdomains](/documentation/routing/zerops-subdomain.html)), so you connect to the project using **zcli VPN** and use ==`app:80`== as your API endpoint.
+
+You can also run an application fully in your local workspace and access other services in the Zerops project using the VPN. However, you cannot use references to the environment variables because you are outside of the project's network. Therefore, you should copy the values manually if you need some of them and use them in your private local configuration strategy.
 
 ## Default hardware configuration and autoscaling
 
 * Each PHP container (1 in non-HA, 3 in HA) starts with 1 vCPU, 0.25 GB RAM, and 5 GB of disk space.
 * Zerops will automatically scale the resources vertically (both in non-HA and HA mode up to 32 vCPU, 128 GB RAM, 1 TB disk space) and horizontally (HA mode only up to 64 containers).
 
+## Pre-installed PHP Composer
+
+[Composer](https://getcomposer.org) **v2.1.5**, as a dependency manager for PHP, is globally pre-installed in each Zerops PHP Service. You can run it by adding the line of ==`composer install`== to the **run** section in the [zerops.yml](/documentation/build/build-config.html) configuration file. It supposes that you have a **`composer.json`** file placed in the root directory of application code that defines what should be installed.
+
 ## Pre-installed PHP modules and extensions
 
-Zerops PHP service includes the most used PHP extensions by default. If you need to use another one, not on the list, let us know through a new issue on the Zerops.io [GitHub Documentation Repository](https://github.com/zeropsio/docs).
+Zerops PHP service includes the most used PHP extensions by default. If you need to use another one, not on the list, let us know through a new issue on the Zerops.io [GitHub Documentation Repository](https://github.com/zeropsio/docs) or send us an e-mail at [dev@zerops.io](mailto:dev@zerops.io).
 
 |Module / Extension                                             |Module / Extension                                           |Module / Extension                                             |Module / Extension                                           |Module / Extension                                           |
 |:--------------------------------------------------------------|:------------------------------------------------------------|:--------------------------------------------------------------|:------------------------------------------------------------|:------------------------------------------------------------|
@@ -182,14 +188,6 @@ Zerops PHP service includes the most used PHP extensions by default. If you need
 
 ## How to customize php.ini setting from application code
 
-You have several options for how to customize PHP configuration settings. The list of `php.ini` [directives](https://www.php.net/manual/en/ini.list.php) also contains a column with `Changeable` header that shows [modes determining](https://www.php.net/manual/en/configuration.changes.modes.php) when and where a directive may be set. Directives with `PHP_INI_USER`, `PHP_INI_PERDIR`, or `PHP_INI_ALL` mode can be easily controlled from application code. But directives marked with `PHP_INI_SYSTEM` can be set only through `php.ini` configuration to which you don't have direct access.
-
-<!-- markdownlint-disable DOCSMD004 -->
-::: info 
-To see the current `php.ini` configuration, use the `phpinfo()` function.
-:::
-<!-- markdownlint-enable DOCSMD004 -->
-
 To overwrite current `php.ini` settings, it's necessary to create a new `PHP_INI_SCAN_DIR` [environment variable](/documentation/environment-variables/how-to-access.html). As its value, you have to enter a full path to a directory located in application code scanned by the system for all files ending in `.ini` in alphabetical order, where you can place any directive and its value.
 
 You can also use the path **`:`** separator to define the relative order to the pre-defined `php.ini` [configuration](https://www.php.net/manual/en/configuration.file.php). Placing it at the beginning means that `.ini` files coming from application code will overwrite the existed `php.ini` settings. Placing it at the end means the reversed logic. Pre-defined `php.ini` configuration will overwrite `.ini` files from application code.
@@ -197,6 +195,14 @@ You can also use the path **`:`** separator to define the relative order to the 
 ![Settings php.ini](./images/Env-Var-PHP_INI_SCAN_DIR.png "Environment variable PHP_INI_SCAN_DIR")
 
 The recommendation is to create a directory ==`php.d`== in the [code root](#code-root-and-document-root) (always in `/var/www`) and place all custom `*.ini` files there.
+
+Generally, you have several options for how to customize PHP configuration settings. The list of `php.ini` [directives](https://www.php.net/manual/en/ini.list.php) also contains a column with `Changeable` header that shows [modes determining](https://www.php.net/manual/en/configuration.changes.modes.php) when and where a directive may be set. Directives with `PHP_INI_USER`, `PHP_INI_PERDIR`, or `PHP_INI_ALL` mode can be easily controlled from application code. But directives marked with `PHP_INI_SYSTEM` can be set only through `php.ini` configuration to which you don't have direct access.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info 
+To see the current `php.ini` configuration, use the `phpinfo()` function.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
 
 ### A real example of `PHP_INI_SCAN_DIR` using
 
@@ -238,9 +244,10 @@ if (
 
 ## What you should remember when using the HA mode
 
-### Non-temporary local data
+### Locally stored data only for a temporary purpose
 
-Each container has separate local disk space, which can be used by the runtime application code and thus store data. It should be noted that such data is reserved only for this particular instance, not mirrored across the PHP cluster nor backup-ed. It will not be migrated if such a container is deleted due to its failure. If it is necessary to permanently store and share such non-temporary data, we recommend developers use Zerops shared or object store services.
+You should not store your permanent data or sessions in the local disk space of containers running your application.
+The reason is that locally stored data is reserved only for this particular container instance, not mirrored across the PHP cluster nor backup-ed. It will not be migrated if such a container is deleted due to its failure. If it is necessary to store and share such data permanently, we recommend developers should preferably utilize [Zerops Shared Storage](/documentation/services/storage/shared.html) or [Zerops S3 compatible Object Storage](/documentation/services/storage/s3.html) services.
 
 ## Known specifics
 
