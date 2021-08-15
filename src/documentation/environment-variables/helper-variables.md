@@ -18,7 +18,7 @@ use. They cannot be deleted, their keys cannot be changed and those marked with 
 🔒 Unique subdomain of zerops.dev, i.e. `my-app-30001.app.zerops.dev`, this variable is always available, but subdomain access has to actually be enabled inside service routing settings.
 
 #### `startCommand`
-Command used for running the user defined application which corresponds to the command filled when creating the stack.
+Command used for running the user defined application which corresponds to the command filled when creating the service.
 
 ###  PHP+Nginx
 
@@ -127,14 +127,13 @@ Database admin password (changing it won't affect the value in database settings
 
 ### Object Storage
 
-#### `api_url`
+#### `apiUrl`
 🔒 URL used to access the S3 compliant storage object API.
 
-
-#### `access_key`
+#### `accessKeyId`
 🔒 Access key to grant permission for using the object storage.
 
-#### `secret`
+#### `secretAccessKey`
 🔒 Secret key to grant permission for using the object storage.
 
 #### `quotaGBytes`

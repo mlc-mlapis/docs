@@ -194,7 +194,15 @@ module.exports = {
             },
             'services/search-engines',
             'services/message-brokers',
-            'services/storage'
+            {
+              "type": "group",
+              "title": "Storage",
+              "collapsable": false,
+              "children": [
+                'services/storage/s3',
+                'services/storage/shared'
+              ]
+            }
           ]
         }
       ],
@@ -212,7 +220,10 @@ module.exports = {
           children: [
             'how-to-do/build-and-deploy-and-run-nestjs-angular-app',
             'how-to-do/how-to-prepare-phpmyadmin-application-kit',
-            'how-to-do/how-to-prepare-adminer-application-kit'
+            'how-to-do/how-to-prepare-adminer-application-kit',
+            'how-to-do/using-object-storage-in-php',
+            'how-to-do/using-object-storage-in-nodejs',
+            'how-to-do/using-object-storage-in-golang'
           ]
         }
       ]

@@ -85,7 +85,7 @@ For more flexibility with future potential hostname changes, it's always recomme
 
 ### From local development environment
 
-To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html). This allows you to access the database the same way other services inside the project can, but unlike other services, you cannot use references to the environment variables. Therefore, you should copy the values manually through the „**How To Access** / **Database access details**“ section of the service detail in your application if you need some of them and use them in your private local configuration strategy.
+To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html). This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, you should copy the values manually through the „**How To Access** / **Database access details**“ section of the service detail in your application if you need some of them and use them in your private local configuration strategy.
 
 ![MariaDB Service](./images/MariaDB-Database-Access-Details.png "Database Access Details")
 
