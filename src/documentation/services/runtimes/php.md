@@ -257,7 +257,7 @@ and see it in the **Runtime log** tab later.
 
 ![Runtime log](./images/Runtime-Log-PHP-Error.png "Runtime log PHP error")
 
-You can look at [Apache](https://httpd.apache.org/docs/2.4/logs.html) or [Nginx](https://docs.nginx.com/nginx/admin-guide/monitoring/logging) documentation for more information.
+Look at [Apache](https://httpd.apache.org/docs/2.4/logs.html) or [Nginx](https://docs.nginx.com/nginx/admin-guide/monitoring/logging) documentation for more information.
 
 ## How to detect HTTPS sessions
 
