@@ -1,5 +1,7 @@
 # Using S3 compatible object storage in PHP
 
+You can find more examples and code samples written in PHP that demonstrate how to interact with Amazon Simple Storage Service (Amazon S3) on the page [PHP Code Samples for Amazon S3](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-php-example_code-s3.html).
+
 ## Installing required SDKs
 
 * Use [Composer](https://getcomposer.org) as a dependency manager for PHP. It's already globally pre-installed in each Zerops PHP Service, and you can install it also in your local development environment.
@@ -55,6 +57,7 @@ $apiUrlValue = 'https://s3.app.zerops.io';
 This limitation is temporary only and will be removed as soon as possible.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
+
 ## How to get access credentials
 
 Using the following code, you will get a variable ==`$credentials`== containing an object used later for authentication when creating buckets and their content.
@@ -77,20 +80,24 @@ The unique generated id of the created Zerops Object Storage Service instance is
   use Aws\Credentials\Credentials;
   use Aws\Exception\AwsException;
 
-  // Object storage name.
-  $objetStorageName = 'store';
-  // Necessary environment variable names.
-  $accessKeyId = 'accessKeyId';
-  $secretAccessKey = 'secretAccessKey';
-  // Get an object with credentials.
-  $credentials = new Credentials(
-    getenv("{$objetStorageName}_${$accessKeyId}"),
-    getenv("{$objetStorageName}_${secretAccessKey}")
-  );
+  try {
+    // Object storage name.
+    $objetStorageName = 'store';
+    // Necessary environment variable names.
+    $accessKeyId = 'accessKeyId';
+    $secretAccessKey = 'secretAccessKey';
+    // Get an object with credentials.
+    $credentials = new Credentials(
+      getenv("{$objetStorageName}_${$accessKeyId}"),
+      getenv("{$objetStorageName}_${secretAccessKey}")
+    );
+  } catch (AwsException $e) {
+    echo 'Error: ' . $e->getAwsErrorMessage();
+  }
 ?>
 ```
 
-## Creating an object storage bucket
+## Creating a new object storage bucket
 
 When having `$credentials` from the previous code snippet (supposing all declared variables are also accessible), you can create a named bucket as a container for storing objects. Zerops uses the [multi-tenancy feature](https://docs.ceph.com/en/latest/radosgw/multitenancy) requiring buckets with [unique names](/documentation/services/storage/s3.html#object-store-bucket-names) only in the scope of each tenant.
 
@@ -104,9 +111,9 @@ When having `$credentials` from the previous code snippet (supposing all declare
   $apiUrlValue = getenv("{$objetStorageName}_${$apiUrl}");
 
   // Function declaration.
-  function createBucket($apiUrlValue, $credentials, $bucketName) {
+  function getS3Client($apiUrlValue, $credentials) {
     // Create a new S3 SDK client instance.
-    $s3 = new S3Client([
+    return new S3Client([
       'version' => 'latest',
       // Zerops supports only the S3 default region for API calls.
       // It doesn't mean that the physical HW infrastructure is located there also.
@@ -118,13 +125,100 @@ When having `$credentials` from the previous code snippet (supposing all declare
       'use_path_style_endpoint' => true,
       'credentials' => $credentials
     ]);
+  }
+
+  // Function declaration.
+  function createBucket($s3Client, $bucketName) {
     // Create a new bucket.
-    $result = $s3->createBucket([
+    return $s3Client->createBucket([
       'Bucket' => $bucketName
     ]);
   }
 
+  // Calling the function: getS3Client
+  $s3Client = getS3Client($apiUrlValue, $credentials);
   // Calling the function: createBucket
-  createBucket($apiUrlValue, $credentials, $bucketName);
+  $bucket = createBucket($s3Client, $bucketName);
 ?>
 ```
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Created new bucket's URL
+As the S3 path-style addressing model is used, the bucket's effective URL is:
+
+```url
+https://s3.app.zerops.io/records
+```
+
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+## Getting an existed object storage bucket ACL setting
+
+When having `$credentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and get its ACL setting.
+
+```php
+<?php
+  // Required bucket name.
+  $bucketName = 'records';
+
+  // Function declaration.
+  function getBucketAcl($s3Client, $bucketName) {
+    // Check it the required bucket exists.
+    if ($s3Client->doesBucketExist($bucketName)) {
+      // If yes, return its ACL setting.
+      return $s3Client->getBucketAcl([
+        'Bucket' => $bucketName
+      ]);
+    } else {
+      // If not, return null.
+      return null;
+    }
+  }
+
+  // Calling the function: getS3Client
+  $s3Client = getS3Client($apiUrlValue, $credentials);
+  // Calling the function: createBucket
+  $bucketAcl = getBucketAcl($s3Client, $bucketName);
+?>
+```
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Default bucket's Grants setting
+As mentioned in the documentation [Object storage owner identity](/documentation/services/storage/s3.html#object-storage-owner-identity), there is the only one grantee, equal to the owner, with the same name as the chosen [Object storage name](#object-storage-name) (for example, ==`store`== ).
+
+```php
+"Grants" => [{
+  "Grantee" => [{
+    "DisplayName" => "store",
+    "ID" => "0LW7E_BUT-yKmmEcyf3dzQ",
+    "Type" => "CanonicalUser"
+  }],
+  "Permission" => "FULL_CONTROL"
+}]
+```
+
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Default bucket's @metadata headers
+It's also worth listing the default setting of a bucket's headers related to the HTTPS public read/write access (authenticated access is currently not available through RESTful interface):
+
+```php
+"@metadata" => [{
+  "headers" => [{
+    "access-control-allow-origin" => "*",
+    "access-control-allow-methods" => "GET, POST, PUT, DELETE, OPTIONS",
+    "access-control-allow-headers" => "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization",
+    "access-control-expose-headers" => "Content-Length,Content-Range"
+  }]
+}]
+```
+
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+## Setting an existed object storage bucket as public
+
+

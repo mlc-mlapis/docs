@@ -227,6 +227,38 @@ file_uploads = Off
 6. Check the current status using the `phpinfo()` function. There should be the `file_uploads` directive set to `Off` value (in **Core** module section).
 <!-- markdownlint-enable MD029 -->
 
+## Logging
+
+Both access and error logs are configured using a syslog service to centralize all records and allowing live access through a **Runtime log** tab inside your service detail for each Zerops service container.
+
+![Runtime log](./images/Runtime-Log.png "Runtime log access")
+
+Default **Apache** configuration is done through `/etc/apache2/sites-enabled/vhost.conf`, and you don't have direct edit access to its content. **You can't change it**.
+
+```shell
+ErrorLog  "| /usr/bin/logger -thttpd -plocal6.err"
+CustomLog "| /usr/bin/logger -thttpd -plocal6.notice" combined
+```
+
+Default **Nginx** configuration is done through `/etc/nginx/sites-enabled/default.site`, and you have direct edit access to its content through the [Nginx configuration](#default-nginx-config) section. **You can change it**, but be careful what you are doing.
+
+```shell
+access_log syslog:server=unix:/dev/log,facility=kern default_short;
+error_log syslog:server=unix:/dev/log,facility=kern;
+```
+
+You can use PHP [error_log](https://www.php.net/manual/en/function.error-log.php) directive to pass any application runtime error,
+
+```php
+error_log("Application is running in the read-only mode.");
+```
+
+and see it in the **Runtime log** tab later.
+
+![Runtime log](./images/Runtime-Log-PHP-Error.png "Runtime log PHP error")
+
+You can look at [Apache](https://httpd.apache.org/docs/2.4/logs.html) or [Nginx](https://docs.nginx.com/nginx/admin-guide/monitoring/logging) documentation for more information.
+
 ## How to detect HTTPS sessions
 
 Zerops Routing Service (see the schema of a Zerops project with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access)) takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project's services.
