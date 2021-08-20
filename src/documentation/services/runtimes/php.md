@@ -247,7 +247,7 @@ access_log syslog:server=unix:/dev/log,facility=kern default_short;
 error_log syslog:server=unix:/dev/log,facility=kern;
 ```
 
-You can use PHP ==`error_log`== directive to pass any application runtime error,
+You can use PHP [error_log](https://www.php.net/manual/en/function.error-log.php) directive to pass any application runtime error,
 
 ```php
 error_log("Application is running in the read-only mode.");
@@ -256,6 +256,8 @@ error_log("Application is running in the read-only mode.");
 and see it in the **Runtime log** tab later.
 
 ![Runtime log](./images/Runtime-Log-PHP-Error.png "Runtime log PHP error")
+
+You can look at [Apache](https://httpd.apache.org/docs/2.4/logs.html) or [Nginx](https://docs.nginx.com/nginx/admin-guide/monitoring/logging) documentation for more information.
 
 ## How to detect HTTPS sessions
 
