@@ -178,7 +178,7 @@ When having `$credentials` and `getS3Client` function from the previous code sni
 
   // Calling the function: getS3Client
   $s3Client = getS3Client($apiUrlValue, $credentials);
-  // Calling the function: createBucket
+  // Calling the function: getBucketAcl
   $bucketAcl = getBucketAcl($s3Client, $bucketName);
 ?>
 ```
@@ -188,14 +188,16 @@ When having `$credentials` and `getS3Client` function from the previous code sni
 As mentioned in the documentation [Object storage owner identity](/documentation/services/storage/s3.html#object-storage-owner-identity), there is the only one grantee, equal to the owner, with the same name as the chosen [Object storage name](#object-storage-name) (for example, ==`store`== ).
 
 ```php
-"Grants" => [{
-  "Grantee" => [{
-    "DisplayName" => "store",
-    "ID" => "0LW7E_BUT-yKmmEcyf3dzQ",
-    "Type" => "CanonicalUser"
-  }],
-  "Permission" => "FULL_CONTROL"
-}]
+"Grants" => [
+  [
+    "Grantee" => [
+      "DisplayName" => "store",
+      "ID" => "0LW7E_BUT-yKmmEcyf3dzQ",
+      "Type" => "CanonicalUser"
+    ],
+    "Permission" => "FULL_CONTROL"
+  ]
+]
 ```
 
 :::
@@ -206,19 +208,114 @@ As mentioned in the documentation [Object storage owner identity](/documentation
 It's also worth listing the default setting of a bucket's headers related to the HTTPS public read/write access (authenticated access is currently not available through RESTful interface):
 
 ```php
-"@metadata" => [{
-  "headers" => [{
+"@metadata" => [
+  "headers" => [
     "access-control-allow-origin" => "*",
     "access-control-allow-methods" => "GET, POST, PUT, DELETE, OPTIONS",
     "access-control-allow-headers" => "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization",
     "access-control-expose-headers" => "Content-Length,Content-Range"
-  }]
-}]
+  ]
+]
 ```
 
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-## Setting an existed object storage bucket as public
+## Update an existed object storage bucket ACL
 
+When having `$credentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and modify its ACL setting to one of [canned grants](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).
 
+```php
+<?php
+  // Required bucket name.
+  $bucketName = 'records';
+
+  // Function declaration.
+  function putBucketAcl($s3Client, $bucketName) {
+    // Check it the required bucket exists.
+    if ($s3Client->doesBucketExist($bucketName)) {
+      // If yes, modify its ACL setting to public read.
+      return $s3Client->putBucketAcl([
+        'Bucket' => $bucketName,
+        'ACL' => 'public-read'
+      ]);
+    } else {
+      // If not, return null.
+      return null;
+    }
+  }
+
+  // Calling the function: getS3Client
+  $s3Client = getS3Client($apiUrlValue, $credentials);
+  // Calling the function: putBucketAcl
+  putBucketAcl($s3Client, $bucketName);
+?>
+```
+
+Setting the ACL as ==`public-read`== adds another `Grantee` to the bucket's `Grants` list:
+
+```php
+[
+  "Grantee" => [
+    "Type" => "Group",
+    "URI" => "http://acs.amazonaws.com/groups/global/AllUsers"
+  ],
+  "Permission" => "READ"
+]
+```
+
+If you have another Zerops Object Storage Service in your project (for example, the one with ==`archivestore`== [Object Storage Name](/documentation/services/storage/s3.html#object-store-bucket-names)), you can set its buckets access rights to allow access from the ==`store`== service with [read](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#permissions) access.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Grants work in overwriting mode
+Setting ==`Grants`== requires defining the complete list of items ( ==`Grantee`== ) for the bucket because it overwrites the previous value. It doesn't work in an incremental mode. You will probably create a more sophisticated routine to prepare the **access control policy** you need. Here, it's simplified to the constant value.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+```php
+<?php
+  // Required bucket name.
+  $bucketName = 'records';
+
+  $accessControlPolicy => [
+    'Grants' => [
+      [
+        'Grantee' => [
+          'DisplayName' => 'archivestore',
+          'ID' => 'V4CvJVn-S5Gzzzq0yoRX7g',
+          'Type' => 'CanonicalUser'
+         ],
+         'Permission' => 'FULL_CONTROL'
+      ],
+      [
+        'Grantee' => [
+          'DisplayName' => 'store',
+          'ID' => '0LW7E_BUT-yKmmEcyf3dzQ',
+          'Type' => 'CanonicalUser'
+        ],
+        'Permission' => 'READ'
+      ]
+    ]
+  ];
+
+  // Function declaration.
+  function putBucketAcl($s3Client, $bucketName, $accessControlPolicy) {
+    // Check it the required bucket exists.
+    if ($s3Client->doesBucketExist($bucketName)) {
+      // If yes, modify its AccessControlPolicy setting.
+      return $s3Client->putBucketAcl([
+        'Bucket' => $bucketName,
+        'AccessControlPolicy' => $accessControlPolicy
+      ]);
+    } else {
+      // If not, return null.
+      return null;
+    }
+  }
+
+  // Calling the function: getS3Client
+  $s3Client = getS3Client($apiUrlValue, $credentials);
+  // Calling the function: putBucketAcl
+  putBucketAcl($s3Client, $bucketName, $accessControlPolicy);
+?>
+```
