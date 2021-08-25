@@ -319,3 +319,127 @@ Setting ==`Grants`== requires defining the complete list of items ( ==`Grantee`=
   putBucketAcl($s3Client, $bucketName, $accessControlPolicy);
 ?>
 ```
+
+## Adding a new bucket's object (with body or a file)
+
+When having `$credentials` from the previous code snippet (supposing all declared variables are also accessible), you can put a new object inside a bucket. You must have WRITE permissions on a bucket to add an object to it.
+
+```php
+<?php
+  // Required bucket name.
+  $bucketName = 'records';
+
+  // Declaration of an object with body to be placed into a bucket.
+  $objectBodyKey = "K1";
+  $objectBody = "Description of the K1.";
+
+  // Declaration of an object with a file to be placed into a bucket.
+  $objectFileKey = "scan_20210815_00001";
+  $filePath = "./files/" . $objectFileKey . ".jpg";
+
+
+  // Function declaration.
+  function putObjectWithBody($s3Client, $bucketName, $objectKey, $objectBodyKey) {
+    // Check it the required bucket exists.
+    if ($s3Client->doesBucketExist($bucketName)) {
+      // If yes, put an object inside the bucket.
+      return $s3Client->putObject([
+        'Bucket' => $bucketName,
+        'Key' => $objectKey,
+        'Body' => $objectBody
+      ]);
+    } else {
+      // If not, return null.
+      return null;
+    }
+  }
+
+  // Function declaration.
+  function putObjectWithFile($s3Client, $bucketName, $objectFileKey, $filePath) {
+    // Check it the required bucket exists.
+    if ($s3Client->doesBucketExist($bucketName)) {
+      // If yes, put an object inside the bucket.
+      return $s3Client->putObject([
+        'Bucket' => $bucketName,
+        'Key' => $fileKey,
+        'SourceFile' => $filePath
+      ]);
+    } else {
+      // If not, return null.
+      return null;
+    }
+  }
+
+  // Calling the function: getS3Client
+  $s3Client = getS3Client($apiUrlValue, $credentials);
+  // Calling the function: putObjectBody
+  $resultBody = putObjectWithBody($s3Client, $bucketName, $objectBodyKey, $objectBody);
+  // Calling the function: putObjectFile
+  $resultFile = putObjectWithFile($s3Client, $bucketName, $objectFileKey, $filePath);
+?>
+```
+
+## Getting an existed bucket's object (with body or a file)
+
+When having `$credentials` from the previous code snippet (supposing all declared variables are also accessible), you can get an already existed object from a bucket back. You must have READ permissions at least on a bucket to get an object from it.
+
+```php
+<?php
+  // Required bucket name.
+  $bucketName = 'records';
+
+  // Declaration of an object key its body content to be get from a bucket.
+  $objectBodyKey = "K1";
+  // Declaration of an object key its file content to be downloaded from a bucket.
+  $objectFileKey = "scan_20210815_00001";
+  $filePath = "./files/" . $objectFileKey . ".jpg";
+
+  // Function declaration.
+  function getObjectBody($s3Client, $bucketName, $objectBodyKey) {
+    // Check it the required bucket exists.
+    if ($s3Client->doesBucketExist($bucketName)) {
+      // Check it the required object exists.
+      if ($s3Client->doesObjectExist($bucketName, $objectBodyKey)) {
+        // If yes, get an object from the bucket.
+        return $s3Client->getObject([
+          'Bucket' => $bucketName,
+          'Key' => $objectBodyKey
+        ]);
+      }
+    }
+    // If either a bucket or an object doesn't exist, return null.
+    return null;
+  }
+
+  // Function declaration.
+  function getObjectFile($s3Client, $bucketName, $objectFileKey, $filePath) {
+    // Check it the required bucket exists.
+    if ($s3Client->doesBucketExist($bucketName)) {
+      // Check it the required object exists.
+      if ($s3Client->doesObjectExist($bucketName, $objectBodyKey)) {
+        // If yes, get an object from the bucket.
+        return $s3Client->getObject([
+          'Bucket' => $bucketName,
+          'Key' => $objectBodyKey,
+          'SaveAs' => $filePath
+        ]);
+      }
+    }
+    // If either a bucket or an object doesn't exist, return null.
+    return null;
+  }
+
+  // Calling the function: getS3Client
+  $s3Client = getS3Client($apiUrlValue, $credentials);
+
+  // Calling the function to get an object body: getObjectBody
+  $result = getObjectBody($s3Client, $bucketName, $objectBodyKey);
+  // Returned value contains the object body content.
+  $objectBody = $result["Body"];
+
+  // Calling the function to download an object file: getObjectFile
+  $result = getObjectFile($s3Client, $bucketName, $objectFileKey, $filePath);
+  // The downloaded file will be saved on disk as declared in the $filePath.
+?>
+```
+
