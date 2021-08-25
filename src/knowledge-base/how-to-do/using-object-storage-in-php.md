@@ -170,10 +170,9 @@ When having `$credentials` and `getS3Client` function from the previous code sni
       return $s3Client->getBucketAcl([
         'Bucket' => $bucketName
       ]);
-    } else {
-      // If not, return null.
-      return null;
     }
+    // If the bucket doesn't exist, return null.
+    return null;
   }
 
   // Calling the function: getS3Client
@@ -239,10 +238,9 @@ When having `$credentials` and `getS3Client` function from the previous code sni
         'Bucket' => $bucketName,
         'ACL' => 'public-read'
       ]);
-    } else {
-      // If not, return null.
-      return null;
     }
+    // If the bucket doesn't exist, return null.
+    return null;
   }
 
   // Calling the function: getS3Client
@@ -307,10 +305,9 @@ Setting ==`Grants`== requires defining the complete list of items ( ==`Grantee`=
         'Bucket' => $bucketName,
         'AccessControlPolicy' => $accessControlPolicy
       ]);
-    } else {
-      // If not, return null.
-      return null;
     }
+    // If the bucket doesn't exist, return null.
+    return null;
   }
 
   // Calling the function: getS3Client
@@ -348,10 +345,9 @@ When having `$credentials` from the previous code snippet (supposing all declare
         'Key' => $objectKey,
         'Body' => $objectBody
       ]);
-    } else {
-      // If not, return null.
-      return null;
     }
+    // If the bucket doesn't exist, return null.
+    return null;
   }
 
   // Function declaration.
@@ -364,10 +360,9 @@ When having `$credentials` from the previous code snippet (supposing all declare
         'Key' => $fileKey,
         'SourceFile' => $filePath
       ]);
-    } else {
-      // If not, return null.
-      return null;
     }
+    // If the bucket doesn't exist, return null.
+    return null;
   }
 
   // Calling the function: getS3Client
