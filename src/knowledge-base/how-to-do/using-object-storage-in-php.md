@@ -428,12 +428,12 @@ When having `$credentials` from the previous code snippet (supposing all declare
   $s3Client = getS3Client($apiUrlValue, $credentials);
 
   // Calling the function to get an object body: getObjectBody
-  $result = getObjectBody($s3Client, $bucketName, $objectBodyKey);
+  $resultBody = getObjectBody($s3Client, $bucketName, $objectBodyKey);
   // Returned value contains the object body content.
-  $objectBody = $result["Body"];
+  $objectBody = $resultBody["Body"];
 
   // Calling the function to download an object file: getObjectFile
-  $result = getObjectFile($s3Client, $bucketName, $objectFileKey, $filePath);
+  $resultFile = getObjectFile($s3Client, $bucketName, $objectFileKey, $filePath);
   // The downloaded file will be saved on disk as declared in the $filePath.
 ?>
 ```
