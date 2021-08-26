@@ -77,8 +77,8 @@ The unique generated id of the created Zerops Object Storage Service instance is
 
   // Import relevant SDK classes.
   use Aws\S3\S3Client;
+  use Aws\S3\Exception\S3Exception;
   use Aws\Credentials\Credentials;
-  use Aws\Exception\AwsException;
 
   try {
     // Object storage name.
@@ -91,8 +91,8 @@ The unique generated id of the created Zerops Object Storage Service instance is
       getenv("{$objetStorageName}_${$accessKeyId}"),
       getenv("{$objetStorageName}_${secretAccessKey}")
     );
-  } catch (AwsException $e) {
-    echo 'Error: ' . $e->getAwsErrorMessage();
+  } catch (S3Exception $e) {
+    echo 'Error: ' . $e->getCode() . ':' . $e->getMessage();
   }
 ?>
 ```
@@ -217,6 +217,8 @@ It's also worth listing the default setting of a bucket's headers related to the
 ]
 ```
 
+The same default **@metadata headers** setting is used also for all added bucket's objects.
+
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -336,13 +338,13 @@ When having `$credentials` from the previous code snippet (supposing all declare
 
 
   // Function declaration.
-  function putObjectWithBody($s3Client, $bucketName, $objectKey, $objectBodyKey) {
+  function putObjectWithBody($s3Client, $bucketName, $objectBodyKey, $objectBody) {
     // Check it the required bucket exists.
     if ($s3Client->doesBucketExist($bucketName)) {
       // If yes, put an object inside the bucket.
       return $s3Client->putObject([
         'Bucket' => $bucketName,
-        'Key' => $objectKey,
+        'Key' => $objectBodyKey,
         'Body' => $objectBody
       ]);
     }
@@ -357,7 +359,7 @@ When having `$credentials` from the previous code snippet (supposing all declare
       // If yes, put an object inside the bucket.
       return $s3Client->putObject([
         'Bucket' => $bucketName,
-        'Key' => $fileKey,
+        'Key' => $objectFileKey,
         'SourceFile' => $filePath
       ]);
     }
@@ -390,7 +392,7 @@ When having `$credentials` from the previous code snippet (supposing all declare
   $filePath = "./files/" . $objectFileKey . ".jpg";
 
   // Function declaration.
-  function getObjectBody($s3Client, $bucketName, $objectBodyKey) {
+  function getObjectWithBody($s3Client, $bucketName, $objectBodyKey) {
     // Check it the required bucket exists.
     if ($s3Client->doesBucketExist($bucketName)) {
       // Check it the required object exists.
@@ -407,15 +409,15 @@ When having `$credentials` from the previous code snippet (supposing all declare
   }
 
   // Function declaration.
-  function getObjectFile($s3Client, $bucketName, $objectFileKey, $filePath) {
+  function getObjectWithFile($s3Client, $bucketName, $objectFileKey, $filePath) {
     // Check it the required bucket exists.
     if ($s3Client->doesBucketExist($bucketName)) {
       // Check it the required object exists.
-      if ($s3Client->doesObjectExist($bucketName, $objectBodyKey)) {
+      if ($s3Client->doesObjectExist($bucketName, $objectFileKey)) {
         // If yes, get an object from the bucket.
         return $s3Client->getObject([
           'Bucket' => $bucketName,
-          'Key' => $objectBodyKey,
+          'Key' => $objectFileKey,
           'SaveAs' => $filePath
         ]);
       }
@@ -428,13 +430,12 @@ When having `$credentials` from the previous code snippet (supposing all declare
   $s3Client = getS3Client($apiUrlValue, $credentials);
 
   // Calling the function to get an object body: getObjectBody
-  $result = getObjectBody($s3Client, $bucketName, $objectBodyKey);
-  // Returned value contains the object body content.
-  $objectBody = $result["Body"];
+  $resultBody = getObjectWithBody($s3Client, $bucketName, $objectBodyKey);
+  // Get the object body content.
+  $bodyContent = $resultBody->get('Body')->getContents();
 
   // Calling the function to download an object file: getObjectFile
-  $result = getObjectFile($s3Client, $bucketName, $objectFileKey, $filePath);
-  // The downloaded file will be saved on disk as declared in the $filePath.
+  $resultFile = getObjectWithFile($s3Client, $bucketName, $objectFileKey, $filePath);
+  // The downloaded file will be saved on disk as declared by the $filePath.
 ?>
 ```
-
