@@ -111,7 +111,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 
 You have **two ways** how you can deliver application code to the service. Either a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or using the Zerops **zcli** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
 
-When a Zerops service has been connected to a GitHub or GitLab repository, you have to make a **new commit/tag** to invoke the first [build & deploy](http://localhost:8081/documentation/build/how-zerops-build-works.html) pipeline task.
+When a Zerops service has been connected to a GitHub or GitLab repository, you can select the checkbox `Build after repository connection` to run the first build immediately after the service creation. Otherwise, you have to make a **new commit/tag** to invoke that first [build & deploy](http://localhost:8081/documentation/build/how-zerops-build-works.html) pipeline task.
 
 ![Service connected to a Repository](./images/Repository-Triggering-Tag-Commit.png "Repository triggering on a Tag/Commit")
 

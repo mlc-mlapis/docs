@@ -329,12 +329,12 @@ When having `$credentials` from the previous code snippet (supposing all declare
   $bucketName = 'records';
 
   // Declaration of an object with body to be placed into a bucket.
-  $objectBodyKey = "K1";
+  $objectBodyKey = "K1.txt";
   $objectBody = "Description of the K1.";
 
   // Declaration of an object with a file to be placed into a bucket.
-  $objectFileKey = "scan_20210815_00001";
-  $filePath = "./files/" . $objectFileKey . ".jpg";
+  $objectFileKey = "scan_20210815_00001.jpg";
+  $filePath = "./files/" . $objectFileKey;
 
 
   // Function declaration.
@@ -386,10 +386,10 @@ When having `$credentials` from the previous code snippet (supposing all declare
   $bucketName = 'records';
 
   // Declaration of an object key its body content to be get from a bucket.
-  $objectBodyKey = "K1";
+  $objectBodyKey = "K1.txt";
   // Declaration of an object key its file content to be downloaded from a bucket.
-  $objectFileKey = "scan_20210815_00001";
-  $filePath = "./files/" . $objectFileKey . ".jpg";
+  $objectFileKey = "scan_20210815_00001.jpg";
+  $filePath = "./files/" . $objectFileKey;
 
   // Function declaration.
   function getObjectWithBody($s3Client, $bucketName, $objectBodyKey) {
