@@ -88,14 +88,14 @@ The unique generated id of the created Zerops Object Storage Service instance is
 
   try {
     // Object storage name.
-    $objetStorageName = 'store';
+    $objectStorageName = 'store';
     // Necessary environment variable names.
     $accessKeyId = 'accessKeyId';
     $secretAccessKey = 'secretAccessKey';
     // Get an object with credentials.
     $credentials = new Credentials(
-      getenv("${$objetStorageName}_${$accessKeyId}"),
-      getenv("${$objetStorageName}_${$secretAccessKey}")
+      getenv("${$objectStorageName}_${$accessKeyId}"),
+      getenv("${$objectStorageName}_${$secretAccessKey}")
     );
   } catch (S3Exception $e) {
     echo 'Error: ' . $e->getCode() . ':' . $e->getMessage();
@@ -110,13 +110,13 @@ When having `$credentials` from the previous code snippet (supposing all declare
 ```php
 <?php
   // All bucket names in the Zerops shared object storage namespace have to be unique!
-  $uniqueBucketPrefix = getenv("${$objetStorageName}_${$accessKeyId}");
+  $uniqueBucketPrefix = getenv("${$objectStorageName}_${$accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
   $bucketName = "${$uniqueBucketPrefix}:${$localBucketName}";
   // Necessary environment variable name.
   $apiUrl = 'apiUrl';
-  $apiUrlValue = getenv("${$objetStorageName}_${$apiUrl}");
+  $apiUrlValue = getenv("${$objectStorageName}_${$apiUrl}");
 
   // Function declaration.
   function getS3Client($apiUrlValue, $credentials) {
@@ -168,7 +168,7 @@ When having `$credentials` and `getS3Client` function from the previous code sni
 ```php
 <?php
   // All bucket names in the Zerops shared object storage namespace have to be unique!
-  $uniqueBucketPrefix = getenv("${$objetStorageName}_${$accessKeyId}");
+  $uniqueBucketPrefix = getenv("${$objectStorageName}_${$accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
   $bucketName = "${$uniqueBucketPrefix}:${$localBucketName}";
@@ -240,7 +240,7 @@ When having `$credentials` and `getS3Client` function from the previous code sni
 ```php
 <?php
   // All bucket names in the Zerops shared object storage namespace have to be unique!
-  $uniqueBucketPrefix = getenv("${$objetStorageName}_${$accessKeyId}");
+  $uniqueBucketPrefix = getenv("${$objectStorageName}_${$accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
   $bucketName = "${$uniqueBucketPrefix}:${$localBucketName}";
@@ -289,7 +289,7 @@ Setting ==`Grants`== requires defining the complete list of items ( ==`Grantee`=
 ```php
 <?php
   // All bucket names in the Zerops shared object storage namespace have to be unique!
-  $uniqueBucketPrefix = getenv("${$objetStorageName}_${$accessKeyId}");
+  $uniqueBucketPrefix = getenv("${$objectStorageName}_${$accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
   $bucketName = "${$uniqueBucketPrefix}:${$localBucketName}";
@@ -343,7 +343,7 @@ When having `$credentials` from the previous code snippet (supposing all declare
 ```php
 <?php
   // All bucket names in the Zerops shared object storage namespace have to be unique!
-  $uniqueBucketPrefix = getenv("${$objetStorageName}_${$accessKeyId}");
+  $uniqueBucketPrefix = getenv("${$objectStorageName}_${$accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
   $bucketName = "${$uniqueBucketPrefix}:${$localBucketName}";
@@ -403,7 +403,7 @@ When having `$credentials` from the previous code snippet (supposing all declare
 ```php
 <?php
   // All bucket names in the Zerops shared object storage namespace have to be unique!
-  $uniqueBucketPrefix = getenv("${$objetStorageName}_${$accessKeyId}");
+  $uniqueBucketPrefix = getenv("${$objectStorageName}_${$accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
   $bucketName = "${$uniqueBucketPrefix}:${$localBucketName}";
