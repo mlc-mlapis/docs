@@ -1,6 +1,6 @@
 # PHP Service in HA Mode, Internal
 
-The following image shows a simplified schema of a standalone Zerops PHP Service in HA mode with a default of **3** runtime environment instances (horizontally scaled **up to 64** instances) as a **PHP cluster** without external access. This means no access from outside of the Zerops project infrastructure, such as the Internet. There is only native access through a private network using a [default port](/documentation/services/runtimes/php.html#hostname-and-port) **==80==** from the [Zerops Project Core Service](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html) itself, which is the heart of each user-defined Zerops project.
+The following image shows a simplified schema of a standalone [Zerops PHP Service](/documentation/services/runtimes/php.html) in HA mode with a default of **3** runtime environment instances (horizontally scaled **up to 64** instances) as a **PHP cluster** without external access. This means no access from outside of the Zerops project infrastructure, such as the Internet. There is only native access through a private network using a [default port](/documentation/services/runtimes/php.html#hostname-and-port) **==80==** from the [Zerops Project Core Service](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html) itself, which is the heart of each user-defined Zerops project.
 
 ## Simplified schema (no external access)
 
