@@ -1,6 +1,6 @@
 # MariaDB (MySQL)
 
-Zerops provides a fully managed and scaled MariaDB (MySQL) database service, suitable for both development and production projects using any load. You can choose any option you want and be sure that it will work. Your certainty and peace of mind are our top priority.
+Zerops provides a fully managed and scaled MariaDB (MySQL) database service, suitable for both development and production projects using any load. You can choose any option you want and be sure that it will work.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: details Compatibility & Differences to MySQL
@@ -83,9 +83,11 @@ Other services can access the database using its **hostname** and **port**, as t
 
 For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#mariadb)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility. Another reason not to hard-code the values inside your applications is that it can be dangerous because it is easy to commit them (like your credentials) into a repository, potentially exposing them to more people than intended.
 
-### From local development environment
+### From local environment
 
-To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html). This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, you should copy the values manually through the „**How To Access** / **Database access details**“ section of the service detail in your application if you need some of them and use them in your private local configuration strategy.
+The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
+
+To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as said before. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, you should copy the values manually through the „**How To Access** / **Database access details**“ section of the service detail in your application if you need some of them and use them in your private local configuration strategy.
 
 ![MariaDB Service](./images/MariaDB-Database-Access-Details.png "Database Access Details")
 
