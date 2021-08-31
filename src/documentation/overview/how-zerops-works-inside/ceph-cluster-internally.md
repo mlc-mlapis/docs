@@ -10,6 +10,8 @@ Data that are stored in a cluster are put into **pools**. Pools are logical repr
 
 **Monitor nodes** maintain information about the cluster health state, a map of all nodes, and data distribution rules. Each **Storage node** has several physical hard disks/partitions attached, which are used as **OSDs** (Object Storage Devices) and managed by running **Ceph OSDs** (Object Storage Deamons).
 
+![Zerops Object Storage Service](./images/Zerops-S3-Service-Detail.png "Zerops Object Storage Service")
+
 ## User's request logic explanation
 
 1. A client sends a data request to the service always through its endpoint `https://s3.app.zerops.io`.
@@ -17,5 +19,3 @@ Data that are stored in a cluster are put into **pools**. Pools are logical repr
 3. The selected `Monitor node` evaluates information contained in the request together with available data in `Placement Groups` mappings and the cluster status related to `Storage nodes`.
 4. As a result, one of the **Storage nodes** is identified as the right one to be contacted by a client's request, and the request is redirected to it.
 5. The selected **Storage node** processes the request and responses to the client.
-
-![Zerops Object Storage Service](./images/Zerops-S3-Service-Detail.png "Zerops Object Storage Service")
