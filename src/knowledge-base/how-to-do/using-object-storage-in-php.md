@@ -68,7 +68,7 @@ This limitation is temporary only and will be removed as soon as possible.
 
 Using the following code, you will get a variable ==`$credentials`== containing an object used later for authentication when creating buckets and their content.
 
-Assume further that the code is associated with access to the Zerops Object Storage Service, whose [object storage name](/documentation/services/storage/s3.html#object-storage-name) was chosen as the ==**`store`**== . Necessary [Storage access details](/documentation/services/storage/s3.html#from-local-development-environment) values **Access Key Id** and **Secret Access Key** are taken from [environment variables](/documentation/environment-variables/how-to-access.html) then.
+Assume further that the code is associated with access to the Zerops Object Storage Service, whose [object storage name](/documentation/services/storage/s3.html#object-storage-name) was chosen as the ==**`store`**== . Necessary [Storage access details](/documentation/services/storage/s3.html#from-local-environment) values **Access Key Id** and **Secret Access Key** are taken from [environment variables](/documentation/environment-variables/how-to-access.html) then.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info
@@ -105,7 +105,7 @@ The unique generated id of the created Zerops Object Storage Service instance is
 
 ## Creating a new object storage bucket
 
-When having `$credentials` from the previous code snippet (supposing all declared variables are also accessible), you can create a named bucket as a container for storing objects. Zerops uses the [multi-tenancy feature](https://docs.ceph.com/en/latest/radosgw/multitenancy) requiring buckets with [unique names](/documentation/services/storage/s3.html#object-store-bucket-names) only in the scope of each tenant.
+When having `$credentials` from the previous code snippet (supposing all declared variables are also accessible), you can create a named bucket as a container for storing objects. Zerops uses the [multi-tenancy feature](https://docs.ceph.com/en/latest/radosgw/multitenancy) requiring buckets with [unique names](/documentation/services/storage/s3.html#object-storage-bucket-names) only in the scope of each tenant.
 
 ```php
 <?php
@@ -278,7 +278,7 @@ Setting the ACL as ==`public-read`== adds another `Grantee` to the bucket's `Gra
 ]
 ```
 
-If you have another Zerops Object Storage Service in your project (for example, the one with ==`archivestore`== [Object Storage Name](/documentation/services/storage/s3.html#object-store-bucket-names)), you can set its buckets access rights to allow access from the ==`store`== service with [read](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#permissions) access.
+If you have another Zerops Object Storage Service in your project (for example, the one with ==`archivestore`== [Object Storage Name](/documentation/services/storage/s3.html#object-storage-bucket-names)), you can set its buckets access rights to allow access from the ==`store`== service with [read](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#permissions) access.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Grants work in overwriting mode
