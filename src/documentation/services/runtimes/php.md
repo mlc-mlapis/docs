@@ -126,17 +126,15 @@ You can look at the two step-by-step described real projects, **Adminer** and **
 
 ## Accessing a Zerops S3 Object Storage
 
-
+You can [access the object storage](/documentation/services/storage/s3.html#how-to-access-an-object-storage-service) using its public [API URL endpoint](#api-url-endpoint-and-port) in the same way as any access from the outside Internet, and including your local development environment.
 
 ## Accessing a Zerops Shared Storage
 
-When a Zerops PHP Service is created, you can mount a **Zerops Shared Storage Service** to it. If you don't have any of such yet, create a new one. You can then **enable** the switch on the right service card (here only ==`app`== Zerops Service) that you want to connect to the storage. When it already exists, go to its **Storage configuration card** and do the same change.
+When a Zerops PHP Service is created, you can mount a Zerops [Shared Storage Service](/documentation/services/storage/shared.html#storage-mounting) to it. If you don't have any of such yet, create a new one first.
 
-The path to the root is ==`/mnt/app`== , then. Here, you can create any directory structure you need. Because PHP code runs under the **`www-data`** user account, any saved file has `-rw-r--r-- www-data www-data` permissions and created directories `drwxr-xr-x www-data www-data`.
+Because PHP code runs under the **`www-data`** user account, any saved file has `-rw-r--r-- www-data www-data` permissions and created directories `drwxr-xr-x www-data www-data`.
 
 The **`zeropsSharedStorageMounts`** environment variable allows you to get the list of mounted shared storage services (separated by a pipe, if there are more than only one). For more flexibility, it's always recommended to use such environment variables indirectly, as shown in an example of [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), in each project service separately.
-
-![Shared Storage](./images/Mount-Shared-Storage.png "Mount a Shared Storage")
 
 ## How to access a PHP runtime environment
 
