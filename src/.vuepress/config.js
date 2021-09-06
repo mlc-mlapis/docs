@@ -65,7 +65,8 @@ module.exports = {
                 'overview/how-zerops-works-inside/typical-schemas-of-zerops-projects',
                 'overview/how-zerops-works-inside/php-cluster-internally',
                 'overview/how-zerops-works-inside/mariadb-galera-cluster-internally',
-                'overview/how-zerops-works-inside/ceph-cluster-internally'
+                'overview/how-zerops-works-inside/ceph-cluster-internally',
+                'overview/how-zerops-works-inside/glusterfs-cluster-internally'
               ]
             }
           ]

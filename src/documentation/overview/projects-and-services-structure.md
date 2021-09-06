@@ -50,7 +50,7 @@ A project can contain an [unlimited number of services](/documentation/overview/
 
 ### Runtime environments
 
-[Node.js](/documentation/services/runtimes.html#node-js), [Golang](/documentation/services/runtimes.html#golang), [PHP](/documentation/services/runtimes.html#php)
+[Node.js](/documentation/services/runtimes.html#node-js), [Golang](/documentation/services/runtimes.html#golang), [PHP](/documentation/services/runtimes/php.html)
 
 ### Static web server services
 
@@ -70,4 +70,4 @@ A project can contain an [unlimited number of services](/documentation/overview/
 
 ### Storage services
 
-[Shared storage](/documentation/services/storage.html#shared-storage), [S3 compatible Object Storage](/documentation/services/storage.html#s3-compatible-object-storage)
+[Shared storage](/documentation/services/storage.html#shared-storage), [S3 compatible Object Storage](/documentation/services/storage/s3.html)
