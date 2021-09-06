@@ -6,7 +6,7 @@ A **gluster volume** in Zerops is a collection of 3 [containers](https://linuxco
 
 The **gluster native client** process mounts the volume and exposes the storage from all the bricks as a single unified storage namespace to the applications accessing it. I/O from the applications is routed to different bricks based on internal optimization mechanisms and rules.
 
-The picture also supposes that the chosen [shared storage name](/documentation/services/storage/shared.html#shared-storage-name) has been **disk** and mounted in any [runtime service](/documentation/services/storage/shared.html#storage-mounting).
+The picture also supposes that the chosen [shared storage name](/documentation/services/storage/shared.html#shared-storage-name) has been **disk** and mounted in an appropriate [runtime service](/documentation/services/storage/shared.html#storage-mounting) (previously enabled for mounting).
 
 ![Zerops Shared Storage Service](./images/Zerops-GlusterFS-Service-Detail.png "Zerops Shared Storage Service")
 
