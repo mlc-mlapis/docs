@@ -259,6 +259,12 @@ and see it in the **Runtime log** tab later.
 
 Look at [Apache](https://httpd.apache.org/docs/2.4/logs.html) or [Nginx](https://docs.nginx.com/nginx/admin-guide/monitoring/logging) documentation for more information.
 
+## How to browse the content of a runtime container
+
+You can use **File browser** functionality available in all runtime services to view folders, files, and their contents & attributes. The mounted shared storage disks are accessible at the path ==/mnt/== .
+
+![File browser](./images/Runtime-File-Browser.png "File browser feature")
+
 ## How to detect HTTPS sessions
 
 Zerops Routing Service (see the schema of a Zerops project with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access)) takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project's services.
