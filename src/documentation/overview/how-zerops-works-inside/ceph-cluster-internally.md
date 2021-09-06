@@ -1,6 +1,6 @@
 # Object Storage Service, Internal
 
-The following image shows a simplified schema of a standalone shared [Zerops S3 compatible Object Storage Service](/documentation/services/storage/s3.html) based on the [Ceph cluster](https://docs.ceph.com/en/latest/architecture) technology. At the heart of the Ceph storage cluster is the **CRUSH** algorithm. It allows calculating which **Storage node** needs to be contacted for retrieving or storing data.
+The following picture shows a simplified schema of a standalone shared [Zerops S3 compatible Object Storage Service](/documentation/services/storage/s3.html) based on the [Ceph cluster](https://docs.ceph.com/en/latest/architecture) technology. At the heart of the Ceph storage cluster is the **CRUSH** algorithm. It allows calculating which **Storage node** needs to be contacted for retrieving or storing data.
 
 The Zerops Object Storage Service is directly accessible from everywhere using its public [API URL endpoint](/documentation/services/storage/s3.html#api-url-endpoint-and-port) through HTTPS protocol in the same way. So in this only one case, you don't need to utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), unlike all other Zerops services.
 
