@@ -213,7 +213,8 @@ module.exports = {
           title: 'Best practices',
           collapsable: false,
           children: [
-            'best-practices/how-to-use-environment-variables-efficiently'
+            'best-practices/how-to-use-environment-variables-efficiently',
+            'best-practices/when-and-why-use-shared-or-object-storage'
           ]
         },
         {

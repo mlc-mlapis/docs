@@ -3,6 +3,7 @@
 ## Best practices
 
 - [How to use environment variables efficiently](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html)
+- [When and why using Zerops Shared or Object Storage](/knowledge-base/best-practices/when-and-why-use-shared-or-object-storage.html)
 
 ## How to do
 
