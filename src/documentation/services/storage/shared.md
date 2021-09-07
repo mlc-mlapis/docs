@@ -2,21 +2,13 @@
 
 Zerops provides a fully managed and scaled **shared storage** service (replicated volume) based on the [GlusterFS](https://docs.gluster.org) cluster technology, suitable for both development and production projects using any load. You can choose any option you want and be sure that it will work.
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: info When and why using Zerops Shared or Object Storage
+If you are not sure what storage type to choose, try reading [some facts](/knowledge-base/best-practices/when-and-why-use-shared-or-object-storage.html) for your decision.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 [[toc]]
-
-## Comparison with using Object Storage instead
-
-|Zerops Shared Storage                                                                                                                     |Zerops Object Storage                                                                                                                               |
-|:-----------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
-|Direct access to already saved files for modification.                                                                                    |The necessity to download files before making changes.                                                                                              |
-|All project's runtime services can have concurrent access to the same files.                                                              |Each project's runtime service accesses files separately.                                                                                           |
-|The file system guarantees auto-locking.                                                                                                  |No auto-locking, it's necessary to create your own logic.                                                                                           |
-|Vertical container autoscaling eliminates most of application bottlenecks.                                                                |Scaling is managed fully by the infrastructure without limits.                                                                                      |
-|There are some fixed limits for the number of files and directories.                                                                      |No limits for the number of files.                                                                                                                  |
-|Performs best, usually for smaller files.                                                                                                 |Performs best, usually for big content and high stream throughput.                                                                                  |
-|You pay for vCPU, RAM, Disk, so it's ~ [10 times expensive](/documentation/overview/pricing.html#hardware-resources-cost-and-autoscaling).|You pay only for reserved disk capacity, so it's ~ [10 times cheaper](/documentation/overview/pricing.html#hardware-resources-cost-and-autoscaling).|
-|Only standard file system metadata and ACLs functionality.                                                                                |Extended customization for metadata and ACLs.                                                                                                       |
-|Files are organized into a hierarchy, with directories and sub-directories.                                                               |Files are stored in a flat bucket address space, which makes it easier to locate and retrieve.                                                      |
 
 ## Adding the Shared Storage Service in Zerops
 
