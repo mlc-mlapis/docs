@@ -16,6 +16,12 @@ Information on the compatibility of MariaDB software with similar, competing sof
 
 You can currently choose **v10.4** or **v10.3**. The chosen version of the database **can't be changed afterward**.
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Changing version
+Switching must be done manually by creating a new service with another version and migrating data using a [backup / restore](#how-to-backup-restore-database-data) pattern.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ### Hostname and port
 
 Choose a short and descriptive URL-friendly name, for example, **db**. The following rules apply:
@@ -26,12 +32,6 @@ Choose a short and descriptive URL-friendly name, for example, **db**. The follo
 * the hostname **==can't be changed==** later.
 
 The port will automatically be set to the value of **==3306==** and can't be changed.
-
-<!-- markdownlint-disable DOCSMD004 -->
-::: info Changing version
-Switching must be done manually by creating a new service with another version and migrating data using a [backup / restore](#how-to-backup-restore-database-data) pattern.
-:::
-<!-- markdownlint-enable DOCSMD004 -->
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Hostname is also used as the default admin user name
