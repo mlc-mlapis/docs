@@ -10,6 +10,12 @@ Zerops provides a fully managed and scaled PHP runtime service, suitable for bot
 
 You can currently choose PHP version **v8.0**, **v7.4**, or **v7.3**. The chosen version of it **can't be changed afterward**. The service is always combined with a web server. It can be either **Apache v2.4** or **Nginx v1.18**. Differences and configuration specifics to each web server are listed below.
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Changing version
+Switching must be done manually by creating a new service with another version and migrating service code using a new [deploy](/documentation/deploy/how-deploy-works.html) or [build & deploy](/documentation/build/how-zerops-build-works.html) process.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ### Hostname and port
 
 Choose a short and descriptive URL-friendly name, for example, **app**. The following rules apply:
@@ -20,12 +26,6 @@ Choose a short and descriptive URL-friendly name, for example, **app**. The foll
 * the hostname **==can't be changed==** later.
 
 The port will automatically be set to the value of **==80==** and can't be changed.
-
-<!-- markdownlint-disable DOCSMD004 -->
-::: info Changing version
-Switching must be done manually by creating a new service with another version and migrating service code using a new [deploy](/documentation/deploy/how-deploy-works.html) or [build & deploy](/documentation/build/how-zerops-build-works.html) process.
-:::
-<!-- markdownlint-enable DOCSMD004 -->
 
 ### Application code root and document root
 
