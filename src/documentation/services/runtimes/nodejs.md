@@ -16,7 +16,7 @@ Switching must be done manually by creating a new service with another version a
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-### Hostname and port
+### Hostname
 
 Choose a short and descriptive URL-friendly name, for example, **app**. The following rules apply:
 
@@ -25,5 +25,12 @@ Choose a short and descriptive URL-friendly name, for example, **app**. The foll
 * **==has to be unique==** in relation to other existing project's hostnames,
 * the hostname **==can't be changed==** later.
 
-The port will be preset to the default value of **==3000==**. You can change it immediately or anytime later. You can also add a new internal port by specifying its protocol (TCP / UDP), number (0 - 65535), and a used scheme.
+### Port
 
+**Node.js** service, together with the [Golang service](/documentation/services/runtimes/golang.html), is the only one that allows you to use **any port number** you want. The service can even have [multiple internal ports](/documentation/routing/routing-between-project-services.html) open (**0** - **65535**), running on **tcp** or **udp** protocols. The port will be preset to the **==tcp==** protocol and the value of **==3000==**. You can change it immediately or anytime later.
+
+Additionally, the Zerops [routing system](/documentation/routing/using-your-domain.html) allows you to set the mappings between those internal ports and external Internet access. If you run a web server on that internal port (HTTP application protocol is supported), it means that you can even map [public Internet domains](/documentation/routing/using-your-domain.html) with the possibility of automatic support for SSL certificates (it also works for Zerops [subdomains](/documentation/routing/zerops-subdomain.html)).
+
+![Custom Port](./images/Edit-Custom-Port.png "Edit Custom Port")
+
+Because domain access or subdomains can be enabled only for **tcp** ports with support for HTTP, the checkbox **HTTP protocol support** allows marking such a case. In turn, Zerops uses this flag to optimize its internal logic to offer SSL certificates only in handy places.
