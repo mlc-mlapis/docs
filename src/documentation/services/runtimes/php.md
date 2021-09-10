@@ -115,6 +115,11 @@ When a Zerops service has been connected to a GitHub or GitLab repository, you c
 
 ![Service connected to a Repository](./images/Repository-Triggering-Tag-Commit.png "Repository triggering on a Tag/Commit")
 
+When the build process has been successfully finished, you can download the whole zipped **artifact of the build container** and browse locally if you need to check its content.
+
+![Build Artifact](./images/Download-Build-Artefact-PHP.png "Download build artifact")
+![Build Artifact](./images/Download-Build-Artefact-PHP-App-Version.png "Download build artifact")
+
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Simple projects and how to deploy them using the Zerops zcli
 You can look at the two step-by-step described real projects, **Adminer** and **phpMyAdmin** web tools, used to administer the Zerops MariaDB (MySQL) databases. How to create and deploy them with the Zerops **zcli**.
