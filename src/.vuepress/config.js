@@ -63,6 +63,7 @@ module.exports = {
               "collapsable": false,
               "children": [
                 'overview/how-zerops-works-inside/typical-schemas-of-zerops-projects',
+                'overview/how-zerops-works-inside/nodejs-cluster-internally',
                 'overview/how-zerops-works-inside/php-cluster-internally',
                 'overview/how-zerops-works-inside/mariadb-galera-cluster-internally',
                 'overview/how-zerops-works-inside/ceph-cluster-internally',
