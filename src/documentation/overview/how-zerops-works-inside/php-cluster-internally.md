@@ -14,4 +14,8 @@ PHP service containers are located on **different physical computers** to preven
 
 **Zerops Routing Service** takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project's services, including Zerops PHP Services. Both active **HTTP balancers** again direct the requests to the least busy instance of the PHP runtime environment service.
 
+It's only on you if you choose or not the automatic support for SSL certificates when you map [public domains](/documentation/routing/using-your-domain.html) to your Zerops service.
+
+![SSL Certificates](./images/SSL-Certificate-Support-Option.png "SSL Certificates Support")
+
 ![Zerops PHP Service](./images/Zerops-PHP-Service-Detail.png "Zerops PHP Service")
