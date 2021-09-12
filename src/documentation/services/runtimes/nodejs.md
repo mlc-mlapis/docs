@@ -88,23 +88,97 @@ When the build process has been successfully finished, you can download the whol
 ![Build Artifact](./images/Download-Build-Artefact-NodeJS.png "Download build artifact")
 ![Build Artifact](./images/Download-Build-Artefact-NodeJS-App-Version.png "Download build artifact")
 
-<!-- markdownlint-disable DOCSMD004 -->
-::: info Simple projects and how to deploy them using the Zerops zcli
-You can look at the two step-by-step described real projects, **Adminer** and **phpMyAdmin** web tools, used to administer the Zerops MariaDB (MySQL) databases. How to create and deploy them with the Zerops **zcli**.
-
-* [Preparing and deploying phpMyAdmin application kit](/knowledge-base/how-to-do/how-to-prepare-phpmyadmin-application-kit.html)
-* [Preparing and deploying Adminer application kit](/knowledge-base/how-to-do/how-to-prepare-adminer-application-kit.html)
-:::
-<!-- markdownlint-enable DOCSMD004 -->
-
 ## Accessing a Zerops S3 Object Storage
 
 You can [access the object storage](/documentation/services/storage/s3.html#how-to-access-an-object-storage-service) using its public [API URL endpoint](#api-url-endpoint-and-port) in the same way as any access from the outside Internet, and including your local development environment.
 
 ## Accessing a Zerops Shared Storage
 
-When a Zerops PHP Service is created, you can mount a Zerops [Shared Storage Service](/documentation/services/storage/shared.html#storage-mounting) to it. If you don't have any of such yet, create a new one first.
+When a Zerops Node.js Service is created, you can mount a Zerops [Shared Storage Service](/documentation/services/storage/shared.html#storage-mounting) to it. If you don't have any of such yet, create a new one first.
 
-Because PHP code runs under the **`www-data`** user account, any saved file has `-rw-r--r-- www-data www-data` permissions and created directories `drwxr-xr-x www-data www-data`.
+Because Node.js code runs under the **`root`** user account, any saved file has `-rw-r--r-- root root` permissions and created directories `drwxr-xr-x root root`.
 
 The **`zeropsSharedStorageMounts`** environment variable allows you to get the list of mounted shared storage services (separated by a pipe, if there are more than only one). For more flexibility, it's always recommended to use such environment variables indirectly, as shown in an example of [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), in each project service separately.
+
+## How to access a Node.js runtime environment
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Don't use additional security protocols for internal communication
+The runtime environment service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+### From other services inside the project
+
+Other services can access the Node.js application using its **hostname** and **port**, as they are part of the same private project network.
+
+It's always recommended not to place configuration values as constants directly into the application code. The better way is to use them indirectly, for example, via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), referencing Zerops [implicit environment variables](/documentation/environment-variables/helper-variables.htm) and given that [all environment variables](/documentation/environment-variables/how-to-access.html) are shared within the project across all services.
+
+### From local environment
+
+The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
+
+You can access the Zerops Node.js Service from your local workspace by using the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as said above. This might be handy if you, for example, use the service as a REST API and you don’t want it publicly available (via [public domains](/documentation/routing/using-your-domain.html) or Zerops [subdomains](/documentation/routing/zerops-subdomain.html)), so you connect to the project using **zcli VPN** and use ==`app:3000`== as your API endpoint.
+
+You can also run an application fully in your local workspace and access other services in the Zerops project using the VPN. However, you cannot use references to the environment variables because you are outside of the project's network. Therefore, you should copy the values manually if you need some of them and use them in your private local configuration strategy.
+
+## Default hardware configuration and autoscaling
+
+* Each Node.js container (1 in non-HA, 3 in HA) starts with 1 vCPU, 0.25 GB RAM, and 5 GB of disk space.
+* Zerops will automatically scale the resources vertically (both in non-HA and HA mode up to 32 vCPU, 128 GB RAM, 1 TB disk space) and horizontally (HA mode only up to 64 containers).
+
+## Pre-installed NPM and YARN
+
+Both package managers are installed in each Node.js container. You can install any package during build stage you want.
+
+## Logging
+
+Both console and error logs are configured using a syslog service to centralize all records and allowing live access through a **Runtime log** tab inside your service detail for each Zerops service container.
+
+![Runtime log](./images/Runtime-Log.png "Runtime log access")
+
+## How to browse the content of a runtime container
+
+You can use **File browser** functionality available in all runtime services to view folders, files, and their contents & attributes. The mounted shared storage disks are accessible at the path ==/mnt/== .
+
+![File browser](./images/Runtime-File-Browser.png "File browser feature")
+
+## How to detect HTTPS sessions
+
+Zerops Routing Service (see the schema of a Zerops project with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access)) takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project's services.
+
+Your application logic may need to check or do something when a client is accessing it using HTTPS protocol (user's encrypted requests). In such a case, it's possible to inspect the **`x-forwarded-proto`** header. You can see it below using a super simple Node.js application that uses the [express](https://www.npmjs.com/package/express) based web server.
+
+```javascript
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+   const header = req.headers['x-forwarded-proto'];
+   if (header) {
+      if (header.toLowerCase() === 'https') {
+         res.send(`... secured communication through HTTPS protocol`);
+      } else {
+         res.send(`... communication only through HTTP protocol`);
+      }
+   } else {
+      res.send('... x-forwarded-proto header does not exist.');
+   }
+})
+
+app.listen(port, () => {
+  console.log(`... listening on port ${port}`);
+})
+```
+
+## What you should remember when using the HA mode
+
+### Locally stored data only for a temporary purpose
+
+You should not store your permanent data or sessions in the local disk space of containers running your application.
+The reason is that locally stored data is reserved only for this particular container instance, not mirrored across the Node.js cluster nor backup-ed. It will not be migrated if such a container is deleted due to its failure. If it is necessary to store and share such data permanently, we recommend developers should preferably utilize [Zerops Shared Storage](/documentation/services/storage/shared.html) or [Zerops S3 compatible Object Storage](/documentation/services/storage/s3.html) services.
+
+## Known specifics
+
+* Node.js application itself is run via **systemd** service unit, which keeps it running and handle restarts.

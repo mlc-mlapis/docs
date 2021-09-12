@@ -274,7 +274,7 @@ You can use **File browser** functionality available in all runtime services to 
 
 Zerops Routing Service (see the schema of a Zerops project with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access)) takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project's services.
 
-Your application logic may need to check or do something when a client is accessing it using HTTPS protocol (user's requests are encrypted). In such a case, it's possible to inspect the **`HTTP_X_FORWARDED_PROTO`** header.
+Your application logic may need to check or do something when a client is accessing it using HTTPS protocol (user's encrypted requests). In such a case, it's possible to inspect the **`HTTP_X_FORWARDED_PROTO`** header.
 
 ```php
 if (
