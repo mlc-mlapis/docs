@@ -31,7 +31,7 @@ runs:
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Where following code snippets are used
-Suppose the code is used in a php file located in a [document root](/documentation/services/runtimes/php.html#setting-php-apache-document-root) subdirectory (for example, ==**`public`**== ) placed directly in the [application code root](/documentation/services/runtimes/php.html#application-code-root-and-document-root).
+Suppose the code is used in a `php` file located in a [document root](/documentation/services/runtimes/php.html#setting-php-apache-document-root) subdirectory (for example, ==**`public`**== ) placed directly in the [application code root](/documentation/services/runtimes/php.html#application-code-root-and-document-root).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 

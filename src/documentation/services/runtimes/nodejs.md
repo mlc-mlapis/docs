@@ -165,11 +165,11 @@ app.get('/', (req, res) => {
    } else {
       res.send('... x-forwarded-proto header does not exist.');
    }
-})
+});
 
 app.listen(port, () => {
   console.log(`... listening on port ${port}`);
-})
+});
 ```
 
 ## What you should remember when using the HA mode
