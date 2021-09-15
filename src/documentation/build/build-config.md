@@ -30,7 +30,7 @@ List the technologies your build uses. Zerops will use this as a base pack for t
 ##### `nodejs@<10, 12, 14>`
 Includes `npm`, `yarn`, `git`, `npx`.
 
-##### `php@<7.2, 7.3>`
+##### `php@<7.3, 7.4, 8.0>`
 Includes `composer`, `git`, `php`.
 
 ##### `go@<1>`

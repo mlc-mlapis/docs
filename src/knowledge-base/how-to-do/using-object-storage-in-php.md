@@ -146,7 +146,7 @@ When having `$credentials` and `getS3Client` function from the previous code sni
 
   // Function declaration.
   function getBucketAcl($s3Client, $bucketName) {
-    // Check it the required bucket exists.
+    // Check, if the required bucket exists.
     if ($s3Client->doesBucketExist($bucketName)) {
       // If yes, return its ACL setting.
       return $s3Client->getBucketAcl([
@@ -217,8 +217,8 @@ When having `$credentials` and `getS3Client` function from the previous code sni
   $bucketName = "${uniqueBucketPrefix}:${localBucketName}";
 
   // Function declaration.
-  function putBucketAcl($s3Client, $bucketName) {
-    // Check it the required bucket exists.
+  function putPublicBucketAcl($s3Client, $bucketName) {
+    // Check, if the required bucket exists.
     if ($s3Client->doesBucketExist($bucketName)) {
       // If yes, modify its ACL setting to public read.
       return $s3Client->putBucketAcl([
@@ -232,8 +232,8 @@ When having `$credentials` and `getS3Client` function from the previous code sni
 
   // Calling the function: getS3Client
   $s3Client = getS3Client($apiUrlValue, $credentials);
-  // Calling the function: putBucketAcl
-  putBucketAcl($s3Client, $bucketName);
+  // Calling the function: putPublicBucketAcl
+  putPublicBucketAcl($s3Client, $bucketName);
 ?>
 ```
 
@@ -253,42 +253,54 @@ If you have another Zerops Object Storage Service in your project (for example, 
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Grants work in overwriting mode
-Setting ==`Grants`== requires defining the complete list of items ( ==`Grantee`== ) for the bucket because it overwrites the previous value. It doesn't work in an incremental mode. You will probably create a more sophisticated routine to prepare the **access control policy** you need. Here, it's simplified to the constant value.
+Setting ==`AccessControlPolicy`== requires defining the ==`Grants`== property with the complete list of items ( ==`Grantee`== ) and also the ==`Owner`= property for the bucket because it overwrites the previous value. It doesn't work in an incremental mode. You will probably create a more sophisticated routine to prepare the **access control policy** you need. Here, it's simplified to the simple calculated value.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ```php
 <?php
+  // Object storage name.
+  $archiveObjectStorageName = 'archivestore';
+  // Get an object with credentials.
+  $archiveCredentials = new Credentials(
+    getenv("${archiveObjectStorageName}_${accessKeyId}"),
+    getenv("${archiveObjectStorageName}_${secretAccessKey}")
+  );
   // All bucket names in the Zerops shared object storage namespace have to be unique!
-  $uniqueBucketPrefix = getenv("${objectStorageName}_${accessKeyId}");
+  $archiveUniqueBucketPrefix = getenv("${archiveObjectStorageName}_${accessKeyId}");
   // Required bucket name.
-  $localBucketName = 'records';
-  $bucketName = "${uniqueBucketPrefix}:${localBucketName}";
+  $archiveLocalBucketName = 'records';
+  $archiveBucketName = "${archiveUniqueBucketPrefix}:${archiveLocalBucketName}";
 
+  // Definition of required grantees
   $accessControlPolicy => [
     'Grants' => [
       [
         'Grantee' => [
-          'DisplayName' => 'archivestore',
-          'ID' => 'V4CvJVn-S5Gzzzq0yoRX7g',
+          'DisplayName' => $archiveObjectStorageName,
+          'ID' => getenv("${archiveObjectStorageName}_${accessKeyId}"),
           'Type' => 'CanonicalUser'
          ],
          'Permission' => 'FULL_CONTROL'
       ],
       [
         'Grantee' => [
-          'DisplayName' => 'store',
-          'ID' => '0LW7E_BUT-yKmmEcyf3dzQ',
+          'DisplayName' => $objectStorageName,
+          'ID' => getenv("${objectStorageName}_${accessKeyId}"),
           'Type' => 'CanonicalUser'
         ],
         'Permission' => 'READ'
       ]
+    ],
+    'Owner' => [
+       'DisplayName' => $archiveObjectStorageName,
+       'ID' => getenv("${archiveObjectStorageName}_${accessKeyId}")
     ]
   ];
 
   // Function declaration.
-  function putBucketAcl($s3Client, $bucketName, $accessControlPolicy) {
-    // Check it the required bucket exists.
+  function putCustomBucketAcl($s3Client, $bucketName, $accessControlPolicy) {
+    // Check, if the required bucket exists.
     if ($s3Client->doesBucketExist($bucketName)) {
       // If yes, modify its AccessControlPolicy setting.
       return $s3Client->putBucketAcl([
@@ -301,9 +313,9 @@ Setting ==`Grants`== requires defining the complete list of items ( ==`Grantee`=
   }
 
   // Calling the function: getS3Client
-  $s3Client = getS3Client($apiUrlValue, $credentials);
-  // Calling the function: putBucketAcl
-  putBucketAcl($s3Client, $bucketName, $accessControlPolicy);
+  $s3Client = getS3Client($apiUrlValue, $archiveCredentials);
+  // Calling the function: putCustomBucketAcl
+  putCustomBucketAcl($s3Client, $archiveBucketName, $accessControlPolicy);
 ?>
 ```
 
@@ -319,7 +331,7 @@ When having `$credentials` from the previous code snippet (supposing all declare
   $localBucketName = 'records';
   $bucketName = "${uniqueBucketPrefix}:${localBucketName}";
 
-  // Declaration of an object with body to be placed into a bucket.
+  // Declaration of an object with a body to be placed into a bucket.
   $objectBodyKey = "K1.txt";
   $objectBody = "Description of the K1.";
 
@@ -330,7 +342,7 @@ When having `$credentials` from the previous code snippet (supposing all declare
 
   // Function declaration.
   function putObjectWithBody($s3Client, $bucketName, $objectBodyKey, $objectBody) {
-    // Check it the required bucket exists.
+    // Check, if the required bucket exists.
     if ($s3Client->doesBucketExist($bucketName)) {
       // If yes, put an object inside the bucket.
       return $s3Client->putObject([
@@ -345,7 +357,7 @@ When having `$credentials` from the previous code snippet (supposing all declare
 
   // Function declaration.
   function putObjectWithFile($s3Client, $bucketName, $objectFileKey, $filePath) {
-    // Check it the required bucket exists.
+    // Check, if the required bucket exists.
     if ($s3Client->doesBucketExist($bucketName)) {
       // If yes, put an object inside the bucket.
       return $s3Client->putObject([
@@ -379,17 +391,17 @@ When having `$credentials` from the previous code snippet (supposing all declare
   $localBucketName = 'records';
   $bucketName = "${uniqueBucketPrefix}:${localBucketName}";
 
-  // Declaration of an object key its body content to be get from a bucket.
+  // Declarations of the object's keys whose body contents are to be retrieved from the bucket.
   $objectBodyKey = "K1.txt";
-  // Declaration of an object key its file content to be downloaded from a bucket.
   $objectFileKey = "scan_20210815_00001.jpg";
+
   $filePath = "./files/" . $objectFileKey;
 
   // Function declaration.
   function getObjectWithBody($s3Client, $bucketName, $objectBodyKey) {
-    // Check it the required bucket exists.
+    // Check, if the required bucket exists.
     if ($s3Client->doesBucketExist($bucketName)) {
-      // Check it the required object exists.
+      // Check, if the required object exists.
       if ($s3Client->doesObjectExist($bucketName, $objectBodyKey)) {
         // If yes, get an object from the bucket.
         return $s3Client->getObject([
@@ -404,9 +416,9 @@ When having `$credentials` from the previous code snippet (supposing all declare
 
   // Function declaration.
   function getObjectWithFile($s3Client, $bucketName, $objectFileKey, $filePath) {
-    // Check it the required bucket exists.
+    // Check, if the required bucket exists.
     if ($s3Client->doesBucketExist($bucketName)) {
-      // Check it the required object exists.
+      // Check, if the required object exists.
       if ($s3Client->doesObjectExist($bucketName, $objectFileKey)) {
         // If yes, get an object from the bucket.
         return $s3Client->getObject([
