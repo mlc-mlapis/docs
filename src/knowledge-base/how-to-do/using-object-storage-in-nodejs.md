@@ -74,13 +74,13 @@ All API calls to the object storage service are asynchronous and that's why **as
 
 ```javascript
 // All bucket names in the Zerops shared object storage namespace have to be unique!
-uniqueBucketPrefix = env[`${objectStorageName}_${accessKeyId}`];
+const uniqueBucketPrefix = env[`${objectStorageName}_${accessKeyId}`];
 // Required bucket name.
-localBucketName = 'records';
-bucketName = "${uniqueBucketPrefix}:${localBucketName}";
+const localBucketName = 'records';
+const bucketName = `${uniqueBucketPrefix}:${localBucketName}`;
 // Necessary environment variable name.
-apiUrl = 'apiUrl';
-apiUrlValue = env[`${objectStorageName}_${apiUrl}`];
+const apiUrl = 'apiUrl';
+const apiUrlValue = env[`${objectStorageName}_${apiUrl}`];
 
 // Function declaration.
 const getS3Client = (apiUrlValue, credentials) => {
@@ -121,7 +121,7 @@ const s3Client = getS3Client(apiUrlValue, credentials);
 
 (async () => {
    // Calling the function: createBucket
-   await createBucket(s3Client, bucketName);
+   const result = await createBucket(s3Client, bucketName);
    // Calling the function: listBuckets
    const buckets = await listBuckets(s3Client);
 })();
@@ -144,14 +144,14 @@ When having `credentials` and `getS3Client` function from the previous code snip
 
 ```javascript
 // All bucket names in the Zerops shared object storage namespace have to be unique!
-uniqueBucketPrefix = env[`${objectStorageName}_${accessKeyId}`];
+const uniqueBucketPrefix = env[`${objectStorageName}_${accessKeyId}`];
 // Required bucket name.
-localBucketName = 'records';
-bucketName = "${uniqueBucketPrefix}:${localBucketName}";
+const localBucketName = 'records';
+const bucketName = `${uniqueBucketPrefix}:${localBucketName}`;
 
 // Function declaration.
 const getBucketAcl = async (s3Client, bucketName) => {
-   // Check it the required bucket exists.
+   // Check, if the required bucket exists.
    return await s3Client.headBucket({
       Bucket: bucketName
    }).promise().then(
@@ -180,7 +180,7 @@ const s3Client = getS3Client(apiUrlValue, credentials);
 
 (async () => {
    // Calling the function: getBucketAcl
-   const bucketAcl = await getBucketAcl(s3Client, bucketName);
+   const result = await getBucketAcl(s3Client, bucketName);
 })();
 ```
 
@@ -221,3 +221,228 @@ The same default **@metadata headers** setting is used also for all added bucket
 
 :::
 <!-- markdownlint-enable DOCSMD004 -->
+
+## Update an existed object storage bucket ACL
+
+When having `credentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and modify its ACL setting to one of [canned grants](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).
+
+```javascript
+// All bucket names in the Zerops shared object storage namespace have to be unique!
+const uniqueBucketPrefix = env[`${objectStorageName}_${accessKeyId}`];
+// Required bucket name.
+const localBucketName = 'records';
+const bucketName = `${uniqueBucketPrefix}:${localBucketName}`;
+
+// Function declaration.
+const putBucketAcl = async (s3Client, bucketName, options) => {
+   // Check, if the required bucket exists.
+   return await s3Client.headBucket({
+      Bucket: bucketName
+   }).promise().then(
+      // If yes, modify its ACL setting to public read.
+      () => {
+         return (async () => {
+            return await s3Client.putBucketAcl(
+               {
+                  ...{Bucket: bucketName},
+                  ...options
+               }
+            ).promise();
+         })();
+      },
+      // If no, return 404 or 403 status code.
+      error => {
+         if (error.statusCode === 404) {
+            console.log(`... bucket name <${bucketName}> not found`);
+         } else {
+            console.log(`... bucket name <${bucketName}> access denied`);
+         }
+         return error.statusCode;
+      }
+   );
+}
+
+// Calling the function: getS3Client
+const s3Client = getS3Client(apiUrlValue, credentials);
+
+(async () => {
+   // Calling the function: putBucketAcl
+   const result = await putBucketAcl(s3Client, bucketName, {ACL: 'public-read'});
+})();
+```
+
+Setting the ACL as ==`public-read`== adds another `Grantee` to the bucket's `Grants` list:
+
+```json
+{
+   "Grantee": {
+      "Type": "Group",
+      "URI": "http://acs.amazonaws.com/groups/global/AllUsers"
+   },
+   "Permission": "READ"
+}
+```
+
+If you have another Zerops Object Storage Service in your project (for example, the one with ==`archivestore`== [Object Storage Name](/documentation/services/storage/s3.html#object-storage-bucket-names)), you can set its buckets access rights to allow access from the ==`store`== service with [read](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#permissions) access.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Grants work in overwriting mode
+Setting ==`AccessControlPolicy`== requires defining the ==`Grants`== property with the complete list of items ( ==`Grantee`== ) and also the ==`Owner`== property for the bucket because it overwrites the previous value. It doesn't work in an incremental mode. You will probably create a more sophisticated routine to prepare the **access control policy** you need. Here, it's simplified to the simple calculated value.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+```javascript
+// Object storage name.
+const archiveObjectStorageName = 'archivestore';
+// Get an object with credentials.
+const archiveCredentials = new AWS.Credentials(
+   env[`${archiveObjectStorageName}_${accessKeyId}`],
+   env[`${archiveObjectStorageName}_${secretAccessKey}`]
+);
+// All bucket names in the Zerops shared object storage namespace have to be unique!
+const archiveUniqueBucketPrefix = env[`${archiveObjectStorageName}_${accessKeyId}`];
+// Required bucket name.
+const archiveLocalBucketName = 'records';
+const archiveBucketName = `${archiveUniqueBucketPrefix}:${archiveLocalBucketName}`;
+
+// Definition of required grantees
+const accessControlPolicy: {
+   Grants: [
+      {
+         Grantee: {
+            DisplayName: archiveObjectStorageName,
+            ID: env[`${archiveObjectStorageName}_${accessKeyId}`],
+            Type: 'CanonicalUser'
+         },
+         Permission: 'FULL_CONTROL'
+      },
+      {
+         Grantee: {
+            DisplayName: objectStorageName,
+            ID: env[`${objectStorageName}_${accessKeyId}`],
+            Type: 'CanonicalUser'
+         },
+         Permission: 'READ'
+      }
+   ],
+   Owner: {
+      DisplayName: archiveObjectStorageName,
+      ID: env[`${archiveObjectStorageName}_${accessKeyId}`]
+   }
+};
+
+// Calling the function: getS3Client
+const s3Client = getS3Client(apiUrlValue, archiveCredentials);
+
+(async () => {
+   // Calling the function: putBucketAcl
+   const result = await putBucketAcl(s3Client, archiveBucketName, {AccessControlPolicy: accessControlPolicy});
+})();
+```
+
+## Adding a new bucket's object (with body or a file)
+
+When having `credentials` from the previous code snippet (supposing all declared variables are also accessible), you can put a new object inside a bucket. You must have WRITE permissions on a bucket to add an object to it.
+
+```javascript
+// All bucket names in the Zerops shared object storage namespace have to be unique!
+const uniqueBucketPrefix = env[`${objectStorageName}_${accessKeyId}`];
+// Required bucket name.
+const localBucketName = 'records';
+const bucketName = `${uniqueBucketPrefix}:${localBucketName}`;
+
+// Declaration of an object with a body to be placed into a bucket.
+const objectKey = "K1.txt";
+const objectBody = "Description of the K1.";
+
+// Declaration of an object with a file to be placed into a bucket.
+const objectFileKey = "scan_20210815_00001.jpg";
+const path = require('path');
+const filePath = path.join(__dirname, `/files/${objectFileKey}`);
+const fs = require('fs');
+const readFileStream = fs.createReadStream(filePath);
+
+// Function declaration.
+const putObject = async (s3Client, bucketName, objectKey, objectContent) => {
+   // Checking, if the required bucket exists or not is the same as in previous examples.
+   // If the object's key already exist, it'll be overwritten.
+   return await s3Client.putObject({
+      Bucket: bucketName,
+      Key: objectKey,
+      Body: objectContent
+   }).promise();
+}
+
+// Calling the function: getS3Client
+const s3Client = getS3Client(apiUrlValue, credentials);
+
+(async () => {
+   // Calling the function: putObject
+   const resultBody = await putObject(s3Client, bucketName, objectKey, objectBody);
+   const resultFile = await putObject(s3Client, bucketName, objectFileKey, readFileStream);
+})();
+```
+
+## Getting an existed bucket's object (with body or a file)
+
+When having `credentials` from the previous code snippet (supposing all declared variables are also accessible), you can get an already existed object from a bucket back. You must have READ permissions at least on a bucket to get an object from it.
+
+```javascript
+// All bucket names in the Zerops shared object storage namespace have to be unique!
+const uniqueBucketPrefix = env[`${objectStorageName}_${accessKeyId}`];
+// Required bucket name.
+const localBucketName = 'records';
+const bucketName = `${uniqueBucketPrefix}:${localBucketName}`;
+
+// Declarations of the object's keys whose body contents are to be retrieved from the bucket.
+const objectKey = "K1.txt";
+const objectFileKey = "scan_20210815_00001.jpg";
+
+const path = require('path');
+const filePath = path.join(__dirname, `/files/${objectFileKey}`);
+const fs = require('fs');
+const writeFileStream = fs.createWriteStream(filePath);
+
+// Function declaration.
+const getObject = async (s3Client, bucketName, objectKey) => {
+   // Checking, if the required bucket exists or not is the same as in previous examples.
+   // Check, if the required object's key exists.
+   return await s3Client.headObject({
+      Bucket: bucketName,
+      Key: objectKey
+   }).promise().then(
+      // If yes, retrieve its body.
+      () => {
+         return (async () => {
+            return await s3Client.getObject({
+                  Bucket: bucketName,
+                  Key: objectKey
+            }).promise();
+         })();
+      },
+      // If no, return 404 or 403 status code.
+      error => {
+         if (error.statusCode === 404) {
+            console.log(`... object key <${objectKey}> not found`);
+         } else {
+            console.log(`... object key <${objectKey}> access denied`);
+         }
+         return error.statusCode;
+      }
+   );
+}
+
+// Calling the function: getS3Client
+const s3Client = getS3Client(apiUrlValue, credentials);
+
+(async () => {
+   // Calling the function: getObject
+   const resultBody = await getObject(s3Client, bucketName, objectKey);
+   // Getting the body content from the response.
+   const bodyContent = resultBody.Body.toString('utf-8');
+   // Calling the function: getObject
+   const resultFile = await getObject(s3Client, bucketName, objectFileKey);
+   // Saving the received body content into a file.
+   writeFileStream.write(resultFile.Body);
+})();
+```
