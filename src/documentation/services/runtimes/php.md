@@ -29,7 +29,7 @@ The port will be automatically set to the value of **==80==** and can't be chang
 
 ### Application code root and document root
 
-The application code you deploy will always be placed in the ==**/var/www**== **code root** folder. You can choose a **document root** (the publicly accessible folder, usually the location of your ==index.php==). By default, the document root is set to the folder ==**/var/www/public**==, which you can change.
+The application code you deploy will always be placed in the ==**/var/www**== **code root** folder. You can choose a **document root** (the publicly accessible folder, usually the location of your ==index.php==). By default, the document root is set to the folder ==**/var/www/public**== , which you can change.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Recommendation
