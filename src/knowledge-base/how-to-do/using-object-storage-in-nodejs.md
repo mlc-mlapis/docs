@@ -138,7 +138,7 @@ https://s3.app.zerops.io/records
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-## Getting an existed object storage bucket ACL setting
+## Getting an existing object storage bucket ACL setting
 
 When having `credentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and get its ACL setting.
 
@@ -222,7 +222,7 @@ The same default **@metadata headers** setting is used also for all added bucket
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-## Update an existed object storage bucket ACL
+## Update an existing object storage bucket ACL
 
 When having `credentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and modify its ACL setting to one of [canned grants](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).
 
@@ -383,7 +383,7 @@ const s3Client = getS3Client(apiUrlValue, credentials);
 })();
 ```
 
-## Getting an existed bucket's object (with body or a file)
+## Getting an existing bucket's object (with body or a file)
 
 When having `credentials` from the previous code snippet (supposing all declared variables are also accessible), you can get an already existed object from a bucket back. You must have READ permissions at least on a bucket to get an object from it.
 
