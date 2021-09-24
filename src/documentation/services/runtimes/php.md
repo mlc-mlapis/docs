@@ -115,7 +115,7 @@ When a Zerops service has been connected to a GitHub or GitLab repository, you c
 
 ![Service connected to a Repository](./images/Repository-Triggering-Tag-Commit.png "Repository triggering on a Tag/Commit")
 
-When the build process has been successfully finished, you can download the whole zipped **artifact of the build container** and browse locally if you need to check its content.
+When the build process has been successfully finished, you can download the entire zipped **artifact of the build container** and browse locally if you need to check its content.
 
 ![Build Artifact](./images/Download-Build-Artefact-PHP.png "Download build artifact")
 ![Build Artifact](./images/Download-Build-Artefact-PHP-App-Version.png "Download build artifact")
@@ -153,13 +153,13 @@ The runtime environment service is not configured to support direct access using
 
 Other services can access the PHP application using its **hostname** and **port**, as they are part of the same private project network.
 
-It's always recommended to not place configuration values as constants directly into the application code. The better way is to use them indirectly, for example, via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), referencing Zerops [implicit environment variables](/documentation/environment-variables/helper-variables.htm) and given that [all environment variables](/documentation/environment-variables/how-to-access.html) are shared within the project across all services.
+It's always recommended to not set the configuration values as constants directly into the application code. It is preferable to use them indirectly, for example, via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), referencing Zerops [implicit environment variables](/documentation/environment-variables/helper-variables.htm) and given that [all environment variables](/documentation/environment-variables/how-to-access.html) are shared within the project across all services.
 
 ### From the local environment
 
 The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
 
-You can access the Zerops PHP Service from your local workspace by using the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as said above. This might be handy if you, for example, use the service as a REST API and you don’t want it publicly available (via [public domains](/documentation/routing/using-your-domain.html) or Zerops [subdomains](/documentation/routing/zerops-subdomain.html)), so you connect to the project using **zcli VPN** and use ==`app:80`== as your API endpoint.
+You can access the Zerops PHP Service from your local workspace by using the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as mentioned above. This might come in handy if you, for example, use the service as a REST API and you don’t want it publicly available (via [public domains](/documentation/routing/using-your-domain.html) or Zerops [subdomains](/documentation/routing/zerops-subdomain.html)), so you connect to the project using **zcli VPN** and use ==`app:80`== as your API endpoint.
 
 You can also run an application fully in your local workspace and access other services in the Zerops project using the VPN. However, you cannot use references to the environment variables because you are outside of the project's network. Therefore, you should copy the values manually if you need some of them and use them in your private local configuration strategy.
 
@@ -274,7 +274,7 @@ You can use the **File browser** functionality available in all runtime services
 
 Zerops Routing Service (see the schema of a Zerops project with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access)) takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project's services.
 
-Your application logic may need to check or do something when a client is accessing it using HTTPS protocol (user's encrypted requests). In such a case, it's possible to inspect the **`HTTP_X_FORWARDED_PROTO`** header.
+Your application logic may need to check or do something when a client is accessing it using an HTTPS protocol (user's encrypted requests). In such a case, it's possible to inspect the **`HTTP_X_FORWARDED_PROTO`** header.
 
 ```php
 if (
@@ -290,7 +290,7 @@ if (
 ### Locally stored data only for a temporary purpose
 
 You should not store your permanent data or sessions in the local disk space of containers running your application.
-The reason is that locally stored data is reserved only for this particular container instance, not mirrored across the PHP cluster nor backed up. It will not be migrated if such a container is deleted due to its failure. If it is necessary to store and share such data permanently, we recommend developers to preferably utilize [Zerops Shared Storage](/documentation/services/storage/shared.html) or [Zerops S3 compatible Object Storage](/documentation/services/storage/s3.html) services.
+The reason being that locally stored data is reserved only for this particular container instance, not mirrored across the PHP cluster nor backed up. It will not be migrated if such a container is deleted due to its failure. If it is necessary to store and share such data permanently, we recommend developers to preferably utilize [Zerops Shared Storage](/documentation/services/storage/shared.html) or [Zerops S3 compatible Object Storage](/documentation/services/storage/s3.html) services.
 
 ## Known specifics
 
