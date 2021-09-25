@@ -93,6 +93,7 @@ Once you get the `$credentials` from the previous code snippet (supposing all de
   function getS3Client($apiUrlValue, $credentials) {
     // Create a new S3 SDK client instance.
     return new S3Client([
+      // The 'version' is a required property in PHP SDK.
       'version' => 'latest',
       // Zerops supports only the S3 default region for API calls.
       // It doesn't mean that the physical HW infrastructure is located there also.
