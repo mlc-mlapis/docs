@@ -2,7 +2,7 @@
 
 You can find more examples and code samples written in Node.js / JavaScript that demonstrate how to interact with Amazon Simple Storage Service (Amazon S3) on the page [JavaScript Code Samples for Amazon S3](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-javascriptv3-example_code-s3.html).
 
-## Installing required SDKs
+## Installing the required SDKs
 
 * Use [npm](https://www.npmjs.com) or [yarn](https://yarnpkg.com) as a dependency manager for Node.js. It's already globally pre-installed in each Zerops Node.js Service, and you can install it also in your local development environment.
 
@@ -27,17 +27,17 @@ runs:
   - ...
 ```
 
-* The package manager downloads necessary files and creates a new subdirectory `aws-sdk` in the `node_packages` directory placed beside the `package.json` file.
+* The package manager downloads the necessary files and creates a new subdirectory `aws-sdk` in the `node_packages` directory placed beside the `package.json` file.
 
 ## How to get access credentials
 
 Using the following code, you will get a variable ==`credentials`== containing an object used later for authentication when creating buckets and their content.
 
-Assume further that the code is associated with access to the Zerops Object Storage Service, whose [object storage name](/documentation/services/storage/s3.html#object-storage-name) was chosen as the ==**`store`**== . Necessary [Storage access details](/documentation/services/storage/s3.html#from-local-environment) values **Access Key Id** and **Secret Access Key** are taken from [environment variables](/documentation/environment-variables/how-to-access.html) then.
+Assume further that the code is associated with access to the Zerops Object Storage Service, whose [object storage name](/documentation/services/storage/s3.html#object-storage-name) was chosen as the ==**`store`**== . The necessary [Storage access details](/documentation/services/storage/s3.html#from-local-environment) values **Access Key Id** and **Secret Access Key** are taken from the [environment variables](/documentation/environment-variables/how-to-access.html) then.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info
-The unique generated id of the created Zerops Object Storage Service instance is used as the value of the **accessKeyId** environment variable. The value of **secretAccessKey** is a 16-characters random string.
+The unique generated id of the created Zerops Object Storage Service instance is used as the value of the **accessKeyId** environment variable. The value of **secretAccessKey** is a 16-character-long random string.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -64,7 +64,7 @@ const credentials = new AWS.Credentials(
 
 ## Creating a new object storage bucket
 
-When having `credentials` from the previous code snippet (supposing all declared variables are also accessible), you can create a named bucket as a container for storing objects. Remember, it's necessary that all created buckets in the whole Zerops have to have unique names across all others. See the recommendation for the [bucket naming convention](/documentation/services/storage/s3.html#used-technology).
+Once you get the `credentials` from the previous code snippet (supposing all declared variables are also accessible), you can create a named bucket as a container for storing objects. Remember, it's necessary that all created buckets in the entire Zerops have unique names. See the recommendation for the [bucket naming convention](/documentation/services/storage/s3.html#used-technology).
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Asynchronous API calls
@@ -127,7 +127,7 @@ const s3Client = getS3Client(apiUrlValue, credentials);
 ```
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Created new bucket's URL
+::: info Created new bucket URL
 As the S3 path-style addressing model is used, the bucket's effective URL is:
 
 ```url
@@ -139,7 +139,7 @@ https://s3.app.zerops.io/records
 
 ## Getting an existing object storage bucket ACL setting
 
-When having `credentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and get its ACL setting.
+Once you have the `credentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and get its ACL setting.
 
 ```javascript
 // All bucket names in the Zerops shared object storage namespace have to be unique!
@@ -185,7 +185,7 @@ const s3Client = getS3Client(apiUrlValue, credentials);
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Default bucket's Grants setting
-As mentioned in the documentation [Object storage owner identity](/documentation/services/storage/s3.html#object-storage-owner-identity), there is the only one grantee, equal to the owner, with the same name as the chosen [Object storage name](#object-storage-name) (for example, ==`store`== ).
+As mentioned in the documentation [Object storage owner identity](/documentation/services/storage/s3.html#object-storage-owner-identity), there is only the one grantee, equal to the owner, with the same name as the chosen [Object storage name](#object-storage-name) (for example, ==`store`== ).
 
 ```json
 "Grants": [{
@@ -216,14 +216,14 @@ It's also worth listing the default setting of a bucket's headers related to the
 }
 ```
 
-The same default **@metadata headers** setting is used also for all added bucket's objects.
+The same default **@metadata headers** setting is also used for all added bucket's objects.
 
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ## Update an existing object storage bucket ACL
 
-When having `credentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and modify its ACL setting to one of [canned grants](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).
+Once you have the `credentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and modify its ACL setting to one of [canned grants](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).
 
 ```javascript
 // All bucket names in the Zerops shared object storage namespace have to be unique!
@@ -282,7 +282,7 @@ Setting the ACL as ==`public-read`== adds another `Grantee` to the bucket's `Gra
 }
 ```
 
-If you have another Zerops Object Storage Service in your project (for example, the one with ==`archivestore`== [Object Storage Name](/documentation/services/storage/s3.html#object-storage-bucket-names)), you can set its buckets access rights to allow access from the ==`store`== service with [read](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#permissions) access.
+If you have another Zerops Object Storage Service in your project (for example, the one with ==`archivestore`== [Object Storage Name](/documentation/services/storage/s3.html#object-storage-bucket-names)), you can set its bucket access rights to allow access from the ==`store`== service with [read](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#permissions) access.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Grants work in overwriting mode
@@ -341,7 +341,7 @@ const s3Client = getS3Client(apiUrlValue, archiveCredentials);
 
 ## Adding a new bucket's object (with body or a file)
 
-When having `credentials` from the previous code snippet (supposing all declared variables are also accessible), you can put a new object inside a bucket. You must have WRITE permissions on a bucket to add an object to it.
+When having `credentials` from the previous code snippet (supposing all declared variables are also accessible), you can put a new object inside a bucket. You have to have WRITE permissions on a bucket to add an object to it.
 
 ```javascript
 // All bucket names in the Zerops shared object storage namespace have to be unique!
@@ -384,7 +384,7 @@ const s3Client = getS3Client(apiUrlValue, credentials);
 
 ## Getting an existing bucket's object (with body or a file)
 
-When having `credentials` from the previous code snippet (supposing all declared variables are also accessible), you can get an already existed object from a bucket back. You must have READ permissions at least on a bucket to get an object from it.
+When you have the `credentials` from the previous code snippet (supposing all declared variables are also accessible), you can get an already existing object from a bucket back. You have to at least have READ permissions on a bucket to get an object from it.
 
 ```javascript
 // All bucket names in the Zerops shared object storage namespace have to be unique!
