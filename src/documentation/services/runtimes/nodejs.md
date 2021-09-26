@@ -27,11 +27,11 @@ Choose a short and descriptive URL-friendly name, for example, **app**. The foll
 
 ### Port
 
-The **Node.js** service, together with the [Golang service](/documentation/services/runtimes/golang.html), is the only one that allows you to use **any port number** you want. The service can even have [multiple internal ports](/documentation/routing/routing-between-project-services.html) open (**0** - **65535**), running on **tcp** or **udp** protocols. The port will be preset to the **==tcp==** protocol and the value of **==3000==**. You can change it immediately or anytime after that.
+The **Node.js** service, together with the [Golang service](/documentation/services/runtimes/golang.html), is the only one that allows you to use **any port number** you want. The service can even have [multiple internal ports](/documentation/routing/routing-between-project-services.html) open (**1** - **65535**), running on **tcp** or **udp** protocols. The port will be preset to the **==tcp==** protocol and the value of **==3000==**. You can change it immediately or anytime after that.
 
 Additionally, the Zerops [routing system](/documentation/routing/using-your-domain.html) allows you to set the mappings between those internal ports and external Internet access. If you run a web server on that internal port (HTTP application protocol is supported), it means that you can even map [public Internet domains](/documentation/routing/using-your-domain.html) with the option of automatic support for SSL certificates (it also works for Zerops [subdomains](/documentation/routing/zerops-subdomain.html)).
 
-![Custom Port](./images/Edit-Custom-Port.png "Edit Custom Port")
+![Custom Port](./images/Edit-Custom-Port-3000.png "Edit Custom Port")
 
 Because domain access or subdomains can only be enabled for **tcp** ports with support for HTTP, the checkbox **HTTP protocol support** allows for marking such a case. In turn, Zerops uses this flag to optimize its internal logic to offer this option and SSL certificates only in handy places.
 
@@ -158,12 +158,12 @@ app.get('/', (req, res) => {
    const header = req.headers['x-forwarded-proto'];
    if (header) {
       if (header.toLowerCase() === 'https') {
-         res.send(`... secured communication through HTTPS protocol`);
+         res.send('... secured communication through HTTPS protocol');
       } else {
-         res.send(`... communication only through HTTP protocol`);
+         res.send('... communication only through HTTP protocol');
       }
    } else {
-      res.send('... x-forwarded-proto header does not exist.');
+      res.send('... x-forwarded-proto header does not exist');
    }
 });
 
@@ -176,8 +176,7 @@ app.listen(port, () => {
 
 ### Locally stored data only for a temporary purpose
 
-You should not store your permanent data or sessions in the local disk space of containers running your application.
-The reason being that locally stored data is reserved only for this particular container instance, not mirrored across the Node.js cluster nor backup-ed. It will not be migrated if such a container is deleted due to its failure. If it is necessary to store and share such data permanently, we recommend developers to preferably utilize [Zerops Shared Storage](/documentation/services/storage/shared.html) or [Zerops S3 compatible Object Storage](/documentation/services/storage/s3.html) services.
+You should not store your permanent data or sessions in the local disk space of containers running your application. The reason being that locally stored data is reserved only for this particular container instance, not mirrored across the Node.js cluster nor backup-ed. It will not be migrated if such a container is deleted due to its failure. If it is necessary to store and share such data permanently, we recommend developers to preferably utilize [Zerops Shared Storage](/documentation/services/storage/shared.html) or [Zerops S3 compatible Object Storage](/documentation/services/storage/s3.html) services.
 
 ## Known specifics
 

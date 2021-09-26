@@ -86,7 +86,6 @@ const apiUrlValue = env[`${objectStorageName}_${apiUrl}`];
 const getS3Client = (apiUrlValue, credentials) => {
    // Create a new S3 SDK client instance.
    return new S3Client({
-      version: 'latest',
       // Zerops supports only the S3 default region for API calls.
       // It doesn't mean that the physical HW infrastructure is located there also.
       // All Zerops infrastructure is completely located in Europe/Prague.
