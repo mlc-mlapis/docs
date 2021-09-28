@@ -89,7 +89,7 @@ Once you get the `$credentials` from the previous code snippet (supposing all de
   $apiUrl = 'apiUrl';
   $apiUrlValue = getenv("${objectStorageName}_${apiUrl}");
 
-  // Function declaration.
+  // Function declaration: Getting an S3 SDK client
   function getS3Client($apiUrlValue, $credentials) {
     // Create a new S3 SDK client instance.
     return new S3Client([
