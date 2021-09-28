@@ -86,10 +86,19 @@ import (
   "github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-// Function declaration: Getting an S3 SDK client
-func getS3Client(objectStorageName string, credentials *credentials.StaticCredentialsProvider) (*s3.Client, error) {
-  ctx := context.Background()
+/**
+ * The way that allows you to pass in a <context> to your program. It should only be used at a high level
+ * (in the main or top-level request handler). This can be used to derive other contexts. Here, it's only
+ * a formal API requirement and not used in any way.
+ */
+var ctx = context.Background()
 
+// Function declaration: Getting an S3 SDK client
+func getS3Client(
+  ctx context.Context,
+  objectStorageName string,
+  credentials *credentials.StaticCredentialsProvider
+) (*s3.Client, error) {
   // Necessary environment variable name.
   const apiUrl = "apiUrl"
   // Getting the environment variable value.
@@ -126,7 +135,7 @@ func getS3Client(objectStorageName string, credentials *credentials.StaticCreden
   if s3Client != nil {
     return s3Client, nil
   }
-  return nil, errors.New("creating a client failed")
+  return nil, errors.New("creating an S3 SDK client failed")
 }
 ```
 
