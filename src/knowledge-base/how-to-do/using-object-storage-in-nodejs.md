@@ -82,7 +82,7 @@ const bucketName = `${uniqueBucketPrefix}:${localBucketName}`;
 const apiUrl = 'apiUrl';
 const apiUrlValue = env[`${objectStorageName}_${apiUrl}`];
 
-// Function declaration.
+// Function declaration: Getting an S3 SDK client
 const getS3Client = (apiUrlValue, credentials) => {
    // Create a new S3 SDK client instance.
    return new S3Client({

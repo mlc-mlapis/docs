@@ -18,7 +18,7 @@ When a new MariaDB service is created with a different hostname in the future (w
 If **Golang** is used instead of Node.js.
 
 ```go
-const DB_CONNECTION_STRING = os.LookupEnv('DEFAULT_DB_CONNECTION_STRING')
+DB_CONNECTION_STRING, variableFound := os.LookupEnv("DEFAULT_DB_CONNECTION_STRING")
 ```
 
 If **PHP** is used instead of Node.js.
