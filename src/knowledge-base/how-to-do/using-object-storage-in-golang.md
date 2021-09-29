@@ -107,6 +107,7 @@ func getS3Client(
     return nil, errors.New("non-existed apiUrl environment variable")
   }
 
+  // Obtaining the S3 SDK client configuration based on the passed parameters.
   cnf, err := config.LoadDefaultConfig(
     ctx,
     config.WithCredentialsProvider(credentials),
@@ -121,9 +122,10 @@ func getS3Client(
 
   // Create a new S3 SDK client instance.
   s3Client := s3.NewFromConfig(
+    // Passing the S3 SDK client configuration created before.
     cnf,
     s3.WithEndpointResolver(
-      // Applying of the Zerops Object Storage API URL endpoint
+      // Applying of the Zerops Object Storage API URL endpoint.
       s3.EndpointResolverFromURL(apiUrlValue),
     ),
     func(opts *s3.Options) {
