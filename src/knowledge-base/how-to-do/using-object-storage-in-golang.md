@@ -148,6 +148,7 @@ Once you get the `getCredentials` and `getS3Client` functions from the previous 
 ```go
 // Include the necessary AWS SDK modules.
 import {
+  "fmt"
   "os"
   "github.com/aws/aws-sdk-go-v2/aws"
   "github.com/aws/aws-sdk-go-v2/service/s3"
@@ -186,11 +187,31 @@ func createBucket(
 
 // Function declaration: Getting information about existed buckets
 func listBuckets(ctx context.Context, s3Client *s3.Client) (*s3.ListBucketsOutput, error) {
+  // Invoking the S3 SDK client method to get a list of existed buckets.
   result, err := s3Client.ListBuckets(ctx, nil)
   if err != nil {
     return nil, err
   }
   return result, nil
+}
+
+// Calling the function: getCredentials
+userCredentials := getCredentials(objectStorageName)
+if userCredentials != nil {
+  // Calling the function: getS3Client
+  s3Client, err := getS3Client(ctx, objectStorageName, userCredentials)
+  if err == nil {
+    // Calling the function: createBucket
+    createBucketOutput, err := createBucket(ctx, objectStorageName, s3Client, localBucketName)
+    // Calling the function: listBuckets
+    listBucketsOutput, err := listBuckets(ctx, s3Client)
+    if err == nil {
+      // Printing the existed bucket names
+      for _, bucket := range listBucketsOutput.Buckets {
+        fmt.Println(*bucket.Name)
+      }
+    }
+  }
 }
 ```
 
