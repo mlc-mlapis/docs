@@ -84,7 +84,7 @@ Once you get the `$credentials` from the previous code snippet (supposing all de
   $uniqueBucketPrefix = getenv("${objectStorageName}_${accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
-  $bucketName = "${uniqueBucketPrefix}:${localBucketName}";
+  $bucketName = "${uniqueBucketPrefix}.${localBucketName}";
   // Necessary environment variable name.
   $apiUrl = 'apiUrl';
   $apiUrlValue = getenv("${objectStorageName}_${apiUrl}");
@@ -143,7 +143,7 @@ When having `$credentials` and `getS3Client` function from the previous code sni
   $uniqueBucketPrefix = getenv("${objectStorageName}_${accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
-  $bucketName = "${uniqueBucketPrefix}:${localBucketName}";
+  $bucketName = "${uniqueBucketPrefix}.${localBucketName}";
 
   // Function declaration.
   function getBucketAcl($s3Client, $bucketName) {
@@ -174,7 +174,7 @@ As mentioned in the documentation [Object storage owner identity](/documentation
   [
     "Grantee" => [
       "DisplayName" => "store",
-      "ID" => "0LW7E_BUT-yKmmEcyf3dzQ",
+      "ID" => "0lw7enbut8ykmmecyf3dzq",
       "Type" => "CanonicalUser"
     ],
     "Permission" => "FULL_CONTROL"
@@ -215,7 +215,7 @@ Once you have the `$credentials` and `getS3Client` function from the previous co
   $uniqueBucketPrefix = getenv("${objectStorageName}_${accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
-  $bucketName = "${uniqueBucketPrefix}:${localBucketName}";
+  $bucketName = "${uniqueBucketPrefix}.${localBucketName}";
 
   // Function declaration.
   function putPublicBucketAcl($s3Client, $bucketName) {
@@ -271,7 +271,7 @@ Setting ==`AccessControlPolicy`== requires defining the ==`Grants`== property wi
   $archiveUniqueBucketPrefix = getenv("${archiveObjectStorageName}_${accessKeyId}");
   // Required bucket name.
   $archiveLocalBucketName = 'records';
-  $archiveBucketName = "${archiveUniqueBucketPrefix}:${archiveLocalBucketName}";
+  $archiveBucketName = "${archiveUniqueBucketPrefix}.${archiveLocalBucketName}";
 
   // Definition of required grantees
   $accessControlPolicy => [
@@ -330,7 +330,7 @@ When having `$credentials` from the previous code snippet (supposing all declare
   $uniqueBucketPrefix = getenv("${objectStorageName}_${accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
-  $bucketName = "${uniqueBucketPrefix}:${localBucketName}";
+  $bucketName = "${uniqueBucketPrefix}.${localBucketName}";
 
   // Declaration of an object with a body to be placed into a bucket.
   $objectBodyKey = "K1.txt";
@@ -390,7 +390,7 @@ When you have the `$credentials` from the previous code snippet (supposing all d
   $uniqueBucketPrefix = getenv("${objectStorageName}_${accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
-  $bucketName = "${uniqueBucketPrefix}:${localBucketName}";
+  $bucketName = "${uniqueBucketPrefix}.${localBucketName}";
 
   // Declarations of the object's keys whose body contents are to be retrieved from the bucket.
   $objectBodyKey = "K1.txt";

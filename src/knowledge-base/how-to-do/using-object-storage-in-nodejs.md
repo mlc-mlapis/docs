@@ -77,7 +77,8 @@ All API calls to the object storage service are asynchronous and that's why **as
 const uniqueBucketPrefix = env[`${objectStorageName}_${accessKeyId}`];
 // Required bucket name.
 const localBucketName = 'records';
-const bucketName = `${uniqueBucketPrefix}:${localBucketName}`;
+// Unique bucket name preparation.
+const bucketName = `${uniqueBucketPrefix}.${localBucketName}`;
 // Necessary environment variable name.
 const apiUrl = 'apiUrl';
 const apiUrlValue = env[`${objectStorageName}_${apiUrl}`];
@@ -146,7 +147,7 @@ Once you have the `credentials` and `getS3Client` function from the previous cod
 const uniqueBucketPrefix = env[`${objectStorageName}_${accessKeyId}`];
 // Required bucket name.
 const localBucketName = 'records';
-const bucketName = `${uniqueBucketPrefix}:${localBucketName}`;
+const bucketName = `${uniqueBucketPrefix}.${localBucketName}`;
 
 // Function declaration.
 const getBucketAcl = async (s3Client, bucketName) => {
@@ -191,7 +192,7 @@ As mentioned in the documentation [Object storage owner identity](/documentation
 "Grants": [{
    "Grantee": {
       "DisplayName": "store",
-      "ID": "zZ92GYuvR4yZF0KAjFaLzg",
+      "ID": "zz92gyuvr4yzf0kajfalzg",
       "Type": "CanonicalUser"
    },
    "Permission": "FULL_CONTROL"
@@ -230,7 +231,7 @@ Once you have the `credentials` and `getS3Client` function from the previous cod
 const uniqueBucketPrefix = env[`${objectStorageName}_${accessKeyId}`];
 // Required bucket name.
 const localBucketName = 'records';
-const bucketName = `${uniqueBucketPrefix}:${localBucketName}`;
+const bucketName = `${uniqueBucketPrefix}.${localBucketName}`;
 
 // Function declaration.
 const putBucketAcl = async (s3Client, bucketName, options) => {
@@ -302,7 +303,7 @@ const archiveCredentials = new AWS.Credentials(
 const archiveUniqueBucketPrefix = env[`${archiveObjectStorageName}_${accessKeyId}`];
 // Required bucket name.
 const archiveLocalBucketName = 'records';
-const archiveBucketName = `${archiveUniqueBucketPrefix}:${archiveLocalBucketName}`;
+const archiveBucketName = `${archiveUniqueBucketPrefix}.${archiveLocalBucketName}`;
 
 // Definition of required grantees
 const accessControlPolicy: {
@@ -348,7 +349,7 @@ When having `credentials` from the previous code snippet (supposing all declared
 const uniqueBucketPrefix = env[`${objectStorageName}_${accessKeyId}`];
 // Required bucket name.
 const localBucketName = 'records';
-const bucketName = `${uniqueBucketPrefix}:${localBucketName}`;
+const bucketName = `${uniqueBucketPrefix}.${localBucketName}`;
 
 // Declaration of an object with a body to be placed into a bucket.
 const objectKey = "K1.txt";
@@ -391,7 +392,7 @@ When you have the `credentials` from the previous code snippet (supposing all de
 const uniqueBucketPrefix = env[`${objectStorageName}_${accessKeyId}`];
 // Required bucket name.
 const localBucketName = 'records';
-const bucketName = `${uniqueBucketPrefix}:${localBucketName}`;
+const bucketName = `${uniqueBucketPrefix}.${localBucketName}`;
 
 // Declarations of the object's keys whose body contents are to be retrieved from the bucket.
 const objectKey = "K1.txt";

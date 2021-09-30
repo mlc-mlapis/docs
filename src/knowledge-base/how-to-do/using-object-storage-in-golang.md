@@ -73,7 +73,7 @@ func getCredentials(objectStorageName string) *credentials.StaticCredentialsProv
 
 ## How to get an S3 API client
 
-Once you get the `credentials` from the previous code snippet (supposing all declared variables are also accessible), you can create an S3 SDK client to access the S3 API.
+Once you get the `getCredentials` function from the previous code snippet (supposing all declared variables are also accessible), you can create an S3 SDK client to access the S3 API.
 
 ```go
 // Include the necessary AWS SDK modules.
@@ -143,11 +143,55 @@ func getS3Client(
 
 ## Creating a new object storage bucket
 
-Once you get the `credentials` from the previous code snippet (supposing all declared variables are also accessible), you can create a named bucket as a container for storing objects. Remember, it's necessary that all created buckets in the entire Zerops have unique names. See the recommendation for the [bucket naming convention](/documentation/services/storage/s3.html#used-technology).
+Once you get the `getCredentials` and `getS3Client` functions from the previous code snippet (supposing all declared variables are also accessible), you can create a named bucket as a container for storing objects. Remember, it's necessary that all created buckets in the entire Zerops have unique names. See the recommendation for the [bucket naming convention](/documentation/services/storage/s3.html#used-technology).
 
 ```go
+// Include the necessary AWS SDK modules.
+import {
+  "os"
+  "github.com/aws/aws-sdk-go-v2/aws"
+  "github.com/aws/aws-sdk-go-v2/service/s3"
+}
+
 // Required bucket name.
 const localBucketName = "records";
+
+// Function declaration: Getting an S3 SDK client
+func createBucket(
+  ctx context.Context,
+  objectStorageName string,
+  s3Client *s3.Client,
+  localBucketName string,
+) (*s3.CreateBucketOutput, error) {
+  // Necessary environment variable names.
+  const accessKeyId = "accessKeyId"
+  // All bucket names in the Zerops shared object storage namespace have to be unique!
+  // Getting the environment variable value that will be used as the unique prefix.
+  uniqueBucketPrefixValue, uniqueBucketPrefixFound := os.LookupEnv(objectStorageName + "_" + accessKeyId)
+  if !uniqueBucketPrefixFound {
+    return nil, errors.New("non-existed accessKeyId environment variable")
+  }
+  // Unique bucket name preparation.
+  bucketName := uniqueBucketPrefixValue + "." + localBucketName;
+
+  // Invoking the S3 SDK client method to create a new bucket.
+  result, err := s3Client.CreateBucket(ctx, &s3.CreateBucketInput{
+    Bucket: aws.String(bucketName),
+  })
+  if err != nil {
+    return nil, err
+  }
+  return result, nil
+}
+
+// Function declaration: Getting information about existed buckets
+func listBuckets(ctx context.Context, s3Client *s3.Client) (*s3.ListBucketsOutput, error) {
+  result, err := s3Client.ListBuckets(ctx, nil)
+  if err != nil {
+    return nil, err
+  }
+  return result, nil
+}
 ```
 
 <!-- markdownlint-disable DOCSMD004 -->
