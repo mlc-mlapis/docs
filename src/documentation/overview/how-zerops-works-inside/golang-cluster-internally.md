@@ -14,7 +14,7 @@ Golang service containers are located on **different physical computers** to pre
 
 **Zerops Routing Service** takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project's services, including Zerops Golang Services. If a request should or shouldn't be managed as an HTTP one, the crucial decision is made on the existence of the [HTTP protocol support](/documentation/services/runtimes/golang.html#port) flag. Both active **HTTP balancers** again direct the requests to the least busy instance of the Golang runtime environment service.
 
-It's up to you if you choose or not the automatic support for SSL certificates or not when you map [public domains](/documentation/routing/using-your-domain.html) to your Zerops service.
+It's up to you if you choose the automatic support for SSL certificates or not when you map [public domains](/documentation/routing/using-your-domain.html) to your Zerops service.
 
 ![SSL Certificates](./images/SSL-Certificate-Support-Option.png "SSL Certificates Support")
 
