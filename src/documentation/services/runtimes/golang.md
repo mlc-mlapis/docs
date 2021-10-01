@@ -8,7 +8,7 @@ Zerops provides a fully managed and scaled Golang runtime service, suitable for 
 
 ### Version to choose
 
-You can currently choose only Golang version **v1.16**.
+You can currently only choose Golang version **v1.16**.
 
 ### Hostname
 
@@ -29,11 +29,11 @@ Additionally, the Zerops [routing system](/documentation/routing/using-your-doma
 
 Because domain access or subdomains can only be enabled for **tcp** ports with support for HTTP, the checkbox **HTTP protocol support** allows for marking such a case. In turn, Zerops uses this flag to optimize its internal logic to offer this option and SSL certificates only in handy places.
 
-To understand this better, take look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**. In general, the logic is not that you would open some ports primarily in Zerops and thus put some functionality into operation, but that the given Golang application in a particular container binds to a local port (e.g., 8080). The following setting in Zerops then only enables the path to it. In other words, nothing is accessible at the beginning from the outside, and you will map only a specific route with this setting.
+To understand this better, take look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**. In general, the logic is not that you would open some ports primarily in Zerops and thus put some functionality into operation, but that the given Golang application in a particular container binds to a local port (e.g., 8080). The following setting in Zerops then only creates the path to it. In other words, nothing is accessible at the beginning from the outside, and you will map only a specific route with this setting.
 
 ### Start Command
 
-A command that should start your service will be triggered after each deployment or after you manually start or re-start it. For example, if the result of your Golang application build command ==`go build -o ./bin/server ./app/server.go`== is an executable deployed via [zerops.yml](/documentation/build/build-config.html#deploy) `deploy: [ "./bin/server" ]` directive, then the start command should be ==`./bin/server`== .
+A command that should start your service will be triggered after each deployment or after you manually start or re-start it. For example, if the result of your Golang application build command ==`go build -o ./bin/server ./app/server.go`== is an executable deployed via the [zerops.yml](/documentation/build/build-config.html#deploy) `deploy: [ "./bin/server" ]` directive, then the start command should be ==`./bin/server`== .
 
 ### HA / non-HA runtime environment mode
 
