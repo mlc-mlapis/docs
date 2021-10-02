@@ -170,14 +170,16 @@ When having `$credentials` and `getS3Client` function from the previous code sni
 As mentioned in the documentation [Object storage owner identity](/documentation/services/storage/s3.html#object-storage-owner-identity), there is only the one grantee, equal to the owner, with the same name as the chosen [Object storage name](#object-storage-name) (for example, ==`store`== ).
 
 ```php
-"Grants" => [
-  [
-    "Grantee" => [
-      "DisplayName" => "store",
-      "ID" => "0lw7enbut8ykmmecyf3dzq",
-      "Type" => "CanonicalUser"
-    ],
-    "Permission" => "FULL_CONTROL"
+[
+  "Grants" => [
+    [
+      "Grantee" => [
+        "DisplayName" => "store",
+        "ID" => "0lw7enbut8ykmmecyf3dzq",
+        "Type" => "CanonicalUser"
+      ],
+      "Permission" => "FULL_CONTROL"
+    ]
   ]
 ]
 ```
@@ -190,12 +192,14 @@ As mentioned in the documentation [Object storage owner identity](/documentation
 It's also worth listing the default setting of a bucket's headers related to the HTTPS public read/write access (authenticated access is currently not available through RESTful interface):
 
 ```php
-"@metadata" => [
-  "headers" => [
-    "access-control-allow-origin" => "*",
-    "access-control-allow-methods" => "GET, POST, PUT, DELETE, OPTIONS",
-    "access-control-allow-headers" => "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization",
-    "access-control-expose-headers" => "Content-Length,Content-Range"
+[
+  "@metadata" => [
+    "headers" => [
+      "access-control-allow-origin" => "*",
+      "access-control-allow-methods" => "GET, POST, PUT, DELETE, OPTIONS",
+      "access-control-allow-headers" => "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization",
+      "access-control-expose-headers" => "Content-Length,Content-Range"
+    ]
   ]
 ]
 ```
