@@ -150,20 +150,14 @@ Once you get the `getCredentials` and `getS3Client` functions from the previous 
 import {
   "fmt"
   "os"
-  "github.com/aws/aws-sdk-go-v2/aws"
   "github.com/aws/aws-sdk-go-v2/service/s3"
 }
 
 // Required bucket name.
 const localBucketName = "records";
 
-// Function declaration: Getting an S3 SDK client
-func createBucket(
-  ctx context.Context,
-  objectStorageName string,
-  s3Client *s3.Client,
-  localBucketName string,
-) (*s3.CreateBucketOutput, error) {
+// Function declaration: Getting a unique bucket name based on <accessKeyId> value
+func getUniqueBucketName(objectStorageName string, localBucketName string) (*string, error) {
   // Necessary environment variable names.
   const accessKeyId = "accessKeyId"
   // All bucket names in the Zerops shared object storage namespace have to be unique!
@@ -174,15 +168,29 @@ func createBucket(
   }
   // Unique bucket name preparation.
   bucketName := uniqueBucketPrefixValue + "." + localBucketName;
+  return &bucketName, nil
+}
 
-  // Invoking the S3 SDK client method to create a new bucket.
-  result, err := s3Client.CreateBucket(ctx, &s3.CreateBucketInput{
-    Bucket: aws.String(bucketName),
-  })
-  if err != nil {
-    return nil, err
+// Function declaration: Getting an S3 SDK client
+func createBucket(
+  ctx context.Context,
+  objectStorageName string,
+  s3Client *s3.Client,
+  localBucketName string,
+) (*s3.CreateBucketOutput, error) {
+  // Unique bucket name preparation.
+  bucketName, err := getUniqueBucketName(objectStorageName, localBucketName)
+  if err == nil {
+    // Invoking the S3 SDK client method to create a new bucket.
+    result, err := s3Client.CreateBucket(ctx, &s3.CreateBucketInput{
+      Bucket: bucketName,
+    })
+    if err != nil {
+      return nil, err
+    }
+    return result, nil
   }
-  return result, nil
+  return nil, err
 }
 
 // Function declaration: Getting information about existed buckets
@@ -222,6 +230,103 @@ As the S3 path-style addressing model is used, the bucket's effective URL is:
 ```url
 https://s3.app.zerops.io/records
 ```
+
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+## Getting an existing object storage bucket ACL setting
+
+Once you have the `getCredentials`, `getUniqueBucketName`, and `getS3Client` functions from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and get its ACL setting.
+
+```go
+// Include the necessary modules.
+import (
+  "encoding/json"
+)
+
+// Function declaration: Getting an exited bucket ACL
+func getBucketAcl(
+  ctx context.Context,
+  objectStorageName string,
+  s3Client *s3.Client,
+  localBucketName string,
+) (*s3.GetBucketAclOutput, error) {
+  bucketName, err := getUniqueBucketName(objectStorageName, localBucketName)
+  if err == nil {
+    // Check, if the required bucket exists.
+    _, err := s3Client.HeadBucket(ctx, &s3.HeadBucketInput{
+      Bucket: bucketName,
+    })
+    if err != nil {
+      return nil, err
+    }
+    // If it exists, get its ACL.
+    result, err := s3Client.GetBucketAcl(ctx, &s3.GetBucketAclInput{
+      Bucket: bucketName,
+    })
+    if err != nil {
+      return nil, err
+    }
+    return result, nil
+  }
+  return nil, err
+}
+
+// Calling the function: getCredentials
+userCredentials := getCredentials(objectStorageName)
+if userCredentials != nil {
+  // Calling the function: getS3Client
+  s3Client, err := getS3Client(ctx, objectStorageName, userCredentials)
+  if err == nil {
+    // Calling the function: getBucketAcl
+    bucketAclOutput, err := getBucketAcl(ctx, objectStorageName, s3Client, localBucketName)
+    if err == nil {
+      // Formatting and printing the returned value of the bucket ACL.
+      grantsJSON, err := json.MarshalIndent(bucketAclOutput.Grants, "", "  ")
+      fmt.Printf("... %s\n", string(grantsJSON))
+    }
+  }
+}
+```
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Default bucket's Grants setting
+As mentioned in the documentation [Object storage owner identity](/documentation/services/storage/s3.html#object-storage-owner-identity), there is only the one grantee, equal to the owner, with the same name as the chosen [Object storage name](#object-storage-name) (for example, ==`store`== ).
+
+```json
+{
+  "Grants": [{
+    "Grantee": {
+      "DisplayName": "store",
+      "ID": "zz92gyuvr4yzf0kajfalzg",
+      "Type": "CanonicalUser"
+    },
+    "Permission": "FULL_CONTROL"
+  }]
+}
+```
+
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Default bucket's @metadata headers
+It's also worth listing the default setting of a bucket's headers related to the HTTPS public read/write access (authenticated access is currently not available through RESTful interface):
+
+```json
+{
+  "@metadata": {
+    "headers": {
+      "access-control-allow-origin": "*",
+      "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization",
+      "access-control-expose-headers": "Content-Length,Content-Range"
+    }
+  }
+}
+```
+
+The same default **@metadata headers** setting is also used for all added bucket's objects.
 
 :::
 <!-- markdownlint-enable DOCSMD004 -->
