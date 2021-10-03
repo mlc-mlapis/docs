@@ -283,7 +283,7 @@ if userCredentials != nil {
     if err == nil {
       // Formatting and printing the returned value of the bucket ACL.
       grantsJSON, err := json.MarshalIndent(bucketAclOutput.Grants, "", "  ")
-      fmt.Printf("... %s\n", string(grantsJSON))
+      fmt.Printf("%s\n", string(grantsJSON))
     }
   }
 }
