@@ -287,6 +287,12 @@ Setting the ACL as ==`public-read`== adds another `Grantee` to the bucket's `Gra
 }
 ```
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Public read access to a bucket
+After setting the ACL as ==`public-read`== means that the URL `https://s3.app.zerops.io/records` will be accessible with the read access to anyone.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 If you have another Zerops Object Storage Service in your project (for example, the one with ==`archivestore`== [Object Storage Name](/documentation/services/storage/s3.html#object-storage-bucket-names)), you can set its bucket access rights to allow access from the ==`store`== service with [read](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#permissions) access.
 
 <!-- markdownlint-disable DOCSMD004 -->

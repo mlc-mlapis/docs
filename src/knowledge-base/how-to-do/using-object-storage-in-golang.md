@@ -283,7 +283,7 @@ if userCredentials != nil {
     if err == nil {
       // Formatting and printing the returned value of the bucket ACL.
       grantsJSON, err := json.MarshalIndent(bucketAclOutput.Grants, "", "  ")
-      fmt.Printf("... %s\n", string(grantsJSON))
+      fmt.Printf("%s\n", string(grantsJSON))
     }
   }
 }
@@ -328,5 +328,80 @@ It's also worth listing the default setting of a bucket's headers related to the
 
 The same default **@metadata headers** setting is also used for all added bucket's objects.
 
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+## Update an existing object storage bucket ACL
+
+Once you have the `getCredentials`, `getUniqueBucketName`, and `getS3Client` functions from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and modify its ACL setting to one of [canned grants](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).
+
+```go
+import (
+  s3Types "github.com/aws/aws-sdk-go-v2/service/s3/types"
+)
+
+// Function declaration: Updating an exited bucket ACL
+func putBucketAcl(
+  ctx context.Context,
+  objectStorageName string,
+  s3Client *s3.Client,
+  localBucketName string,
+  cannedAcl s3Types.BucketCannedACL,
+) (*s3.GetBucketAclOutput, error) {
+  bucketName, err := getUniqueBucketName(objectStorageName, localBucketName)
+  if err == nil {
+    // Check, if the required bucket exists.
+    _, err := s3Client.HeadBucket(ctx, &s3.HeadBucketInput{
+      Bucket: bucketName,
+    })
+    if err != nil {
+      return nil, err
+    }
+    // If it exists, update its ACL.
+    result, err := s3Client.PutBucketAcl(ctx, &s3.PutBucketAclInput{
+      Bucket: bucketName,
+      ACL: cannedAcl,
+    })
+    if err != nil {
+      return nil, err
+    }
+    return result, nil
+  }
+  return nil, err
+}
+
+// Calling the function: getCredentials
+userCredentials := getCredentials(objectStorageName)
+if userCredentials != nil {
+  // Calling the function: getS3Client
+  s3Client, err := getS3Client(ctx, objectStorageName, userCredentials)
+  if err == nil {
+    // Calling the function: putBucketAcl
+    _, err = putBucketAcl(
+      ctx,
+      objectStorageName,
+      s3Client,
+      localBucketName,
+      s3Types.BucketCannedACLPublicRead,
+    )
+  }
+}
+```
+
+Setting the ACL as ==`public-read`== adds another `Grantee` to the bucket's `Grants` list:
+
+```json
+{
+   "Grantee": {
+      "Type": "Group",
+      "URI": "http://acs.amazonaws.com/groups/global/AllUsers"
+   },
+   "Permission": "READ"
+}
+```
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Public read access to a bucket
+After setting the ACL as ==`public-read`== means that the URL `https://s3.app.zerops.io/records` will be accessible with the read access to anyone.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
