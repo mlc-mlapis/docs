@@ -37,7 +37,7 @@ Suppose the code is used in a `php` file located in a [document root](/documenta
 
 ## How to get access credentials
 
-Using the following code, you will get a variable ==`$credentials`== containing an object used later for authentication when creating buckets and their content.
+Using the following code, you will get a variable ==`$storeCredentials`== containing an object used later for authentication when creating buckets and their content.
 
 Assume further that the code is associated with access to the Zerops Object Storage Service, whose [object storage name](/documentation/services/storage/s3.html#object-storage-name) was chosen as the ==**`store`**== . The necessary [Storage access details](/documentation/services/storage/s3.html#from-local-environment) values **Access Key Id** and **Secret Access Key** are taken from the [environment variables](/documentation/environment-variables/how-to-access.html) then.
 
@@ -59,14 +59,14 @@ The unique generated id of the created Zerops Object Storage Service instance is
 
   try {
     // Object storage name.
-    $objectStorageName = 'store';
+    $storeObjectStorageName = 'store';
     // Necessary environment variable names.
     $accessKeyId = 'accessKeyId';
     $secretAccessKey = 'secretAccessKey';
     // Get an object with credentials.
-    $credentials = new Credentials(
-      getenv("${objectStorageName}_${accessKeyId}"),
-      getenv("${objectStorageName}_${secretAccessKey}")
+    $storeCredentials = new Credentials(
+      getenv("${storeObjectStorageName}_${accessKeyId}"),
+      getenv("${storeObjectStorageName}_${secretAccessKey}")
     );
   } catch (S3Exception $e) {
     echo 'Error: ' . $e->getCode() . ':' . $e->getMessage();
@@ -76,21 +76,21 @@ The unique generated id of the created Zerops Object Storage Service instance is
 
 ## Creating a new object storage bucket
 
-Once you get the `$credentials` from the previous code snippet (supposing all declared variables are also accessible), you can create a named bucket as a container for storing objects. Remember, it's necessary that all created buckets in the entire Zerops have unique names. See our recommendation for the [bucket naming convention](/documentation/services/storage/s3.html#used-technology).
+Once you get the `$storeCredentials` from the previous code snippet (supposing all declared variables are also accessible), you can create a named bucket as a container for storing objects. Remember, it's necessary that all created buckets in the entire Zerops have unique names. See our recommendation for the [bucket naming convention](/documentation/services/storage/s3.html#used-technology).
 
 ```php
 <?php
   // All bucket names in the Zerops shared object storage namespace have to be unique!
-  $uniqueBucketPrefix = getenv("${objectStorageName}_${accessKeyId}");
+  $uniqueBucketPrefix = getenv("${storeObjectStorageName}_${accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
   $bucketName = "${uniqueBucketPrefix}.${localBucketName}";
   // Necessary environment variable name.
   $apiUrl = 'apiUrl';
-  $apiUrlValue = getenv("${objectStorageName}_${apiUrl}");
+  $apiUrlValue = getenv("${storeObjectStorageName}_${apiUrl}");
 
   // Function declaration: Getting an S3 SDK client
-  function getS3Client($apiUrlValue, $credentials) {
+  function getS3Client($apiUrlValue, $storeCredentials) {
     // Create a new S3 SDK client instance.
     return new S3Client([
       // The 'version' is a required property in PHP SDK.
@@ -103,7 +103,7 @@ Once you get the `$credentials` from the previous code snippet (supposing all de
       // Zerops supports currently only S3 path-style addressing model.
       // The virtual-hosted style model will be supported in near future.
       'use_path_style_endpoint' => true,
-      'credentials' => $credentials
+      'credentials' => $storeCredentials
     ]);
   }
 
@@ -116,7 +116,7 @@ Once you get the `$credentials` from the previous code snippet (supposing all de
   }
 
   // Calling the function: getS3Client
-  $s3Client = getS3Client($apiUrlValue, $credentials);
+  $s3Client = getS3Client($apiUrlValue, $storeCredentials);
   // Calling the function: createBucket
   $bucket = createBucket($s3Client, $bucketName);
 ?>
@@ -135,12 +135,12 @@ https://s3.app.zerops.io/records
 
 ## Getting an existing object storage bucket ACL setting
 
-When having `$credentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and get its ACL setting.
+When having `$storeCredentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and get its ACL setting.
 
 ```php
 <?php
   // All bucket names in the Zerops shared object storage namespace have to be unique!
-  $uniqueBucketPrefix = getenv("${objectStorageName}_${accessKeyId}");
+  $uniqueBucketPrefix = getenv("${storeObjectStorageName}_${accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
   $bucketName = "${uniqueBucketPrefix}.${localBucketName}";
@@ -159,7 +159,7 @@ When having `$credentials` and `getS3Client` function from the previous code sni
   }
 
   // Calling the function: getS3Client
-  $s3Client = getS3Client($apiUrlValue, $credentials);
+  $s3Client = getS3Client($apiUrlValue, $storeCredentials);
   // Calling the function: getBucketAcl
   $bucketAcl = getBucketAcl($s3Client, $bucketName);
 ?>
@@ -211,12 +211,12 @@ The same default **@metadata headers** setting is also used for all added bucket
 
 ## Updating an existing object storage bucket ACL
 
-Once you have the `$credentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and modify its ACL setting to one of [canned grants](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).
+Once you have the `$storeCredentials` and `getS3Client` function from the previous code snippet (supposing all declared variables are also accessible), you can check the existence of a bucket and modify its ACL setting to one of [canned grants](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl).
 
 ```php
 <?php
   // All bucket names in the Zerops shared object storage namespace have to be unique!
-  $uniqueBucketPrefix = getenv("${objectStorageName}_${accessKeyId}");
+  $uniqueBucketPrefix = getenv("${storeObjectStorageName}_${accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
   $bucketName = "${uniqueBucketPrefix}.${localBucketName}";
@@ -236,7 +236,7 @@ Once you have the `$credentials` and `getS3Client` function from the previous co
   }
 
   // Calling the function: getS3Client
-  $s3Client = getS3Client($apiUrlValue, $credentials);
+  $s3Client = getS3Client($apiUrlValue, $storeCredentials);
   // Calling the function: putPublicBucketAcl
   putPublicBucketAcl($s3Client, $bucketName);
 ?>
@@ -260,7 +260,7 @@ After setting the ACL as ==`public-read`== means that the URL `https://s3.app.ze
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-If you have another Zerops Object Storage Service in your project (for example, the one with ==`archivestore`== [Object Storage Name](/documentation/services/storage/s3.html#object-storage-bucket-names)), you can set its bucket access rights to allow access from the ==`store`== service with [read](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#permissions) access.
+If you have another Zerops Object Storage Service in your project (for example, the one with ==`archive`== [Object Storage Name](/documentation/services/storage/s3.html#object-storage-bucket-names)), you can set its bucket access rights to allow access from the ==`store`== service with [read](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#permissions) access.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Grants work in overwriting mode
@@ -271,7 +271,7 @@ Setting ==`AccessControlPolicy`== requires defining the ==`Grants`== property wi
 ```php
 <?php
   // Object storage name.
-  $archiveObjectStorageName = 'archivestore';
+  $archiveObjectStorageName = 'archive';
   // Get an object with credentials.
   $archiveCredentials = new Credentials(
     getenv("${archiveObjectStorageName}_${accessKeyId}"),
@@ -284,7 +284,7 @@ Setting ==`AccessControlPolicy`== requires defining the ==`Grants`== property wi
   $archiveBucketName = "${archiveUniqueBucketPrefix}.${archiveLocalBucketName}";
 
   // Definition of required grantees
-  $accessControlPolicy => [
+  $accessControlPolicy = [
     'Grants' => [
       [
         'Grantee' => [
@@ -296,8 +296,8 @@ Setting ==`AccessControlPolicy`== requires defining the ==`Grants`== property wi
       ],
       [
         'Grantee' => [
-          'DisplayName' => $objectStorageName,
-          'ID' => getenv("${objectStorageName}_${accessKeyId}"),
+          'DisplayName' => $storeObjectStorageName,
+          'ID' => getenv("${storeObjectStorageName}_${accessKeyId}"),
           'Type' => 'CanonicalUser'
         ],
         'Permission' => 'READ'
@@ -330,14 +330,20 @@ Setting ==`AccessControlPolicy`== requires defining the ==`Grants`== property wi
 ?>
 ```
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Cross-account access enabled buckets
+If the ACL of buckets ACL are modified to allow access from another account as shown above (read access to buckets of `archive` object storage service using the credentials of `store` object storage service), it's necessary to understand that these are not implicitly listed among all available buckets of `store` object storage service (for example, using `$s3Client->listBuckets()`). They are called **external buckets**.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ## Adding a new bucket's object (with body or a file)
 
-When having `$credentials` from the previous code snippet (supposing all declared variables are also accessible), you can put a new object inside a bucket. You have to have WRITE permissions on a bucket to add an object to it.
+When having `$storeCredentials` from the previous code snippet (supposing all declared variables are also accessible), you can put a new object inside a bucket. You have to have WRITE permissions on a bucket to add an object to it.
 
 ```php
 <?php
   // All bucket names in the Zerops shared object storage namespace have to be unique!
-  $uniqueBucketPrefix = getenv("${objectStorageName}_${accessKeyId}");
+  $uniqueBucketPrefix = getenv("${storeObjectStorageName}_${accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
   $bucketName = "${uniqueBucketPrefix}.${localBucketName}";
@@ -382,7 +388,7 @@ When having `$credentials` from the previous code snippet (supposing all declare
   }
 
   // Calling the function: getS3Client
-  $s3Client = getS3Client($apiUrlValue, $credentials);
+  $s3Client = getS3Client($apiUrlValue, $storeCredentials);
   // Calling the function: putObjectBody
   $resultBody = putObjectWithBody($s3Client, $bucketName, $objectBodyKey, $objectBody);
   // Calling the function: putObjectFile
@@ -392,12 +398,12 @@ When having `$credentials` from the previous code snippet (supposing all declare
 
 ## Getting an existing bucket's object (with body or a file)
 
-When you have the `$credentials` from the previous code snippet (supposing all declared variables are also accessible), you can get an already existing object from a bucket back. You have to at least have READ permissions on a bucket to get an object from it.
+When you have the `$storeCredentials` from the previous code snippet (supposing all declared variables are also accessible), you can get an already existing object from a bucket back. You have to at least have READ permissions on a bucket to get an object from it.
 
 ```php
 <?php
   // All bucket names in the Zerops shared object storage namespace have to be unique!
-  $uniqueBucketPrefix = getenv("${objectStorageName}_${accessKeyId}");
+  $uniqueBucketPrefix = getenv("${storeObjectStorageName}_${accessKeyId}");
   // Required bucket name.
   $localBucketName = 'records';
   $bucketName = "${uniqueBucketPrefix}.${localBucketName}";
@@ -444,7 +450,7 @@ When you have the `$credentials` from the previous code snippet (supposing all d
   }
 
   // Calling the function: getS3Client
-  $s3Client = getS3Client($apiUrlValue, $credentials);
+  $s3Client = getS3Client($apiUrlValue, $storeCredentials);
 
   // Calling the function to get an object body: getObjectBody
   $resultBody = getObjectWithBody($s3Client, $bucketName, $objectBodyKey);

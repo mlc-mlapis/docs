@@ -31,7 +31,7 @@ go get github.com/aws/aws-sdk-go-v2/service/s3
 
 ## How to get access credentials
 
-Using the following code, you will get a variable ==`credentials`== containing an object used later for authentication when creating buckets and their content.
+Using the following code, you will get an object used later for authentication when creating buckets and their content.
 
 Assume further that the code is associated with access to the Zerops Object Storage Service, whose [object storage name](/documentation/services/storage/s3.html#object-storage-name) was chosen as the ==**`store`**== . The necessary [Storage access details](/documentation/services/storage/s3.html#from-local-environment) values **Access Key Id** and **Secret Access Key** are taken from the [environment variables](/documentation/environment-variables/how-to-access.html) then.
 
@@ -49,20 +49,34 @@ import (
 )
 
 // Object storage name.
-const objectStorageName = "store"
+const storeObjectStorageName = "store"
+
+func getAccessKeyIdValue(objectStorageName string) *string {
+  // Necessary environment variable name.
+  const accessKeyId = "accessKeyId"
+  accessKeyIdValue, accessKeyIdFound := os.LookupEnv(objectStorageName + "_" + accessKeyId)
+  // If the environment variable has been found ...
+  if accessKeyIdFound {
+    return &accessKeyIdValue
+  }
+  return nil
+}
+
+func getSecretAccessKeyValue(objectStorageName string) *string {
+  // Necessary environment variable name.
+  const secretAccessKey = "secretAccessKey"
+  secretAccessKeyValue, secretAccessKeyFound := os.LookupEnv(objectStorageName + "_" + secretAccessKey)
+  // If the environment variable has been found ...
+  if secretAccessKeyFound {
+    return &secretAccessKeyFound
+  }
+  return nil
+}
 
 // Function returning a pointer to a variable with a user credentials.
-func getCredentials(objectStorageName string) *credentials.StaticCredentialsProvider {
-  // Necessary environment variable names.
-  const accessKeyId = "accessKeyId"
-  const secretAccessKey = "secretAccessKey"
-
-  // Retrieving environment variable values.
-  accessKeyIdValue, accessKeyIdFound := os.LookupEnv(objectStorageName + "_" + accessKeyId)
-  secretAccessKeyValue, secretAccessKeyFound := os.LookupEnv(objectStorageName + "_" + secretAccessKey)
-  // If both environment variables have been found ...
-  if accessKeyIdFound && secretAccessKeyFound {
-    credentials := credentials.NewStaticCredentialsProvider(accessKeyIdValue, secretAccessKeyValue, "")
+func getCredentials(accessKeyIdValue *string, secretAccessKeyValue *string) *credentials.StaticCredentialsProvider {
+  if accessKeyIdValue != nil && secretAccessKeyValue != nil {
+    credentials := credentials.NewStaticCredentialsProvider(*accessKeyIdValue, *secretAccessKeyValue, "")
     // A pointer to a variable with credentials is returned.
     return &credentials
   }
@@ -204,10 +218,10 @@ func listBuckets(ctx context.Context, s3Client *s3.Client) (*s3.ListBucketsOutpu
 }
 
 // Calling the function: getCredentials
-userCredentials := getCredentials(objectStorageName)
-if userCredentials != nil {
+storeCredentials := getCredentials(objectStorageName)
+if storeCredentials != nil {
   // Calling the function: getS3Client
-  s3Client, err := getS3Client(ctx, objectStorageName, userCredentials)
+  s3Client, err := getS3Client(ctx, objectStorageName, storeCredentials)
   if err == nil {
     // Calling the function: createBucket
     createBucketOutput, err := createBucket(ctx, objectStorageName, s3Client, localBucketName)
@@ -273,13 +287,13 @@ func getBucketAcl(
 }
 
 // Calling the function: getCredentials
-userCredentials := getCredentials(objectStorageName)
-if userCredentials != nil {
+storeCredentials := getCredentials(storeObjectStorageName)
+if storeCredentials != nil {
   // Calling the function: getS3Client
-  s3Client, err := getS3Client(ctx, objectStorageName, userCredentials)
+  s3Client, err := getS3Client(ctx, storeObjectStorageName, storeCredentials)
   if err == nil {
     // Calling the function: getBucketAcl
-    bucketAclOutput, err := getBucketAcl(ctx, objectStorageName, s3Client, localBucketName)
+    bucketAclOutput, err := getBucketAcl(ctx, storeObjectStorageName, s3Client, localBucketName)
     if err == nil {
       // Formatting and printing the returned value of the bucket ACL.
       grantsJSON, err := json.MarshalIndent(bucketAclOutput.Grants, "", "  ")
@@ -371,15 +385,15 @@ func putBucketAcl(
 }
 
 // Calling the function: getCredentials
-userCredentials := getCredentials(objectStorageName)
-if userCredentials != nil {
+storeCredentials := getCredentials(storeObjectStorageName)
+if storeCredentials != nil {
   // Calling the function: getS3Client
-  s3Client, err := getS3Client(ctx, objectStorageName, userCredentials)
+  s3Client, err := getS3Client(ctx, storeObjectStorageName, storeCredentials)
   if err == nil {
     // Calling the function: putBucketAcl
     _, err = putBucketAcl(
       ctx,
-      objectStorageName,
+      storeObjectStorageName,
       s3Client,
       localBucketName,
       s3Types.BucketCannedACLPublicRead,
@@ -403,5 +417,106 @@ Setting the ACL as ==`public-read`== adds another `Grantee` to the bucket's `Gra
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Public read access to a bucket
 After setting the ACL as ==`public-read`== means that the URL `https://s3.app.zerops.io/records` will be accessible with the read access to anyone.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+If you have another Zerops Object Storage Service in your project (for example, the one with ==`archive`== [Object Storage Name](/documentation/services/storage/s3.html#object-storage-bucket-names)), you can set its bucket access rights to allow access from the ==`store`== service with [read](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#permissions) access.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Grants work in overwriting mode
+Setting ==`AccessControlPolicy`== requires defining the ==`Grants`== property with the complete list of items ( ==`Grantee`== ) and also the ==`Owner`== property for the bucket because it overwrites the previous value. It doesn't work in an incremental mode. You will probably create a more sophisticated routine to prepare the **access control policy** you need. Here, it's simplified to the simple calculated value.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+```go
+import (
+  s3Types "github.com/aws/aws-sdk-go-v2/service/s3/types"
+)
+
+// Function declaration: Setting an bucket access control policy
+func putBucketAclPolicy(
+  ctx context.Context,
+  objectStorageName string,
+  s3Client *s3.Client,
+  localBucketName string,
+  aclPolicy *s3Types.AccessControlPolicy,
+) (*s3.PutBucketAclOutput, error) {
+  bucketName, err := getUniqueBucketName(objectStorageName, localBucketName)
+  if err == nil {
+    // Check, if the required bucket exists.
+    _, err := s3Client.HeadBucket(ctx, &s3.HeadBucketInput{
+      Bucket: bucketName,
+    })
+    if err != nil {
+      return nil, err
+    }
+    // If it exists, update its ACL.
+    result, err := s3Client.PutBucketAcl(ctx, &s3.PutBucketAclInput{
+      Bucket: bucketName,
+      AccessControlPolicy: aclPolicy,
+    })
+    if err != nil {
+      return nil, err
+    }
+    return result, nil
+  }
+  return nil, err
+}
+
+// Object storage names.
+const storeObjectStorageName = "store";
+const archiveObjectStorageName = "archive";
+// Calling the function: getCredentials
+archiveCredentials := getCredentials(
+  getAccessKeyIdValue(archiveObjectStorageName),
+  getSecretAccessKeyValue(archiveObjectStorageName),
+)
+if archiveCredentials != nil {
+  // Calling the function: getS3Client
+  s3Client, err := getS3Client(ctx, archiveObjectStorageName, archiveCredentials)
+  if err == nil {
+    // Calling the function: getBucketAcl
+    bucketAclOutput, err := getBucketAcl(ctx, archiveObjectStorageName, s3Client, localBucketName)
+    if err == nil {
+      // Getting of the current bucket owner
+      currentOwnerDisplayName := *bucketAclOutput.Owner.DisplayName
+      currentOwnerId := *bucketAclOutput.Owner.ID
+      // Getting existing grants
+      currentGrants := bucketAclOutput.Grants
+
+      // A new grantee represents the read access under the identity of the <store> object storage service.
+      newGranteeId := getAccessKeyIdValue(storeObjectStorageName)
+      // Create a new grantee
+      newGrantee := s3.Grantee{
+        DisplayName: &storeObjectStorageName,
+        ID: &newGranteeId,
+        Type: s3Types.TypeCanonicalUser
+      }
+      // Create a new grant (a new grantee with read access permission).
+      newGrant := s3.Grant{Grantee: &newGrantee, Permission: s3Types.PermissionRead}
+      // Setting the updated access control policy
+      accessControlPolicy := s3Types.AccessControlPolicy{
+        Grants: append(currentGrants, newGrant),
+        Owner: &s3Types.Owner{
+          DisplayName: &currentOwnerDisplayName,
+          ID: &currentOwnerId,
+        },
+      }
+      // Calling the function: putBucketAclPolicy
+      _, err = putBucketAclPolicy(
+        ctx,
+        archiveObjectStorageName,
+        s3Client,
+        localBucketName,
+        &accessControlPolicy,
+      )
+    }
+  }
+}
+```
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Cross-account access enabled buckets
+If the ACL of buckets ACL are modified to allow access from another account as shown above (read access to buckets of `archive` object storage service using the credentials of `store` object storage service), it's necessary to understand that these are not implicitly listed among all available buckets of `store` object storage service (for example, using `s3Client.ListBuckets(ctx, nil)`). They are called **external buckets**.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
