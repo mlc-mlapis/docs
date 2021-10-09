@@ -352,7 +352,7 @@ const s3Client = getS3Client(apiUrlValue, archiveCredentials);
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Cross-account access enabled buckets
-If the ACL of buckets ACL are modified to allow access from another account as shown above (read access to buckets of `archive` object storage service using the credentials of `store` object storage service), it's necessary to understand that these are not implicitly listed among all available buckets of `store` object storage service (for example, using `s3Client.listBuckets()`). They are called **external buckets**.
+If the ACL of buckets are modified to allow access from another account as shown above (read access to buckets of `archive` object storage service using the credentials of `store` object storage service), it's necessary to understand that these are not implicitly listed among all available buckets of `store` object storage service (for example, using `s3Client.listBuckets()`). They are called **external buckets**. You need to access them explicitly based on their known bucket names.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 

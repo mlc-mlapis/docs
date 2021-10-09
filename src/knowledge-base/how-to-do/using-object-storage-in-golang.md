@@ -517,6 +517,89 @@ if archiveCredentials != nil {
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Cross-account access enabled buckets
-If the ACL of buckets ACL are modified to allow access from another account as shown above (read access to buckets of `archive` object storage service using the credentials of `store` object storage service), it's necessary to understand that these are not implicitly listed among all available buckets of `store` object storage service (for example, using `s3Client.ListBuckets(ctx, nil)`). They are called **external buckets**.
+If the ACL of buckets are modified to allow access from another account as shown above (read access to buckets of `archive` object storage service using the credentials of `store` object storage service), it's necessary to understand that these are not implicitly listed among all available buckets of `store` object storage service (for example, using `s3Client.ListBuckets(ctx, nil)`). They are called **external buckets**. You need to access them explicitly based on their known bucket names.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
+
+## Adding a new bucket's object (with body or a file)
+
+Once you have the `getCredentials`, `getUniqueBucketName`, and `getS3Client` functions from the previous code snippet (supposing all declared variables are also accessible), you can put a new object inside a bucket. You have to have WRITE permissions on a bucket to add an object to it.
+
+```go
+import (
+  "bytes"
+  "io"
+  "os"
+  "path/filepath"
+)
+
+func putObject(
+  ctx context.Context,
+  objectStorageName string,
+  s3Client *s3.Client,
+  localBucketName string,
+  objectKey string,
+  objectContent io.Reader,
+) (*s3.PutObjectOutput, error) {
+  bucketName, err := getUniqueBucketName(objectStorageName, localBucketName)
+  if err == nil {
+    result, err := s3Client.PutObject(ctx, &s3.PutObjectInput{
+      Bucket: bucketName,
+      Key: &objectKey,
+      Body: objectContent,
+    })
+    if err != nil {
+      return nil, err
+    }
+    return result, nil
+  }
+  return nil, err
+}
+
+// Declaration of an object with a plain text body to be inserted into a bucket.
+const objectKey = "K1.txt";
+const objectBody = "Description of the K1.";
+// Declaration of an object with a file to be inserted into a bucket.
+const objectFileKey = "scan_20210815_00001.jpg"
+currentDir, _ := os.Getwd()
+// The file is located in the subdirectory: ./files
+filePath := filepath.Join(currentDir, "files", objectFileKey)
+objectFileContent, err := os.Open(filePath)
+
+// Calling the function: getCredentials
+storeCredentials := getCredentials(storeObjectStorageName)
+if storeCredentials != nil {
+  // Calling the function: getS3Client
+  s3Client, err := getS3Client(ctx, storeObjectStorageName, storeCredentials)
+  if err == nil {
+    // Calling the function: putObject
+    // Inserting an object with a plain text body into a bucket.
+    _, err = putObject(
+      ctx,
+      objectStorageName,
+      s3Client,
+      localBucketName,
+      // The key, under which the body content will be saved.
+      objectKey,
+      // Transformation of a plain text body to a binary content.
+      bytes.NewReader([]byte(objectBody)),
+    }
+    // Calling the function: putObject
+    // Inserting an object with a file into a bucket.
+    _, err = putObject(
+      ctx,
+      objectStorageName,
+      s3Client,
+      localBucketName,
+      // The key, under which the file will be saved.
+      objectFileKey,
+      // The binary content of the file.
+      objectFileContent,
+    }
+  }
+}
+```
+
+## Getting an existing bucket's object (with body or a file)
+
+Once you have the `getCredentials`, `getUniqueBucketName`, and `getS3Client` functions from the previous code snippet (supposing all declared variables are also accessible), you can get an already existing object from a bucket back. You have to at least have READ permissions on a bucket to get an object from it.
