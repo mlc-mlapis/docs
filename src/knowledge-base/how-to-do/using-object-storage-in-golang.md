@@ -603,3 +603,71 @@ if storeCredentials != nil {
 ## Getting an existing bucket's object (with body or a file)
 
 Once you have the `getCredentials`, `getUniqueBucketName`, and `getS3Client` functions from the previous code snippet (supposing all declared variables are also accessible), you can get an already existing object from a bucket back. You have to at least have READ permissions on a bucket to get an object from it.
+
+```go
+import (
+  "io"
+  "os"
+  "path/filepath"
+)
+
+func getObject(
+  ctx context.Context,
+  objectStorageName string,
+  s3Client *s3.Client,
+  localBucketName string,
+  objectKey string,
+) (*s3.GetObjectOutput, error) {
+  bucketName, err := getUniqueBucketName(objectStorageName, localBucketName)
+  if err == nil {
+    result, err := s3Client.GetObject(ctx, &s3.GetObjectInput{
+      Bucket: bucketName,
+      Key: &objectKey,
+    })
+    if err != nil {
+      return nil, err
+    }
+    return result, nil
+  }
+  return nil, err
+}
+
+// Declaration of an object key to be retrieved as a plain text body from a bucket.
+const objectKey = "K1.txt";
+// Declaration of an object key to be retrieved as a file from a bucket.
+const objectFileKey = "scan_20210815_00001.jpg"
+currentDir, _ := os.Getwd()
+// The file should be written back to the subdirectory: ./files
+filePath := filepath.Join(currentDir, "files", objectFileKey)
+objectFileContent, err := os.Create(filePath)
+
+// Calling the function: getCredentials
+storeCredentials := getCredentials(storeObjectStorageName)
+if storeCredentials != nil {
+  // Calling the function: getS3Client
+  s3Client, err := getS3Client(ctx, storeObjectStorageName, storeCredentials)
+  if err == nil {
+    // Calling the function: getObject
+    // Retrieving an object with a plain text body from a bucket.
+    outputBody, err := getObject(ctx, objectStorageName, s3Client, localBucketName, objectKey)
+    if err == nil {
+      resultBody := outputBody.Body
+      defer resultBody.Close()
+      bodyContent, err := io.ReadAll(resultBody)
+      if err == nil {
+        // Getting the previously saved value: "Description of the K1."
+        stringBodyContent := fmt.Sprintf("%s", bodyContent)
+      }
+    // Calling the function: getObject
+    // Retrieving an object with a file from a bucket.
+    outputFile, err := getObject(ctx, objectStorageName, s3Client, localBucketName, objectFileKey)
+    if err == nil {
+      resultFile := getObjectOutputFile.Body
+      defer objectFileContent.Close()
+      defer resultFile.Close()
+      // Saving the retrieved binary object content to a local file.
+      _, err = objectFileContentArchive.ReadFrom(resultFile)
+    }
+  }
+}
+```
