@@ -656,7 +656,7 @@ if storeCredentials != nil {
       bodyContent, err := io.ReadAll(resultBody)
       if err == nil {
         // Getting the previously saved value: "Description of the K1."
-        stringBodyContent := fmt.Sprintf("%s", bodyContent)
+        stringBodyContent := string(bodyContent)
       }
     // Calling the function: getObject
     // Retrieving an object with a file from a bucket.
