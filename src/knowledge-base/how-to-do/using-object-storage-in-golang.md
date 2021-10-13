@@ -51,6 +51,7 @@ import (
 // Object storage name.
 const storeObjectStorageName = "store"
 
+// Function returning a pointer to a variable with an accessKeyId value.
 func getAccessKeyIdValue(objectStorageName string) *string {
   // Necessary environment variable name.
   const accessKeyId = "accessKeyId"
@@ -62,6 +63,7 @@ func getAccessKeyIdValue(objectStorageName string) *string {
   return nil
 }
 
+// Function returning a pointer to a variable with a secretAccessKey value.
 func getSecretAccessKeyValue(objectStorageName string) *string {
   // Necessary environment variable name.
   const secretAccessKey = "secretAccessKey"
@@ -74,7 +76,9 @@ func getSecretAccessKeyValue(objectStorageName string) *string {
 }
 
 // Function returning a pointer to a variable with a user credentials.
-func getCredentials(accessKeyIdValue *string, secretAccessKeyValue *string) *credentials.StaticCredentialsProvider {
+func getCredentials(objectStorageName string) *credentials.StaticCredentialsProvider {
+  accessKeyIdValue := getAccessKeyIdValue(objectStorageName)
+  secretAccessKeyValue := getSecretAccessKeyValue(objectStorageName)
   if accessKeyIdValue != nil && secretAccessKeyValue != nil {
     credentials := credentials.NewStaticCredentialsProvider(*accessKeyIdValue, *secretAccessKeyValue, "")
     // A pointer to a variable with credentials is returned.
@@ -218,13 +222,13 @@ func listBuckets(ctx context.Context, s3Client *s3.Client) (*s3.ListBucketsOutpu
 }
 
 // Calling the function: getCredentials
-storeCredentials := getCredentials(objectStorageName)
+storeCredentials := getCredentials(storeObjectStorageName)
 if storeCredentials != nil {
   // Calling the function: getS3Client
-  s3Client, err := getS3Client(ctx, objectStorageName, storeCredentials)
+  s3Client, err := getS3Client(ctx, storeObjectStorageName, storeCredentials)
   if err == nil {
     // Calling the function: createBucket
-    createBucketOutput, err := createBucket(ctx, objectStorageName, s3Client, localBucketName)
+    createBucketOutput, err := createBucket(ctx, storeObjectStorageName, s3Client, localBucketName)
     // Calling the function: listBuckets
     listBucketsOutput, err := listBuckets(ctx, s3Client)
     if err == nil {
@@ -467,10 +471,7 @@ func putBucketAclPolicy(
 const storeObjectStorageName = "store";
 const archiveObjectStorageName = "archive";
 // Calling the function: getCredentials
-archiveCredentials := getCredentials(
-  getAccessKeyIdValue(archiveObjectStorageName),
-  getSecretAccessKeyValue(archiveObjectStorageName),
-)
+archiveCredentials := getCredentials(archiveObjectStorageName)
 if archiveCredentials != nil {
   // Calling the function: getS3Client
   s3Client, err := getS3Client(ctx, archiveObjectStorageName, archiveCredentials)
@@ -576,7 +577,7 @@ if storeCredentials != nil {
     // Inserting an object with a plain text body into a bucket.
     _, err = putObject(
       ctx,
-      objectStorageName,
+      storeObjectStorageName,
       s3Client,
       localBucketName,
       // The key, under which the body content will be saved.
@@ -588,7 +589,7 @@ if storeCredentials != nil {
     // Inserting an object with a file into a bucket.
     _, err = putObject(
       ctx,
-      objectStorageName,
+      storeObjectStorageName,
       s3Client,
       localBucketName,
       // The key, under which the file will be saved.
@@ -649,7 +650,7 @@ if storeCredentials != nil {
   if err == nil {
     // Calling the function: getObject
     // Retrieving an object with a plain text body from a bucket.
-    outputBody, err := getObject(ctx, objectStorageName, s3Client, localBucketName, objectKey)
+    outputBody, err := getObject(ctx, storeObjectStorageName, s3Client, localBucketName, objectKey)
     if err == nil {
       resultBody := outputBody.Body
       defer resultBody.Close()
@@ -660,7 +661,7 @@ if storeCredentials != nil {
       }
     // Calling the function: getObject
     // Retrieving an object with a file from a bucket.
-    outputFile, err := getObject(ctx, objectStorageName, s3Client, localBucketName, objectFileKey)
+    outputFile, err := getObject(ctx, storeObjectStorageName, s3Client, localBucketName, objectFileKey)
     if err == nil {
       resultFile := getObjectOutputFile.Body
       defer objectFileContent.Close()
