@@ -55,10 +55,10 @@ const storeObjectStorageName = "store"
 func getAccessKeyIdValue(objectStorageName string) *string {
   // Necessary environment variable name.
   const accessKeyId = "accessKeyId"
-  accessKeyIdValue, accessKeyIdFound := os.LookupEnv(objectStorageName + "_" + accessKeyId)
+  value, found := os.LookupEnv(objectStorageName + "_" + accessKeyId)
   // If the environment variable has been found ...
-  if accessKeyIdFound {
-    return &accessKeyIdValue
+  if found {
+    return &value
   }
   return nil
 }
@@ -67,10 +67,10 @@ func getAccessKeyIdValue(objectStorageName string) *string {
 func getSecretAccessKeyValue(objectStorageName string) *string {
   // Necessary environment variable name.
   const secretAccessKey = "secretAccessKey"
-  secretAccessKeyValue, secretAccessKeyFound := os.LookupEnv(objectStorageName + "_" + secretAccessKey)
+  value, found := os.LookupEnv(objectStorageName + "_" + secretAccessKey)
   // If the environment variable has been found ...
-  if secretAccessKeyFound {
-    return &secretAccessKeyFound
+  if found {
+    return &value
   }
   return nil
 }
@@ -180,12 +180,12 @@ func getUniqueBucketName(objectStorageName string, localBucketName string) (*str
   const accessKeyId = "accessKeyId"
   // All bucket names in the Zerops shared object storage namespace have to be unique!
   // Getting the environment variable value that will be used as the unique prefix.
-  uniqueBucketPrefixValue, uniqueBucketPrefixFound := os.LookupEnv(objectStorageName + "_" + accessKeyId)
-  if !uniqueBucketPrefixFound {
+  value, found := os.LookupEnv(objectStorageName + "_" + accessKeyId)
+  if !found {
     return nil, errors.New("non-existed accessKeyId environment variable")
   }
   // Unique bucket name preparation.
-  bucketName := uniqueBucketPrefixValue + "." + localBucketName;
+  bucketName := value + "." + localBucketName;
   return &bucketName, nil
 }
 
@@ -198,27 +198,19 @@ func createBucket(
 ) (*s3.CreateBucketOutput, error) {
   // Unique bucket name preparation.
   bucketName, err := getUniqueBucketName(objectStorageName, localBucketName)
-  if err == nil {
-    // Invoking the S3 SDK client method to create a new bucket.
-    result, err := s3Client.CreateBucket(ctx, &s3.CreateBucketInput{
-      Bucket: bucketName,
-    })
-    if err != nil {
-      return nil, err
-    }
-    return result, nil
+  if err != nil {
+    return nil, err
   }
-  return nil, err
+  // Invoking the S3 SDK client method to create a new bucket.
+  return s3Client.CreateBucket(ctx, &s3.CreateBucketInput{
+    Bucket: bucketName,
+  })
 }
 
 // Function declaration: Getting information about existed buckets
 func listBuckets(ctx context.Context, s3Client *s3.Client) (*s3.ListBucketsOutput, error) {
   // Invoking the S3 SDK client method to get a list of existed buckets.
-  result, err := s3Client.ListBuckets(ctx, nil)
-  if err != nil {
-    return nil, err
-  }
-  return result, nil
+  return s3Client.ListBuckets(ctx, nil)
 }
 
 // Calling the function: getCredentials
@@ -226,7 +218,7 @@ storeCredentials := getCredentials(storeObjectStorageName)
 if storeCredentials != nil {
   // Calling the function: getS3Client
   s3Client, err := getS3Client(ctx, storeObjectStorageName, storeCredentials)
-  if err == nil {
+  if s3Client != nil {
     // Calling the function: createBucket
     createBucketOutput, err := createBucket(ctx, storeObjectStorageName, s3Client, localBucketName)
     // Calling the function: listBuckets
@@ -270,7 +262,7 @@ func getBucketAcl(
   localBucketName string,
 ) (*s3.GetBucketAclOutput, error) {
   bucketName, err := getUniqueBucketName(objectStorageName, localBucketName)
-  if err == nil {
+  if bucketName != nil {
     // Check, if the required bucket exists.
     _, err := s3Client.HeadBucket(ctx, &s3.HeadBucketInput{
       Bucket: bucketName,
@@ -279,13 +271,9 @@ func getBucketAcl(
       return nil, err
     }
     // If it exists, get its ACL.
-    result, err := s3Client.GetBucketAcl(ctx, &s3.GetBucketAclInput{
+    return s3Client.GetBucketAcl(ctx, &s3.GetBucketAclInput{
       Bucket: bucketName,
     })
-    if err != nil {
-      return nil, err
-    }
-    return result, nil
   }
   return nil, err
 }
@@ -295,7 +283,7 @@ storeCredentials := getCredentials(storeObjectStorageName)
 if storeCredentials != nil {
   // Calling the function: getS3Client
   s3Client, err := getS3Client(ctx, storeObjectStorageName, storeCredentials)
-  if err == nil {
+  if s3Client != nil {
     // Calling the function: getBucketAcl
     bucketAclOutput, err := getBucketAcl(ctx, storeObjectStorageName, s3Client, localBucketName)
     if err == nil {
@@ -367,7 +355,7 @@ func putBucketAcl(
   cannedAcl s3Types.BucketCannedACL,
 ) (*s3.GetBucketAclOutput, error) {
   bucketName, err := getUniqueBucketName(objectStorageName, localBucketName)
-  if err == nil {
+  if bucketName != nil {
     // Check, if the required bucket exists.
     _, err := s3Client.HeadBucket(ctx, &s3.HeadBucketInput{
       Bucket: bucketName,
@@ -376,14 +364,10 @@ func putBucketAcl(
       return nil, err
     }
     // If it exists, update its ACL.
-    result, err := s3Client.PutBucketAcl(ctx, &s3.PutBucketAclInput{
+    return s3Client.PutBucketAcl(ctx, &s3.PutBucketAclInput{
       Bucket: bucketName,
       ACL: cannedAcl,
     })
-    if err != nil {
-      return nil, err
-    }
-    return result, nil
   }
   return nil, err
 }
@@ -393,7 +377,7 @@ storeCredentials := getCredentials(storeObjectStorageName)
 if storeCredentials != nil {
   // Calling the function: getS3Client
   s3Client, err := getS3Client(ctx, storeObjectStorageName, storeCredentials)
-  if err == nil {
+  if s3Client != nil {
     // Calling the function: putBucketAcl
     _, err = putBucketAcl(
       ctx,
@@ -446,7 +430,7 @@ func putBucketAclPolicy(
   aclPolicy *s3Types.AccessControlPolicy,
 ) (*s3.PutBucketAclOutput, error) {
   bucketName, err := getUniqueBucketName(objectStorageName, localBucketName)
-  if err == nil {
+  if bucketName != nil {
     // Check, if the required bucket exists.
     _, err := s3Client.HeadBucket(ctx, &s3.HeadBucketInput{
       Bucket: bucketName,
@@ -455,14 +439,10 @@ func putBucketAclPolicy(
       return nil, err
     }
     // If it exists, update its ACL.
-    result, err := s3Client.PutBucketAcl(ctx, &s3.PutBucketAclInput{
+    return s3Client.PutBucketAcl(ctx, &s3.PutBucketAclInput{
       Bucket: bucketName,
       AccessControlPolicy: aclPolicy,
     })
-    if err != nil {
-      return nil, err
-    }
-    return result, nil
   }
   return nil, err
 }
@@ -475,7 +455,7 @@ archiveCredentials := getCredentials(archiveObjectStorageName)
 if archiveCredentials != nil {
   // Calling the function: getS3Client
   s3Client, err := getS3Client(ctx, archiveObjectStorageName, archiveCredentials)
-  if err == nil {
+  if s3Client != nil {
     // Calling the function: getBucketAcl
     bucketAclOutput, err := getBucketAcl(ctx, archiveObjectStorageName, s3Client, localBucketName)
     if err == nil {
@@ -543,16 +523,12 @@ func putObject(
   objectContent io.Reader,
 ) (*s3.PutObjectOutput, error) {
   bucketName, err := getUniqueBucketName(objectStorageName, localBucketName)
-  if err == nil {
-    result, err := s3Client.PutObject(ctx, &s3.PutObjectInput{
+  if bucketName != nil {
+    return s3Client.PutObject(ctx, &s3.PutObjectInput{
       Bucket: bucketName,
       Key: &objectKey,
       Body: objectContent,
     })
-    if err != nil {
-      return nil, err
-    }
-    return result, nil
   }
   return nil, err
 }
@@ -572,7 +548,7 @@ storeCredentials := getCredentials(storeObjectStorageName)
 if storeCredentials != nil {
   // Calling the function: getS3Client
   s3Client, err := getS3Client(ctx, storeObjectStorageName, storeCredentials)
-  if err == nil {
+  if s3Client != nil {
     // Calling the function: putObject
     // Inserting an object with a plain text body into a bucket.
     _, err = putObject(
@@ -620,15 +596,11 @@ func getObject(
   objectKey string,
 ) (*s3.GetObjectOutput, error) {
   bucketName, err := getUniqueBucketName(objectStorageName, localBucketName)
-  if err == nil {
-    result, err := s3Client.GetObject(ctx, &s3.GetObjectInput{
+  if bucketName != nil {
+    return s3Client.GetObject(ctx, &s3.GetObjectInput{
       Bucket: bucketName,
       Key: &objectKey,
     })
-    if err != nil {
-      return nil, err
-    }
-    return result, nil
   }
   return nil, err
 }
@@ -647,7 +619,7 @@ storeCredentials := getCredentials(storeObjectStorageName)
 if storeCredentials != nil {
   // Calling the function: getS3Client
   s3Client, err := getS3Client(ctx, storeObjectStorageName, storeCredentials)
-  if err == nil {
+  if s3Client != nil {
     // Calling the function: getObject
     // Retrieving an object with a plain text body from a bucket.
     outputBody, err := getObject(ctx, storeObjectStorageName, s3Client, localBucketName, objectKey)
