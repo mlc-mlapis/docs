@@ -80,23 +80,11 @@ const getCredentials = (objectStorageName) => {
 }
 ```
 
-## Creating a new object storage bucket
+## How to get an S3 API client
 
-Once you get the `getCredentials` function from the previous code snippet (supposing all declared variables are also accessible), you can create a named bucket as a container for storing objects. Remember, it's necessary that all created buckets in the entire Zerops have unique names. See the recommendation for the [bucket naming convention](/documentation/services/storage/s3.html#used-technology).
-
-<!-- markdownlint-disable DOCSMD004 -->
-::: info Asynchronous API calls
-All API calls to the object storage service are asynchronous and that's why **async/await** pattern is used.
-:::
-<!-- markdownlint-enable DOCSMD004 -->
+Once you get the `getCredentials` function from the previous code snippet (supposing all declared variables are also accessible), you can create an S3 SDK client to access the S3 API using the following function.
 
 ```javascript
-// Required bucket name.
-const localBucketName = 'records';
-
-// Get the user credentials.
-const storeCredentials = getCredentials(storeObjectStorageName);
-
 // Function declaration: Getting an S3 SDK client
 const getS3Client = (objectStorageName, credentials) => {
    // Necessary environment variable name.
@@ -118,11 +106,23 @@ const getS3Client = (objectStorageName, credentials) => {
    }
    return null;
 }
+```
 
-// Function declaration.
-const listBuckets = async (s3Client) => {
-   return await s3Client.listBuckets().promise();
-}
+## Creating a new object storage bucket
+
+Once you get the `getCredentials` and `getS3Client` functions from the previous code snippet (supposing all declared variables are also accessible), you can create a named bucket as a container for storing objects. Remember, it's necessary that all created buckets in the entire Zerops have unique names. See the recommendation for the [bucket naming convention](/documentation/services/storage/s3.html#used-technology).
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Asynchronous API calls
+All API calls to the object storage service are asynchronous and that's why **async/await** pattern is used.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+```javascript
+// Required bucket name.
+const localBucketName = 'records';
+// Get the user credentials.
+const storeCredentials = getCredentials(storeObjectStorageName);
 
 // Function declaration: Getting a unique bucket name based on <accessKeyId> value
 const getUniqueBucketName = (objectStorageName, localBucketName) => {
@@ -147,6 +147,11 @@ const createBucket = async (s3Client, objectStorageName, localBucketName) => {
          LocationConstraint: ''
       }
    }).promise();
+}
+
+// Function declaration: Getting all buckets for the current user credentials
+const listBuckets = async (s3Client) => {
+   return await s3Client.listBuckets().promise();
 }
 
 // Calling the function: getS3Client
