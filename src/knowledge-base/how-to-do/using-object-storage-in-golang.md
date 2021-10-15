@@ -207,7 +207,7 @@ func createBucket(
   })
 }
 
-// Function declaration: Getting information about existed buckets
+// Function declaration: Getting all buckets for the current user credentials
 func listBuckets(ctx context.Context, s3Client *s3.Client) (*s3.ListBucketsOutput, error) {
   // Invoking the S3 SDK client method to get a list of existed buckets.
   return s3Client.ListBuckets(ctx, nil)
