@@ -4,11 +4,11 @@ You can find more examples and code samples written in Golang that demonstrate h
 
 ## Installing the required SDKs
 
-* The AWS SDK for Go V2 uses Go Modules, which was a feature introduced in Go 1.11. If you didn't initialize your GitHub/GitLab project as a Go module yet, for example, run the command ==`go mod init github.com/<user>/<repository>`== . It writes a new `go.mod` file in the current root project directory to track your code's dependencies. The `go.mod` file must not already exist. If you were to publish this module, it must be a path from which Go tools can download it.
+* The AWS SDK for Go V2 uses Go Modules, which was a feature introduced in Go 1.11. If you haven't initialized your GitHub/GitLab project as a Go module yet, for example, run the command ==`go mod init github.com/<user>/<repository>`== . This writes a new `go.mod` file in the current root project directory to track your code's dependencies. The `go.mod` file must not already exist. If you were to publish this module, there has to be a path from which Go tools can download it.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Application code is located in a subdirectory
-If your module code is not directly placed in the project root, but in its subdirectory, like the `app`, importing this module from other modules would be:
+If your module code is not placed in the project root directly, but located in its subdirectory, such as the `app`, importing this module from other modules would be done as follows:
 
 ```go
 import {
@@ -27,13 +27,13 @@ go get github.com/aws/aws-sdk-go-v2/config
 go get github.com/aws/aws-sdk-go-v2/service/s3
 ```
 
-* Both the Go commands, used later for running the application, `go run` locally, or compiling the [final binary executable](/documentation/services/runtimes/golang.html#start-command) `go build`, can download these dependency modules when needed.
+* Both the Go commands, used later for running the application, `go run` locally, and compiling the [final binary executable](/documentation/services/runtimes/golang.html#start-command) `go build`, can download these dependency modules when needed.
 
 ## How to get access credentials
 
 Using the following code, you will get an object used later for authentication when creating buckets and their content.
 
-Assume further that the code is associated with access to the Zerops Object Storage Service, whose [object storage name](/documentation/services/storage/s3.html#object-storage-name) was chosen as the ==**`store`**== . The necessary [Storage access details](/documentation/services/storage/s3.html#from-local-environment) values **Access Key Id** and **Secret Access Key** are taken from the [environment variables](/documentation/environment-variables/how-to-access.html) then.
+Assuming that the code is associated with access to the Zerops Object Storage Service, the [object storage name](/documentation/services/storage/s3.html#object-storage-name) of which was chosen as the ==**`store`**== . The necessary [Storage access details](/documentation/services/storage/s3.html#from-local-environment) values **Access Key Id** and **Secret Access Key** are taken from the [environment variables](/documentation/environment-variables/how-to-access.html) then.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info
@@ -404,7 +404,7 @@ Setting the ACL as ==`public-read`== adds another `Grantee` to the bucket's `Gra
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Public read access to a bucket
-After setting the ACL as ==`public-read`== means that the URL `https://s3.app.zerops.io/records` will be accessible with the read access to anyone.
+Setting the ACL to ==`public-read`== means that the URL `https://s3.app.zerops.io/records` will be accessible with read access to anyone.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -498,7 +498,7 @@ if archiveCredentials != nil {
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Cross-account access enabled buckets
-If the ACL of buckets are modified to allow access from another account as shown above (read access to buckets of `archive` object storage service using the credentials of `store` object storage service), it's necessary to understand that these are not implicitly listed among all available buckets of `store` object storage service (for example, using `s3Client.ListBuckets(ctx, nil)`). They are called **external buckets**. You need to access them explicitly based on their known bucket names.
+If the ACL of buckets is modified to allow access from another account as shown above (read access to buckets of `archive` object storage service using the credentials of `store` object storage service), it's necessary to understand that these are not implicitly listed among all available buckets of `store` object storage service (for example, using `s3Client.ListBuckets(ctx, nil)`). They are called **external buckets**. You need to access them explicitly based on their known bucket names.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
