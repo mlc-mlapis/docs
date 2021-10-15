@@ -33,7 +33,7 @@ runs:
 
 Using the following function, ==`getCredentials`== , you can get an object used later for authentication when creating buckets and their content.
 
-Assume further that the code is associated with access to the Zerops Object Storage Service, whose [object storage name](/documentation/services/storage/s3.html#object-storage-name) was chosen as the ==**`store`**== . The necessary [Storage access details](/documentation/services/storage/s3.html#from-local-environment) values **Access Key Id** and **Secret Access Key** are taken from the [environment variables](/documentation/environment-variables/how-to-access.html) then.
+Assuming that the code is associated with access to the Zerops Object Storage Service, the [object storage name](/documentation/services/storage/s3.html#object-storage-name) of which was chosen as the ==**`store`**== . The necessary [Storage access details](/documentation/services/storage/s3.html#from-local-environment) values **Access Key Id** and **Secret Access Key** are taken from the [environment variables](/documentation/environment-variables/how-to-access.html) then.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info
@@ -326,7 +326,7 @@ Setting the ACL as ==`public-read`== adds another `Grantee` to the bucket's `Gra
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Public read access to a bucket
-After setting the ACL as ==`public-read`== means that the URL `https://s3.app.zerops.io/records` will be accessible with the read access to anyone.
+Setting the ACL to ==`public-read`== means that the URL `https://s3.app.zerops.io/records` will be accessible with the read access to anyone.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
