@@ -204,9 +204,9 @@ You can also force synchronization waits for causality checks on a cluster by [w
 
 ### Non-database local data
 
-Each container has separate local disk space, which can theoretically be used by appropriate APIs of the database service and thus store data outside the replicated contents of the database. It should be noted that such data is reserved only for this particular instance, not mirrored across the MariaDB Galera cluster nor backup-ed. It will not be migrated if such a container is deleted due to its failure. If it is necessary to permanently store and share such non-database data, we recommend developers use Zerops shared storage services. Also, separate direct access to an individual MariaDB instance is not supported in any way.
+Each container has separate local disk space, which can theoretically be used by appropriate APIs of the database service and thus store data outside the replicated contents of the database. It should be noted that such data is reserved only for this particular instance, not mirrored across the MariaDB Galera cluster nor backup-ed. It will not be migrated if such a container is deleted due to its failure. Also, separate direct access to an individual MariaDB instance is not supported in any way.
 
-Typical operations from this point of view can be a functionality of [SELECT INTO OUTFILE](https://mariadb.com/kb/en/select-into-outfile), [SELECT INTO DUMPFILE](https://mariadb.com/kb/en/select-into-dumpfile), [LOAD_FILE](https://mariadb.com/kb/en/load_file), or [LOAD DATA](https://dev.mysql.com/doc/refman/8.0/en/load-data.html).
+Typical operations from the point of a container local disk space is a functionality of [SELECT INTO OUTFILE](https://mariadb.com/kb/en/select-into-outfile), [SELECT INTO DUMPFILE](https://mariadb.com/kb/en/select-into-dumpfile), [LOAD_FILE](https://mariadb.com/kb/en/load_file), or [LOAD DATA](https://dev.mysql.com/doc/refman/8.0/en/load-data.html). You can't save or load such data directly to any shared storage.
 
 ### Selected specifics of a Galera HA cluster
 
