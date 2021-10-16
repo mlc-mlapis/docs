@@ -2,6 +2,8 @@
 
 You can find more examples and code samples written in Golang that demonstrate how to interact with Amazon Simple Storage Service (Amazon S3) on the page [Golang Code Samples for Amazon S3](https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3).
 
+[[toc]]
+
 ## Installing the required SDKs
 
 * The AWS SDK for Go V2 uses Go Modules, which was a feature introduced in Go 1.11. If you haven't initialized your GitHub/GitLab project as a Go module yet, for example, run the command ==`go mod init github.com/<user>/<repository>`== . This writes a new `go.mod` file in the current root project directory to track your code's dependencies. The `go.mod` file must not already exist. If you were to publish this module, there has to be a path from which Go tools can download it.

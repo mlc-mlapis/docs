@@ -2,6 +2,8 @@
 
 You can find more examples and code samples written in PHP that demonstrate how to interact with Amazon Simple Storage Service (Amazon S3) on the page [PHP Code Samples for Amazon S3](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-php-example_code-s3.html).
 
+[[toc]]
+
 ## Installing the required SDKs
 
 * Use [Composer](https://getcomposer.org) as a dependency manager for PHP. It's already globally pre-installed in each Zerops PHP Service, and you can install it also in your local development environment.
