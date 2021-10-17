@@ -10,7 +10,7 @@ Zerops provides a fully managed and scaled Golang runtime service, suitable for 
 
 You can currently only choose Golang version **v1.16**.
 
-Used as the export & import type: `golang@1`.
+Used as the export & import type: ==`golang@1`== .
 
 ### Hostname
 

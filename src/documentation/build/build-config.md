@@ -4,7 +4,7 @@ sidebarDepth: 3
 
 # Build Config (zerops.yml)
 
-Zerops uses a yaml definition file to build your application. This file, `zerops.yml`, has to be placed at the root of your project.
+Zerops uses a YAML definition file to build your application. This file, `zerops.yml`, has to be placed at the root of your project.
 
 ## Example
 
