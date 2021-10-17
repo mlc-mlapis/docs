@@ -12,6 +12,12 @@ If you are not sure what storage type to choose, take a look at [the best practi
 
 ## Adding the Shared Storage Service in Zerops
 
+### Version to choose
+
+You can currently choose only version **v1.0**. The chosen version of it **can't be changed afterward**.
+
+Used as the export & import type: `shared-storage@1`.
+
 ### Shared storage name
 
 Choose a short and descriptive URL-friendly name, for example, **disk**. The following rules apply:

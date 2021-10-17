@@ -10,6 +10,8 @@ Zerops provides a fully managed and scaled PHP runtime service, suitable for bot
 
 You can currently choose PHP version **v8.0**, **v7.4**, or **v7.3**. The chosen version of it **can't be changed afterward**. The service is always combined with a web server. It can be either **Apache v2.4** or **Nginx v1.18**. Differences and configuration specifics to each web server are listed below.
 
+Used as the export & import types: `php@8.0`, `php@7.4`, and `php@7.3`.
+
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Changing versions
 Switching must be done manually by creating a new service with another version and migrating the service code using a new [deploy](/documentation/deploy/how-deploy-works.html) or [build & deploy](/documentation/build/how-zerops-build-works.html) process.

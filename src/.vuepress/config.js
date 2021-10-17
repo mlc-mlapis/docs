@@ -144,6 +144,13 @@ module.exports = {
           ]
         },
         {
+          title: 'Export & Import',
+          collapsable: false,
+          children: [
+            'export-import/project-service-export-import'
+          ]
+        },
+        {
           title: 'Logs',
           collapsable: false,
           children: [
