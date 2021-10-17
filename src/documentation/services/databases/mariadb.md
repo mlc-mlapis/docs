@@ -16,7 +16,7 @@ Information on the compatibility of MariaDB software with similar, competing sof
 
 You can currently choose **v10.4** or **v10.3**. The chosen version of the database **can't be changed afterward**.
 
-Used as the export & import types: `mariadb@10.4` or `mariadb@10.3`.
+Used as the export & import types: ==`mariadb@10.4`== or ==`mariadb@10.3`== .
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Changing version
