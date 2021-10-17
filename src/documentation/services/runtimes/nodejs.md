@@ -10,6 +10,8 @@ Zerops provides a fully managed and scaled Node.js runtime service, suitable for
 
 You can currently choose Node.js version **v14.17**, **v12.13**, or **v10.17**. The chosen version of it **can't be changed afterward**.
 
+Used as the export & import types: `nodejs@14`, `nodejs@13`, and `nodejs@10`.
+
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Changing versions
 Switching must be done manually by creating a new service with another version and migrating service code using a new [deploy](/documentation/deploy/how-deploy-works.html) or [build & deploy](/documentation/build/how-zerops-build-works.html) process.

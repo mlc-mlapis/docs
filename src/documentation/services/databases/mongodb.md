@@ -8,7 +8,9 @@ Zerops provides a fully managed and scaled MongoDB database service, suitable fo
 
 ### Version to choose
 
-You can actually choose **v4.0**. The chosen version of the database **can't be changed afterward**, and switching has to be done manually by creating a new service with another version and migrating data. We, however, plan to implement service cloning, allowing you safe migration so that this limitation will be removed soon.
+You can actually choose **v4.0**. The chosen version of the database **can't be changed afterward**.
+
+Used as the export & import type: `mongodb@4`.
 
 ### Hostname and port
 
