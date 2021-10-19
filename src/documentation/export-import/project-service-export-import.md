@@ -28,17 +28,16 @@ Zerops uses a YAML definition format to describe the structures. If you make a p
 
 ```yaml
 project:
-  name: copy of iKBase Class
-  description: Intelligent Knowledge Base
+  name: Example
   tags:
   - DEMO
   - ZEROPS
 services:
-- hostname: golang
-  type: go@1
-  mode: NON_HA
+- hostname: app
+  type: nodejs@14
+  mode: HA
   ports:
-  - port: 8088
+  - port: 3000
     httpSupport: true
   - port: 9090
     protocol: UDP
@@ -46,20 +45,15 @@ services:
   envVariables:
   - key: jwt_token_secret
     content: M3rW31Ne%T@bRk
-  - key: password_encryption_secret
-    content: X322%wE@8@Ur6Pv
-  startCommand: ./bin/main.exe
-- hostname: phpapache
-  type: php-apache@8.0
-  mode: NON_HA
-  documentRoot: /var/www/public
-- hostname: objectstorage
-  type: object-storage@1
+  - key: CONNECTION_STRING
+    content: ${db_connectionString}
+  startCommand: npm start
+- hostname: db
+  type: mariadb@10.4
   mode: HA
-  objectStorageDiskGBytes: 2
 - hostname: sharedstorage
   type: shared-storage@1
-  mode: HA
+  mode: NON_HA
 ```
 
 ### project
