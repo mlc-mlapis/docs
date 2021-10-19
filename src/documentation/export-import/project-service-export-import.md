@@ -62,77 +62,111 @@ services:
   mode: HA
 ```
 
+### project
+
 **`project`**
 
-Project structure uses `name`, `description`, and `tags` items.
+A project structure uses `name`, `description`, and `tags` items.
+
+#### name
 
 `name`: string
 
-Existed project name, pre-pended by a prefix of `copy of` to differentiate it.
+A project name. When exported, it's pre-pended by a prefix of `copy of` to differentiate it.
+
+#### description
 
 `description`: string (optional)
 
-Project description, if entered.
+A project description, if entered.
+
+#### tags
 
 `tags`: Array[string] (optional)
 
 A sequence of project tags, if entered. Each of them on a separate line with the opening dash.
 
+### services
+
 **`services`**
 
 A sequence of project services (1~N). Several general items are shared across all service structures, and exception ones are used only in some.
+
+#### hostname
 
 `hostname`: string
 
 A chosen short and descriptive URL-friendly unique service name. Related to [MariaDB](/documentation/services/databases/mariadb.html#hostname-and-port), [MongoDB](/documentation/services/databases/mongodb.html#hostname-and-port), Redis, [Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), [PHP](/documentation/services/runtimes/php.html#hostname-and-port), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#object-storage-name), and [Shared Storage](/documentation/services/storage/shared.html#shared-storage-name).
 
+#### type
+
 `type`: dictionary
 
-Service type and chosen version. Each of the following service documentation specifies the available options: [MariaDB](/documentation/services/databases/mariadb.html#version-to-choose), [MongoDB](/documentation/services/databases/mongodb.html#version-to-choose), Redis, [Node.js](/documentation/services/runtimes/nodejs.html#version-to-choose), [Golang](/documentation/services/runtimes/golang.html#version-to-choose), [PHP](/documentation/services/runtimes/php.html#version-to-choose), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#version-to-choose), and [Shared Storage](/documentation/services/storage/shared.html#version-to-choose).
+A service type and its chosen version. Each of the following service documentation specifies the available options: [MariaDB](/documentation/services/databases/mariadb.html#version-to-choose), [MongoDB](/documentation/services/databases/mongodb.html#version-to-choose), Redis, [Node.js](/documentation/services/runtimes/nodejs.html#version-to-choose), [Golang](/documentation/services/runtimes/golang.html#version-to-choose), [PHP](/documentation/services/runtimes/php.html#version-to-choose), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#version-to-choose), and [Shared Storage](/documentation/services/storage/shared.html#version-to-choose).
+
+#### mode
 
 `mode`: dictionary
 
 Affects whether a service should be run in ==**`HA`**== (High Availability) mode, using 3 or more containers, or ==**`NON_HA`**== mode, using only 1 container. Related to [MariaDB](/documentation/services/databases/mariadb.html#ha-non-ha-database-mode), MongoDB, Redis, [Node.js](/documentation/services/runtimes/nodejs.html#ha-non-ha-runtime-environment-mode), [Golang](/documentation/services/runtimes/golang.html#ha-non-ha-runtime-environment-mode)), [PHP](/documentation/services/runtimes/php.html#ha-non-ha-runtime-environment-mode), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#used-technology) (**always runs only in HA mode**) , and [Shared Storage](/documentation/services/storage/shared.html#default-hardware-configuration-and-autoscaling).
 
+#### ports
+
 `ports`: Array[ServicePort] (optional)
 
 A sequence of service ports (1~N). Each one contains `port`, `protocol`, and `httpSupport` items.
 
-Related only to [Node.js](/documentation/services/runtimes/nodejs.html#port) and [Golang](/documentation/services/runtimes/golang.html#port) runtime environment services, where you can change it. The rest of the services have the ports preset, and you can't change them. That's the reason why this part is not included at their level, and if entered, it's ignored.
+Related only to [Node.js](/documentation/services/runtimes/nodejs.html#port) and [Golang](/documentation/services/runtimes/golang.html#port) runtime environment services, where you can set or change it. **You have to enter one port at least.** The rest of the services have the ports preset, and you can't change them. That's the reason why this part is not included at their level, and if entered, it's ignored.
+
+##### port
 
 `port`: integer
 
-Chosen port number.
+A chosen port number.
+
+##### protocol
 
 `protocol`: dictionary (optional)
 
-Chosen protocol. The default value is the ==`TCP`== and it does not have to be entered. The other possible option is the ==`UDP`== value.
+A chosen protocol. The default value is the ==`TCP`== and it does not have to be entered. The other possible option is the ==`UDP`== value.
+
+##### httpSupport
 
 `httpSupport`: boolean (optional)
 
 The default value ==`true`== indicates if a web server runs on the port (HTTP application protocol is supported), otherwise value ==`false`== is used. If enabled, it means that you can even map [public Internet domains](/documentation/routing/using-your-domain.html#using-your-domain-to-access-a-service) with the option of automatic support for SSL certificates (it also works for [Zerops subdomains](/documentation/routing/zerops-subdomain.html#zerops-subdomain-for-previews)).
 
+#### envVariables
+
 `envVariables`: Array[EnvironmentVariable] (optional)
 
 A sequence of [service environment variables](/documentation/environment-variables/how-to-access.html) (0~N). Each one contains `key` and `content` items.
 
+##### key
+
 `key`: string
 
-Environment variable key.
+An environment variable key.
+
+##### content
 
 `content`: string
 
-Environment variable content.
+An environment variable content.
+
+#### documentRoot (optional)
 
 `documentRoot`: string (optional)
 
-It's related only to the [PHP/Apache](/documentation/services/runtimes/php.html#setting-php-apache-document-root) service. The value represents a folder name used as the root of the publicly accessible web server content, usually the location of your `index.php`. By default, the document root is set to the `public` name when you create the service manually in the Zerops GUI.
+It's related only to the [PHP/Apache](/documentation/services/runtimes/php.html#setting-php-apache-document-root) service. The value represents a folder name used as the root of the publicly accessible web server content, usually the location of your `index.php`. The document root is set to the `public` name when you create the service manually in the Zerops GUI. **When using the import functionality, you have to enter also a value.**
+
+#### nginxConfig
 
 `nginxConfig`: string (optional)
 
-It's related only to the [PHP/Nginx](/documentation/services/runtimes/php.html#default-nginx-config)) service. The value represents the required content of the configuration `nginx.conf` file used by the Nginx server. The part of that configuration is also setting the value of a document root.
+It's related only to the [PHP/Nginx](/documentation/services/runtimes/php.html#default-nginx-config)) service. The value represents the required content of the configuration `nginx.conf` file used by the Nginx server. The part of that configuration is also setting the value of a document root. **When using the import functionality, you have to enter also the same or your customized config.**
 
-For example, this could be an exported value if a user would accept the default setting when creating the service in the Zerops GUI.
+For example, this could be the exported value if a user would accept the default setting when creating the service in the Zerops GUI.
 
 ```yaml
 services:
@@ -156,7 +190,7 @@ services:
           fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
           fastcgi_split_path_info ^(.+\.php)(/.*)$;
           include fastcgi_params;
-          
+
           fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
           fastcgi_param DOCUMENT_ROOT $realpath_root;
           internal;
@@ -166,3 +200,41 @@ services:
         error_log syslog:server=unix:/dev/log,facility=kern;
       }
 ```
+
+#### startCommand
+
+`startCommand`: string
+
+A command that should start your service. It will be triggered after each deployment or after you manually start or re-start it.
+
+Related only to [Node.js](/documentation/services/runtimes/nodejs.html#start-command) and [Golang](/documentation/services/runtimes/golang.html#start-command) runtime environment services, where you can specify it.
+
+#### objectStorageDiskGBytes
+
+`objectStorageDiskGBytes`: integer (optional)
+
+The default value is ==`2`== . It's related only to the [Object Storage](/documentation/services/storage/s3.html#required-disk-capacity) service. The value represents the required maximum amount of data in GB the Object Storage Service should be capable of holding.
+
+#### buildFromGit
+
+`buildFromGit`: string (optional)
+
+A public Git URL of a repository should be cloned by Zerops and used for building such a service, including the branch name. It allows fully automatic processing of the same steps as a user can manually do in the Zerops GUI (including selecting the `Build immediately after the service creation` checkbox). **There is a strict condition for using it. The repository has to be a public one.**
+
+The format of the URL should be: `https://<domain>@<branchName>`
+
+Related only to [Node.js](/documentation/services/runtimes/nodejs.html#how-to-deploy-application-code), [Golang](/documentation/services/runtimes/golang.html#how-to-deploy-application-code), and [PHP](/documentation/services/runtimes/php.html#how-to-deploy-application-code) runtime environment services.
+
+#### enableSubdomainAccess
+
+`enableSubdomainAccess`: boolean (optional)
+
+The default value is `false`. The value `true` allows to enable a [Zerops subdomain](/documentation/routing/zerops-subdomain.html) access immediately after a successful automatic build from a public repository specified by the `buildFromGit` item.
+
+## Current known limitations
+
+1. It's not possible use private repositories in combination with the `buildFromGit` item. If you want to import a service related to a private repository, you have to connect it manually in the Zerops GUI.
+
+2. When using shared storage services, neither the export nor the import is able to process the [storage mounting points](/documentation/services/storage/shared.html#storage-mounting) in relation to [Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-shared-storage), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-shared-storage), and [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage) runtime environment services.
+
+3. When importing several services, they are created parallelly and asynchronously, without the explicit order. You can't affect which one will be instantiated as the first and which as the last.
