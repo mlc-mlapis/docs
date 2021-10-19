@@ -35,7 +35,7 @@ There's only one namespace for all service hostnames, shared storage names, and 
 
 ### Storage mounting
 
-A shared storage disk can only be mounted to runtime environment services ([PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage), Node.js, Golang).
+A shared storage disk can only be mounted to runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-shared-storage), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-shared-storage), and [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage)).
 
 The mounting is done automatically by **enabling** the corresponding switch for an already existing runtime service to which you want to mount the storage. If you want to do it anytime after creating the service, return to its **Storage configuration** section in the service details and make the same change.
 

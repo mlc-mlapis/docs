@@ -21,6 +21,12 @@ module.exports = {
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
   ],
 
+  markdown: {
+    toc: {
+      includeLevel: [2, 3, 4, 5]
+    }
+  },
+
   /**
    * Theme configuration, here is the default theme configuration for VuePress.
    *
