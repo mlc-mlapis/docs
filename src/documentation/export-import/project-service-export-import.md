@@ -154,7 +154,7 @@ An environment variable key.
 
 An environment variable content.
 
-#### documentRoot (optional)
+#### documentRoot
 
 `documentRoot`: string (optional)
 
