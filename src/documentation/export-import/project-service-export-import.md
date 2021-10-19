@@ -158,13 +158,13 @@ An environment variable content.
 
 `documentRoot`: string (optional)
 
-It's related only to the [PHP/Apache](/documentation/services/runtimes/php.html#setting-php-apache-document-root) service. The value represents a folder name used as the root of the publicly accessible web server content, usually the location of your `index.php`. The document root is set to the `public` name when you create the service manually in the Zerops GUI. **When using the import functionality, you have to enter also a value.**
+It's related only to the [PHP/Apache](/documentation/services/runtimes/php.html#setting-php-apache-document-root) service. The value represents a folder name used as the root of the publicly accessible web server content, usually the location of your `index.php`. The document root is set to the `public` name when you create the service manually in the Zerops GUI. **When used with the import functionality, you have to enter a value.**
 
 #### nginxConfig
 
 `nginxConfig`: string (optional)
 
-It's related only to the [PHP/Nginx](/documentation/services/runtimes/php.html#default-nginx-config)) service. The value represents the required content of the configuration `nginx.conf` file used by the Nginx server. The part of that configuration is also setting the value of a document root. **When using the import functionality, you have to enter also the same or your customized config.**
+It's related only to the [PHP/Nginx](/documentation/services/runtimes/php.html#default-nginx-config)) service. The value represents the required content of the configuration `nginx.conf` file used by the Nginx server. The part of that configuration is also setting the value of a document root. **When used with the import functionality, you have to enter also the same or your customized config.**
 
 For example, this could be the exported value if a user would accept the default setting when creating the service in the Zerops GUI.
 
@@ -213,7 +213,7 @@ Related only to [Node.js](/documentation/services/runtimes/nodejs.html#start-com
 
 `objectStorageDiskGBytes`: integer (optional)
 
-The default value is ==`2`== . It's related only to the [Object Storage](/documentation/services/storage/s3.html#required-disk-capacity) service. The value represents the required maximum amount of data in GB the Object Storage Service should be capable of holding.
+It's related only to the [Object Storage](/documentation/services/storage/s3.html#required-disk-capacity) service. The value represents the required maximum amount of data in GB the Object Storage Service should be capable of holding. **When used with the import functionality, you have to enter a value.** The preset value, when working in the Zerops GUI, is ==`2`== GB.
 
 #### buildFromGit
 
