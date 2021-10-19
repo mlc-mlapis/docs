@@ -88,7 +88,7 @@ A chosen short and descriptive URL-friendly unique service name. Related to [Mar
 
 `type`: dictionary
 
-Service type and chosen version. Each service documentation specifies its available options: [MariaDB](/documentation/services/databases/mariadb.html#version-to-choose), [MongoDB](/documentation/services/databases/mongodb.html#version-to-choose), Redis, [Node.js](/documentation/services/runtimes/nodejs.html#version-to-choose), [Golang](/documentation/services/runtimes/golang.html#version-to-choose), [PHP](/documentation/services/runtimes/php.html#version-to-choose), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#version-to-choose), and [Shared Storage](/documentation/services/storage/shared.html#version-to-choose).
+Service type and chosen version. Each of the following service documentation specifies the available options: [MariaDB](/documentation/services/databases/mariadb.html#version-to-choose), [MongoDB](/documentation/services/databases/mongodb.html#version-to-choose), Redis, [Node.js](/documentation/services/runtimes/nodejs.html#version-to-choose), [Golang](/documentation/services/runtimes/golang.html#version-to-choose), [PHP](/documentation/services/runtimes/php.html#version-to-choose), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#version-to-choose), and [Shared Storage](/documentation/services/storage/shared.html#version-to-choose).
 
 `mode`: dictionary
 
@@ -123,3 +123,46 @@ Environment variable key.
 `content`: string
 
 Environment variable content.
+
+`documentRoot`: string (optional)
+
+It's related only to the [PHP/Apache](/documentation/services/runtimes/php.html#setting-php-apache-document-root) service. The value represents a folder name used as the root of the publicly accessible web server content, usually the location of your `index.php`. By default, the document root is set to the `public` name when you create the service manually in the Zerops GUI.
+
+`nginxConfig`: string (optional)
+
+It's related only to the [PHP/Nginx](/documentation/services/runtimes/php.html#default-nginx-config)) service. The value represents the required content of the configuration `nginx.conf` file used by the Nginx server. The part of that configuration is also setting the value of a document root.
+
+For example, this could be an exported value if a user would accept the default setting when creating the service in the Zerops GUI.
+
+```yaml
+services:
+  - hostname: phpnginx
+    type: php-nginx@8.0
+    mode: NON_HA
+    nginxConfig: |
+      server {
+        listen 80;
+        listen [::]:80;
+        
+        server_name _;
+        # Be sure that you set up a correct document root!
+        root /var/www/public;
+        
+        location / {
+          try_files $uri /index.php$is_args$args;
+        }
+        
+        location ~* \.php$ {
+          fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
+          fastcgi_split_path_info ^(.+\.php)(/.*)$;
+          include fastcgi_params;
+          
+          fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+          fastcgi_param DOCUMENT_ROOT $realpath_root;
+          internal;
+        }
+        
+        access_log syslog:server=unix:/dev/log,facility=kern default_short;
+        error_log syslog:server=unix:/dev/log,facility=kern;
+      }
+```

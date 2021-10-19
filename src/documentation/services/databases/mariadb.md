@@ -208,7 +208,7 @@ You can also force synchronization waits for causality checks on a cluster by [w
 
 Each container has separate local disk space, which can theoretically be used by appropriate APIs of the database service and thus store data outside the replicated contents of the database. It should be noted that such data is reserved only for this particular instance, not mirrored across the MariaDB Galera cluster nor backup-ed. It will not be migrated if such a container is deleted due to its failure. Also, separate direct access to an individual MariaDB instance is not supported in any way.
 
-Typical operations from the point of a container local disk space is a functionality of [SELECT INTO OUTFILE](https://mariadb.com/kb/en/select-into-outfile), [SELECT INTO DUMPFILE](https://mariadb.com/kb/en/select-into-dumpfile), [LOAD_FILE](https://mariadb.com/kb/en/load_file), or [LOAD DATA](https://dev.mysql.com/doc/refman/8.0/en/load-data.html). You can't save or load such data directly to any shared storage.
+We don't recommend to use any functionality of [SELECT INTO OUTFILE](https://mariadb.com/kb/en/select-into-outfile), [SELECT INTO DUMPFILE](https://mariadb.com/kb/en/select-into-dumpfile), [LOAD_FILE](https://mariadb.com/kb/en/load_file), or [LOAD DATA](https://dev.mysql.com/doc/refman/8.0/en/load-data.html). You can't save/load such data directly to/from any shared storage, and in the Galera HA cluster environment, it is impossible to predict which container the selected data will be stored on. Instead of that, use the standard functionality of the [export/import](/documentation/services/databases/mariadb.html#how-to-backup-restore-database-data) mechanism.
 
 ### Selected specifics of a Galera HA cluster
 
