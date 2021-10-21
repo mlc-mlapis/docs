@@ -177,6 +177,23 @@ Create a new Zerops [PHP service](/documentation/services/runtimes.html#php) and
 
 ![Adminer](./images/Adminer-Login.png "Adminer Login")
 
+You can also use the Zerops [import functionality](/documentation/export-import/project-service-export-import.html) to quickly add a service with Adminer to your project, which can be safely accessed using [Zerops VPN](/documentation/cli/vpn.html) built into the [zcli](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://adminer`). Use the Zerops [recipe-adminer](https://github.com/zeropsio/recipe-adminer) and the import syntax:
+
+```yaml
+services:
+  # Service will be accessible through zcli VPN under: http://adminer
+- hostname: adminer
+  # Type and version of a used service.
+  type: php-apache@8.0
+  # Whether the service will be run on one or multiple containers.
+  # Since this is a utility service, using only one container is fine.
+  mode: NON_HA
+  # Folder name used as the root of the publicly accessible web server content.
+  documentRoot: public
+  # Repository that contains adminer code with build and deploy instructions.
+  buildFromGit: https://github.com/zeropsio/recipe-adminer@main
+```
+
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Explanation of the phpMyAdmin security warning
 Zerops Routing Service (see the schema of a Zerops project with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access)) takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project's services. That's the reason why **phpMyAdmin** can see the difference between using HTTPS protocol on a client-side and HTTP protocol on a server-side. **From Zerops point of view, it's not a security risk**. It's the only positive falsy notification from the phpMyAdmin side (not supporting the `HTTP_X_FORWARDED_PROTO` HTTP header that says it has happened).

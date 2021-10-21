@@ -218,16 +218,26 @@ The format of the URL should be: `https://<domain>@<branchName>`
 
 Related only to [Node.js](/documentation/services/runtimes/nodejs.html#how-to-deploy-application-code), [Golang](/documentation/services/runtimes/golang.html#how-to-deploy-application-code), and [PHP](/documentation/services/runtimes/php.html#how-to-deploy-application-code) runtime environment services.
 
-#### enableSubdomainAccess
+## Secure access through VPN
 
-`enableSubdomainAccess`: boolean (optional)
-
-The default value is `false`. The value `true` allows to enable a [Zerops subdomain](/documentation/routing/zerops-subdomain.html) access immediately after a successful automatic build from a public repository specified by the `buildFromGit` item.
+Can use the [Zerops VPN](/documentation/cli/vpn.html) and securely access such a service through URL `http://<hostname>:<port>` inside your Zerops project network.
 
 ## Current known limitations
 
 1. It's not possible use private repositories in combination with the `buildFromGit` item. If you want to import a service related to a private repository, you have to connect it manually in the Zerops GUI.
 
-2. When using shared storage services, neither the export nor the import is able to process the [storage mounting points](/documentation/services/storage/shared.html#storage-mounting) in relation to [Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-shared-storage), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-shared-storage), and [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage) runtime environment services.
+2. You have to configure your [domains](/documentation/routing/using-your-domain.html), or [Zerops subdomains](/documentation/routing/zerops-subdomain.html) access directly in the Zerops GUI.
 
-3. When importing several services, they are created parallelly and asynchronously, without the explicit order. You can't affect which one will be instantiated as the first and which as the last.
+3. When using shared storage services, neither the export nor the import is able to process the [storage mounting points](/documentation/services/storage/shared.html#storage-mounting) in relation to [Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-shared-storage), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-shared-storage), and [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage) runtime environment services.
+
+4. When importing several services, they are created parallelly and asynchronously, without the explicit order. You can't affect which one will be instantiated as the first and which as the last.
+
+## Zerops recipes
+
+The concept of pre-prepared skeletons demonstrates the way how to set up and use technologies Zerops is supporting. They are using the import syntax to allow very fast creation of services utilizing such technologies.
+
+Here are some of them:
+
+* [recipe-adminer](https://github.com/zeropsio/recipe-adminer)
+
+Adminer is a full-featured database management tool written in PHP. Conversely to phpMyAdmin, it consist of a single file ready to deploy to the target server. Adminer is available for MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Elasticsearch, MongoDB and others via plugin.
