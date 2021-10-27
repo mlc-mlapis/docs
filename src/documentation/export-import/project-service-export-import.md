@@ -1,16 +1,16 @@
 # Export & import of Zerops projects and services structure
 
-Zerops export and import functionality can be used to make a copy of an existing project/service or as an alternative way to adding a new project/service manually through the Zerops GUI. It is important to note that only structure, configuration, and environment variables are exported/imported. Restoring application data related to databases ([MariaDB](/documentation/services/databases/mariadb.html#how-to-backup-restore-database-data), MongoDB, Redis), storage ([Object Storage](/documentation/services/storage/s3.html#using-rclone-as-a-local-management-tool), Shared Storage), and engines (Elasticsearch, RabbitMQ),  deploying applications, and setting up [public routing](/documentation/routing/using-your-domain.html) is up to a user.
+Zerops export and import functionality can be used to make a copy of an existing project/service or as an alternative to adding a new project/service manually through the Zerops GUI. It is important to note that only structure, configuration, and environment variables are exported/imported. Restoring application data related to databases ([MariaDB](/documentation/services/databases/mariadb.html#how-to-backup-restore-database-data), MongoDB, Redis), storage ([Object Storage](/documentation/services/storage/s3.html#using-rclone-as-a-local-management-tool), Shared Storage), and engines (Elasticsearch, RabbitMQ), deploying applications, and setting up [public routing](/documentation/routing/using-your-domain.html) is up to the specific user.
 
 [[TOC]]
 
 ## How to export / import a project
 
-You can find several places in the Zerops GUI where you can do it. The primary one for export is the main project menu, as shown in the following picture. The project is exported including all of its services.
+You can find several places in the Zerops GUI where you can do this. The primary one for export is the main project menu, as shown in the following picture. The project is exported including all of its services.
 
 ![Zerops exports](./images/Project-Export.png "Zerops project export")
 
-You can import the whole project, including all its services, on the same page you use for creating a new project manually.
+You can import the entire project including all of its services on the same page you use for creating a new project manually.
 
 ![Zerops imports](./images/Project-Import.png "Zerops project import")
 
@@ -24,7 +24,7 @@ Importing a project service can be done again in the project menu, as shown in t
 
 ## Used YAML specification
 
-Zerops uses a YAML definition format to describe the structures. If you make a project export, you can get something similar to the following. You can see two main parts, `project` and `services`. If you export a service separately, only the `services` part is there with that one exported service.
+Zerops uses a YAML definition format to describe the structures. If you make a project export, you can get something similar to the following. You can see two main parts, `project` and `services`. If you export a service separately, only the `services` part will be shown relative to the exported service.
 
 ```yaml
 project:
@@ -66,7 +66,7 @@ A project structure uses `name`, `description`, and `tags` items.
 
 `name`: string
 
-A project name. When exported, it's pre-pended by a prefix of `copy of` to differentiate it.
+A project name. When exported, it's pre-pended by the prefix of `copy of` to differentiate it.
 
 #### description
 
@@ -84,13 +84,13 @@ A sequence of project tags, if entered. Each of them on a separate line with the
 
 **`services`**
 
-A sequence of project services (1~N). Several general items are shared across all service structures, and exception ones are used only in some.
+A sequence of project services (1~N). Several general items are shared across all service structures, exceptional ones are used only in some cases.
 
 #### hostname
 
 `hostname`: string
 
-A chosen short and descriptive URL-friendly unique service name. Related to [MariaDB](/documentation/services/databases/mariadb.html#hostname-and-port), [MongoDB](/documentation/services/databases/mongodb.html#hostname-and-port), Redis, [Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), [PHP](/documentation/services/runtimes/php.html#hostname-and-port), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#object-storage-name), and [Shared Storage](/documentation/services/storage/shared.html#shared-storage-name).
+A chosen short and descriptive, URL-friendly unique service name. Related to [MariaDB](/documentation/services/databases/mariadb.html#hostname-and-port), [MongoDB](/documentation/services/databases/mongodb.html#hostname-and-port), Redis, [Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), [PHP](/documentation/services/runtimes/php.html#hostname-and-port), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#object-storage-name), and [Shared Storage](/documentation/services/storage/shared.html#shared-storage-name).
 
 #### type
 
@@ -102,7 +102,7 @@ A service type and its chosen version. Each of the following service documentati
 
 `mode`: dictionary
 
-Affects whether a service should be run in ==**`HA`**== (High Availability) mode, using 3 or more containers, or ==**`NON_HA`**== mode, using only 1 container. Related to [MariaDB](/documentation/services/databases/mariadb.html#ha-non-ha-database-mode), MongoDB, Redis, [Node.js](/documentation/services/runtimes/nodejs.html#ha-non-ha-runtime-environment-mode), [Golang](/documentation/services/runtimes/golang.html#ha-non-ha-runtime-environment-mode)), [PHP](/documentation/services/runtimes/php.html#ha-non-ha-runtime-environment-mode), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#used-technology) (**always runs only in HA mode**) , and [Shared Storage](/documentation/services/storage/shared.html#default-hardware-configuration-and-autoscaling).
+Affects whether a service should be run in ==**`HA`**== (High Availability) mode, using 3 or more containers, or ==**`NON_HA`**== mode, using only 1 container. Related to [MariaDB](/documentation/services/databases/mariadb.html#ha-non-ha-database-mode), MongoDB, Redis, [Node.js](/documentation/services/runtimes/nodejs.html#ha-non-ha-runtime-environment-mode), [Golang](/documentation/services/runtimes/golang.html#ha-non-ha-runtime-environment-mode)), [PHP](/documentation/services/runtimes/php.html#ha-non-ha-runtime-environment-mode), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#used-technology) (**always runs in HA mode**), and [Shared Storage](/documentation/services/storage/shared.html#default-hardware-configuration-and-autoscaling).
 
 #### ports
 
@@ -110,7 +110,7 @@ Affects whether a service should be run in ==**`HA`**== (High Availability) mode
 
 A sequence of service ports (1~N). Each one contains `port`, `protocol`, and `httpSupport` items.
 
-Related only to [Node.js](/documentation/services/runtimes/nodejs.html#port) and [Golang](/documentation/services/runtimes/golang.html#port) runtime environment services, where you can set or change it. **You have to enter one port at least.** The rest of the services have the ports preset, and you can't change them. That's the reason why this part is not included at their level, and if entered, it's ignored.
+Related only to the [Node.js](/documentation/services/runtimes/nodejs.html#port) and [Golang](/documentation/services/runtimes/golang.html#port) runtime environment services, where you can set or change it. **You have to enter one port at least.** The rest of the services have the ports preset, and you can't change them. That's why this part is not included at the service level, and if entered, is ignored.
 
 ##### port
 
@@ -152,13 +152,13 @@ An environment variable content.
 
 `documentRoot`: string (optional)
 
-It's related only to the [PHP/Apache](/documentation/services/runtimes/php.html#setting-php-apache-document-root) service. The value represents a folder name used as the root of the publicly accessible web server content, usually the location of your `index.php`. The document root is set to the `public` name when you create the service manually in the Zerops GUI. **When used with the import functionality, you have to enter a value.**
+This is related only to the [PHP/Apache](/documentation/services/runtimes/php.html#setting-php-apache-document-root) service. The value represents a folder name used as the root of the publicly accessible web server content, usually the location of your `index.php`. The document root is set to the `public` name when you create the service manually in the Zerops GUI. **When used with the import functionality, you have to enter a value.**
 
 #### nginxConfig
 
 `nginxConfig`: string (optional)
 
-It's related only to the [PHP/Nginx](/documentation/services/runtimes/php.html#default-nginx-config)) service. The value represents the required content of the configuration `nginx.conf` file used by the Nginx server. The part of that configuration is also setting the value of a document root. **When used with the import functionality, you have to enter also the same or your customized config.**
+This is related only to the [PHP/Nginx](/documentation/services/runtimes/php.html#default-nginx-config)) service. The value represents the required content of the configuration `nginx.conf` file used by the Nginx server. The part of that configuration is also setting the value of a document root. **When used with the import functionality, you also have to enter the same, or your customized config.**
 
 For example, this could be the exported value if a user would accept the default setting when creating the service in the Zerops GUI.
 
@@ -206,13 +206,13 @@ Related only to [Node.js](/documentation/services/runtimes/nodejs.html#start-com
 
 `objectStorageDiskGBytes`: integer (optional)
 
-It's related only to the [Object Storage](/documentation/services/storage/s3.html#required-disk-capacity) service. The value represents the required maximum amount of data in GB the Object Storage Service should be capable of holding. **When used with the import functionality, you have to enter a value.** The preset value, when working in the Zerops GUI, is ==`2`== GB.
+This is related only to the [Object Storage](/documentation/services/storage/s3.html#required-disk-capacity) service. The value represents the required maximum amount of data in GB the Object Storage Service should be capable of holding. **When used with the import functionality, you have to enter a value.** The preset value, when working in the Zerops GUI, is ==`2`== GB.
 
 #### buildFromGit
 
 `buildFromGit`: string (optional)
 
-A public Git URL of a repository should be cloned by Zerops and used for building such a service, including the branch name. It allows fully automatic processing of the same steps as a user can manually do in the Zerops GUI (including selecting the `Build immediately after the service creation` checkbox). **There is a strict condition for using it. The repository has to be a public one.**
+A public Git URL of a repository should be cloned by Zerops and used for building such a service, including the branch name. It allows for fully automatic processing of the same steps that can be taken manually by a user in the Zerops GUI (including selecting the `Build immediately after the service creation` checkbox). **There is a strict condition for using this. The repository has to be a public one.**
 
 The format of the URL should be: `https://<domain>@<branchName>`
 
@@ -220,24 +220,24 @@ Related only to [Node.js](/documentation/services/runtimes/nodejs.html#how-to-de
 
 ## Secure access through VPN
 
-Can use the [Zerops VPN](/documentation/cli/vpn.html) and securely access such a service through URL `http://<hostname>:<port>` inside your Zerops project network.
+Option to use the [Zerops VPN](/documentation/cli/vpn.html) and securely access such a service through URL `http://<hostname>:<port>` inside your Zerops project network.
 
 ## Current known limitations
 
-1. It's not possible use private repositories in combination with the `buildFromGit` item. If you want to import a service related to a private repository, you have to connect it manually in the Zerops GUI.
+1. It's not possible to use private repositories in combination with the `buildFromGit` item. If you want to import a service related to a private repository, you have to connect it manually in the Zerops GUI.
 
-2. You have to configure your [domains](/documentation/routing/using-your-domain.html), or [Zerops subdomains](/documentation/routing/zerops-subdomain.html) access directly in the Zerops GUI.
+2. You have to configure your [domain](/documentation/routing/using-your-domain.html), or [Zerops subdomain](/documentation/routing/zerops-subdomain.html) access directly in the Zerops GUI.
 
 3. When using shared storage services, neither the export nor the import is able to process the [storage mounting points](/documentation/services/storage/shared.html#storage-mounting) in relation to [Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-shared-storage), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-shared-storage), and [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage) runtime environment services.
 
-4. When importing several services, they are created parallelly and asynchronously, without the explicit order. You can't affect which one will be instantiated as the first and which as the last.
+4. When importing several services, they are created in parallel and asynchronously, without a specific order. You can't affect which one will be instantiated as the first and which one as the last.
 
 ## Zerops recipes
 
-The concept of pre-prepared skeletons demonstrates the way how to set up and use technologies Zerops is supporting. They are using the import syntax to allow very fast creation of services utilizing such technologies.
+The concept of pre-made skeletons demonstrates how to set up and use the technologies that Zerops is supporting. They are using the import syntax to allow very fast creation of services utilizing such technologies.
 
 Here are some of them:
 
 * [recipe-adminer](https://github.com/zeropsio/recipe-adminer)
 
-Adminer is a full-featured database management tool written in PHP. Conversely to phpMyAdmin, it consist of a single file ready to deploy to the target server. Adminer is available for MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Elasticsearch, MongoDB and others via plugin.
+Adminer is a full-featured database management tool written in PHP. Conversely to phpMyAdmin, it consist of a single file ready to deploy to the target server. Adminer is available for MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Elasticsearch, MongoDB, and others via a plugin.
