@@ -8,7 +8,7 @@ Data that are stored in a cluster are put into **pools**. Pools are logical repr
 
 **Placement Groups** (PGs) are used for the distribution of data within a pool. When creating a pool, a certain number of placement groups is set. The placement groups are used internally to group objects and are the essential factors for the performance of a Ceph cluster. **The object's name determines the PG for an object.**
 
-**Monitor nodes** maintain information about the cluster health state, a map of all nodes, and data distribution rules. Each **Storage node** has several physical hard disks/partitions attached, which are used as **OSDs** (Object Storage Devices) and managed by running **Ceph OSDs** (Object Storage Deamons).
+**Monitor nodes** maintain information about the cluster health state, a map of all nodes, and data distribution rules. Each **Storage node** has several physical hard disks/partitions attached, which are used as **OSDs** (Object Storage Devices) and managed by running **Ceph OSDs** (Object Storage Daemons).
 
 ![Zerops Object Storage Service](./images/Zerops-S3-Service-Detail.png "Zerops Object Storage Service")
 
