@@ -169,7 +169,6 @@ The important thing in such cases is choosing **facility number 17** ( ==`local1
 * Console methods do not support log severity levels, despite methods like console.warn(), console.error(), and console.debug(), respectively. Those are simply functions that print to the standard output or standard error without indicating log severity.
 
 * Those methods usually are synchronous functions when the destination is a terminal or a file, so they are not suitable for production very well unless you pipe the output to another program. **In the Zerops environment, the output is piped to a logger controller of the Project Core Service, so logging operations are processed asynchronously** (see [Detail of Project Core Service](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html) tab). The environment was tested for throughput around ~50K logs/second.
-
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
