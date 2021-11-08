@@ -150,6 +150,12 @@ When you configure and run a web server (for example, [Gin](https://github.com/g
 The important thing in such cases is choosing **facility number 17** ( ==`local1`== ) as the configuration option. The reason is the dedicated switch **Show web server logs** in the **Runtime log** view that allows you to show web access & error logs separately from standard application logs. It's important, especially from the access logs point of view, because there could be thousands and thousands of records.
 
 <!-- markdownlint-disable DOCSMD004 -->
+::: info Stdout & Stderr output streams
+**In the Zerops environment, the output is piped to a logger controller of the Project Core Service, so logging operations are processed asynchronously** (see [Detail of Project Core Service](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html) tab). The environment was tested for throughput around ~50K logs/second.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+<!-- markdownlint-disable DOCSMD004 -->
 ::: warning Supported facility numbers
 Don't use any other facility number except ==`local0`== and ==`local1`== as shown above. If you use another one (0 .. 15, 18 .. 23) by [RFC5424](https://datatracker.ietf.org/doc/html/rfc5424#section-6.2.1), they will be filtered out on the Zerops backend and you won't see them in the Zerops GUI. At the same time, **important** system messages originating from the container's runtime environment are checked and transparently included in the application logs, regardless of their original facility number, to inform the user.
 :::
