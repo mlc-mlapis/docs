@@ -135,6 +135,10 @@ fmt.Println("<4>Warning (4) severity > warning conditions.")
 fmt.Println("<5>Notice (5) severity > normal, but significant, condition.")
 fmt.Println("<6>Informational (6) severity > informational message.")
 fmt.Println("<7>Debug (7) severity > debug-level message.")
+
+fmt.Println("--- Ekvivalent syntax using Stderr & Stdout ---")
+fmt.Fprintf(os.Stderr, "<3>Error (3) severity > error conditions.\n")
+fmt.Fprintf(os.Stdout, "<0>Emergency (0) severity > system is unusable.\n")
 ```
 
 Then you can show log messages with **facility number 16** ( ==`local0`== ) in the **Runtime log** view and choose the severity level, or show all of them by selecting the **All** option. Keep the dedicated switch **Show web server logs** in the disabled state. It is related only to the web server access & error logs if anyone is operated in the runtime environment.
