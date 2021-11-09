@@ -121,7 +121,7 @@ Both console and **important** system messages coming from the container's runti
 
 ![Runtime log](./images/Runtime-Log.png "Runtime log access")
 
-All messages sent to **Stderr** (standard error file descriptor) or **Stdout** (standard output file descriptor), using the Golang `fmt` package, are processed via **Linux Systemd daemon** as log messages with **facility number 16** ( ==`local0`== ) and **severity 6** (**Informational**) by default (see [RFC5424](https://datatracker.ietf.org/doc/html/rfc5424#section-6.2.1)).
+All messages sent to **Stderr** (standard error file descriptor) or **Stdout** (standard output file descriptor), using the Golang `fmt` or `log` packages, are processed via **Linux Systemd daemon** as log messages with **facility number 16** ( ==`local0`== ) and **severity 6** (**Informational**) by default (see [RFC5424](https://datatracker.ietf.org/doc/html/rfc5424#section-6.2.1)).
 
 If you want to set another severity, use a message prefix ==`<N>`== to encode such a log severity in printed lines, as shown below.
 
@@ -135,6 +135,11 @@ fmt.Println("<4>Warning (4) severity > warning conditions.")
 fmt.Println("<5>Notice (5) severity > normal, but significant, condition.")
 fmt.Println("<6>Informational (6) severity > informational message.")
 fmt.Println("<7>Debug (7) severity > debug-level message.")
+
+log.SetFlags(0) // To eliminate a timestamp as a default message prefix.
+log.Println("--- Ekvivalent using log package ---")
+log.Println("A message with the informational severity ...")
+log.Println("<0>Emergency (0) severity > system is unusable.")
 
 fmt.Println("--- Ekvivalent syntax using Stderr & Stdout ---")
 fmt.Fprintf(os.Stderr, "<3>Error (3) severity > error conditions.\n")
