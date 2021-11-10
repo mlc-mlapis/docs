@@ -151,7 +151,11 @@ Other services can access the Node.js application using its **hostname** and **p
 
 It's always recommended to not set the configuration values as constants directly into the application code. It is preferable to use them indirectly, for example, via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), referencing Zerops [implicit environment variables](/documentation/environment-variables/helper-variables.htm) and given that [all environment variables](/documentation/environment-variables/how-to-access.html) are shared within the project across all services.
 
-### From the local environment
+### From other Zerops projects
+
+Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, the cross projects communication can be done precisely in the same ways described in the section [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. The projects are not directly interconnected.
+
+### From your local environment
 
 The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
 
@@ -159,7 +163,7 @@ You can access the Zerops Node.js Service from your local workspace by using the
 
 You can also run an application fully in your local workspace and access other services in the Zerops project using the VPN. However, you cannot use references to the environment variables because you are outside of the project's network. Therefore, you should copy the values manually if you need some of them and use them in your private local configuration strategy.
 
-### From the external Internet environment
+### From your public domains (common Internet environment)
 
 The Zerops [routing system](/documentation/routing/using-your-domain.html) allows you to set the mappings between the service [internal ports](#port) and external Internet access. In general, Zerops doesn’t try to detect which ports your application is running. Instead, it relies on the user to let Zerops know.
 
