@@ -6,6 +6,37 @@ Zerops provides a fully managed and scaled Node.js runtime service, suitable for
 
 ## Adding the Node.js Service in Zerops
 
+Zerops Node.js service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers). It has pre-installed NPM and YARN package managers, allowing you to install any package during the build stage you want, together with the Git version control system.
+
+### Two ways how to do it
+
+You have two possible ways to create a new Node.js service. Either manually in the Zerops GUI, as described in the [rest of this document](#version-to-choose), or using Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+
+#### Simple import example in the YAML syntax
+
+Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following.
+
+```yaml
+services:
+# Service will be accessible through zcli VPN under: http://app
+- hostname: app
+  # Type and version of a used service.
+  type: nodejs@14
+  # Whether the service will be run on one or multiple containers.
+  # Since this is a simple example, using only one container is fine.
+  mode: NON_HA
+  ports:
+  # Internal port number.
+  - port: 3000
+    # If a web server is running on the port.
+    httpSupport: true
+  # A command that should start your service.
+  # It will be triggered after each deployment or after you manually start or re-start it.
+  startCommand: npm start
+```
+
+A complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+
 ### Version to choose
 
 You can currently choose Node.js version **v14.17**, **v12.13**, or **v10.17**. The chosen version of it **can't be changed afterward**.
@@ -29,15 +60,13 @@ Choose a short and descriptive URL-friendly name, for example, **app**. The foll
 
 ### Port
 
-The **Node.js** service, together with the [Golang service](/documentation/services/runtimes/golang.html), is the only one that allows you to use **any port number** you want. The service can even have [multiple internal ports](/documentation/routing/routing-between-project-services.html) open (**1** - **65535**), running on **tcp** or **udp** protocols. The port will be preset to the **==tcp==** protocol and the value of **==3000==**. You can change it immediately or anytime after that.
-
-Additionally, the Zerops [routing system](/documentation/routing/using-your-domain.html) allows you to set the mappings between those internal ports and external Internet access. If you run a web server on that internal port (HTTP application protocol is supported), it means that you can even map [public Internet domains](/documentation/routing/using-your-domain.html) with the option of automatic support for SSL certificates (it also works for Zerops [subdomains](/documentation/routing/zerops-subdomain.html)).
+The **Node.js** service is one of the Zerops services that allows you to use **any port number** you want. The service can even have [multiple internal ports](/documentation/routing/routing-between-project-services.html) open (**1** - **65535**), running on **tcp** or **udp** protocols. The port will be preset to the **==tcp==** protocol and the value of **==3000==**. You can change it immediately or anytime after that.
 
 ![Custom Port](./images/Edit-Custom-Port-3000.png "Edit Custom Port")
 
-Because domain access or subdomains can only be enabled for **tcp** ports with support for HTTP, the checkbox **HTTP protocol support** allows for marking such a case. In turn, Zerops uses this flag to optimize its internal logic to offer this option and SSL certificates only in handy places.
+Because public domain access or Zerops subdomains can only be enabled for **tcp** ports with support for HTTP, the checkbox **HTTP protocol support** allows for marking such a case. In turn, Zerops uses this flag to optimize its internal logic to offer this option and SSL certificates only in handy places. These ports are used to set up public Internet access as described in the section [From the external Internet environment](#from-the-external-internet-environment).
 
-To understand this better, take look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**. In general, the logic is not that you would open some ports primarily in Zerops and thus put some functionality into operation, but that the given Node.js application in a particular container binds to a local port (e.g., 3000). The following setting in Zerops then only creates the path to it. In other words, nothing is accessible at the beginning from the outside, and you will map only a specific route with this setting.
+![Public Routing](./images/Public-Routing-Overview.png "Public Routing Overview")
 
 ### Start Command
 
@@ -77,9 +106,15 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 * the need to respect all of the [specifics](#what-you-should-remember-when-using-the-ha-mode) related to a Node.js cluster,
 * recommended for production projects.
 
-### How to deploy application code
+## How to deploy application code
 
-There are **two ways** by which you can deliver application code to the service. Either via a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or by using the Zerops **zcli** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Preface
+Conceptually, you can either use Zerops deploy functionality to upload already built application files to Zerops, say at the end of your existing CI/CD pipeline, or utilize Zerops build & deploy pipeline, which can build and then deploy the application for you automatically.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+There are **two ways** by which you can physically deliver application code to the service. Either via a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or by using the Zerops **zcli** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
 
 When a Zerops service has been connected to a GitHub or GitLab repository, you can select the checkbox `Build immediately after the service creation` to run the first build immediately after the service creation. Otherwise, you have to make a **new commit/tag** to invoke that first [build & deploy](http://localhost:8081/documentation/build/how-zerops-build-works.html) pipeline task.
 
@@ -124,14 +159,20 @@ You can access the Zerops Node.js Service from your local workspace by using the
 
 You can also run an application fully in your local workspace and access other services in the Zerops project using the VPN. However, you cannot use references to the environment variables because you are outside of the project's network. Therefore, you should copy the values manually if you need some of them and use them in your private local configuration strategy.
 
+### From the external Internet environment
+
+The Zerops [routing system](/documentation/routing/using-your-domain.html) allows you to set the mappings between the service [internal ports](#port) and external Internet access. In general, Zerops doesn’t try to detect which ports your application is running. Instead, it relies on the user to let Zerops know.
+
+If you run **a web server** on that internal port (HTTP protocol support checkbox is selected), it means that you can map [public Internet domains](/documentation/routing/using-your-domain.html) with the option of automatic support for SSL certificates (also works for Zerops [subdomains](/documentation/routing/zerops-subdomain.html)).
+
+You can also [open public ports](/documentation/routing/access-through-ip-and-firewall.html) on the [IP addresses](/documentation/routing/unique-ipv4-ipv6-addresses.html) assigned to the project and point them to a service and its internal port. Each public port on the IP address can be protected with a built-in [firewall](/documentation/routing/access-through-ip-and-firewall.html#firewall).
+
+To understand this better, take a look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
+
 ## Default hardware configuration and autoscaling
 
 * Each Node.js container (1 in non-HA, 3 in HA) starts with 1 vCPU, 0.25 GB RAM, and 5 GB of disk space.
 * Zerops will automatically scale the resources vertically (both in non-HA and HA mode up to 32 vCPU, 128 GB RAM, 1 TB disk space) and horizontally (HA mode only up to 64 containers).
-
-## Pre-installed NPM and YARN
-
-Both package managers are installed in each Node.js container. You can install any package during build stage you want.
 
 ## Logging
 
