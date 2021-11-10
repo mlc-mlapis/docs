@@ -66,7 +66,7 @@ The **Node.js** service is one of the Zerops services that allows you to use **a
 
 Because public domain access or Zerops subdomains can only be enabled for **tcp** ports with support for HTTP, the checkbox **HTTP protocol support** allows for marking such a case. In turn, Zerops uses this flag to optimize its internal logic to offer this option and SSL certificates only in handy places. These ports are used to set up public Internet access as described in the section [From the external Internet environment](#from-the-external-internet-environment).
 
-![Public Routing](./images/Public-Routing-Overview.png "Public Routing Overview")
+![Public Routing](./images/Public-Routing-Overview-NodeJS.png "Public Routing Overview")
 
 ### Start Command
 
