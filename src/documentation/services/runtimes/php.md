@@ -6,6 +6,31 @@ Zerops provides a fully managed and scaled PHP runtime service, suitable for bot
 
 ## Adding the PHP Service in Zerops
 
+Zerops PHP service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers). It has pre-installed the [Composer dependency manager](#pre-installed-php-composer), a lot of popular [PHP modules and extensions](#pre-installed-php-modules-and-extensions), together with the Git version control system.
+
+### Two ways how to do it
+
+You have two possible ways to create a new PHP service. Either manually in the Zerops GUI, as described in the [rest of this document](#version-to-choose), or using Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+
+#### Simple import example in the YAML syntax
+
+Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following. It's the case when the Apache web server is used, but similar syntax can also be used for the Nginx web server.
+
+```yaml
+services:
+# Service will be accessible through zcli VPN under: http://app
+- hostname: app
+  # Type and version of a used service combined with the Apache web server.
+  type: php-apache@8.0
+  # Whether the service will be run on one or multiple containers.
+  # Since this is a simple example, using only one container is fine.
+  mode: NON_HA
+  # Folder name used as the root of the publicly accessible web server content.
+  documentRoot: public
+```
+
+A complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+
 ### Version to choose
 
 You can currently choose PHP version **v8.0**, **v7.4**, or **v7.3**. The chosen version of it **can't be changed afterward**. The service is always combined with a web server. It can be either **Apache v2.4** or **Nginx v1.18**. Differences and configuration specifics to each web server are listed below.
@@ -82,7 +107,7 @@ location ^~ /uploads/ {
 }
 ```
 
-* Ensure that used **storage log paths** at the point marked <span style="background-color: #8000ff; color: white">&nbsp;[**6**]&nbsp;</span> for the **access_log** and the **error_log** are correct.
+* ==**`Don't modify`**== **storage log paths** at the point marked <span style="background-color: #8000ff; color: white">&nbsp;[**6**]&nbsp;</span> for the **access_log** and the **error_log**. The chosen facility ==`local1`== is related to the mechanism of showing [runtime logs](#logging) in the Zerops GUI.
 
 ### HA / non-HA runtime environment mode
 
@@ -164,13 +189,25 @@ Other services can access the PHP application using its **hostname** and **port*
 
 It's always recommended to not set the configuration values as constants directly into the application code. It is preferable to use them indirectly, for example, via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), referencing Zerops [implicit environment variables](/documentation/environment-variables/helper-variables.htm) and given that [all environment variables](/documentation/environment-variables/how-to-access.html) are shared within the project across all services.
 
-### From the local environment
+### From other Zerops projects
+
+Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, the cross projects communication can be done precisely in the same ways described in the section [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. The projects are not directly interconnected.
+
+### From your local environment
 
 The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
 
 You can access the Zerops PHP Service from your local workspace by using the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as mentioned above. This might come in handy if you, for example, use the service as a REST API and you don’t want it publicly available (via [public domains](/documentation/routing/using-your-domain.html) or Zerops [subdomains](/documentation/routing/zerops-subdomain.html)), so you connect to the project using **zcli VPN** and use ==`app:80`== as your API endpoint.
 
 You can also run an application fully in your local workspace and access other services in the Zerops project using the VPN. However, you cannot use references to the environment variables because you are outside of the project's network. Therefore, you should copy the values manually if you need some of them and use them in your private local configuration strategy.
+
+### From your public domains (common Internet environment)
+
+The Zerops [routing system](/documentation/routing/using-your-domain.html) allows you to set the mappings between the service [internal port](#port) and external Internet access. Because the port is implicitly fixed, Zerops knows how to do it.
+
+**The web server** runs always on that internal port, and it means that you can map [public Internet domains](/documentation/routing/using-your-domain.html) with the option of automatic support for SSL certificates (also works for Zerops [subdomains](/documentation/routing/zerops-subdomain.html)).
+
+To understand this better, take a look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
 
 ## Default hardware configuration and autoscaling
 
