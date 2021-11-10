@@ -6,6 +6,38 @@ Zerops provides a fully managed and scaled Golang runtime service, suitable for 
 
 ## Adding the Golang Service in Zerops
 
+Zerops Golang service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers). It has pre-installed the Git version control system.
+
+### Two ways how to do it
+
+You have two possible ways to create a new Golang service. Either manually in the Zerops GUI, as described in the [rest of this document](#version-to-choose), or using Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+
+#### Simple import example in the YAML syntax
+
+Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following.
+
+```yaml
+services:
+# Service will be accessible through zcli VPN under: http://app
+- hostname: app
+  # Type and version of a used service.
+  type: golang@1
+  # Whether the service will be run on one or multiple containers.
+  # Since this is a simple example, using only one container is fine.
+  mode: NON_HA
+  ports:
+  # Internal port number.
+  - port: 8080
+    # If a web server is running on the port.
+    httpSupport: true
+  # A command that should start your service.
+  # It will be triggered after each deployment or after you manually start or re-start it.
+  # The executable can be created using a command: go build -o ./bin/server ./app/server.go
+  startCommand: ./bin/server
+```
+
+A complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+
 ### Version to choose
 
 You can currently only choose Golang version **v1.16**.
@@ -23,15 +55,13 @@ Choose a short and descriptive URL-friendly name, for example, **app**. The foll
 
 ### Port
 
-The **Golang** service, together with the [Node.js service](/documentation/services/runtimes/nodejs.html), is the only one that allows you to use **any port number** you want. The service can even have [multiple internal ports](/documentation/routing/routing-between-project-services.html) open (**1** - **65535**), running on **tcp** or **udp** protocols. The port will be preset to the **==tcp==** protocol and the value of **==8080==**. You can change it immediately or anytime after that.
-
-Additionally, the Zerops [routing system](/documentation/routing/using-your-domain.html) allows you to set the mappings between those internal ports and external Internet access. If you run a web server on that internal port (HTTP application protocol is supported), it means that you can even map [public Internet domains](/documentation/routing/using-your-domain.html) with the option of automatic support for SSL certificates (it also works for Zerops [subdomains](/documentation/routing/zerops-subdomain.html)).
+The **Golang** service is one of the Zerops services that allows you to use **any port number** you want. The service can even have [multiple internal ports](/documentation/routing/routing-between-project-services.html) open (**1** - **65535**), running on **tcp** or **udp** protocols. The port will be preset to the **==tcp==** protocol and the value of **==8080==**. You can change it immediately or anytime after that.
 
 ![Custom Port](./images/Edit-Custom-Port-8080.png "Edit Custom Port")
 
-Because domain access or subdomains can only be enabled for **tcp** ports with support for HTTP, the checkbox **HTTP protocol support** allows for marking such a case. In turn, Zerops uses this flag to optimize its internal logic to offer this option and SSL certificates only in handy places.
+Because domain access or subdomains can only be enabled for **tcp** ports with support for HTTP, the checkbox **HTTP protocol support** allows for marking such a case. In turn, Zerops uses this flag to optimize its internal logic to offer this option and SSL certificates only in handy places. These ports are used to set up public Internet access as described in the section [From the external Internet environment](#from-the-external-internet-environment).
 
-To understand this better, take look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**. In general, the logic is not that you would open some ports primarily in Zerops and thus put some functionality into operation, but that the given Golang application in a particular container binds to a local port (e.g., 8080). The following setting in Zerops then only creates the path to it. In other words, nothing is accessible at the beginning from the outside, and you will map only a specific route with this setting.
+![Public Routing](./images/Public-Routing-Overview-Golang.png "Public Routing Overview")
 
 ### Start Command
 
@@ -108,13 +138,27 @@ Other services can access the Golang application using its **hostname** and **po
 
 It's always recommended to not set the configuration values as constants directly into the application code. It is preferable to use them indirectly, for example, via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), referencing Zerops [implicit environment variables](/documentation/environment-variables/helper-variables.htm) and given that [all environment variables](/documentation/environment-variables/how-to-access.html) are shared within the project across all services.
 
-### From the local environment
+### From other Zerops projects
+
+Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, the cross projects communication can be done precisely in the same ways described in the section [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. The projects are not directly interconnected.
+
+### From your local environment
 
 The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
 
 You can access the Zerops Golang Service from your local workspace by using the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as mentioned above. This might come in handy if you, for example, use the service as a REST API and you don’t want it publicly available (via [public domains](/documentation/routing/using-your-domain.html) or Zerops [subdomains](/documentation/routing/zerops-subdomain.html)), so you connect to the project using **zcli VPN** and use ==`app:8080`== as your API endpoint.
 
 You can also run an application fully in your local workspace and access other services in the Zerops project using the VPN. However, you cannot use references to the environment variables because you are outside of the project's network. Therefore, you should copy the values manually if you need some of them and use them in your private local configuration strategy.
+
+### From your public domains (common Internet environment)
+
+The Zerops [routing system](/documentation/routing/using-your-domain.html) allows you to set the mappings between those internal ports and external Internet access. In general, Zerops doesn’t try to detect which ports your application is running. Instead, it relies on the user to let Zerops know.
+
+If you run a **web server** on that internal port (HTTP protocol support checkbox is selected), it means that you can map [public Internet domains](/documentation/routing/using-your-domain.html) with the option of automatic support for SSL certificates (also works for Zerops [subdomains](/documentation/routing/zerops-subdomain.html)).
+
+You can also [open public ports](/documentation/routing/access-through-ip-and-firewall.html) on the [IP addresses](/documentation/routing/unique-ipv4-ipv6-addresses.html) assigned to the project and point them to a service and its internal port. Each public port on the IP address can be protected with a built-in [firewall](/documentation/routing/access-through-ip-and-firewall.html#firewall).
+
+To understand this better, take a look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
 
 ## Default hardware configuration and autoscaling
 
