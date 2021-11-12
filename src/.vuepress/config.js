@@ -246,6 +246,7 @@ module.exports = {
             'how-to-do/build-and-deploy-and-run-nestjs-angular-app',
             'how-to-do/how-to-prepare-phpmyadmin-application-kit',
             'how-to-do/how-to-prepare-adminer-application-kit',
+            'how-to-do/how-to-prepare-simple-nginx-web',
             'how-to-do/using-object-storage-in-php',
             'how-to-do/using-object-storage-in-nodejs',
             'how-to-do/using-object-storage-in-golang'
