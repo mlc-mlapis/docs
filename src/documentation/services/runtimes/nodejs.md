@@ -147,7 +147,7 @@ The runtime environment service is not configured to support direct access using
 
 ### From other services inside the project
 
-Other services can access the Node.js application using its **hostname** and **port**, as they are part of the same private project network.
+Other services can access the Node.js application using its **hostname** and **port**, as they are part of the same private project network (for example, `http://app:3000`).
 
 It's always recommended to not set the configuration values as constants directly into the application code. It is preferable to use them indirectly, for example, via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), referencing Zerops [implicit environment variables](/documentation/environment-variables/helper-variables.htm) and given that [all environment variables](/documentation/environment-variables/how-to-access.html) are shared within the project across all services.
 
@@ -180,7 +180,7 @@ To understand this better, take a look at the section [With external access](/do
 
 ## Logging
 
-Both console and **important** system messages coming from the container's runtime environment are configured using a syslog service to centralize all records and allowing live access through the **Runtime log** tab inside your service detail for each Zerops service container. It's not necessary to refresh the view. New logs are automatically passed through a web socket channel and shown immediately.
+Both console and **important** system messages coming from the container's runtime environment are configured using a syslog service to centralize all records and allow live access through the **Runtime log** tab inside your service detail for each Zerops service container. It's not necessary to refresh the view. New logs are automatically passed through a web socket channel and shown immediately.
 
 ![Runtime log](./images/Runtime-Log.png "Runtime log access")
 
@@ -200,13 +200,13 @@ console.log('<6>Informational (6) severity > informational message.');
 console.log('<7>Debug (7) severity > debug-level message.');
 ```
 
-Then you can show log messages with **facility number 16** ( ==`local0`== ) in the **Runtime log** view and choose the severity level, or show all of them by selecting the **All** option. Keep the dedicated switch **Show web server logs** in the disabled state. It is related only to the web server access & error logs if anyone is operated in the runtime environment.
+Then you can show log messages with **facility number 16** ( ==`local0`== ) in the **Runtime log** view and choose the severity level, or show all of them by selecting the **All** option. Keep the dedicated switch ==**`Show web server logs`**== in the disabled state. It is related only to the web server access & error logs if anyone is operated in the runtime environment.
 
 ![Logs](./images/Log_Records_Severities_NodeJS.png "Logs by severity")
 
 When you configure and run a web server (for example, [Express](https://www.npmjs.com/package/express), [NestJS](https://nestjs.com), [Koa](https://koajs.com)) as a part of application code, you may have reasons to make logging by a different way, for example, using logging libraries like [Winston](https://www.npmjs.com/package/winston), [Bunyan](https://www.npmjs.com/package/bunyan), or [Syslog-client](https://www.npmjs.com/package/syslog-client). These could be more suitable for your projects, especially for the production environment.
 
-The important thing in such cases is choosing **facility number 17** ( ==`local1`== ) as the configuration option. The reason is the dedicated switch **Show web server logs** in the **Runtime log** view that allows you to show web access & error logs separately from standard application logs. It's important, especially from the access logs point of view, because there could be thousands and thousands of records.
+The important thing in such cases is choosing **facility number 17** ( ==`local1`== ) as the configuration option. The reason is the dedicated switch ==**`Show web server logs`**== in the **Runtime log** view that allows you to show web access & error logs separately from standard application logs. It's important, especially from the access logs point of view, because there could be thousands and thousands of records.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Console methods
