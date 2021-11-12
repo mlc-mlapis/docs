@@ -198,7 +198,14 @@ module.exports = {
                 'services/runtimes/php'
               ]
             },
-            'services/static-servers',
+            {
+              "type": "group",
+              "title": "Static servers",
+              "collapsable": false,
+              "children": [
+                'services/static-servers/nginx'
+              ]
+            },
             {
               "type": "group",
               "title": "Databases",

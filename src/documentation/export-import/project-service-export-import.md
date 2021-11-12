@@ -158,9 +158,9 @@ This is related only to the [PHP/Apache](/documentation/services/runtimes/php.ht
 
 `nginxConfig`: string (optional)
 
-This is related only to the [PHP/Nginx](/documentation/services/runtimes/php.html#default-nginx-config)) service. The value represents the required content of the configuration `nginx.conf` file used by the Nginx server. The part of that configuration is also setting the value of a document root. **When used with the import functionality, you also have to enter the same, or your customized config.**
+This is related only to the [PHP/Nginx](/documentation/services/runtimes/php.html#default-nginx-config) and static [Nginx](/documentation/services/static-servers/nginx.html#default-nginx-config) services. The value represents the required content of the configuration `nginx.conf` file used by the Nginx server. The part of that configuration is also setting the value of a document root. **When used with the import functionality, you also have to enter the same, or your customized config.**
 
-For example, this could be the exported value if a user would accept the default setting when creating the service in the Zerops GUI.
+For example, this could be the exported value if a user would accept the default setting when creating the PHP/Nginx service in the Zerops GUI.
 
 ```yaml
 services:

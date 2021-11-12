@@ -50,11 +50,11 @@ A project can contain an [unlimited number of services](/documentation/overview/
 
 ### Runtime environments
 
-[Node.js](/documentation/services/runtimes.html#node-js), [Golang](/documentation/services/runtimes.html#golang), [PHP](/documentation/services/runtimes/php.html)
+[Node.js](/documentation/services/runtimes/nodejs.html), [Golang](/documentation/services/runtimes/golang.html), [PHP](/documentation/services/runtimes/php.html)
 
-### Static web server services
+### Static server services
 
-[Nginx](/documentation/services/static-servers.html)
+[Nginx](/documentation/services/static-servers/nginx.html)
 
 ### Database services
 

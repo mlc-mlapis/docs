@@ -1,3 +1,3 @@
 # Static servers
 
-## Nginx
+* [Nginx](/documentation/services/static-servers/nginx.html)

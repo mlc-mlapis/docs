@@ -88,7 +88,7 @@ You can make changes later to the **document root** as well, just do so through 
 
 ![PHP+Nginx](./images/PHP-Nginx-Document-Root.png "Document root")
 
-* You can adjust the default config (with the pre-defined content specific for each PHP engine version) as you wish, as long as you respect the correct syntax and valid paths. However, there is one exception. **==Don't modify port 80==** at the point marked <span style="background-color: #ff8080">&nbsp;[**1**]&nbsp;</span>. If you do, you will break your project.
+* You can adjust the default config (with the pre-defined content specific for each PHP engine version) as you wish, as long as you respect the correct syntax and valid paths. However, there are two exceptions. First, **==don't modify port 80==** at the point marked <span style="background-color: #ff8080">&nbsp;[**1**]&nbsp;</span>. If you do, you will break your project.
 
 * Defined separated **document root** as a subdirectory such as **public** `/var/www/public` (optional name) or keeping it identical with the service **code root** `/var/www` at the marked point <span style="background-color: #ffff00">&nbsp;[**2**]&nbsp;</span>.
 
@@ -107,7 +107,9 @@ location ^~ /uploads/ {
 }
 ```
 
-* ==**`Don't modify`**== **storage log paths** at the point marked <span style="background-color: #8000ff; color: white">&nbsp;[**6**]&nbsp;</span> for the **access_log** and the **error_log**. The chosen facility ==`local1`== is related to the mechanism of showing [runtime logs](#logging) in the Zerops GUI.
+* And as the second exception, ==**`don't modify`**== **storage log paths** at the point marked <span style="background-color: #8000ff; color: white">&nbsp;[**6**]&nbsp;</span> for the **access_log** and the **error_log**. The chosen facility ==`local1`== is related to the mechanism of showing [runtime logs](#logging) in the Zerops GUI.
+
+* The configuration syntax is validated on saving with `nginx -t` command.
 
 ### HA / non-HA runtime environment mode
 
@@ -185,7 +187,7 @@ The runtime environment service is not configured to support direct access using
 
 ### From other services inside the project
 
-Other services can access the PHP application using its **hostname** and **port**, as they are part of the same private project network.
+Other services can access the PHP application using its **hostname** and **port**, as they are part of the same private project network (for example, `http://app` , where the port `:80` is implicit).
 
 It's always recommended to not set the configuration values as constants directly into the application code. It is preferable to use them indirectly, for example, via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), referencing Zerops [implicit environment variables](/documentation/environment-variables/helper-variables.htm) and given that [all environment variables](/documentation/environment-variables/how-to-access.html) are shared within the project across all services.
 
@@ -280,25 +282,25 @@ file_uploads = Off
 
 ## Logging
 
-Application logs, together with web access and error logs are configured using a syslog service to centralize all records and allowing live access through the **Runtime log** tab inside your service detail for each Zerops service container. It's not necessary to refresh the view. New logs are automatically passed through a web socket channel and shown immediately.
+Application logs, together with web access and error logs are configured using a syslog service to centralize all records and allow live access through the **Runtime log** tab inside your service detail for each Zerops service container. It's not necessary to refresh the view. New logs are automatically passed through a web socket channel and shown immediately.
 
 ![Runtime log](./images/Runtime-Log.png "Runtime log access")
 
 Default **Apache** configuration is done through `/etc/apache2/sites-enabled/vhost.conf`, and you don't have direct edit access to its content. **You can't change it**.
 
-```shell
+```bash
 CustomLog "| /usr/bin/logger -thttpd -plocal1.notice" combined
 ErrorLog  "| /usr/bin/logger -thttpd -plocal1.err"
 ```
 
 Default **Nginx** configuration is done through `/etc/nginx/sites-enabled/default.site`, and you have direct edit access to its content through the [Nginx configuration](#default-nginx-config) section. **You can change it**, but be careful what you are doing.
 
-```shell
+```bash
 access_log syslog:server=unix:/dev/log,facility=local1 default_short;
 error_log syslog:server=unix:/dev/log,facility=local1;
 ```
 
-As you can see in both cases, **web access & error logs** are directed with **facility number 17** ( ==`local1`== ). This is an important fact, as the Zerops GUI has a dedicated switch (**Show web server logs**) for showing them when enabled. Access logs are set up with **severity 6** (**Informational**) and error logs with **severity 4** (**Error**).
+As you can see in both cases, **web access & error logs** are directed with **facility number 17** ( ==`local1`== ). This is an important fact, as the Zerops GUI has a dedicated switch ==**`Show web server logs`** for showing them when enabled. Access logs are set up with **severity 6** (**Informational**) and error logs with **severity 4** (**Error**).
 
 ![PHP Logging](./images/Access-Error-Logs-PHP.png "Access & Error logs")
 
@@ -310,7 +312,7 @@ error_log("Application is running in the read-only mode.");
 
 and see them with **severity 4** (**Error**) in the **Runtime log** tab again.
 
-System logs generated by application code using the PHP [syslog](https://www.php.net/manual/en/function.syslog.php) functionality, are processed via **Linux Systemd daemon** as log messages (see [RFC5424](https://datatracker.ietf.org/doc/html/rfc5424#section-6.2.1)). You have to use ==`LOG_LOCAL0`== as **facility number 16** ( ==`local0`== ) in [openlog](https://www.php.net/manual/en/function.openlog.php) to emit those logs correctly and show them in the **Runtime log** tab, now with the dedicated switch (**Show web server logs**) in the disabled state.
+System logs generated by application code using the PHP [syslog](https://www.php.net/manual/en/function.syslog.php) functionality, are processed via **Linux Systemd daemon** as log messages (see [RFC5424](https://datatracker.ietf.org/doc/html/rfc5424#section-6.2.1)). You have to use ==`LOG_LOCAL0`== as **facility number 16** ( ==`local0`== ) in [openlog](https://www.php.net/manual/en/function.openlog.php) to emit those logs correctly and show them in the **Runtime log** tab, now with the dedicated switch ==**`Show web server logs`**== in the **disabled state**.
 
 You are setting a log severity by the first parameter when calling [syslog](https://www.php.net/manual/en/function.syslog.php) function.
 
