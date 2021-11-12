@@ -8,7 +8,7 @@ If you don't have the possibility to get any native Linux or Mac platform, or if
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-The following step-by-step instructions can help you to go through the process easily.
+The following step-by-step instructions can help you to go through the process easily. It's supposed that you already created your project in Zerops GUI and an empty PHP service (not connected to any repository).
 
 1. Open a new **Bash** / **Zsh** terminal window (coming also from the WSL2 installation). It will be open in `/home/<username>` on Linux or `/Users/<username>` on Mac directory by default.
 
@@ -26,12 +26,12 @@ The following step-by-step instructions can help you to go through the process e
 
 8. Switch back to the parent directory with the command ==`cd ..`== .
 
-9. Deploy the application kit prepared in this way to the Zerops [PHP service](/documentation/services/runtimes/php.html) using the [Zerops zcli](/documentation/cli/installation.html) via the [deploy command](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) ==`zcli deploy "<project name>" <service> "."`== (after using the [login command](/documentation/cli/available-commands.html#login)). This command creates a zipped file from the [current directory content](/documentation/build/build-config.html#deploy-everything) first and then deploys it to Zerops via an HTTPS protocol (without triggering a build pipeline).
+9. Deploy the application kit prepared in this way to the Zerops [PHP service](/documentation/services/runtimes/php.html) using the [Zerops zcli](/documentation/cli/installation.html) via the [deploy command](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) ==`zcli deploy "<project name>" <service hostname> "."`== (after using the [login command](/documentation/cli/available-commands.html#login)). This command creates a zipped file from the [current directory content](/documentation/build/build-config.html#deploy-everything) first and then deploys it to Zerops via an HTTPS protocol (without triggering a build pipeline).
 
 10. You should see the following output while the deployment process is working:
 
-```powershell
-service status: SERVICE_STACK_STATUS_ACTIVE
+```bash
+service status: SERVICE_STACK_STATUS_READY_TO_DEPLOY
 creating package
 working directory: /home/<username>/install/adminer
 packing directory: /home/<username>/install/adminer
@@ -46,7 +46,7 @@ service deployed
 
 If you run the command ==`ls -a -l`== on `/home/<username>/install/adminer/public` directory, you can check correct file permissions (allow only read access to files except for the owner) of the **Adminer** application kit. The listing should be as follows:
 
-```shell
+```bash
 drwxr-xr-x 2 <username> <username>   4096 Jul 31 14:15 .
 drwxr-xr-x 3 <username> <username>   4096 Jul 31 14:15 ..
 -rw-r--r-- 1 <username> <username> 317072 Jul 31 13:55 index.php
@@ -56,7 +56,7 @@ drwxr-xr-x 3 <username> <username>   4096 Jul 31 14:15 ..
 
 If you use only native Windows environment to prepare the **Adminer** application kit (without WSL2), the listing would be as follows (read, write and execute of everything), which is incorrect:
 
-```shell
+```bash
 drwxrxxrxx 2 <username> <username>   4096 Jul 31 14:15 .
 drwxrxxrxx 3 <username> <username>   4096 Jul 31 14:15 ..
 -rwxrwxrwx 1 <username> <username> 317072 Jul 31 13:55 index.php

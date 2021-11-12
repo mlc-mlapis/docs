@@ -157,8 +157,8 @@ When the build process has been successfully finished, you can download the enti
 ![Build Artifact](./images/Download-Build-Artefact-PHP-App-Version.png "Download build artifact")
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Simple projects and how to deploy them using the Zerops zcli
-You can look at the two real projects described step-by-step, **Adminer** and **phpMyAdmin** web tools, used to administer the Zerops MariaDB (MySQL) databases. Take a look at how you can create and deploy them with the Zerops **zcli**.
+::: info Simple projects and how to deploy the code using the Zerops zcli
+You can look at the two real projects described step-by-step, **Adminer** and **phpMyAdmin** web tools, used to administer the Zerops MariaDB (MySQL) databases. Take a look at how you can create and deploy them with the Zerops **zcli**. It's supposed that you already created your project in Zerops GUI and an empty PHP service (not connected to any repository).
 
 * [Preparing and deploying phpMyAdmin application kit](/knowledge-base/how-to-do/how-to-prepare-phpmyadmin-application-kit.html)
 * [Preparing and deploying Adminer application kit](/knowledge-base/how-to-do/how-to-prepare-adminer-application-kit.html)

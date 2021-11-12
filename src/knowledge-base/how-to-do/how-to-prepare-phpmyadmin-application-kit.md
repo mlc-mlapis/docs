@@ -8,7 +8,7 @@ if you don't have the possibility to get any native Linux or Mac platform, or if
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-The following step-by-step instructions can help you to go through the process easily.
+The following step-by-step instructions can help you to go through the process easily. It's supposed that you already created your project in Zerops GUI and an empty PHP service (not connected to any repository).
 
 1. Open a new **Bash** / **Zsh** terminal window (coming also from the WSL2 installation). It will be open in `/home/<username>` on Linux or `/Users/<username>` on Mac directory by default.
 
@@ -50,12 +50,12 @@ The following step-by-step instructions can help you to go through the process e
 
 20. Switch to the parent directory using the command ==`cd ..`== .
 
-21. Deploy the application kit prepared in this way to the Zerops [PHP service](/documentation/services/runtimes/php.html) using the [Zerops zcli](/documentation/cli/installation.html) with the [deploy command](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) ==`zcli deploy "<project name>" <service> "."`== (after using the [login command](/documentation/cli/available-commands.html#login)). This command creates a zipped file from the [current directory content](/documentation/build/build-config.html#deploy-everything) first and then deploys it to Zerops via an HTTPS protocol (without triggering a build pipeline).
+21. Deploy the application kit prepared in this way to the Zerops [PHP service](/documentation/services/runtimes/php.html) using the [Zerops zcli](/documentation/cli/installation.html) with the [deploy command](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) ==`zcli deploy "<project name>" <service hostname> "."`== (after using the [login command](/documentation/cli/available-commands.html#login)). This command creates a zipped file from the [current directory content](/documentation/build/build-config.html#deploy-everything) first and then deploys it to Zerops via an HTTPS protocol (without triggering a build pipeline).
 
 22. You should see the following output while the deployment process is working:
 
-```powershell
-service status: SERVICE_STACK_STATUS_ACTIVE
+```bash
+service status: SERVICE_STACK_STATUS_READY_TO_DEPLOY
 creating package
 working directory: /home/<username>/install/phpMyAdmin
 packing directory: /home/<username>/install/phpMyAdmin
@@ -70,7 +70,7 @@ service deployed
 
 If you run the command ==`ls -a -l`== on `/home/<username>/install/phpMyAdmin/public` directory, you can check correct files permissions (allow only read access except for the owner) of the **phpMyAdmin** application kit. The listing should be as follows:
 
-```shell
+```bash
 drwxr-xr-x 11 <username> <username>   4096 Jul 31 10:32 .
 drwxr-xr-x  3 <username> <username>   4096 Jul 31 10:27 ..
 -rw-r--r--  1 <username> <username>   2587 Jun  4 00:18 CONTRIBUTING.md
@@ -105,7 +105,7 @@ drwxr-xr-x 17 <username> <username>   4096 Jun  4 00:19 vendor
 
 If you use only the Windows environment to prepare the **phpMyAdmin** application kit (without WSL2), the listing should be as follows (read, write and execute of everything), which is incorrect:
 
-```shell
+```bash
 drwxrwxrwx 11 <username> <username>   4096 Jul 31 10:32 .
 drwxrwxrwx  3 <username> <username>   4096 Jul 31 10:27 ..
 -rwxrwxrwx  1 <username> <username>   2587 Jun  4 00:18 CONTRIBUTING.md

@@ -122,6 +122,14 @@ When the build process has been successfully finished, you can download the enti
 ![Build Artifact](./images/Download-Build-Artefact-Nginx.png "Download build artifact")
 ![Build Artifact](./images/Download-Build-Artefact-Nginx-App-Version.png "Download build artifact")
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: info A simple project and how to deploy the code using the Zerops zcli
+You can look at the elementary project described step-by-step. Take a look at how you can create and deploy it with the Zerops [zcli](/documentation/cli/installation.html). It's supposed that you already created your project in Zerops GUI and an empty Nginx service (not connected to any repository).
+
+* [Preparing and deploying a simple Nginx web](/knowledge-base/how-to-do/how-to-prepare-simple-nginx-web.html)
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ## Accessing a Zerops Shared Storage
 
 When a Zerops Nginx Service is created, you can mount a Zerops [Shared Storage Service](/documentation/services/storage/shared.html#storage-mounting) to it. If you don't have any as of yet, create a new one first.
