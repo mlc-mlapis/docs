@@ -124,7 +124,7 @@ When the build process has been successfully finished, you can download the enti
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info A simple project and how to deploy the code using the Zerops zcli
-You can look at the elementary project described step-by-step. Take a look at how you can create and deploy it with the Zerops [zcli](/documentation/cli/installation.html). It's supposed that you already created your project in Zerops GUI and an empty Nginx service (not connected to any repository).
+You can look at the elementary project described step-by-step. Take a look at how you can create and deploy it with the Zerops [zcli](/documentation/cli/installation.html). It's supposed that you already created your project in Zerops GUI and an empty Nginx service (not connected to any repository).  You can use a [service import](#simple-import-example-in-the-yaml-syntax) functionality for it.
 
 * [Preparing and deploying a simple Nginx web](/knowledge-base/how-to-do/how-to-prepare-simple-nginx-web.html)
 :::

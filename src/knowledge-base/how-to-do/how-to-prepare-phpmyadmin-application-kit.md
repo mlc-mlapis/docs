@@ -8,7 +8,7 @@ if you don't have the possibility to get any native Linux or Mac platform, or if
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-The following step-by-step instructions can help you to go through the process easily. It's supposed that you already created your project in Zerops GUI and an empty PHP service (not connected to any repository).
+The following step-by-step instructions can help you to go through the process easily. It's supposed that you already created your project in Zerops GUI and an empty PHP service (not connected to any repository). You can use a [service import](/documentation/services/runtimes/php.html#simple-import-example-in-the-yaml-syntax) functionality for it.
 
 1. Open a new **Bash** / **Zsh** terminal window (coming also from the WSL2 installation). It will be open in `/home/<username>` on Linux or `/Users/<username>` on Mac directory by default.
 
