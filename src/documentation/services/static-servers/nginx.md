@@ -2,6 +2,8 @@
 
 Zerops provides a fully managed and scaled Nginx static web server service, suitable for both development and production projects using any load. You can choose any option you want and be sure that it will work.
 
+This service is usually used as a web server for serving static files (index.html, *.js bundles, fonts, images, other assets) of front-end applications, like **Angular**, **Vue**, **React**.
+
 [[toc]]
 
 ## Adding the Nginx Service in Zerops
@@ -85,6 +87,25 @@ root /var/www;
 
 * The configuration syntax is validated on saving with `nginx -t` command.
 
+#### Nginx config tips for SPA applications
+
+1. A static server should probably return always `index.html` as a response for any request that asks for a non-existed file or resource. The `location` section for the root can be used as the following code:
+
+```bash
+location / {
+  try_files $uri $uri/ /index.html;
+}
+```
+
+2. The `index.html` file should not be usually cached on a client-side to refresh the SPA homepage automatically. You can add another `location` section just for it.
+
+```bash
+location = /index.html {
+  add_header Cache-Control "private, no-cache, no-store, must-revalidate";
+  expires 0;
+}
+```
+
 ### HA / non-HA mode
 
 When creating a new service, you can choose whether the runtime environment should be run in **HA** (High Availability) mode, using 3 or more containers, or **non-HA mode**, using only 1 container. ==**The chosen runtime environment mode can't be changed later.**== If you would like to learn more about the technical details and how this service is internally built, take a look at the [PHP Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/php-cluster-internally.html) part of the documentation. Although the specific text is focused on the PHP environment (running in combination with the Apache or Nginx webserver), in terms of logic and functionality, there is an entirely identical situation, which also applies to a separate static Nginx web server.
@@ -141,16 +162,14 @@ The **`zeropsSharedStorageMounts`** environment variable allows you to get the l
 ## How to access an Nginx static server
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: warning Don't use additional security protocols for internal communication
-The runtime environment service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+::: warning Security protocols for internal communication
+The static Nginx service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ### From other services inside the project
 
 Other services can access the Nginx static server using its **hostname** and **port**, as they are part of the same private project network (for example, `http://web`, where the port `:80` is implicit).
-
-It's always recommended to not set the configuration values as constants directly into the application code. It is preferable to use them indirectly, for example, via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), referencing Zerops [implicit environment variables](/documentation/environment-variables/helper-variables.htm) and given that [all environment variables](/documentation/environment-variables/how-to-access.html) are shared within the project across all services.
 
 ### From other Zerops projects
 
