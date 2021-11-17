@@ -95,7 +95,7 @@ Elasticsearch is a distributed system, which means its indices live in multiple 
 
 In Zerops environment, the Elasticsearch service uses two load [Nginx Layer 7](https://www.nginx.com/resources/glossary/layer-7-load-balancing) balancers to route incoming HTTP traffic directly to cluster data nodes.
 
-It would be a mistake for the client application to get a list of data nodes to communicate (sniffering). The point is that, on the one hand, there is no sense from the performance point of view, and in the event of any change in the cluster arrangement (e.g., failure of one data node and its replacement by another), such a list would not even correspond to reality.
+It would be a mistake for the client application to get a list of data nodes to communicate (sniffing). The point is that, on the one hand, there is no sense from the performance point of view, and in the event of any change in the cluster arrangement (e.g., failure of one data node and its replacement by another), such a list would not even correspond to reality.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Authentication is not required
@@ -107,7 +107,7 @@ From the point of view of individual client SDKs, the following applies:
 
 #### Node.js
 
-Get the ==**`connectionString`**== environment variable published by your Elasticsearch service and [build the API client](https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/client-connecting.html#client-usage) using the taken host and disabled sniffering.
+Get the ==**`connectionString`**== environment variable published by your Elasticsearch service and [build the API client](https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/client-connecting.html#client-usage) using the taken host and disabled sniffing.
 
 ```javascript
 const {Client} = require('@elastic/elasticsearch');
@@ -121,16 +121,16 @@ const connectionString = 'connectionString';
 const host = env[`${hostname}_${connectionString}`];
 const esClient = new Client({
   node: host
-  // Sniffering should be disabled.
+  // Sniffing should be disabled.
   sniffOnStart: false
 });
 ```
 
 #### Golang
 
-Get the ==**`connectionString`**== environment variable published by your Elasticsearch service and [build the API client](https://www.elastic.co/blog/the-go-client-for-elasticsearch-configuration-and-customization) using the taken host and disabled sniffer (disable nodes discovering).
+Get the ==**`connectionString`**== environment variable published by your Elasticsearch service and [build the API client](https://www.elastic.co/blog/the-go-client-for-elasticsearch-configuration-and-customization) using the taken host and disabled sniffing (disable nodes discovering).
 
-```golang
+```go
 import (
   "github.com/elastic/go-elasticsearch/v7"
 )
@@ -142,7 +142,7 @@ const connectionString = "connectionString"
 host, found := os.LookupEnv(hostname + "_" + connectionString)
 cfg := elasticsearch.Config{
   Addresses: []string{host},
-  // Sniffering should be disabled.
+  // Sniffing should be disabled.
   DiscoverNodesOnStart: false,
 }
 esClient, err := elasticsearch.NewClient(cfg)
@@ -150,7 +150,7 @@ esClient, err := elasticsearch.NewClient(cfg)
 
 #### PHP
 
-Get the ==**`connectionString`**== environment variable published by your Elasticsearch service and [build the API client](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/connceting.html) using the taken host.
+Get the ==**`connectionString`**== environment variable published by your Elasticsearch service and [build the API client](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/connceting.html) using the taken host and disabled sniffing.
 
 ```php
 use Elasticsearch\ClientBuilder;
@@ -162,7 +162,7 @@ $connectionString = "connectionString";
 $hosts = [getenv("${hostname}_${connectionString}")];
 $esClient = ClientBuilder::create()
   ->setHosts($hosts)
-  // Sniffering should be disabled.
+  // Sniffing should be disabled.
   ->setSniffOnStart(false)
   ->build();
 ```
