@@ -8,7 +8,7 @@ You can create a separate project for any environment (development, stage, produ
 
 All services inside such a project share a [dedicated private network](/documentation/routing/routing-between-project-services.html) and can see and reference [environment variables](/documentation/environment-variables/how-to-access.html) from other services.
 
-**By default, nothing outside the project can access any of the services inside.** Each service can be made publicly accessible through Zerops subdomains (*.app.zerops.io) or [domains](/documentation/routing/using-your-domain.html), pointing your DNS records to the [IPv6](/documentation/routing/unique-ipv4-ipv6-addresses.html) or [IPv4](/documentation/overview/pricing.html#project-add-ons) addresses assigned to the project, or by setting up direct access by [opening public ports](/documentation/routing/access-through-ip-and-firewall.html) on the assigned IP addresses. A built-in optional [firewall](/documentation/routing/access-through-ip-and-firewall.html) can manage the direct access by defining a list of allowed and denied IP addresses for each open public port.
+**By default, nothing outside the project can access any of the services inside.** Each [runtime environment](/documentation/services/runtimes.html) or [static web server](/documentation/services/static-servers.html) services can be made publicly accessible through Zerops subdomains (*.app.zerops.io) or [domains](/documentation/routing/using-your-domain.html), pointing your DNS records to the [IPv6](/documentation/routing/unique-ipv4-ipv6-addresses.html) or [IPv4](/documentation/overview/pricing.html#project-add-ons) addresses assigned to the project, or by setting up direct access by [opening public ports](/documentation/routing/access-through-ip-and-firewall.html) on the assigned IP addresses. A built-in optional [firewall](/documentation/routing/access-through-ip-and-firewall.html) can manage the direct access by defining a list of allowed and denied IP addresses for each open public port. For the rest of the services ([databases](/documentation/services/databases.html), [search engines](/documentation/services/search-engines.html), [message-brokers](/documentation/services/message-brokers.html)), you have to use our [dev tools](/documentation/cli/vpn.html) (VPN access and Zerops CLI). [Storage](/documentation/services/storage.html) services have their specific status and need to be approached with knowledge of their properties.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Communication between different Zerops projects
@@ -62,7 +62,7 @@ A project can contain an [unlimited number of services](/documentation/overview/
 
 ### Search engine services
 
-[Elasticsearch](/documentation/services/search-engines.html#elasticsearch)
+[Elasticsearch](/documentation/services/search-engines/elasticsearch.html)
 
 ### Message broker services
 

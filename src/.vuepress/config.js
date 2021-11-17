@@ -73,6 +73,7 @@ module.exports = {
                 'overview/how-zerops-works-inside/php-cluster-internally',
                 'overview/how-zerops-works-inside/golang-cluster-internally',
                 'overview/how-zerops-works-inside/mariadb-galera-cluster-internally',
+                'overview/how-zerops-works-inside/elasticsearch-cluster-internally',
                 'overview/how-zerops-works-inside/ceph-cluster-internally',
                 'overview/how-zerops-works-inside/glusterfs-cluster-internally'
               ]
@@ -216,7 +217,14 @@ module.exports = {
                 'services/databases/redis'
               ]
             },
-            'services/search-engines',
+            {
+              "type": "group",
+              "title": "Search engines",
+              "collapsable": false,
+              "children": [
+                'services/search-engines/elasticsearch'
+              ]
+            },
             'services/message-brokers',
             {
               "type": "group",

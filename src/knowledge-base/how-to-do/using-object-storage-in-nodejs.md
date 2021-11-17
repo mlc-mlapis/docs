@@ -59,7 +59,7 @@ const getAccessKeyIdValue = (objectStorageName) => {
    // Necessary environment variable name.
    const accessKeyId = "accessKeyId";
    const value = env[`${objectStorageName}_${accessKeyId}`];
-   return value | null;
+   return value ? value : null;
 }
 
 // Function returning a secretAccessKey value.
@@ -67,7 +67,7 @@ const getSecretAccessKeyValue = (objectStorageName) => {
    // Necessary environment variable name.
    const secretAccessKey = "secretAccessKey";
    const value = env[`${objectStorageName}_${secretAccessKey}`];
-   return value | null;
+   return value ? value : null;
 }
 
 // Function returning a user credentials.
