@@ -87,6 +87,38 @@ Even when using the non-HA mode for a production project, we recommend you imple
 * the need to respect the Zerops [specifics](#what-specifics-you-should-remember),
 * recommended for production projects.
 
+## How to access an Elasticsearch service
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Don't use additional security protocols for internal communication
+The Elasticsearch service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+### From other services inside the project
+
+Other services can access the database using its **hostname** and **port**, as they are part of the same private project network (for example, `http://es:9200`). It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each service, especially when using the HA mode, as it makes sure to include all the info required for HA. More info in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also the list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#elasticsearch) for the Elasticsearch Service.
+
+For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#mariadb)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility. Another reason not to hard-code the values inside your applications is that it can be dangerous because it is easy to commit them (like your credentials) into a repository, potentially exposing them to more people than intended.
+
+### From other Zerops projects
+
+Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, the cross projects communication can be done precisely in the same ways described in the section [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. The projects are not directly interconnected.
+
+### From your local environment
+
+The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
+
+To connect to the Elasticsearch from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as mentioned above. This allows you to access the search engine the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, you should copy the values manually through the „**How To Access** / **Search engine access details**“ section of the service detail in your application if you need some of them and use them in your private local configuration strategy.
+
+![Elasticsearch Service](./images/Elasticsearch-Access-Details.png "Search Engine Access Details")
+
+### From your public domains (common Internet environment)
+
+You can't access the Elasticsearch service directly in any way. You have to use one of the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-elasticsearch-service), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-elasticsearch-service), [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-elasticsearch-service)) and go indirectly through them in a programmatic way.
+
+To understand this better, take a look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
+
 ## What specifics you should remember
 
 ### Don't use sniffing to optimize a connection from a client-side
