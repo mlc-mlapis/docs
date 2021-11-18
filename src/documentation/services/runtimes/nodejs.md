@@ -137,6 +137,8 @@ Because Node.js code runs under the **`root`** user account, any saved file has 
 
 The **`zeropsSharedStorageMounts`** environment variable allows you to get the list of mounted shared storage services (separated by a pipe, if there are more than only one). For more flexibility, it's always recommended to use such environment variables indirectly, as shown in an example of [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), in each project service separately.
 
+## Accessing a Zerops Elasticsearch service
+
 ## How to access a Node.js runtime environment
 
 <!-- markdownlint-disable DOCSMD004 -->
