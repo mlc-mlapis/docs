@@ -119,6 +119,29 @@ You can't access the Elasticsearch service directly in any way. You have to use 
 
 To understand this better, take a look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
 
+## Default hardware configuration and autoscaling
+
+* Each Elasticsearch container (1 in non-HA, 3 in HA) starts with 1 vCPU, 1 GB RAM, and 5 GB of disk space.
+* Zerops will automatically scale the HW resources both [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (in non-HA and HA mode) and [horizontally](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (in HA mode only).
+
+## Using a local data management tool
+
+Install any of your favorite data management tools locally. For example, you can use [Spectre ES GUI](https://spectregui.com/elasticsearch-gui.html), a standalone installable tool on Windows, Linux, and Mac platforms. There is also a browser extension-only solution, like [Elasticvue](https://elasticvue.com), a free and open-source Elasticsearch GUI for Firefox, Chrome, Edge browsers. You can try others from the list on the [Best Elasticsearch GUI Clients](https://www.slant.co/topics/11537/~elasticsearch-gui-clients) page.
+
+First, connect to your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then use ==`http://es:9200`== as the endpoint ([without authentication](#hostname-and-port) on the project private network). After that, connect to the Elasticsearch service from the data management tool, as in the example below with the **Spectre ES**:
+
+![Spectre ES](./images/Spectre-ES-Login.png "Spectre ES Connect Dialog")
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Connection security settings
+As you are using a secure VPN channel already, and the Elasticsearch service is located on the internal Zerops project private secured network, it's unnecessary to apply any additional security layer such as SSH or SSL/TLS. For these reasons, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Here's more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+Now it's already easy to browse or edit your data.
+
+![Spectre ES](./images/Spectre-ES-Main-View.png "Spectre ES Main View")
+
 ## What specifics you should remember
 
 ### Don't use sniffing to optimize a connection from a client-side
