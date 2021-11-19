@@ -123,7 +123,7 @@ For system maintenance reasons, the `zps` user is also automatically created wit
 
 Install any of your favorite database administration tools locally. For example, you can use [DataGrip](https://www.jetbrains.com/datagrip), [DbVisualizer](https://www.dbvis.com/), [MySQL Workbench](https://dev.mysql.com/downloads/workbench) multi-platform database administration tools, or [Sequel Pro](https://www.sequelpro.com), [Querious](https://www.araelium.com/querious), specifically on the Mac platform. You can find the list with many others on the [Graphical and Enhanced Clients](https://mariadb.com/kb/en/graphical-and-enhanced-clients) page.
 
-First, access your Zerops project using [zcli](/documentation/cli/installation.html). After that, connect to the database service from your installed database management tool, as in the example below with the **Querious** tool:
+First, connect to your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then use ==`db:3306`== as the endpoint. After that, connect to the database service from your installed database management tool, as in the example below with the **Querious**:
 
 ![Querious](./images/Querious-Connect.png "Querious Connect Dialog")
 
