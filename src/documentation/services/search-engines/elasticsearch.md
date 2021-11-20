@@ -124,6 +124,10 @@ To understand this better, take a look at the section [With external access](/do
 * Each Elasticsearch container (1 in non-HA, 3 in HA) starts with 1 vCPU, 1 GB RAM, and 5 GB of disk space.
 * Zerops will automatically scale the HW resources both [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (in non-HA and HA mode) and [horizontally](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (in HA mode only).
 
+## Zerops Elasticsearch service data backups & restores
+
+Zerops uses [Elasticsearch snapshots](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) as the way how to backup up and restore data. The whole process is configured and automatically managed exclusively by Zerops, and users can't currently affect it. It means that snapshots are created periodically each day, and if the operational data would be damaged, then it will be restored from them on a user request (both [non-HA](#elasticsearch-in-non-ha-mode) & [HA](#elasticsearch-in-ha-mode) modes).
+
 ## Using a local data management tool
 
 Install any of your favorite data management tools locally. For example, you can use [Spectre ES GUI](https://spectregui.com/elasticsearch-gui.html), a standalone installable tool on Windows, Linux, and Mac platforms. There is also a browser extension-only solution, like [Elasticvue](https://elasticvue.com), a free and open-source Elasticsearch GUI for Firefox, Chrome, Edge browsers. You can try others from the list on the [Best Elasticsearch GUI Clients](https://www.slant.co/topics/11537/~elasticsearch-gui-clients) page.
