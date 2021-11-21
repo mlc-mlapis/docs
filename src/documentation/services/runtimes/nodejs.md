@@ -139,6 +139,8 @@ The **`zeropsSharedStorageMounts`** environment variable allows you to get the l
 
 ## Accessing a Zerops Elasticsearch service
 
+Look at the Zerops repository [recipe-es-nodejs-basic](https://github.com/zeropsio/recipe-es-nodejs-basic) of how to do it. There is a simple code example of inserting a new document from the Node.js environment into the Elasticsearch service. You can use the <span style="background-color: #80ff80"><b>&nbsp;Import service&nbsp;</b></span> functionality of the [Zerops import](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project) to create a working demo in your existing Zerops project with a few clicks.
+
 ## How to access a Node.js runtime environment
 
 <!-- markdownlint-disable DOCSMD004 -->
