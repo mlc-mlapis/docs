@@ -186,13 +186,13 @@ To understand this better, take a look at the section [With external access](/do
 
 ## Logging
 
-Both console and **important** system messages coming from the container's runtime environment are configured using a syslog service to centralize all records and allow live access through the **Runtime log** tab inside your service detail for each Zerops service container. It's not necessary to refresh the view. New logs are automatically passed through a web socket channel and shown immediately.
+Both console and **important** system messages coming from the container's runtime environment are configured using a syslog service to centralize all records and allow for live access through the **Runtime log** tab inside your service detail for each Zerops service container. It's not necessary to refresh the view. New logs are automatically passed through a web socket channel and displayed immediately.
 
 ![Runtime log](./images/Runtime-Log.png "Runtime log access")
 
 All messages sent to **Stderr** (standard error file descriptor) or **Stdout** (standard output file descriptor), using the Node.js `console` module, are processed via **Linux Systemd daemon** as log messages with **facility number 16** ( ==`local0`== ) and **severity 6** (**Informational**) by default (see [RFC5424](https://datatracker.ietf.org/doc/html/rfc5424#section-6.2.1)).
 
-If you want to set another severity, use a message prefix ==`<N>`== to encode such a log severity in printed lines, as shown below.
+If you prefer to set a different severity level, use a message prefix ==`<N>`== to encode your chosen log severity in printed lines, as shown below.
 
 ```javascript
 console.log('A message with the informational severity ...');
@@ -206,26 +206,26 @@ console.log('<6>Informational (6) severity > informational message.');
 console.log('<7>Debug (7) severity > debug-level message.');
 ```
 
-Then you can show log messages with **facility number 16** ( ==`local0`== ) in the **Runtime log** view and choose the severity level, or show all of them by selecting the **All** option. Keep the dedicated switch ==**`Show web server logs`**== in the disabled state. It is related only to the web server access & error logs if anyone is operated in the runtime environment.
+Then you can show log messages with **facility number 16** ( ==`local0`== ) in the **Runtime log** view and choose the severity level, or show all of them by selecting the **All** option. Keep the dedicated switch ==**`Show web server logs`**== in the disabled state. This switch is related only to the web server access & error logs if anyone is operating in the runtime environment.
 
 ![Logs](./images/Log_Records_Severities_NodeJS.png "Logs by severity")
 
-When you configure and run a web server (for example, [Express](https://www.npmjs.com/package/express), [NestJS](https://nestjs.com), [Koa](https://koajs.com)) as a part of application code, you may have reasons to make logging by a different way, for example, using logging libraries like [Winston](https://www.npmjs.com/package/winston), [Bunyan](https://www.npmjs.com/package/bunyan), or [Syslog-client](https://www.npmjs.com/package/syslog-client). These could be more suitable for your projects, especially for the production environment.
+When you configure and run a web server (for example, [Express](https://www.npmjs.com/package/express), [NestJS](https://nestjs.com), [Koa](https://koajs.com)) as a part of the application code, you may have reasons to prefer logging in a different way, for example, by using logging libraries such as [Winston](https://www.npmjs.com/package/winston), [Bunyan](https://www.npmjs.com/package/bunyan), or [Syslog-client](https://www.npmjs.com/package/syslog-client). These could be more suitable for your projects, especially for the production environment.
 
-The important thing in such cases is choosing **facility number 17** ( ==`local1`== ) as the configuration option. The reason is the dedicated switch ==**`Show web server logs`**== in the **Runtime log** view that allows you to show web access & error logs separately from standard application logs. It's important, especially from the access logs point of view, because there could be thousands and thousands of records.
+The important thing in such cases is choosing **facility number 17** ( ==`local1`== ) as the configuration option. The reason is the dedicated switch ==**`Show web server logs`**== in the **Runtime log** view that allows you to show web access & error logs separately from standard application logs. It's important, especially from the access logs' point of view, because there could be thousands and thousands of records.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Console methods
 
 * Console methods do not support log severity levels, despite methods like console.warn(), console.error(), and console.debug(), respectively. Those are simply functions that print to the standard output or standard error without indicating log severity.
 
-* Those methods usually are synchronous functions when the destination is a terminal or a file, so they are not suitable for production very well unless you pipe the output to another program. **In the Zerops environment, the output is piped to a logger controller of the Project Core Service, so logging operations are processed asynchronously** (see [Detail of Project Core Service](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html) tab). The environment was tested for throughput around ~50K logs/second.
+* Those methods are usually synchronous functions when the destination is a terminal or a file, so they are not very suitable for production unless you pipe the output to another program. **In the Zerops environment, the output is piped to a logger controller of the Project Core Service, so that the logging operations are processed asynchronously** (see [Detail of Project Core Service](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html) tab). The environment was tested for throughput of around ~50K logs/second.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Supported facility numbers
-Don't use any other facility number except ==`local0`== and ==`local1`== as shown above. If you use another one (0 .. 15, 18 .. 23) by [RFC5424](https://datatracker.ietf.org/doc/html/rfc5424#section-6.2.1), they will be filtered out on the Zerops backend and you won't see them in the Zerops GUI. At the same time, **important** system messages originating from the container's runtime environment are checked and transparently included in the application logs, regardless of their original facility number, to inform the user.
+Don't use any other facility number except ==`local0`== and ==`local1`== as shown above. If you use a different one (0 .. 15, 18 .. 23) by [RFC5424](https://datatracker.ietf.org/doc/html/rfc5424#section-6.2.1), they will be filtered out on the Zerops backend and you won't see them in the Zerops GUI. At the same time, **important** system messages originating from the container's runtime environment are checked and transparently included in the application logs, regardless of their original facility number, in order to inform the user.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
