@@ -29,7 +29,7 @@ services:
   documentRoot: public
 ```
 
-A complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+You can also read the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
 
 ### Version to choose
 
