@@ -198,13 +198,13 @@ const hostname = "es"
 // The requested environment variable name.
 const connectionString = "connectionString"
 // For example, the result of the <host> would be: ["http://es:9200"]
-host, found := os.LookupEnv(hostname + "_" + connectionString)
-cfg := elasticsearch.Config{
+var host, _ = os.LookupEnv(hostname + "_" + connectionString)
+var cfg = elasticsearch.Config{
   Addresses: []string{host},
   // Sniffing should be disabled.
   DiscoverNodesOnStart: false,
 }
-esClient, err := elasticsearch.NewClient(cfg)
+var esClient, _ = elasticsearch.NewClient(cfg)
 ```
 
 #### PHP

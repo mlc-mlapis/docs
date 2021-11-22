@@ -29,7 +29,7 @@ services:
   documentRoot: public
 ```
 
-A complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+You can also read the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
 
 ### Version to choose
 
@@ -294,6 +294,7 @@ The default **Apache** configuration is done through `/etc/apache2/sites-enabled
 CustomLog "| /usr/bin/logger -thttpd -plocal1.notice" combined
 ErrorLog  "| /usr/bin/logger -thttpd -plocal1.err"
 ```
+
 The default **Nginx** configuration is done through `/etc/nginx/sites-enabled/default.site`, and you have direct edit access to its content through the [Nginx configuration](#default-nginx-config) section. **You can change it**, but be careful what you are doing.
 
 ```bash
