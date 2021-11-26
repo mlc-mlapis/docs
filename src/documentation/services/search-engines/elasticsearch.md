@@ -148,6 +148,8 @@ Now it's already easy to browse or edit your data.
 
 ## What specifics you should remember
 
+Don't change the default setting of **two replicas** for indices. Otherwise, you risk that the cluster won't work as expected. Zerops [horizontal scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) algorithm supposes that the **number of replicas is always 2**.
+
 ### Don't use sniffing to optimize a connection from a client-side
 
 Elasticsearch is a distributed system, which means its indices live in multiple nodes connected to each other, forming a cluster. One of the main advantages of being a distributed system — other than fault tolerance — is data can be sharded into multiple data nodes, allowing searches to run much faster than searches run through a single node.
