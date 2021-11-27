@@ -127,7 +127,7 @@ When the build process has been successfully finished, you can download the enti
 
 ## Accessing a Zerops S3 Object Storage
 
-You can [access the object storage](/documentation/services/storage/s3.html#how-to-access-an-object-storage-service) using its public [API URL endpoint](#api-url-endpoint-and-port) in the same way as any access from the outside Internet, including your local development environment.
+You can [access the object storage](/documentation/services/storage/s3.html#how-to-access-an-object-storage-service) using its public [API URL endpoint](/documentation/services/storage/s3.html#api-url-endpoint-and-port) in the same way as any access from the outside Internet, including your local development environment.
 
 ## Accessing a Zerops Shared Storage
 
