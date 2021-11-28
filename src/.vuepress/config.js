@@ -213,6 +213,7 @@ module.exports = {
               "collapsable": false,
               "children": [
                 'services/databases/mariadb',
+                'services/databases/postgresql',
                 'services/databases/mongodb',
                 'services/databases/redis'
               ]
