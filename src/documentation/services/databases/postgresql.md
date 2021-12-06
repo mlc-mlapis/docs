@@ -149,7 +149,7 @@ Suppose you log in as the `zps` super-user and make inappropriate changes to the
 
 ## Default PostgreSQL database
 
-A new database with the name-based also on the selected **hostname** is created during the initial service setup. It means that even if the original default database **postgres** is preserved, the login using **connectionString** without entering the target database will always occur correctly, no matter what value is selected for the hostname. It's also true for any other login type. The standard behavior is that if the target database is not entered, the PostgreSQL authentication logic uses the user name as the target database name.
+A new database with the name based on the selected **hostname** is created during the initial service setup (for example, database **db** if the chosen hostname was **db**). It means that even if the original default database **postgres** is preserved, the login using **connectionString** without entering the target database will always occur correctly, no matter what value is selected for the hostname. It's also true for any other login type. The standard behavior is that if the target database is not entered, the PostgreSQL authentication logic uses the user name as the target database name.
 
 ## Default hardware configuration and autoscaling
 
