@@ -1,0 +1,126 @@
+# PostgreSQL
+
+Zerops provides a fully managed and scaled PostgreSQL database service, suitable for both development and production projects on any load. You can choose any variant you want, and you can be sure that it will work. Your certainty and peaceful sleep are our top priority.
+
+[[toc]]
+
+## Adding the PostgreSQL Service in Zerops
+
+Zerops PostgreSQL service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
+
+### Two ways how to do it
+
+You have two possible ways to create a new PostgreSQL service. Either manually in the Zerops GUI, as described in the [rest of this document](#version-to-choose), or using Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+
+#### Simple import example in the YAML syntax
+
+Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following.
+
+```yaml
+services:
+  # Service will be accessible through zcli VPN under: http://db
+  - hostname: db
+    # Type and version of a used service.
+    type: postgresql@12
+    # Whether the service will be run on one or multiple containers.
+    # Since this is a simple example, using only one container is fine.
+    mode: NON_HA
+```
+
+A complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+
+### Version to choose
+
+You can currently choose PostgreSQL version **v12** (exactly it's the 12.7 version).
+
+Used as the export & import type: ==`postgresql@12`== .
+
+### Hostname and ports
+
+Choose a short and descriptive URL-friendly name, for example, **db**. The following rules apply:
+
+* maximum length **==25==** characters,
+* only lowercase ASCII letters **==a-z==** and numbers **==0-9==**,
+* **==has to be unique==** in relation to other existing project's hostnames,
+* the hostname **==can't be changed==** later.
+
+The port will automatically be set to the value of **==5432==** and can't be changed. It's important to mention that when HA mode is chosen, the additional port of **==5433==** is also automatically set (allows to send read-only requests to standby replica nodes of the PostgreSQL cluster).
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Hostname is also used as the default admin user name
+The chosen **hostname** is automatically used to create an [admin user account](#default-postgresql-user-and-password) with all privileges and grant options for accessing the database. You can change it later if you prefer.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+### HA / non-HA database mode
+
+When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, using 3 containers, or **non-HA mode**, using only 1 container. ==**The chosen database mode can't be changed later.**== If you would like to learn more about the technical details and how this service is internally built, take a look at the [PostgreSQL Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/postgresql-patroni-cluster-internally.html).
+
+#### PostgreSQL in non-HA mode
+
+* great for local development to save money,
+* doesn’t require any changes to the existing code,
+* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-the-ha-mode), but see the recommendation tip below,
+* data is stored only in a single container, higher risk of data loss,
+* all data changes since the last backup is not recoverable,
+* not recommended for production projects.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Recommendation
+Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-the-ha-mode) because you never know when you'll need to switch to the HA mode.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+#### PostgreSQL in HA mode
+
+* will run on three containers as a [Patroni cluster](https://patroni.readthedocs.io), each on a **different physical machine**,
+* so the data is stored redundantly in three places, with no risk of data loss,
+* when one container fails, it's automatically replaced with a new one,
+* with two load balancers ([HAProxy](http://www.haproxy.org)) (no additional cost),
+* [asynchronous behavior](#asynchronous-behavior) of a Patroni HA cluster,
+* the need to respect all of the [specifics](#what-you-should-remember-when-using-the-ha-mode) related to a Patroni HA cluster,
+* recommended for production projects.
+
+## Default PostgreSQL user and password
+
+Zerops automatically creates a user with all privileges and grant options when creating the service, where the name of **==user==** is based on the selected **hostname**, and the **==password==** is randomly generated. These are saved to the environment variables **user** and **password** and can be referenced from other services the same way as **connectionString**.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Zerops doesn’t keep both places in sync
+If you change your password inside the PostgreSQL database directly, the change is not reflected in the environment variable and vice versa. It’s up to you to keep these up to date through the **Service env. Variables** section of the service detail in your application.
+
+The image below represents the state of environment variables available in non-HA mode (especially the names of the **port** and **connectionString**). In the case of HA mode, the particular situation is different. It's due to the specifics of the Patroni cluster functionality and the ways of client communication with it.
+
+![PostgreSQL Service](./images/PostgreSQL-Database-Access-Change-Password.png "Database Access Change Password")
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+## Default PostgreSQL database
+
+A new database with the name-based also on the selected **hostname** is created during the initial service setup. It means that even if the original default database **postgres** is preserved, the login using **connectionString** without entering the target database will always occur correctly, no matter what value is selected for the hostname. It's also true for any other login type. The standard behavior is that if the target database is not entered, the PostgreSQL authentication logic uses the user name as the target database name.
+
+## What you should remember when using the HA mode
+
+### Asynchronous behavior
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Be sure you understand correctly
+When data is stored in a PostgreSQL Patroni cluster (always through its current primary database instance), it is replicated across other standby replica instances asynchronously. As described above, there are two communication channels clients can choose from. The first allows **data writing** through **port 5432**, and the second, allowing **only data reading** through **port 5433**. A reading request can be directed to any cluster member, while a writing request is directed only to the current primary cluster member.
+
+It means that if one SQL statement stores some data through port 5432, the following immediate select query through port 5433 may not retrieve the same data. The reason is that the given select will be executed against another replica instance. If required to get the same data, it's necessary to use the same port for the select query as it was used for storing that data.
+
+A similar case would be with two immediately following SELECT statements to get the same data. The basic premise in such a case is that both select queries are sent over the same TCP connection and therefore routed to the same cluster member. Encapsulating of both commands into a single SQL transaction can guarantee their execution against the same replica instance. Otherwise, send both select requests to the current primary node through port 5432 again.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+### Non-database local data
+
+Each container has separate local disk space, which can theoretically be used by appropriate APIs of the database service and thus store data outside the replicated contents of the database. It should be noted that such data is reserved only for this particular instance, not mirrored across the PostgreSQL Patroni cluster nor backup-ed. It will not be migrated if such a container is deleted due to its failure. Also, separate direct access to an individual PostgreSQL instance is not supported in any way.
+
+We don't recommend to use any functionality of [COPY](https://www.postgresql.org/docs/current/sql-copy.html) because you can't save/load such data directly to/from any shared storage. Instead of that, use the standard functionality of the [export/import](/documentation/services/databases/postgresql.html#how-to-backup-restore-database-data) mechanism.
+
+### Selected specifics of a Patroni HA cluster
+
+* All database tables should have a primary key (multi-column primary keys can also be used) to get performant and effective streaming replication between the current primary instance and all standby replica nodes through a write-ahead log (WAL). It's the process by which write transactions (INSERT, UPDATE, or DELETE) and schema changes (data definition language (DDL)) are reliably captured, logged, and then serially applied to all downstream databases replica nodes in the cluster architecture.
+* The PostgreSQL streaming replication is set up asynchronous, and you can't individually change it to synchronous because it has to be done through `postgresql.conf` you don't have access to.
+* Using [ALTER SYSTEM](https://www.postgresql.org/docs/12/sql-altersystem.html) and changing `postgresql.auto.conf` is also prohibited because the created [default PostgreSQL user](#default-postgresql-user-and-password) is not a super-user. You can't create a new one with such a privilege.

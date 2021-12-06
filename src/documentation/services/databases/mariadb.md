@@ -99,7 +99,7 @@ Zerops automatically creates a user with all privileges and grant options when c
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Zerops doesn’t keep both places in sync
-If you change your password inside the MariaDB database directly, the change is not reflected in the environment variable and vice versa. It’s up to you to keep these up to date through the „**Service env. Variables**“ section of the service detail in your application.
+If you change your password inside the MariaDB database directly, the change is not reflected in the environment variable and vice versa. It’s up to you to keep these up to date through the **Service env. Variables** section of the service detail in your application.
 
 ![MariaDB Service](./images/MariaDB-Database-Access-Change-Password.png "Database Access Change Password")
 :::
@@ -208,7 +208,7 @@ Zerops Routing Service (see the schema of a Zerops project with [external access
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Be sure you understand correctly
-When data is stored in a MariaDB cluster (through its actual primary database instance), it is replicated across other replica instances asynchronously. This means that if one SQL statement stores some data, the next immediate statement may not retrieve the same data. The reason is that the given statement will be executed against another replica instance. If required to get the same data, it's necessary to encapsulate both commands into a single SQL transaction, which will always be executed against the primary instance (because of the write operation that is included). The same would be the case with two immediately following SELECT statements to get the same data. Again, encapsulation of both commands into a single SQL transaction guarantees their execution against a selected but the same replica instance.
+When data is stored in a MariaDB cluster (always through its current primary database instance), it is replicated across other standby replica instances asynchronously. This means that if one SQL statement stores some data, the following immediate select query may not retrieve the same data. The reason is that the given statement will be executed against another replica instance. If required to get the same data, it's necessary to encapsulate both commands into a single SQL transaction, which will always be executed against the primary instance (because of the write operation that is included). The same case would be with two immediately following SELECT statements to get the same data. Again, encapsulating of both commands into a single SQL transaction guarantees their execution against a selected but the same replica instance.
 
 You can also force synchronization waits for causality checks on a cluster by [wsrep_sync_wait](https://mariadb.com/docs/reference/mdb/system-variables/wsrep_sync_wait) bitmask. Enabling it ensures that certain types of queries always execute against the most up to date database state, at the expense of query performance. [Sample usage](https://mariadb.com/kb/en/galera-cluster-system-variables/#wsrep_sync_wait) for a critical read that must have the most up-to-date data:
 

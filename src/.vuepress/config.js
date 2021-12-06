@@ -73,6 +73,7 @@ module.exports = {
                 'overview/how-zerops-works-inside/php-cluster-internally',
                 'overview/how-zerops-works-inside/golang-cluster-internally',
                 'overview/how-zerops-works-inside/mariadb-galera-cluster-internally',
+                'overview/how-zerops-works-inside/postgresql-patroni-cluster-internally',
                 'overview/how-zerops-works-inside/elasticsearch-cluster-internally',
                 'overview/how-zerops-works-inside/ceph-cluster-internally',
                 'overview/how-zerops-works-inside/glusterfs-cluster-internally'
@@ -213,6 +214,7 @@ module.exports = {
               "collapsable": false,
               "children": [
                 'services/databases/mariadb',
+                'services/databases/postgresql',
                 'services/databases/mongodb',
                 'services/databases/redis'
               ]
