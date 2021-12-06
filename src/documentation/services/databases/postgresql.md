@@ -81,6 +81,50 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 * the need to respect all of the [specifics](#what-you-should-remember-when-using-the-ha-mode) related to a Patroni HA cluster,
 * recommended for production projects.
 
+## How to access a PostgreSQL database
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Don't use additional security protocols for internal communication
+The database service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+### From other services inside the project
+
+Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for the database in non-HA mode. See also the explanation of environment variables specifics for HA mode below. More info in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also the list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#postgresql) for the PostgreSQL Service.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Environment variables specifics for HA mode
+Due to the Patroni cluster functionality, you use different connection strings to connect to the database in HA mode. The first is ==**connectionStringPrimary**== , used to connect to the current primary database instance to which all data modification requests have to be directed. The second is ==**connectionStringReplicas**== , used to connect to any member (all standby replica instances + current primary instance) of the database cluster to retrieve already existing data. They use related ==**portPrimary**== and ==**portReplicas**== environment variable values under the hood.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#postgresql)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility. Another reason not to hard-code the values inside your applications is that it can be dangerous because it is easy to commit them (like your credentials) into a repository, potentially exposing them to more people than intended.
+
+### From other Zerops projects
+
+Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, the cross projects communication can be done precisely in the same ways described in the section [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. The projects are not directly interconnected.
+
+### From your local environment
+
+The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
+
+To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as said before. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, you should copy the values manually through the „**How To Access** / **Database access details**“ section of the service detail in your application if you need some of them and use them in your private local configuration strategy.
+
+The following picture shows how it looks in non-HA mode.
+
+![PostgreSQL Service](./images/PostgreSQL-Database-Access-Details-Non-HA.png "Database Access Details in non-HA mode")
+
+The following picture shows how it looks in HA mode.
+
+![PostgreSQL Service](./images/PostgreSQL-Database-Access-Details-HA.png "Database Access Details in HA mode")
+
+### From your public domains (common Internet environment)
+
+You can't access the Elasticsearch service directly in any way. You have to use one of the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html), [Golang](/documentation/services/runtimes/golang.html), [PHP](/documentation/services/runtimes/php.html)) and go indirectly through them in a programmatic way.
+
+To understand this better, take a look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
+
 ## Default PostgreSQL user and password
 
 Zerops automatically creates a user with all privileges and grant options when creating the service, where the name of **==user==** is based on the selected **hostname**, and the **==password==** is randomly generated. These are saved to the environment variables **user** and **password** and can be referenced from other services the same way as **connectionString**.
@@ -106,6 +150,11 @@ Suppose you log in as the `zps` super-user and make inappropriate changes to the
 ## Default PostgreSQL database
 
 A new database with the name-based also on the selected **hostname** is created during the initial service setup. It means that even if the original default database **postgres** is preserved, the login using **connectionString** without entering the target database will always occur correctly, no matter what value is selected for the hostname. It's also true for any other login type. The standard behavior is that if the target database is not entered, the PostgreSQL authentication logic uses the user name as the target database name.
+
+## Default hardware configuration and autoscaling
+
+* Each PostgreSQL container (1 in non-HA, 3 in HA) starts with 1 vCPU, 1 GB RAM, and 5 GB of disk space.
+* Zerops will automatically scale the HW resources both [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (in non-HA and HA mode) and [horizontally](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (in HA mode only).
 
 ## What you should remember when using the HA mode
 

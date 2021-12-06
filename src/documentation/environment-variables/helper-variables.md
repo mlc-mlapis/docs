@@ -64,6 +64,35 @@ Database admin username (changing it won't affect the value in database settings
 #### `password`
 Database admin password (changing it won't affect the value in database settings, that one needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
 
+### PostgresQL
+
+#### `port`
+🔒 Port on which the database server runs in non-HA mode.
+
+#### `portPrimary`
+🔒 Port on which the current database primary server runs in HA cluster mode. It has to be used to create a connection through which all data modification requests (SQL statements INSERT, UPDATE, DELETE) have to be sent.
+
+#### `portReplicas`
+🔒 It can be used to create a connection through which only data reading requests (SQL statement SELECT) should be sent in HA cluster mode (any cluster member can process requests).
+
+#### `hostname`
+🔒 Service hostname.
+
+#### `connectionString`
+🔒 Connection string in non-HA mode.
+
+#### `connectionStringPrimary`
+🔒 Connection string in HA cluster mode to create a connection through which all data modification requests (SQL statements INSERT, UPDATE, DELETE) must be sent (only the current primary member processes requests).
+
+#### `connectionStringReplicas`
+🔒 Connection string in HA cluster mode to create a connection through which only data reading requests (SQL statement SELECT) should be sent (any cluster member can process requests).
+
+#### `user`
+Database admin username (changing it won't affect the value in database settings, that one needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
+
+#### `password`
+Database admin password (changing it won't affect the value in database settings, that one needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
+
 
 ### Elasticsearch
 
