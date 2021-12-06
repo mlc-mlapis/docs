@@ -162,7 +162,7 @@ A new database with the name based on the selected **hostname** is created durin
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Be sure you understand correctly
-When data is stored in a PostgreSQL Patroni cluster (always through its current primary database instance), it is replicated across other standby replica instances asynchronously. As described above, there are two communication channels clients can choose from. The first allows **data writing** through **port 5432**, and the second, allowing **only data reading** through **port 5433**. A reading request can be directed to any cluster member, while a writing request is directed only to the current primary cluster member.
+When data is stored in a PostgreSQL Patroni cluster (always through its current primary database instance), it is replicated across other standby replica instances asynchronously. As described above, there are two communication channels clients can choose from. The first allows **data writing** through **port 5432**, and the second, allowing **only data reading** through **port 5433**. A reading request can be directed to any cluster member, while a writing request is directed only to the current primary  member of the cluster.
 
 It means that if one SQL statement stores some data through port 5432, the following immediate select query through port 5433 may not retrieve the same data. The reason is that the given select will be executed against another replica instance. If required to get the same data, it's necessary to use the same port for the select query as it was used for storing that data.
 
