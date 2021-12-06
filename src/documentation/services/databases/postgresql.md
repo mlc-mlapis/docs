@@ -95,6 +95,14 @@ The image below represents the state of environment variables available in non-H
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Default Zerops maintenance user
+For system maintenance reasons, the `zps` user is also automatically created with all privileges (super-user). It's necessary to not change it in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode. The password for this user can be taken via the `zeropsPassword` environment variable (not presented in the Zerops GUI).
+
+Suppose you log in as the `zps` super-user and make inappropriate changes to the system configuration (especially in the HA cluster setting). You are fully responsible for any system or application failures that may lead to complete data loss.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ## Default PostgreSQL database
 
 A new database with the name-based also on the selected **hostname** is created during the initial service setup. It means that even if the original default database **postgres** is preserved, the login using **connectionString** without entering the target database will always occur correctly, no matter what value is selected for the hostname. It's also true for any other login type. The standard behavior is that if the target database is not entered, the PostgreSQL authentication logic uses the user name as the target database name.
@@ -123,4 +131,4 @@ We don't recommend to use any functionality of [COPY](https://www.postgresql.org
 
 * All database tables should have a primary key (multi-column primary keys can also be used) to get performant and effective streaming replication between the current primary instance and all standby replica nodes through a write-ahead log (WAL). It's the process by which write transactions (INSERT, UPDATE, or DELETE) and schema changes (data definition language (DDL)) are reliably captured, logged, and then serially applied to all downstream databases replica nodes in the cluster architecture.
 * The PostgreSQL streaming replication is set up asynchronous, and you can't individually change it to synchronous because it has to be done through `postgresql.conf` you don't have access to.
-* Using [ALTER SYSTEM](https://www.postgresql.org/docs/12/sql-altersystem.html) and changing `postgresql.auto.conf` is also prohibited because the created [default PostgreSQL user](#default-postgresql-user-and-password) is not a super-user. You can't create a new one with such a privilege.
+* Using [ALTER SYSTEM](https://www.postgresql.org/docs/12/sql-altersystem.html) and changing `postgresql.auto.conf` is also prohibited because the created [default PostgreSQL user](#default-postgresql-user-and-password) is not a super-user.
