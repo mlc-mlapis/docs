@@ -6,7 +6,7 @@ Zerops provides a fully managed and scaled [Elasticsearch](https://www.elastic.c
 
 ## Adding the Elasticsearch Service in Zerops
 
-Zerops Elasticsearch service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers). It has pre-installed the Git version control system.
+Zerops Elasticsearch service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
 
 ### Two ways how to do it
 
