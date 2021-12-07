@@ -44,7 +44,7 @@ Choose a short and descriptive URL-friendly name, for example, **db**. The follo
 * **==has to be unique==** in relation to other existing project's hostnames,
 * the hostname **==can't be changed==** later.
 
-The port will automatically be set to the value of **==5432==** and can't be changed. It's important to mention that when HA mode is chosen, the additional port of **==5433==** is also automatically set (allows to send read-only requests to all members of the PostgreSQL cluster).
+The port will automatically be set to the value of **==5432==** and can't be changed. It's important to mention that when HA mode is chosen, the additional port of **==5433==** is also automatically set. It allows to send read-only requests to all members of the PostgreSQL cluster. If a data change request is sent to this port by a mistake or an error and it will be directed to a standby replica member of the HA cluster, then the statement will be rejected.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Hostname is also used as the default admin user name
@@ -180,6 +180,6 @@ We don't recommend to use any functionality of [COPY](https://www.postgresql.org
 
 ### Selected specifics of a Patroni HA cluster
 
-* All database tables should have a primary key (multi-column primary keys can also be used) to get performant and effective streaming replication between the current primary instance and all standby replica nodes through a write-ahead log (WAL). It's the process by which write transactions (INSERT, UPDATE, or DELETE) and schema changes (data definition language (DDL)) are reliably captured, logged, and then serially applied to all downstream databases replica nodes in the cluster architecture.
+* All database tables should have a primary key (multi-column primary keys can also be used) to get performant and effective streaming replication between the current primary instance and all standby replica nodes through a Write-Ahead Log (WAL). It's the process by which write transactions (INSERT, UPDATE, or DELETE) and schema changes (Data Definition Language - DDL) are reliably captured, logged, and then serially applied to all downstream databases replica nodes in the cluster architecture.
 * The PostgreSQL streaming replication is set up asynchronous, and you can't individually change it to synchronous because it has to be done through `postgresql.conf` you don't have access to.
 * Using [ALTER SYSTEM](https://www.postgresql.org/docs/12/sql-altersystem.html) and changing `postgresql.auto.conf` is also prohibited because the created [default PostgreSQL user](#default-postgresql-user-and-password) is not a super-user.
