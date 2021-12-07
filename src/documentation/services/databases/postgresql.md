@@ -95,7 +95,9 @@ Other services can access the database using its **hostname** and **port**, as t
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Environment variables specifics for HA mode
-Due to the Patroni cluster functionality, you use different connection strings to connect to the database in HA mode. The first is ==**connectionStringPrimary**== , used to connect to the current primary database instance to which all data modification requests have to be directed. The second is ==**connectionStringReplicas**== , used to connect to any member (all standby replica instances + current primary instance) of the database cluster to retrieve already existing data. They use related ==**portPrimary**== and ==**portReplicas**== environment variable values under the hood.
+Due to the Patroni cluster functionality, you can use an additional connection string to connect to the database in HA mode. It is ==**connectionStringReplicas**== , used to connect to any member (all standby replica instances + the current primary instance) of the database cluster to retrieve already existing data (only reading operations via SQL SELECT queries). The corresponding  ==**portReplicas**== environment variable value is used under the hood.
+
+The names of ==**connectionString**== and ==**port**== are kept the same, but in HA mode, using them is reserved for creating a connection to the current primary instance and processing all data modification requests (via SQL INSERT, UPDATE, and DELETE statements).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
