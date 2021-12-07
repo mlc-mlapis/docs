@@ -44,7 +44,7 @@ Choose a short and descriptive URL-friendly name, for example, **db**. The follo
 * **==has to be unique==** in relation to other existing project's hostnames,
 * the hostname **==can't be changed==** later.
 
-The port will automatically be set to the value of **==5432==** and can't be changed. It's important to mention that when HA mode is chosen, the additional port of **==5433==** is also automatically set (allows to send read-only requests to standby replica nodes of the PostgreSQL cluster).
+The port will automatically be set to the value of **==5432==** and can't be changed. It's important to mention that when HA mode is chosen, the additional port of **==5433==** is also automatically set (allows to send read-only requests to all members of the PostgreSQL cluster).
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Hostname is also used as the default admin user name
@@ -121,7 +121,7 @@ The following picture shows how it looks in HA mode.
 
 ### From your public domains (common Internet environment)
 
-You can't access the Elasticsearch service directly in any way. You have to use one of the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html), [Golang](/documentation/services/runtimes/golang.html), [PHP](/documentation/services/runtimes/php.html)) and go indirectly through them in a programmatic way.
+You can't access the PostgreSQL service directly in any way. You have to use one of the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html), [Golang](/documentation/services/runtimes/golang.html), [PHP](/documentation/services/runtimes/php.html)) and go indirectly through them in a programmatic way.
 
 To understand this better, take a look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
 
