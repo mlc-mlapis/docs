@@ -1,4 +1,4 @@
-# IPv4 and IPv6 Addresses in Zerops
+# IPv4 and IPv6 addresses in Zerops
 
 Each [project]() you create gets assigned a **unique IPv6 address** as part of core functionality that can be either used to set up [direct access]() (optionally protected by a firewall) to any of the project's [services]() or as your **AAAA record** and setting up the [domain access]().
 
