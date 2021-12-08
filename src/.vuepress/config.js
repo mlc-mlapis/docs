@@ -149,6 +149,7 @@ module.exports = {
             'routing/change-synchronization',
             'routing/zerops-subdomain',
             'routing/unique-ipv4-ipv6-addresses',
+            'routing/using-shared-ipv4'
           ]
         },
         {
