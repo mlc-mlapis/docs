@@ -158,6 +158,31 @@ A new database with the name based on the selected **hostname** is created durin
 * Each PostgreSQL container (1 in non-HA, 3 in HA) starts with 1 vCPU, 1 GB RAM, and 5 GB of disk space.
 * Zerops will automatically scale the HW resources both [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (in non-HA and HA mode) and [horizontally](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (in HA mode only).
 
+## How to backup / restore database data
+
+### Using phpPgAdmin
+
+Create a new Zerops [PHP service](/documentation/services/runtimes.html#php) and [deploy](/documentation/services/runtimes/php.html#how-to-deploy-application-code) a prepared [Adminer](/knowledge-base/how-to-do/how-to-prepare-adminer-application-kit.html) or [phpMyAdmin](/knowledge-base/how-to-do/how-to-prepare-phpmyadmin-application-kit.html) application kit. After enabling a [Zerops subdomain](/documentation/routing/zerops-subdomain.html) on such a service, you can access the application on its root URL. You can access the MariaDB database service using its hostname, port, user, and password. After that, you can use its built-in export/import functions to backup/restore database data to/from your local file system.
+
+![Adminer](./images/Adminer-Login.png "Adminer Login")
+
+You can use the Zerops [import functionality](/documentation/export-import/project-service-export-import.html) to quickly add a service with phpPgAdmin to your project, which can be safely accessed using [Zerops VPN](/documentation/cli/vpn.html) built into the [zcli](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://phppgadmin`). Use the Zerops [recipe-phppgadmin](https://github.com/zeropsio/recipe-phppgadmin) and the import syntax:
+
+```yaml
+services:
+  # Service will be accessible through zcli VPN under: http://adminer
+- hostname: adminer
+  # Type and version of a used service.
+  type: php-apache@8.0
+  # Whether the service will be run on one or multiple containers.
+  # Since this is a utility service, using only one container is fine.
+  mode: NON_HA
+  # Folder name used as the root of the publicly accessible web server content.
+  documentRoot: public
+  # Repository that contains adminer code with build and deploy instructions.
+  buildFromGit: https://github.com/zeropsio/recipe-adminer@main
+```
+
 ## What you should remember when using the HA mode
 
 ### Asynchronous behavior
