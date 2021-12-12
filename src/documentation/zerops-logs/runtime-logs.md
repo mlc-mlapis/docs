@@ -10,8 +10,12 @@ Each container your [service](/documentation/overview/projects-and-services-stru
 
 Whenever an important event happens, such as an exit or a failure, you will get a notification with a button pointing to the particular container and to the relevant timestamp.
 
-Because there are some logging specifics dependent on each runtime environment, you should read details:
+Because there are some logging specifics, you should also read details for:
 
 * [Logging in Node.js](/documentation/services/runtimes/nodejs.html#logging)
+
 * [Logging in Golang](/documentation/services/runtimes/golang.html#logging)
+
 * [Logging in PHP](/documentation/services/runtimes/php.html#logging)
+
+* [Logging in Nginx](/documentation/services/static-servers/nginx.html#logging)
