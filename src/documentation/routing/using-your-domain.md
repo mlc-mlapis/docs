@@ -4,7 +4,7 @@ You can easily set up routing rules — which domains and their locations should
 
 ![Domain add](/domain-add.png "Domain add")
 
-All you need to do is point your domains A and / or AAAA records to one of the [unique IP addresses](/documentation/routing/unique-ipv4-ipv6-addresses.html) assigned to your [project](/documentation/overview/projects-and-services-structure.html#project).
+All you need to do is point your domain A / AAAA records to one of the [unique IP addresses](/documentation/routing/unique-ipv4-ipv6-addresses.html) assigned to your [project](/documentation/overview/projects-and-services-structure.html#project) or the free [shared IPv4](/documentation/routing/using-shared-ipv4.html).
 
 **[Let's encrypt](https://letsencrypt.org/) SSL Certificate can be automatically installed for you.**
 
