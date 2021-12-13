@@ -12,7 +12,7 @@ Node.js service containers are located on **different physical computers** to pr
 
 ## Extended schema (with external access)
 
-**Zerops Routing Service** takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project services, including Zerops Node.js Services. If a request should or shouldn't be treaed as HTTP, the crucial decision is made on the existence of the [HTTP protocol support](/documentation/services/runtimes/nodejs.html#port) flag. Both active **HTTP balancers** again direct requests to the least busy instance of the Node.js runtime environment service.
+**Zerops Routing Service** takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project services, including Zerops Node.js Services. If a request should or shouldn't be treated as HTTP, the crucial decision is made on the existence of the [HTTP protocol support](/documentation/services/runtimes/nodejs.html#port) flag. Both active **HTTP balancers** again direct requests to the least busy instance of the Node.js runtime environment service.
 
 It's up to you if you choose the automatic support for SSL certificates or not when you map [public domains](/documentation/routing/using-your-domain.html) to your Zerops service.
 
