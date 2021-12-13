@@ -10,7 +10,7 @@ Everything starts with an idea. To make it a reality, you need a team of co-deve
 
 ## Credit and free Zerops credit
 
-To begin with, you'll get \$100 worth of Zerops credit. This is a stress-free way to start off and gives you the freedom to explore all the features which could provide added value for you and your team. This credit can be used for everything except for certain add-ons, such as the IPv4 address. After using up the \$100, you can manually top up your credit using a credit card or set up weekly/monthly automatic payments. At the same time, you can also set up a daily project cost limit to ensure that you don't run over your budget. The VAT rate is 21% for EU countries. We will also notify you by e-mail when your credit is too low (i.e., less than calculated 10%).
+To begin with, you'll get \$100 worth of Zerops credit. This is a stress-free way to start off and gives you the freedom to explore all the features which could provide added value for you and your team. This credit can be used for everything except for certain add-ons, such as the dedicated IPv4 address. After using up the \$100, you can manually top up your credit using a credit card or set up weekly/monthly automatic payments. At the same time, you can also set up a daily project cost limit to ensure that you don't run over your budget. The VAT rate is 21% for EU countries. We will also notify you by e-mail when your credit is too low (i.e., less than calculated 10%).
 
 ## Projects
 
@@ -22,7 +22,7 @@ Any team member can create as many projects as necessary to cover each environme
 
 Each [service](/documentation/overview/projects-and-services-structure.html#service) (except S3 object storage) that you include into the [project](/documentation/overview/projects-and-services-structure.html#project) can be added either as non-HA [High Availability] (useful for development/test projects), it will run on a single container, or HA (a must-have for production projects), it will run on at least [three containers](/documentation/ha/why-should-i-want-high-availability.html). The hourly cost will change according to your choice. Each container starts with 1 vCPU, 250 MB RAM (scaling up by 250 MB increments), and 5 GB of SSD disk space (scaling up by 0.5 GB increments). All hardware resources can be automatically scaled both horizontally (increasing the number of containers) and vertically (adding resources).
 
-**HA mode can't be changed later.** However, we do plan to implement service cloning, allowing you safe migration back. Currently, it's not possible to create non-HA database/message broker/shared storage services but this limitation will be soon removed.
+**HA mode can't be changed later.** However, we do plan to implement service cloning, allowing you safe migration back. Currently, it's not possible to create non-HA message broker and shared storage services.
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Cost of stopped services
 Remember that disk space cost is still being calculated and charged if you stop any service because it occupies the reserved resources.
