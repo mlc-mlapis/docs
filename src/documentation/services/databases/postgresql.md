@@ -162,26 +162,34 @@ A new database with the name based on the selected **hostname** is created durin
 
 ### Using phpPgAdmin
 
-Create a new Zerops [PHP service](/documentation/services/runtimes.html#php) and [deploy](/documentation/services/runtimes/php.html#how-to-deploy-application-code) a prepared [Adminer](/knowledge-base/how-to-do/how-to-prepare-adminer-application-kit.html) or [phpMyAdmin](/knowledge-base/how-to-do/how-to-prepare-phpmyadmin-application-kit.html) application kit. After enabling a [Zerops subdomain](/documentation/routing/zerops-subdomain.html) on such a service, you can access the application on its root URL. You can access the MariaDB database service using its hostname, port, user, and password. After that, you can use its built-in export/import functions to backup/restore database data to/from your local file system.
-
-![Adminer](./images/Adminer-Login.png "Adminer Login")
-
-You can use the Zerops [import functionality](/documentation/export-import/project-service-export-import.html) to quickly add a service with phpPgAdmin to your project, which can be safely accessed using [Zerops VPN](/documentation/cli/vpn.html) built into the [zcli](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://phppgadmin`). Use the Zerops [recipe-phppgadmin](https://github.com/zeropsio/recipe-phppgadmin) and the import syntax:
+You can use the Zerops [import functionality](/documentation/export-import/project-service-export-import.html) to quickly add a service with **phpPgAdmin** to your project and use its built-in export/import functionality. Use the Zerops [recipe-phppgadmin](https://github.com/zeropsio/recipe-phppgadmin) import. The shown syntax below supposes that you already created the Zerops PostgreSQL service with the chosen hostname ==`db`== . If you have such a service with a different hostname, change the **content** value of the **DATABASE_HOSTNAME** environment variable in the import syntax below appropriately.
 
 ```yaml
+# Import syntax for creating a phpPgAdmin instance.
 services:
-  # Service will be accessible through zcli VPN under: http://adminer
-- hostname: adminer
+  # Service will be accessible through zcli VPN under: http://phppgadmin
+- hostname: phppgadmin
   # Type and version of a used service.
-  type: php-apache@8.0
+  type: php-apache@7.4
   # Whether the service will be run on one or multiple containers.
   # Since this is a utility service, using only one container is fine.
   mode: NON_HA
   # Folder name used as the root of the publicly accessible web server content.
   documentRoot: public
-  # Repository that contains adminer code with build and deploy instructions.
-  buildFromGit: https://github.com/zeropsio/recipe-adminer@main
+  # Repository that contains phpPgAdmin code with build and deploy instructions.
+  buildFromGit: https://github.com/zeropsio/recipe-phppgadmin@main
+  # Setting of the "DATABASE_HOSTNAME" environment variable.
+  # It specifies the chosen hostname for the Zerops PostgreSQL service that should be managed.
+  envVariables:
+  - key: DATABASE_HOSTNAME
+    # Here, the Zerops PostgreSQL service's chosen hostname is "db".
+    # Change it if you need to use a different one.
+    content: db
 ```
+
+After that you can either use **phpPgAdmin** either using [Zerops VPN](/documentation/cli/vpn.html) built into the [zcli](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://phppgadmin`) or enable Zerops [subdomain access](/documentation/routing/zerops-subdomain.html).
+
+![phpPgAdmin](./images/Login-Page-phpPgAdmin.png "Login-Page-phpPgAdmin.png Login")
 
 ## What you should remember when using the HA mode
 
