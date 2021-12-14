@@ -2,16 +2,16 @@
 
 ::: tip ZEROPS CAN BUILD AND DEPLOY FOR YOU
 
-While it's certainly possible for you to deploy to Zerops, we recommend you run your [builds](/documentation/build/how-zerops-build-works.html) on Zerops as well. Build can be triggered by connecting service with a GitHub or GitLab repository or by using the `push` command of our CLI.
+While it's certainly possible for you to deploy to Zerops, we recommend you run your [builds](/documentation/build/how-zerops-build-works.html) on Zerops as well. Build can be triggered by connecting the service with a GitHub or GitLab repository or by using the `push` command of our CLI.
 :::
 
 <br />
 
 Deploy is triggered automatically at the end of the [Zerops build pipeline](/documentation/build/build-config.html#run) but you can trigger it manually too by using the `deploy` command in zerops [zcli](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories).
 
-Each deployed application is then saved and you can freely switch between any of the previously deployed versions.
+Each deployed application is then saved and you can switch freely between any of the previously deployed versions.
 
-Zerops takes care of the __no-shutdown__ deploy process by creating a new version of application. After that Zerops starts switching incoming requests to the new version and shutting and removing the old one.
+Zerops takes care of the __no-shutdown__ deploy process by creating a new version of application. After that, Zerops starts switching incoming requests to the new version and shutting and removing the old one.
 
 #### Example of the `deploy` command:
 
