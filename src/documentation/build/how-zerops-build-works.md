@@ -1,10 +1,10 @@
 # How Zerops Build Works
 
-By adding [`zerops.yml`](/documentation/build/build-config.html) to your application source code (we look for it at the root), you let Zerops know what steps to [`run`](/documentation/build/build-config.html#run) to build your application runtime, which technology your build [`uses`](/documentation/build/build-config.html#uses) and which files to [`deploy`](/documentation/build/build-config.html#deploy) when the build is done.
+By adding [`zerops.yml`](/documentation/build/build-config.html) to your application source code (we look for it at the root), you let Zerops know which steps to [`run`](/documentation/build/build-config.html#run) to build your application runtime, which technology your build [`uses`](/documentation/build/build-config.html#uses) and which files to [`deploy`](/documentation/build/build-config.html#deploy) when the build is done.
 
 Build can be triggered either by using a [CLI](/documentation/cli/installation-authorization.html) or by connecting a Zerops service to a [GitHub repository](/documentation/github/github-integration.html) or a [GitLab repository](/documentation/gitlab/gitlab-integration.html).
 
-Internally, Zerops creates a new temporal build service inside your project, runs the defined commands and uses [deploy](/documentation/deploy/how-deploy-works.html) to deploy the result to your runtime service. Running build (and its [log](/documentation/zerops-logs/build-logs.html)) can be monitored inside of our application.
+Internally, Zerops creates a new temporal build service inside your project, runs the defined commands and uses [deploy](/documentation/deploy/how-deploy-works.html) to deploy the result to your runtime service. Running build (and its [log](/documentation/zerops-logs/build-logs.html)) can be monitored within our application.
 
 Build service has access to the project's [environment variables](/documentation/environment-variables/how-to-access.html), so you can utilize them.
 
