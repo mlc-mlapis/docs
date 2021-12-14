@@ -32,6 +32,6 @@ Zerops is able to [scale your sevices both horizontally and vertically](/documen
 
 ### 5. Developer friendliness
 
-We try not to get in your way. We know that for a good dev experience you might want a separate infrastructure for each environment (stage, prod), or even each developer, that's why Zerops places no limits on the number of projects or team members. Each service starts off free, you only start paying once your applications or databases need to scale up.
+We try not to get in your way. We know that for a good dev experience you might want a separate infrastructure for each environment (stage, prod), or even each developer, that's why Zerops places no limits on the number of projects or team members. Each service can start with minimum HW resources or be stopped entirely if you don't need them. Alternatively, it can run in HA mode and support thousands of users 24 hours a day.
 
 We also provide a number of tools to make dev life easier, one of which is the [VPN](/documentation/cli/vpn.html) capability of our CLI, so you can [connect locally](/documentation/cli/available-commands.html#start-project-name) to any of your running services by using its Zerops hostname and a port, i.e. visiting `http://myapp:3000` or `mongodb://mydatabse:27017`.
