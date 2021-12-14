@@ -23,7 +23,7 @@ deploy: [ dist, node_modules, package.json ]
 
 ### `use`
 
-List the technologies your build uses. Zerops will use this as a base pack for the build container. Leave this field empty if you prefer to install everything yourself inside the `run` property.
+List the technologies your build uses. Zerops will use this as a base pack for the build container. Leave this field empty if you'd rather install everything yourself inside the `run` property.
 
 #### Supported base packs:
 
@@ -92,7 +92,7 @@ runs:
 
 ### `deploy`
 
-Directories and files, produced by your build, which should be deployed to your runtime service. Path starts from the root of your project (location of zerops.yml).
+Directories and files, produced by your build, which should be deployed to your runtime service. The path starts from the root of your project (location of zerops.yml).
 
 Quotes have to be used when using the `*` syntax to strip paths.
 
