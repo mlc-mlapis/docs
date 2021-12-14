@@ -177,7 +177,7 @@ Create a new Zerops [PHP service](/documentation/services/runtimes.html#php) and
 
 ![Adminer](./images/Adminer-Login.png "Adminer Login")
 
-You can also use the Zerops [import functionality](/documentation/export-import/project-service-export-import.html) to quickly add a service with Adminer to your project, which can be safely accessed using [Zerops VPN](/documentation/cli/vpn.html) built into the [zcli](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://adminer`). Use the Zerops [recipe-adminer](https://github.com/zeropsio/recipe-adminer) and the import syntax:
+You can also use the Zerops [import functionality](/documentation/export-import/project-service-export-import.html) to quickly add a service with **Adminer** to your project. Use the Zerops [recipe-adminer](https://github.com/zeropsio/recipe-adminer) import.
 
 ```yaml
 services:
@@ -193,6 +193,8 @@ services:
   # Repository that contains adminer code with build and deploy instructions.
   buildFromGit: https://github.com/zeropsio/recipe-adminer@main
 ```
+
+After that you can either use **Adminer** either using [Zerops VPN](/documentation/cli/vpn.html) built into the [zcli](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://adminer`) or enable Zerops [subdomain access](/documentation/routing/zerops-subdomain.html).
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Explanation of the phpMyAdmin security warning
