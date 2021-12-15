@@ -1,6 +1,6 @@
 # Zerops Subdomain for Previews
 
-Each [service](/documentation/overview/projects-and-services-structure.html#service) running on an [HTTP protocol](/documentation/routing/routing-between-project-services.html) (mostly [runtimes](/documentation/services/runtimes.html)) is assigned a unique zerops.io sudomain. You can enable this subdomain inside the **Internal Ports & Public Routing** tab in the service detail.
+Each [service](/documentation/overview/projects-and-services-structure.html#service) running on a [HTTP protocol](/documentation/routing/routing-between-project-services.html) (mostly [runtimes](/documentation/services/runtimes.html)) is assigned a unique zerops.io sudomain. You can enable this subdomain within the **Internal Ports & Public Routing** tab in the service detail.
 
 ![zerops subdomain](/zerops-subdomain.png "zerops subdomain")
 
