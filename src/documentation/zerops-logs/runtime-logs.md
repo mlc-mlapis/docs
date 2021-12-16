@@ -1,6 +1,6 @@
 # Runtime Logs
 
-Each container your [service](/documentation/overview/projects-and-services-structure.html#service) is running on gets its own runtime log. You can view each one inside the **Runtime log** tab of your service detail.
+Each container on which your [service](/documentation/overview/projects-and-services-structure.html#service) is running gets its own runtime log. You can view each one within the **Runtime log** tab of your service detail.
 
 <br/>
 
@@ -8,9 +8,9 @@ Each container your [service](/documentation/overview/projects-and-services-stru
 
 <br/>
 
-Whenever an important event happens, such as an exit or a failure, you will get a notification with a button pointing to the particular container and to the relevant timestamp.
+Whenever an important event happens, such as an exit or a failure, you will get a notification with a button pointing to the particular container and the relevant timestamp.
 
-Because there are some logging specifics, you should also read details for:
+Because there are some logging specifics, you should also read the details about:
 
 * [Logging in Node.js](/documentation/services/runtimes/nodejs.html#logging)
 
