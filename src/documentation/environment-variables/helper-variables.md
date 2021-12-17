@@ -1,7 +1,7 @@
 # Automatically Generated Helper Variables
 
 
-Zerops automatically adds number of utility variables, for both internal and your
+Zerops automatically adds a number of utility variables, for both internal and your own
 use. They cannot be deleted, their keys cannot be changed and those marked with 🔒 cannot have their value edited.
 
 
@@ -15,10 +15,10 @@ use. They cannot be deleted, their keys cannot be changed and those marked with 
 🔒 Service hostname.
 
 #### `zeropsSubdomain`
-🔒 Unique subdomain of zerops.dev, i.e. `my-app-30001.app.zerops.dev`, this variable is always available, but subdomain access has to actually be enabled inside service routing settings.
+🔒 Unique subdomain of zerops.dev, i.e. `my-app-30001.app.zerops.dev`, this variable is always available, but subdomain access has to be enabled inside the service routing settings.
 
 #### `startCommand`
-Command used for running the user defined application which corresponds to the command filled when creating the service.
+Command used for running the user defined application which corresponds to the command filled when creating a service.
 
 ###  PHP+Nginx
 
@@ -26,7 +26,7 @@ Command used for running the user defined application which corresponds to the c
 🔒 Service hostname.
 
 #### `zeropsSubdomain`
-🔒 Unique subdomain of zerops.dev, i.e. `my-app-30001.app.zerops.dev`, this variable is always available, but subdomain access has to actually be enabled inside service routing settings.
+🔒 Unique subdomain of zerops.dev, i.e. `my-app-30001.app.zerops.dev`, this variable is always available, but subdomain access has to be enabled inside the service routing settings.
 
 #### `nginxConfig`
 🔒 Content of the server configuration located in most cases at `/etc/nginx/sites-available` used to define how the request should be handled by the php runtime.
@@ -41,7 +41,7 @@ Folder from which php scripts should be executed. Deployed files are unpacked at
 🔒 Service hostname.
 
 #### `zeropsSubdomain`
-🔒 Unique subdomain of zerops.dev, ie `my-app-30001.app.zerops.dev`, this variable is always available, but subdomain access has to actually be enabled inside service routing settings.
+🔒 Unique subdomain of zerops.dev, ie `my-app-30001.app.zerops.dev`, this variable is always available, but subdomain access has to be enabled inside the service routing settings.
 
 #### `documentRoot`
 Folder from which php scripts should be executed. Deployed files are unpacked at `/var/www`.
@@ -59,10 +59,10 @@ Folder from which php scripts should be executed. Deployed files are unpacked at
 🔒 Connection string.
 
 #### `user`
-Database admin username (changing it won't affect the value in database settings, that one needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
+Database admin username (changing it won't affect the value in the database settings, that needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
 
 #### `password`
-Database admin password (changing it won't affect the value in database settings, that one needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
+Database admin password (changing it won't affect the value in the database settings, that needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
 
 ### PostgresQL
 
@@ -82,10 +82,10 @@ Database admin password (changing it won't affect the value in database settings
 🔒 Connection string in HA cluster mode to create a connection through which only data reading requests (SQL statement SELECT) should be sent (any cluster member can process such requests).
 
 #### `user`
-Database admin username (changing it won't affect the value in database settings, that one needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
+Database admin username (changing it won't affect the value in database settings, that needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
 
 #### `password`
-Database admin password (changing it won't affect the value in database settings, that one needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
+Database admin password (changing it won't affect the value in database settings, that needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
 
 
 ### Elasticsearch
@@ -154,10 +154,10 @@ Database admin password (changing it won't affect the value in database settings
 🔒 URL used to access the S3 compliant storage object API.
 
 #### `accessKeyId`
-🔒 Access key to grant permission for using the object storage.
+🔒 Access key to grant permission to use the object storage.
 
 #### `secretAccessKey`
-🔒 Secret key to grant permission for using the object storage.
+🔒 Secret key to grant permission to use the object storage.
 
 #### `quotaGBytes`
 🔒 Upper bound for the maximum storage consumption.
