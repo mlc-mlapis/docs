@@ -1,6 +1,6 @@
 # Internal Routing Between Project's Services
 
-Zerops sets up a private network for your project so that every service inside the project can see every other service under their respective `hostname`s and ports defined when creating each service. A service can have multiple internal ports open, running on udp or tcp protocols.
+Zerops sets up a private network for your project so that every service within the project can see every other service under their respective `hostname`s and ports which are defined when each service is created. A service can have multiple internal ports open, running on udp or tcp protocols.
 
 Ports on [runtime](/documentation/services/runtimes.html) services can be changed by the user in the Internal Ports & Public routing tab of your service detail. Ports on [databases](/documentation/services/databases.html) are predefined by Zerops and cannot be changed.
 
