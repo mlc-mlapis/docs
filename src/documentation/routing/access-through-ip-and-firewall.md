@@ -8,6 +8,6 @@ You can open public ports on the [IP addresses](/documentation/routing/unique-ip
 
 ## Firewall
 
-Each such open public port can be protected by either whitelisting or blacklisting IP addresses. Either a single IP address or entire IP ranges can be white-/blacklisted using the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) format.
+Each open public port can be protected by either whitelisting or blacklisting IP addresses. Either a single IP address or entire IP ranges can be white-/blacklisted using the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) format.
 
 ![Firewall](/firewall.png "Firewall")
