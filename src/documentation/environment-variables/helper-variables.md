@@ -15,7 +15,7 @@ use. They cannot be deleted, their keys cannot be changed and those marked with 
 🔒 Service hostname.
 
 #### `zeropsSubdomain`
-🔒 Unique subdomain of zerops.dev, i.e. `my-app-30001.app.zerops.dev`, this variable is always available, but subdomain access has to be enabled inside service routing settings.
+🔒 Unique subdomain of zerops.dev, i.e. `my-app-30001.app.zerops.dev`, this variable is always available, but subdomain access has to be enabled inside the service routing settings.
 
 #### `startCommand`
 Command used for running the user defined application which corresponds to the command filled when creating a service.
