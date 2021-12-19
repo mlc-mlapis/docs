@@ -39,12 +39,12 @@ Unlike other services, S3 object storage is rather specific. It is provided by a
 
 All services (except S3 object storage) are [automatically scaled](/documentation/automatic-scaling/how-automatic-scaling-works.html) both [horizontally](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (by increasing or decreasing the number of containers) and [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (by adding or removing vCPUs, RAM size or disk space). The S3 object storage service can only be scaled manually in the GUI and solely in the sense of its object store space (with scaling up/down by 1 GB increments), respecting the fact that vCPUs and RAM size are irrelevant here from the project point of view. Scaling happens in a matter of seconds and is continually optimized to run using the [best possible settings](/documentation/automatic-scaling/how-automatic-scaling-works.html#performance-tunning). Your credit is charged hourly for each resource on each container, and the cost calculation considers the ratio of changes during that time.
 
-|Hardware       |Scaling|[30 days]|   [day]|  [hour]|          Multiplier|
-|:--------------|------:|--------:|-------:|-------:|-------------------:|
-|vCPU           | 1 unit| **$2.5**|$0.08333|$0.00347|number of containers|
-|RAM            | 250 MB| **$1.5**|$0.05000|$0.00208|number of containers|
-|Disk space     | 0.5 GB| **$0.1**|$0.00333|$0.00014|number of containers|
-|S3 Object store| 1.0 GB| **$0.2**|$0.00667|$0.00028|                   1|
+|Hardware       |Scaling| [30 days]|   [day]|  [hour]|          Multiplier|
+|:--------------|------:|---------:|-------:|-------:|-------------------:|
+|vCPU           | 1 unit|  **$2.5**|$0.08333|$0.00347|number of containers|
+|RAM            | 250 MB|  **$1.5**|$0.05000|$0.00208|number of containers|
+|Disk space     | 0.5 GB|  **$0.1**|$0.00333|$0.00014|number of containers|
+|S3 Object store| 1.0 GB| **$0.02**|$0.00067|$0.00003|                   1|
 
 ## Project add-ons
 
