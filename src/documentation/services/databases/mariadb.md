@@ -1,6 +1,6 @@
 # MariaDB (MySQL)
 
-Zerops provides a fully managed and scaled MariaDB (MySQL) database service, suitable for both development and production projects using any load. You can choose any option you want and be sure that it will work.
+Zerops provides a fully managed and scaled MariaDB (MySQL) database service, suitable for both development and production projects using any load. You can choose any option you wsih with the knowledge that it will work.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: details Compatibility & Differences to MySQL
@@ -12,9 +12,9 @@ Information on the compatibility of MariaDB software with similar, competing sof
 
 ## Adding the MariaDB Service in Zerops
 
-### Version to choose
+### Which version to choose
 
-You can currently choose **v10.4** or **v10.3**. The chosen version of the database **can't be changed afterward**.
+You can currently choose **v10.4** or **v10.3**. The chosen version of the database **can't be changed afterwards**.
 
 Used as the export & import types: ==`mariadb@10.4`== or ==`mariadb@10.3`== .
 
@@ -43,7 +43,7 @@ The chosen **hostname** is automatically used to create an [admin user account](
 
 ### HA / non-HA database mode
 
-When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, using 3 containers, or **non-HA mode**, using only 1 container. ==**The chosen database mode can't be changed later.**== If you would like to learn more about the technical details and how this service is internally built, take a look at the [MariaDB Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/mariadb-galera-cluster-internally.html).
+When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, using 3 containers, or **non-HA mode**, using only 1 container. ==**The chosen database mode can't be changed later.**== If you would like to learn more about the technical details and how this service is built internally, take a look at the [MariaDB Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/mariadb-galera-cluster-internally.html).
 
 #### MariaDB in non-HA mode
 
@@ -51,12 +51,12 @@ When creating a new service, you can choose whether the database should be run i
 * doesn’t require any changes to the existing code,
 * not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-the-ha-mode), but see the recommendation tip below,
 * data is stored only in a single container, higher risk of data loss,
-* all data changes since the last backup is not recoverable,
+* all data changes since the last backup are not recoverable,
 * not recommended for production projects.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Recommendation
-Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-the-ha-mode) because you never know when you'll need to switch to the HA mode. This is also true for the used storage engine, as InnoDB is the only option in HA mode.
+Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-the-ha-mode) because you never know when you'll need to switch to HA mode. This is also true for the used storage engine, as InnoDB is the only option in HA mode.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -81,15 +81,15 @@ The database service is not configured to support direct access using SSL/TLS or
 
 ### From other services inside the project
 
-Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using the HA mode, as it makes sure to include all the info required for HA. More info in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also the list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#mariadb) for the MariaDB Service.
+Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using the HA mode, as it makes sure to include all the information required for HA. Find out more in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also the list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#mariadb) for the MariaDB Service.
 
-For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#mariadb)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility. Another reason not to hard-code the values inside your applications is that it can be dangerous because it is easy to commit them (like your credentials) into a repository, potentially exposing them to more people than intended.
+For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#mariadb)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplicity and increased flexibility. Another reason not to hard-code the values inside your applications is that it can be dangerous because it is easy to commit them (like your credentials) into a repository, potentially exposing them to more people than intended.
 
-### From local environment
+### From the local environment
 
 The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
 
-To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as said before. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, you should copy the values manually through the „**How To Access** / **Database access details**“ section of the service detail in your application if you need some of them and use them in your private local configuration strategy.
+To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as previously mentioned. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need to use them, you should copy the values manually through the "**How To Access** / **Database access details**“ section of the service detail in your application and use them in your private local configuration strategy.
 
 ![MariaDB Service](./images/MariaDB-Database-Access-Details.png "Database Access Details")
 
@@ -107,14 +107,14 @@ If you change your password inside the MariaDB database directly, the change is 
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Default Zerops maintenance user
-For system maintenance reasons, the `zps` user is also automatically created with all privileges. It's necessary to not change it in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode.
+For system maintenance reasons, the `zps` user is also automatically created with all privileges. It's important not to change it in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ## Default hardware configuration and autoscaling
 
 * Each MariaDB container (1 in non-HA, 3 in HA) starts with 1 vCPU, 1 GB RAM, and 5 GB of disk space.
-* Zerops will automatically scale the database only [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (both in non-HA and HA mode).
+* Zerops will only automatically scale the database [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (both in non-HA and HA mode).
 * The [horizontal autoscaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) in HA mode is not applied because of optimal performance.
 
 ## How to backup / restore database data
@@ -129,17 +129,17 @@ First, connect to your Zerops project using [zcli](/documentation/cli/installati
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Connection security settings
-As you are using a secure VPN channel already, and the database service is located on the internal Zerops project private secured network, it's unnecessary to apply any additional security layer such as SSH or SSL/TLS. For these reasons, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Here's more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
+As you are using a secure VPN channel already, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For these reasons, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-Now it's already easy to use its export/import built-in functions to backup/restore database data to/from your local file system.
+Now you can easily use the export/import built-in functions to backup/restore database data to/from your local file system.
 
 ![Querious](./images/Querious-Export.png "Querious Export")
 
 ### Using mariadb/mysql CLI
 
-Again, first access your Zerops project using [zcli](/documentation/cli/installation.html). The `mariadb`/`mysql` CLI client has to be already installed locally. It comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version). The client CLI is a part of [MySQL Workbench](https://dev.mysql.com/downloads/workbench) as well.
+Again, first access your Zerops project using [zcli](/documentation/cli/installation.html). The `mariadb`/`mysql` CLI client need to be already installed locally. It comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version). The client CLI is a part of [MySQL Workbench](https://dev.mysql.com/downloads/workbench) as well.
 
 #### Logical database backup
 
@@ -150,7 +150,7 @@ mysqldump -h [hostname] -u [user] -p[password] -x [database] > filename.dump
 And when used values:
 
 * hostname = **==db==** (specified when MariaDB Service was created)
-* user = **==db==** (automatically created with the name same as the hostname)
+* user = **==db==** (automatically created with the same name as the hostname)
 * password = **==xxxxxxxxxxxxxxxx==** (automatically created as a random value)
 * database = **==main==** (created by a user later as a part of the project)
 * filename = **==main==** (specified filename to store the database backup)
@@ -173,7 +173,7 @@ Starting with MariaDB 10.4.6, `mariadb` is a [symlink](https://mariadb.com/kb/en
 
 ### Using Adminer / phpMyAdmin
 
-Create a new Zerops [PHP service](/documentation/services/runtimes.html#php) and [deploy](/documentation/services/runtimes/php.html#how-to-deploy-application-code) a prepared [Adminer](/knowledge-base/how-to-do/how-to-prepare-adminer-application-kit.html) or [phpMyAdmin](/knowledge-base/how-to-do/how-to-prepare-phpmyadmin-application-kit.html) application kit. After enabling a [Zerops subdomain](/documentation/routing/zerops-subdomain.html) on such a service, you can access the application on its root URL. You can access the MariaDB database service using its hostname, port, user, and password. After that, you can use its built-in export/import functions to backup/restore database data to/from your local file system.
+Create a new Zerops [PHP service](/documentation/services/runtimes.html#php) and [deploy](/documentation/services/runtimes/php.html#how-to-deploy-application-code) a pre-prepared [Adminer](/knowledge-base/how-to-do/how-to-prepare-adminer-application-kit.html) or [phpMyAdmin](/knowledge-base/how-to-do/how-to-prepare-phpmyadmin-application-kit.html) application kit. After enabling a [Zerops subdomain](/documentation/routing/zerops-subdomain.html) on such a service, you can access the application through its root URL. You can access the MariaDB database service using its hostname, port, user, and password. After that, you can use its built-in export/import functions to backup/restore database data to/from your local file system.
 
 ![Adminer](./images/Adminer-Login.png "Adminer Login")
 
@@ -194,17 +194,17 @@ services:
   buildFromGit: https://github.com/zeropsio/recipe-adminer@main
 ```
 
-After that you can either use **Adminer** either using [Zerops VPN](/documentation/cli/vpn.html) built into the [zcli](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://adminer`) or enable Zerops [subdomain access](/documentation/routing/zerops-subdomain.html).
+After that you can use **Adminer** either using [Zerops VPN](/documentation/cli/vpn.html) built into the [zcli](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://adminer`) or enable Zerops [subdomain access](/documentation/routing/zerops-subdomain.html).
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Explanation of the phpMyAdmin security warning
-Zerops Routing Service (see the schema of a Zerops project with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access)) takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project's services. That's the reason why **phpMyAdmin** can see the difference between using HTTPS protocol on a client-side and HTTP protocol on a server-side. **From Zerops point of view, it's not a security risk**. It's the only positive falsy notification from the phpMyAdmin side (not supporting the `HTTP_X_FORWARDED_PROTO` HTTP header that says it has happened).
+Zerops Routing Service (see the schema of a Zerops project with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access)) takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project services. This is why **phpMyAdmin** can see the difference between using HTTPS protocol on a client-side and HTTP protocol on a server-side. **From a Zerops point of view, it's not a security risk**. It's the only positive falsy notification from the phpMyAdmin side (not supporting the `HTTP_X_FORWARDED_PROTO` HTTP header that says it has happened).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ![phpMyAdmin](./images/phpMyAdmin-Login.png "phpMyAdmin Login")
 
-## What you should remember when using the HA mode
+## What to bear in mind when using HA mode
 
 ### Asynchronous behavior
 
@@ -212,7 +212,7 @@ Zerops Routing Service (see the schema of a Zerops project with [external access
 ::: warning Be sure you understand correctly
 When data is stored in a MariaDB cluster (always through its current primary database instance), it is replicated across other standby replica instances asynchronously. This means that if one SQL statement stores some data, the following immediate select query may not retrieve the same data. The reason is that the given statement will be executed against another replica instance. If required to get the same data, it's necessary to encapsulate both commands into a single SQL transaction, which will always be executed against the primary instance (because of the write operation that is included). The same case would be with two immediately following SELECT statements to get the same data. Again, encapsulating of both commands into a single SQL transaction guarantees their execution against a selected but the same replica instance.
 
-You can also force synchronization waits for causality checks on a cluster by [wsrep_sync_wait](https://mariadb.com/docs/reference/mdb/system-variables/wsrep_sync_wait) bitmask. Enabling it ensures that certain types of queries always execute against the most up to date database state, at the expense of query performance. [Sample usage](https://mariadb.com/kb/en/galera-cluster-system-variables/#wsrep_sync_wait) for a critical read that must have the most up-to-date data:
+You can also force synchronization to wait for causality checks on a cluster by [wsrep_sync_wait](https://mariadb.com/docs/reference/mdb/system-variables/wsrep_sync_wait) bitmask. Enabling it ensures that certain types of queries always execute against the most up to date database state, at the expense of query performance. [Sample usage](https://mariadb.com/kb/en/galera-cluster-system-variables/#wsrep_sync_wait) for a critical read that must have the most up-to-date data:
 
 ```sql
  SET SESSION wsrep_sync_wait=1;
@@ -225,9 +225,9 @@ You can also force synchronization waits for causality checks on a cluster by [w
 
 ### Non-database local data
 
-Each container has separate local disk space, which can theoretically be used by appropriate APIs of the database service and thus store data outside the replicated contents of the database. It should be noted that such data is reserved only for this particular instance, not mirrored across the MariaDB Galera cluster nor backup-ed. It will not be migrated if such a container is deleted due to its failure. Also, separate direct access to an individual MariaDB instance is not supported in any way.
+Each container has separate local disk space, which can theoretically be used by appropriate APIs of the database service and thus store data outside the replicated contents of the database. It should be noted that such data is only reserved for this particular instance, not mirrored across the MariaDB Galera cluster nor is it backed up. It will not be migrated if such a container is deleted due to failure. Also, separate direct access to an individual MariaDB instance is not supported in any way.
 
-We don't recommend to use any functionality of [SELECT INTO OUTFILE](https://mariadb.com/kb/en/select-into-outfile), [SELECT INTO DUMPFILE](https://mariadb.com/kb/en/select-into-dumpfile), [LOAD_FILE](https://mariadb.com/kb/en/load_file), or [LOAD DATA](https://dev.mysql.com/doc/refman/8.0/en/load-data.html). You can't save/load such data directly to/from any shared storage, and in the Galera HA cluster environment, it is impossible to predict which container the selected data will be stored on. Instead of that, use the standard functionality of the [export/import](/documentation/services/databases/mariadb.html#how-to-backup-restore-database-data) mechanism.
+We don't recommend using any functionality of [SELECT INTO OUTFILE](https://mariadb.com/kb/en/select-into-outfile), [SELECT INTO DUMPFILE](https://mariadb.com/kb/en/select-into-dumpfile), [LOAD_FILE](https://mariadb.com/kb/en/load_file), or [LOAD DATA](https://dev.mysql.com/doc/refman/8.0/en/load-data.html). You can't save/load such data directly to/from any shared storage, and in the Galera HA cluster environment, it is impossible to predict which container the selected data will be stored on. Instead, use the the [export/import](/documentation/services/databases/mariadb.html#how-to-backup-restore-database-data) mechanism's standard functionality.
 
 ### Selected specifics of a Galera HA cluster
 
