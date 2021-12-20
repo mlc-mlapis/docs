@@ -1,6 +1,6 @@
 # Nginx
 
-Zerops provides a fully managed and scaled Nginx static web server service, suitable for both development and production projects using any load. You can choose any option you want and be sure that it will work.
+Zerops provides a fully managed and scaled Nginx static web server service, suitable for both development and production projects using any load. You can choose any option you wish in the knowledge that it will work.
 
 This service is usually used as a web server for serving static files (index.html, *.js bundles, fonts, images, other assets) of front-end applications, like **Angular**, **Vue**, **React**.
 
@@ -8,15 +8,15 @@ This service is usually used as a web server for serving static files (index.htm
 
 ## Adding the Nginx Service in Zerops
 
-Zerops Nginx service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers). It has pre-installed the Git version control system.
+Zerops Nginx service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers). It has the Git version control system pre-installed.
 
-### Two ways how to do it
+### Two ways to do it
 
-You have two possible ways to create a new Nginx service. Either manually in the Zerops GUI, as described in the [rest of this document](#version-to-choose), or using Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+There are two possible ways to create a new Nginx service. Either manually in the Zerops GUI, as described in the [rest of this document](#version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
 #### Simple import example in the YAML syntax
 
-Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following.
+Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
 
 ```yaml
 services:
@@ -48,7 +48,7 @@ services:
 
 A complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
 
-### Version to choose
+### Which version to choose
 
 You can currently choose Nginx version **v1.16**. The chosen version of it **can't be changed afterward**.
 
@@ -67,7 +67,7 @@ The port will be automatically set to the value of **==80==** and can't be chang
 
 ### Document root
 
-You can choose a **document root** (the publicly accessible folder, usually the location of your ==index.html==). By default, the document root is set to the folder ==**/var/www**== , which you can change. You set it through a service Nginx configuration in the following section, see the [Default Nginx config](#default-nginx-config). Later changes you can do through a separate **Nginx configuration** service card.
+You can choose a **document root** (the publicly accessible folder, usually the location of your ==index.html==). By default, the document root is set to the folder ==**/var/www**== , which you can change. You set it through a service Nginx configuration in the following section, see the [Default Nginx config](#default-nginx-config). Any subsequent changes you can make through a separate **Nginx configuration** service card.
 
 ```bash
 root /var/www;
@@ -77,7 +77,7 @@ root /var/www;
 
 ![Nginx](./images/Nginx-Default-Config.png "Default Config")
 
-* You can adjust the default config as you wish, as long as you respect the correct syntax and valid paths. However, there are two exceptions. First, **==Don't modify port 80==** at the point marked <span style="background-color: #ff8080">&nbsp;[**1**]&nbsp;</span>. If you do, you will break your project.
+* You can adjust the default config as you wish, as long as you respect the correct syntax and valid paths. However, there are two exceptions. First, **==don't modify port 80==** at the point marked <span style="background-color: #ff8080">&nbsp;[**1**]&nbsp;</span>. If you do, you will break your project.
 
 * Either use the default **document root** as `/var/www` at the marked point <span style="background-color: #ffff00">&nbsp;[**2**]&nbsp;</span> or enter a subdirectory such as **public** `/var/www/public` (optional name) if your project requires it.
 
@@ -85,11 +85,11 @@ root /var/www;
 
 * And as the second exception, ==**`don't modify`**== **storage log paths** at the point marked <span style="background-color: #8000ff; color: white">&nbsp;[**4**]&nbsp;</span> for the **access_log** and the **error_log**. The chosen facility ==`local1`== is related to the mechanism of showing [runtime logs](#logging) in the Zerops GUI.
 
-* The configuration syntax is validated on saving with `nginx -t` command.
+* The configuration syntax is validated upon saving with `nginx -t` command.
 
 #### Nginx config tips for SPA applications
 
-1. A static server should probably return always `index.html` as a response for any request that asks for a non-existed file or resource. The `location` section for the root can be used as the following code:
+1. A static server should always probably return `index.html` as the response for any request that asks for a non-existant file or resource. The `location` section for the root can be used as the following code:
 
 ```bash
 location / {
@@ -97,7 +97,7 @@ location / {
 }
 ```
 
-2. The `index.html` file should not be usually cached on a client-side to refresh the SPA homepage automatically. You can add another `location` section just for it.
+2. The `index.html` file should not usually be cached on a client-side to refresh the SPA homepage automatically. You can add another `location` section just for this purpose.
 
 ```bash
 location = /index.html {
@@ -108,7 +108,7 @@ location = /index.html {
 
 ### HA / non-HA mode
 
-When creating a new service, you can choose whether the runtime environment should be run in **HA** (High Availability) mode, using 3 or more containers, or **non-HA mode**, using only 1 container. ==**The chosen runtime environment mode can't be changed later.**== If you would like to learn more about the technical details and how this service is internally built, take a look at the [PHP Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/php-cluster-internally.html) part of the documentation. Although the specific text is focused on the PHP environment (running in combination with the Apache or Nginx webserver), in terms of logic and functionality, there is an entirely identical situation, which also applies to a separate static Nginx web server.
+When creating a new service, you can choose whether the runtime environment should be run in **HA** (High Availability) mode, using 3 or more containers, or **non-HA mode**, using only 1 container. ==**The chosen runtime environment mode can't be changed later.**== If you would like to learn more about the technical details and how this service is  built internally, take a look at the [PHP Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/php-cluster-internally.html) part of the documentation. Although the specific text is focused on the PHP environment (running in combination with the Apache or Nginx webserver), in terms of logic and functionality, the situation is entirely identical, which also applies to a separate static Nginx web server.
 
 #### Nginx static server in non-HA mode
 
@@ -128,24 +128,24 @@ When creating a new service, you can choose whether the runtime environment shou
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Preface
-Conceptually, you can either use Zerops deploy functionality to upload already built application files to Zerops, say at the end of your existing CI/CD pipeline, or utilize Zerops build & deploy pipeline, which can build and then deploy the application for you automatically.
+Conceptually, you can either use Zerops deploy functionality to upload application files which are already built to Zerops, say at the end of your existing CI/CD pipeline, or utilize Zerops build & deploy pipeline, which can build and then deploy the application for you automatically.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-There are **two ways** by which you can physically deliver application code to the service. Either via a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or by using the Zerops **zcli** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
+There are **two ways** you can physically deliver application code to the service. Either via a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or by using the Zerops **zcli** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
 
 When a Zerops service has been connected to a GitHub or GitLab repository, you can select the checkbox `Build immediately after the service creation` to run the first build immediately after the service creation. Otherwise, you have to make a **new commit/tag** to invoke that first [build & deploy](http://localhost:8081/documentation/build/how-zerops-build-works.html) pipeline task.
 
 ![Service connected to a Repository](./images/Repository-Triggering-Tag-Commit.png "Repository triggering on a Tag/Commit")
 
-When the build process has been successfully finished, you can download the entire zipped **artifact of the build container** and browse locally if you need to check its content.
+When the build process has been successfully finished, you can download the entire zipped **artifact of the build container** and browse it locally if you need to check its content.
 
 ![Build Artifact](./images/Download-Build-Artefact-Nginx.png "Download build artifact")
 ![Build Artifact](./images/Download-Build-Artefact-Nginx-App-Version.png "Download build artifact")
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info A simple project and how to deploy the code using the Zerops zcli
-You can look at the elementary project described step-by-step. Take a look at how you can create and deploy it with the Zerops [zcli](/documentation/cli/installation.html). It's supposed that you already created your project in Zerops GUI and an empty Nginx service (not connected to any repository).  You can use a [service import](#simple-import-example-in-the-yaml-syntax) functionality for it.
+You can look at this elementary project a step-by-step description. Take a look at how you can create and deploy it with the Zerops [zcli](/documentation/cli/installation.html). It's assumed that you have already created your project in Zerops GUI and an empty Nginx service (not connected to any repository).  You can use a [service import](#simple-import-example-in-the-yaml-syntax) functionality for it.
 
 * [Preparing and deploying a simple Nginx web](/knowledge-base/how-to-do/how-to-prepare-simple-nginx-web.html)
 :::
@@ -153,7 +153,7 @@ You can look at the elementary project described step-by-step. Take a look at ho
 
 ## Accessing a Zerops Shared Storage
 
-When a Zerops Nginx Service is created, you can mount a Zerops [Shared Storage Service](/documentation/services/storage/shared.html#storage-mounting) to it. If you don't have any as of yet, create a new one first.
+When a Zerops Nginx Service is created, you can mount a Zerops [Shared Storage Service](/documentation/services/storage/shared.html#storage-mounting) to it. If you don't have any as of yet, start by creating a new one.
 
 Static Nginx server accesses the mounted shared storage under **`www-data`** user account.
 
@@ -173,7 +173,7 @@ Other services can access the Nginx static server using its **hostname** and **p
 
 ### From other Zerops projects
 
-Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, the cross projects communication can be done precisely in the same ways described in the section [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. The projects are not directly interconnected.
+Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, cross project communication can be done precisely in the same ways described in the section [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. The projects are not directly interconnected.
 
 ### From your local environment
 
@@ -202,14 +202,14 @@ Nginx web access and error logs are configured using a syslog service to central
 
 ![Runtime log](./images/Runtime-Log.png "Runtime log access")
 
-Default **Nginx** configuration is done through `/etc/nginx/sites-enabled/default.site`, and you have direct edit access to its content through the [Nginx configuration](#default-nginx-config) section. **You can change it**, but be careful what you are doing.
+Default **Nginx** configuration is done through `/etc/nginx/sites-enabled/default.site`, and you have direct edit access to its content through the [Nginx configuration](#default-nginx-config) section. **You can change it**, but take care when doing so. 
 
 ```bash
 access_log syslog:server=unix:/dev/log,facility=local1 default_short;
 error_log syslog:server=unix:/dev/log,facility=local1;
 ```
 
-As you can see in both cases, **web access & error logs** are directed with **facility number 17** ( ==`local1`== ). This is an important fact, as the Zerops GUI has a dedicated switch ==**`Show web server logs`**== for showing them when **enabled**. Access logs are set up with **severity 6** (**Informational**) and error logs with **severity 4** (**Error**).
+As you can see in both cases, **web access & error logs** are directed with **facility number 17** ( ==`local1`== ). This is important since the Zerops GUI has a dedicated switch ==**`Show web server logs`**== for showing when they are **enabled**. Access logs are set up with **severity 6** (**Informational**) and error logs with **severity 4** (**Error**).
 
 ![Nginx Logging](./images/Access-Error-Logs-Nginx.png "Access & Error logs")
 
@@ -229,7 +229,7 @@ See the [Nginx](https://docs.nginx.com/nginx/admin-guide/monitoring/logging) doc
 
 ## How to browse the content of an Nginx container
 
-You can use the **File browser** functionality available in all runtime services to view folders, files, and their contents & attributes. The mounted shared storage disks are accessible at the path ==/mnt/== .
+You can use the **File browser** functionality available in all runtime services to view folders, files, and their contents & attributes. The mounted shared storage disks are accessible via the path ==/mnt/== .
 
 ![File browser](./images/Container-File-Browser.png "File browser feature")
 
