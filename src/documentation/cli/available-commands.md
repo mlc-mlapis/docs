@@ -8,7 +8,7 @@ sidebarDepth: 1
 
 ## `login`
 
-Should be used after you install zcli. you usually need to log in only once per device.
+Should be used after you install zcli. You usually only need to log in once per device.
 
 ### Flags
 
@@ -24,7 +24,7 @@ $ zcli login --zeropsToken=AC750cs64sas897sabs65sasbbas9asbdbasd65sadNa
 
 #### `--zeropsLogin`
 
-THe e-mail address you registered your account with. Use alongside your `--zeropsPassword`
+The e-mail address you used to register your account. Use with your `--zeropsPassword`
 
 ```bash
 $ zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
@@ -32,7 +32,7 @@ $ zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
 
 #### `--zeropsPassword`
 
-The password you registered your account with. Use alongside your `--zeropsLogin`. The password should be passed preferably as the `ZEROPSPASSWORD` environment variable, so that it doesn't show up in logs.
+The password you used to register your account. Use with your `--zeropsLogin`. The password should be passed preferably as the `ZEROPSPASSWORD` environment variable, so that it doesn't show up in logs.
 
 ```bash
 $ zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
@@ -60,10 +60,10 @@ $ zcli push myproject myservice --versionName="v0.0.1"
 
 ## `deploy [project name] [service name] [space separated files or directories]`
 
-Used to deploy files to the Zerops service. Alternative to `push`, which triggers the [build pipeline](/documentation/build/how-zerops-build-works.html). Use when you want to deploy already built files to Zerops.
+Used to deploy files to the Zerops service. Alternative to `push`, which triggers the [build pipeline](/documentation/build/how-zerops-build-works.html). Use when you want to deploy files that are already built to Zerops.
 
 ::: tip strip paths of `deploy`ed files
-If for example your application is built into the folder `dist/app` and you want to deploy the files inside without the path, you can use `'dist/app/*'`, see [deploy attribute documentation here](/documentation/build/build-config.html#examples-of-different-deploy-settings).
+If, for example, your application is built into the folder `dist/app` and you want to deploy the files inside it without the path, you can use `'dist/app/*'`, see [deploy attribute documentation here](/documentation/build/build-config.html#examples-of-different-deploy-settings).
 :::
 
 ### Example
