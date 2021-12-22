@@ -89,7 +89,7 @@ root /var/www;
 
 #### Nginx config tips for SPA applications
 
-1. A static server should always probably return `index.html` as the response for any request that asks for a non-existant file or resource. The `location` section for the root can be used as the following code:
+1. A static server should always return `index.html` as the response for any request that asks for a non-existent file or resource. The `location` section for the root can be used as the following code:
 
 ```bash
 location / {
