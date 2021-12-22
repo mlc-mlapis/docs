@@ -306,7 +306,7 @@ access_log syslog:server=unix:/dev/log,facility=local1 default_short;
 error_log syslog:server=unix:/dev/log,facility=local1;
 ```
 
-As you can see in both cases, **web access & error logs** are directed with **facility number 17** ( ==`local1`== ). This is important since the Zerops GUI has a dedicated switch ==**`Show web server logs`** for showing. Access logs are set up with **severity 6** (**Informational**) and error logs with **severity 4** (**Error**).
+As you can see in both cases, **web access & error logs** are directed with **facility number 17** ( ==`local1`== ). This is because the dedicated switch ==**`Show web server logs`**== in the **Runtime log** view that allows you to show web access & error logs separately from standard application logs. It's important, especially from an access log point of view, because there could be thousands and thousands of records. Access logs are set up with **severity 6** (**Informational**) and error logs with **severity 4** (**Error**).
 
 ![PHP Logging](./images/Access-Error-Logs-PHP.png "Access & Error logs")
 
