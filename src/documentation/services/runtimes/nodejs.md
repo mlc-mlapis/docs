@@ -88,7 +88,7 @@ When creating a new service, you can choose whether the runtime environment shou
 
 * great for local development to save money,
 * doesn’t require any changes to the existing code,
-* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-the-ha-mode), but see the recommendation tip below,
+* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-ha-mode), but see the recommendation tip below,
 * not recommended for production projects.
 
 <!-- markdownlint-disable DOCSMD004 -->
