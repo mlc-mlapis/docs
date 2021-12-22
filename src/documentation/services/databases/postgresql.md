@@ -60,14 +60,14 @@ When creating a new service, you can choose whether the database should be run i
 
 * great for local development to save money,
 * doesn’t require any changes to the existing code,
-* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-the-ha-mode), but see the recommendation tip below,
+* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-ha-mode), but see the recommendation tip below,
 * data is stored only in a single container, higher risk of data loss,
 * all data changes since the last backup are not recoverable,
 * not recommended for production projects.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Recommendation
-Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-the-ha-mode) because you never know when you'll need to switch to the HA mode.
+Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-ha-mode) because you never know when you'll need to switch to the HA mode.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -78,7 +78,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 * when one container fails, it's automatically replaced with a new one,
 * with two load balancers ([HAProxy](http://www.haproxy.org)) (no additional cost),
 * [asynchronous behavior](#asynchronous-behavior) of a Patroni HA cluster,
-* the need to respect all of the [specifics](#what-you-should-remember-when-using-the-ha-mode) related to a Patroni HA cluster,
+* the need to respect all of the [specifics](#what-you-should-remember-when-using-ha-mode) related to a Patroni HA cluster,
 * recommended for production projects.
 
 ## How to access a PostgreSQL database
