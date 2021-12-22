@@ -158,7 +158,7 @@ When the build process has been successfully finished, you can download the enti
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Simple projects and how to deploy the code using the Zerops zcli
-You can look at the two real projects with step-by-step descriptions, **Adminer** and **phpMyAdmin** web tools, used to administer the Zerops MariaDB (MySQL) databases. Take a look at how you can create and deploy them with the Zerops **zcli**. It is assumed that you have already created your project in Zerops GUI and an empty PHP service (not connected to any repository). You can use the [service import](#simple-import-example-in-the-yaml-syntax) functionality for it.
+You can look at the two real projects with step-by-step descriptions, **Adminer** and **phpMyAdmin** web tools, used to administer the Zerops MariaDB (MySQL) databases. Take a look at how you can create and deploy them with the Zerops **zcli**. It is assumed that you have already created your project in Zerops GUI and an empty PHP service (not connected to any repository). You can use the [service import](#a-simple-import-example-in-the-yaml-syntax) functionality for it.
 
 * [Preparing and deploying phpMyAdmin application kit](/knowledge-base/how-to-do/how-to-prepare-phpmyadmin-application-kit.html)
 * [Preparing and deploying Adminer application kit](/knowledge-base/how-to-do/how-to-prepare-adminer-application-kit.html)
