@@ -50,7 +50,7 @@ A complete specification of the [import/export syntax in the YAML format](/docum
 
 ### Which version to choose
 
-You can currently choose Nginx version **v1.16**. The chosen version of it **can't be changed afterward**.
+You can currently choose Nginx version **v1.16**. The chosen version of it **can't be changed afterwards**.
 
 Used as the export & import type: ==`nginx@1.16`== .
 
