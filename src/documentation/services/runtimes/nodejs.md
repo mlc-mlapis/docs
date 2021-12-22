@@ -93,7 +93,7 @@ When creating a new service, you can choose whether the runtime environment shou
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Recommendation
-Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-the-ha-mode) because you never know when you'll need to switch to HA mode.
+Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-ha-mode) because you never know when you'll need to switch to HA mode.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
