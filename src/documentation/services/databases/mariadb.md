@@ -49,14 +49,14 @@ When creating a new service, you can choose whether the database should be run i
 
 * great for local development to save money,
 * doesn’t require any changes to the existing code,
-* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-the-ha-mode), but see the recommendation tip below,
+* not necessary to respect HA mode [specifics](#what-to-bear-in-mind-when-using-HA-mode), but see the recommendation tip below,
 * data is stored only in a single container, higher risk of data loss,
 * all data changes since the last backup are not recoverable,
 * not recommended for production projects.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Recommendation
-Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-the-ha-mode) because you never know when you'll need to switch to HA mode. This is also true for the used storage engine, as InnoDB is the only option in HA mode.
+Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-to-bear-in-mind-when-using-HA-mode) because you never know when you'll need to switch to HA mode. This is also true for the used storage engine, as InnoDB is the only option in HA mode.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -68,7 +68,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 * with two load balancers ([MaxScale](https://mariadb.com/kb/en/maxscale)) in [readwritesplit](https://mariadb.com/kb/en/mariadb-maxscale-25-readwritesplit) mode (no additional cost),
 * [asynchronous behavior](#asynchronous-behavior) of a Galera HA cluster,
 * only InnoDB storage engine is supported,
-* the need to respect all of the [specifics](#what-you-should-remember-when-using-the-ha-mode) related to a Galera HA cluster,
+* the need to respect all of the [specifics](#what-to-bear-in-mind-when-using-HA-mode) related to a Galera HA cluster,
 * recommended for production projects.
   
 ## How to access a MariaDB database
