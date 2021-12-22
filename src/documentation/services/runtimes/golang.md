@@ -12,7 +12,7 @@ Zerops Golang service is based on a [Linux LXD container](/documentation/overvie
 
 There are two possible ways to create a new Golang service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-#### Simple import example in the YAML syntax
+#### A simple import example in the YAML syntax
 
 Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
 
