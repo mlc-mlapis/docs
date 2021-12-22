@@ -75,12 +75,12 @@ When creating a new service, you can choose whether the runtime environment shou
 
 * great for local development to save money,
 * doesn’t require any changes to the existing code,
-* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-the-ha-mode), but see the recommendation tip below,
+* not necessary to respect HA mode [specifics](#what-you-should-remember-when-using-ha-mode), but see the recommendation tip below,
 * not recommended for production projects.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Recommendation
-Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-the-ha-mode) because you never know when you'll need to switch to the HA mode.
+Even when using the non-HA mode for a production project, we nonetheless recommend you respect all of the [HA mode specifics](#what-you-should-remember-when-using-ha-mode) because you never know when you'll need to switch to the HA mode.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -90,7 +90,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 * with increasing operating load, the number of containers can reach up to 64,
 * so the application runs redundantly in 3 or more places, with no risk of total failure,
 * when one container fails, it's automatically replaced with a new one,
-* the need to respect all of the [specifics](#what-you-should-remember-when-using-the-ha-mode) related to a Golang cluster,
+* the need to respect all of the [specifics](#what-you-should-remember-when-using-ha-mode) related to a Golang cluster,
 * recommended for production projects.
 
 ## How to deploy application code
@@ -265,7 +265,7 @@ func CheckProtocol(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-## What you should remember when using the HA mode
+## What you should remember when using HA mode
 
 ### Store data locally only for a temporary purpose
 
