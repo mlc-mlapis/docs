@@ -1,14 +1,14 @@
 # MongoDB
 
-Zerops provides a fully managed and scaled MongoDB database service, suitable for both development and production projects on any load. You can choose any variant you want, and you can be sure that it will work. Your certainty and peaceful sleep are our top priority.
+Zerops provides a fully managed and scaled MongoDB database service, suitable for both development and production projects on any load. You can choose any variant you wish in the knowledge that it will work. Your peace of mind is our top priority.
 
 [[toc]]
 
 ## Adding MongoDB service in Zerops
 
-### Version to choose
+### Which version to choose
 
-You can actually choose **v4.0**. The chosen version of the database **can't be changed afterward**.
+You can currently choose **v4.0**. The chosen version of the database **can't be changed afterward**.
 
 Used as the export & import type: ==`mongodb@4`== .
 
