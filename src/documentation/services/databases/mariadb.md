@@ -1,6 +1,6 @@
 # MariaDB (MySQL)
 
-Zerops provides a fully managed and scaled MariaDB (MySQL) database service, suitable for both development and production projects using any load. You can choose any option you wsih with the knowledge that it will work.
+Zerops provides a fully managed and scaled MariaDB (MySQL) database service, suitable for both development and production projects using any load. You can choose any option you wish with the knowledge that it will work.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: details Compatibility & Differences to MySQL
