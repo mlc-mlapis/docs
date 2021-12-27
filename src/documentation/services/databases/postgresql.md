@@ -213,7 +213,7 @@ pg_dump -U db -h db -p 5432 -F c -W db > db.dump
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Passing a secure password in batch jobs and scripts
-To eliminate the necessity to interactively enter a password you can use ==`.pgpass`== [file](https://www.postgresql.org/docs/current/libpq-pgpass.html) located in a user's home directory. This file should contain lines of the following format: `<hostname>:<port>:<database>:<user>:<password>`. Each of the first four fields can be a literal value, or *, which matches anything. The line of `*:*:*:*:<password>` allows to use the same password for any database connection. In such a case, use **pg_dump** with the parameter `-w` instead of `-W`.
+To eliminate the necessity to interactively enter a password you can use ==`.pgpass`== [file](https://www.postgresql.org/docs/current/libpq-pgpass.html) located in a user's home directory. This file should contain lines of the following format: `<hostname>:<port>:<database>:<user>:<password>`. Each of the first four fields can be a literal value, or *, which matches anything. The line of `*:*:*:*:<password>` allows to use the same password for any database connection. On Linux or Mac systems, set the file's mode to `0600` by `chmod 600 ~/.pgpass`. Otherwise, it will be ignored. In such a case, use **pg_dump** with the parameter `-w` instead of `-W`.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
