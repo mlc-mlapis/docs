@@ -121,9 +121,9 @@ For system maintenance reasons, the `zps` user is also automatically created wit
 
 ### Using your favorite database management tool
 
-Install any of your favorite database administration tools locally. For example, you can use [DataGrip](https://www.jetbrains.com/datagrip), [DbVisualizer](https://www.dbvis.com/), [MySQL Workbench](https://dev.mysql.com/downloads/workbench) multi-platform database administration tools, or [Sequel Pro](https://www.sequelpro.com), [Querious](https://www.araelium.com/querious), specifically on the Mac platform. You can find the list with many others on the [Graphical and Enhanced Clients](https://mariadb.com/kb/en/graphical-and-enhanced-clients) page.
+Install any of your favorite database administration tools locally. For example, you can use [DataGrip](https://www.jetbrains.com/datagrip), [DbVisualizer](https://www.dbvis.com), [MySQL Workbench](https://dev.mysql.com/downloads/workbench) multi-platform database administration tools, or [Sequel Pro](https://www.sequelpro.com), [Querious](https://www.araelium.com/querious), specifically on the Mac platform. You can find the list with many others on the [Graphical and Enhanced Clients](https://mariadb.com/kb/en/graphical-and-enhanced-clients) page.
 
-First, connect to your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then use ==`db:3306`== as the endpoint. After that, connect to the database service from your installed database management tool, as in the example below with the **Querious**:
+First, connect to your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then you can use ==`db:3306`== as the endpoint. After that, connect to the database service from your installed database management tool, as in the example below with the **Querious**:
 
 ![Querious](./images/Querious-Connect.png "Querious Connect Dialog")
 
@@ -139,12 +139,12 @@ Now you can easily use the export/import built-in functions to backup/restore da
 
 ### Using mariadb/mysql CLI
 
-Again, first access your Zerops project using [zcli](/documentation/cli/installation.html). The `mariadb`/`mysql` CLI client need to be already installed locally. It comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version). The client CLI is a part of [MySQL Workbench](https://dev.mysql.com/downloads/workbench) as well.
+Again, first access your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `mariadb`/`mysql` CLI client need to be already installed locally. It comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version). The client CLI is a part of [MySQL Workbench](https://dev.mysql.com/downloads/workbench) as well.
 
 #### Logical database backup
 
 ```powershell
-mysqldump -h [hostname] -u [user] -p[password] -x [database] > filename.dump
+mysqldump -h [hostname] -u [user] -p[password] -x [database] > [filename].dump
 ```
 
 And when used values:
@@ -162,7 +162,7 @@ mysqldump -h db -u db -pxxxxxxxxxxxxxxxx -x main > main.dump
 #### Logical database restore
 
 ```powershell
-mysql -h [hostname] -u [user] -p[password] [database] < filename.dump
+mysql -h [hostname] -u [user] -p[password] [database] < [filename].dump
 ```
 
 <!-- markdownlint-disable DOCSMD004 -->
