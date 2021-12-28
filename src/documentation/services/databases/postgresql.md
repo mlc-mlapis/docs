@@ -192,7 +192,7 @@ To install just **libpg** CLI on the Mac platform you can use the [Homebrew Form
 
 PostgreSQL CLI provides the [pg_dump utility](https://www.postgresql.org/docs/current/app-pgdump.html) to help you back up databases as follows (you have to enter a password interactively):
 
-```powershell
+```bash
 pg_dump -U [user] -h [hostname] -p [port] -F c -W [database] > [filename].dump
 ```
 
@@ -207,7 +207,7 @@ And when used values:
 * **-F c** parameter means a compressed custom-format suitable for input later into **pg_restore**
 * **-W** parameter means forcing a prompt for a password interactively
 
-```powershell
+```bash
 pg_dump -U db -h db -p 5432 -F c -W db > db.dump
 ```
 
@@ -221,7 +221,7 @@ To eliminate the need to interactively enter a password you can use ==`.pgpass`=
 
 PostgreSQL CLI provides the [pg_restore utility](https://www.postgresql.org/docs/current/app-pgrestore.html) to help you restore databases as follows (you have to enter a password interactively):
 
-```powershell
+```bash
 pg_restore -U [user] -h [hostname] -p [port] -d [database] -1 -W [filename].dump
 ```
 
@@ -236,7 +236,7 @@ And when used values:
 * **-1** parameter means executing the restore as a single transaction
 * **-W** parameter means forcing a prompt for a password interactively
 
-```powershell
+```bash
 pg_restore -U db -h db -p 5432 -d db -1 -W db.dump
 ```
 

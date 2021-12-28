@@ -143,7 +143,7 @@ Again, first access your Zerops project using [zcli](/documentation/cli/installa
 
 #### Logical database backup
 
-```powershell
+```bash
 mysqldump -h [hostname] -u [user] -p[password] -x [database] > [filename].dump
 ```
 
@@ -155,13 +155,13 @@ And when used values:
 * database = **==main==** (created by a user later as a part of the project)
 * filename = **==main==** (specified filename to store the database backup)
 
-```powershell
+```bash
 mysqldump -h db -u db -pxxxxxxxxxxxxxxxx -x main > main.dump
 ```
 
 #### Logical database restore
 
-```powershell
+```bash
 mysql -h [hostname] -u [user] -p[password] [database] < [filename].dump
 ```
 
