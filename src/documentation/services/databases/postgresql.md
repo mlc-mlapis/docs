@@ -162,31 +162,31 @@ A new database with the name based on the selected **hostname** is created durin
 
 ### Using your favorite database management tool
 
-Install any of your favorite database administration tools locally. For example, you can use [DataGrip](https://www.jetbrains.com/datagrip), [DbVisualizer](https://www.dbvis.com), [DBeaver](https://dbeaver.io), or [pgAdmin](https://www.pgadmin.org). All of them are multi-platform database administration tools.
+Install any of your favorite database administration tools locally. For example, you can use [DataGrip](https://www.jetbrains.com/datagrip), [DbVisualizer](https://www.dbvis.com), [DBeaver](https://dbeaver.io), or [pgAdmin](https://www.pgadmin.org). They are all multi-platform database administration tools.
 
-First, connect to your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then you can use ==`db:5432`== as the endpoint. After that, connect to the database service from your installed database management tool, as in the example below with the **pgAdmin**:
+First, connect to your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then you can use ==`db:5432`== as the endpoint. After that, connect to the database service from your installed database management tool, as in the example below with **pgAdmin**:
 
 ![pgAdmin](./images/Login-Page-pgAdmin.png "pgAdmin Connect Dialog")
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Connection security settings
-As you are using a secure VPN channel already, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For these reasons, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
+As you are already using a secure VPN channel, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For these reasons, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-Now you can easily use the backup/restore built-in functions to save/load database data to/from your local file system.
+Now you can easily use the built-in backup/restore functions to save/load database data to/from your local file system.
 
 ![pgAdmin](./images/Backup-Page-pgAdmin.png "pgAdmin Backup")
 
 ### Using libpg CLI
 
-Again, first access your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `libpg` PostgreSQL CLI client need to be already installed locally. It comes with each local installation of a [PostgreSQL server](https://www.postgresql.org/download) or a [pgAdmin client](https://www.pgadmin.org).
+Again, first access your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `libpg` PostgreSQL CLI client needs to be already installed locally. It comes with each local installation of a [PostgreSQL server](https://www.postgresql.org/download) or a [pgAdmin client](https://www.pgadmin.org).
 
-On the Windows platform you can selectively install only the **Command Line Tools** if you want.
+On the Windows platform you can selectively install just the **Command Line Tools** if you wish.
 
 ![PostgreSQL  CLI](./images/PostgreSQL-CLI-Windows.png "libpg")
 
-To install only **libpg** CLI on the Mac platform you can use the [Homebrew Formulae](https://formulae.brew.sh/formula/libpq) `brew install libpq`, and on the Linux (Debian or Ubuntu) platform either use `apt-get install libpq-dev` command or read more details for [PostgreSQL server](https://www.postgresql.org/download) CLI specific steps on other operating systems.
+To install just **libpg** CLI on the Mac platform you can use the [Homebrew Formulae](https://formulae.brew.sh/formula/libpq) `brew install libpq`, and on the Linux (Debian or Ubuntu) platform either use `apt-get install libpq-dev` command or find further information for [PostgreSQL server](https://www.postgresql.org/download) CLI and specific steps on other operating systems.
 
 #### Logical database backup
 
@@ -204,8 +204,8 @@ And when used values:
 * port = **==5432==** (the [default port](#hostname-and-ports))
 * filename = **==db==** (specified filename to store the database backup)
 
-* **-F c** parameter means a compressed custom-format suitable later for input into **pg_restore**
-* **-W** parameter means forcing to prompt for a password interactively
+* **-F c** parameter means a compressed custom-format suitable for input later into **pg_restore**
+* **-W** parameter means forcing a prompt for a password interactively
 
 ```powershell
 pg_dump -U db -h db -p 5432 -F c -W db > db.dump
@@ -213,7 +213,7 @@ pg_dump -U db -h db -p 5432 -F c -W db > db.dump
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Passing a secure password in batch jobs and scripts
-To eliminate the necessity to interactively enter a password you can use ==`.pgpass`== [file](https://www.postgresql.org/docs/current/libpq-pgpass.html) located in a user's home directory. In such a case, use **pg_dump** with the parameter `-w` instead of `-W`. This file should contain lines of the following format: `<hostname>:<port>:<database>:<user>:<password>`. Each of the first four fields can be a literal value, or *, which matches anything. The line of `*:*:*:*:<password>` allows to use the same password for any database connection. On Linux or Mac systems, set the file's mode to `0600` by `chmod 600 ~/.pgpass`. Otherwise, it will be ignored.
+To eliminate the need to interactively enter a password you can use ==`.pgpass`== [file](https://www.postgresql.org/docs/current/libpq-pgpass.html) located in a user's home directory. In such a case, use **pg_dump** with the parameter `-w` instead of `-W`. This file should contain lines of the following format: `<hostname>:<port>:<database>:<user>:<password>`. Each of the first four fields can be a literal value, or *, which matches anything. The line of `*:*:*:*:<password>` allows to use the same password for any database connection. On Linux or Mac systems, set the file's mode to `0600` by `chmod 600 ~/.pgpass`. Otherwise, it will be ignored.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -234,7 +234,7 @@ And when used values:
 * filename = **==db==** (specified filename has been used to store the database backup)
 
 * **-1** parameter means executing the restore as a single transaction
-* **-W** parameter means forcing to prompt for a password interactively
+* **-W** parameter means forcing a prompt for a password interactively
 
 ```powershell
 pg_restore -U db -h db -p 5432 -d db -1 -W db.dump
@@ -242,7 +242,7 @@ pg_restore -U db -h db -p 5432 -d db -1 -W db.dump
 
 ### Using phpPgAdmin
 
-You can use the Zerops [import functionality](/documentation/export-import/project-service-export-import.html) to quickly add a service with **phpPgAdmin** to your project and use its built-in export/import functionality. Use the Zerops [recipe-phppgadmin](https://github.com/zeropsio/recipe-phppgadmin) import. The syntax shown below supposes that you have already created the Zerops PostgreSQL service with the chosen hostname ==`db`== . If you have such a service with a different hostname, change the **content** value of the **DATABASE_HOSTNAME** environment variable appropriately in the import syntax below.
+You can use the Zerops [import functionality](/documentation/export-import/project-service-export-import.html) to quickly add a service to your project with **phpPgAdmin** and use its built-in export/import functionality. Use the Zerops [recipe-phppgadmin](https://github.com/zeropsio/recipe-phppgadmin) import. The syntax shown below supposes that you have already created the Zerops PostgreSQL service with the chosen hostname ==`db`== . If your services has a different hostname, change the **content** value of the **DATABASE_HOSTNAME** environment variable appropriately in the import syntax below.
 
 ```yaml
 # Import syntax for creating a phpPgAdmin instance.
