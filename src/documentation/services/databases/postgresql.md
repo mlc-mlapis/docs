@@ -242,7 +242,7 @@ pg_restore -U db -h db -p 5432 -d db -1 -W db.dump
 
 ### Using phpPgAdmin
 
-You can use the Zerops [import functionality](/documentation/export-import/project-service-export-import.html) to quickly add a service to your project with **phpPgAdmin** and use its built-in export/import functionality. Use the Zerops [recipe-phppgadmin](https://github.com/zeropsio/recipe-phppgadmin) import. The syntax shown below supposes that you have already created the Zerops PostgreSQL service with the chosen hostname ==`db`== . If your services has a different hostname, change the **content** value of the **DATABASE_HOSTNAME** environment variable appropriately in the import syntax below.
+You can use the Zerops [import functionality](/documentation/export-import/project-service-export-import.html) to quickly add a service to your project with **phpPgAdmin** and use its built-in export/import functionality. Use the Zerops [recipe-phppgadmin](https://github.com/zeropsio/recipe-phppgadmin) import. The syntax shown below supposes that you have already created the Zerops PostgreSQL service with the chosen hostname ==`db`== . If your service has a different hostname, change the **content** value of the **DATABASE_HOSTNAME** environment variable appropriately in the import syntax below.
 
 ```yaml
 # Import syntax for creating a phpPgAdmin instance.
