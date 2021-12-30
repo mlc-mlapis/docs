@@ -69,7 +69,7 @@ When creating a new service, you can choose whether the database should be run i
 * great for local development to save money,
 * data is only stored in a single container, higher risk of data loss,
 * all data changes from the last backup are not recoverable,
-* the need to respect the Zerops [specifics](#what-specifics-you-should-remember),
+* the need to respect the Zerops [specifics](#specifics-you-should-remember),
 * not recommended for production projects.
 
 <!-- markdownlint-disable DOCSMD004 -->
@@ -84,7 +84,7 @@ Even when using non-HA mode for a production project, we recommend you implement
 * therefore data is stored redundantly (by default in three places), with no risk of data loss,
 * when one container fails, it's automatically replaced with a new one,
 * with two load [Nginx Layer 7](https://www.nginx.com/resources/glossary/layer-7-load-balancing) balancers (no additional cost) that route incoming HTTP traffic in a sophisticated way directly to Elasticsearch cluster data nodes,
-* the need to respect the Zerops [specifics](#what-specifics-you-should-remember),
+* the need to respect the Zerops [specifics](#specifics-you-should-remember),
 * recommended for production projects.
 
 ## How to access an Elasticsearch service
