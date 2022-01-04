@@ -3,14 +3,14 @@
 If you are used to using **phpMyAdmin** for the administration of MariaDB (MySQL) databases, you will probably be interested in how to install it within the Zerops [PHP service](/documentation/services/runtimes/php.html) to administrate the Zerops [MariaDB (MySQL) service](/documentation/services/databases/mariadb.html).
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info When using only the Windows platform
-if you don't have the possibility to get any native Linux or Mac platform, or if you're not familiar with them, you will probably welcome using a standard installation of the Windows Subsystem for Linux (WSL2) according to the official procedure on [Microsoft website](https://docs.microsoft.com/windows/wsl/install-win10). You will also need to install [Node.js](https://docs.microsoft.com/windows/dev-environment/javascript/nodejs-on-wsl) on WSL2. **The reason for using WSL2 comes from issues related to unwanted file permission changes when doing this natively on the Windows platform.**
+::: info When only using the Windows platform
+if you can't get a native Linux or Mac platform, or if you're not familiar with them, you will probably welcome using standard installation of the Windows Subsystem for Linux (WSL2) according to the official procedure on [Microsoft website](https://docs.microsoft.com/windows/wsl/install-win10). You will also need to install [Node.js](https://docs.microsoft.com/windows/dev-environment/javascript/nodejs-on-wsl) on WSL2. **The reason for using WSL2 comes from issues related to unwanted file permission changes when doing this natively on the Windows platform.**
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-The following step-by-step instructions can help you to go through the process easily. It's supposed that you already created your project in Zerops GUI and an empty PHP service (not connected to any repository). You can use a [service import](/documentation/services/runtimes/php.html#simple-import-example-in-the-yaml-syntax) functionality for it.
+The following step-by-step instructions can help you through the process with ease. It's assumed that you have already created your project in Zerops GUI and an empty PHP service (not connected to any repository). You can use the [service import](/documentation/services/runtimes/php.html#simple-import-example-in-the-yaml-syntax) functionality for it.
 
-1. Open a new **Bash** / **Zsh** terminal window (coming also from the WSL2 installation). It will be open in `/home/<username>` on Linux or `/Users/<username>` on Mac directory by default.
+1. Open a new **Bash** / **Zsh** terminal window (also from the WSL2 installation). It will be open in `/home/<username>` on Linux or `/Users/<username>` on Mac directory by default.
 
 2. Install **curl** program using the command ==`sudo apt install curl`== on Linux or ==`brew install curl`== on Mac if you didn't do so before.
 
@@ -32,11 +32,11 @@ The following step-by-step instructions can help you to go through the process e
 
 11. Open the content of the file `config.inc.php` in the VIM editor using the command: ==`vim config.inc.php`== .
 
-12. Press ==`i`== on the keyboard to activate the INSERT edit mode.
+12. Press ==`i`== on the keyboard to activate INSERT edit mode.
 
 13. Update the line `$cfg['Servers'][$i]['host'] = 'localhost';` – instead of `localhost` value use a real **hostname** of your Zerops [MariaDB (MySQL) service](/documentation/services/databases/mariadb.html).
 
-14. Update the line `$cfg['blowfish_secret'] = '';` – instead of the empty string value insert a randomly generated value of 32 characters at least.
+14. Update the line `$cfg['blowfish_secret'] = '';` – instead of the empty string value insert a randomly generated value of at least 32 characters.
 
 15. Press ==`ESC`== on the keyboard to leave the INSERT edit mode.
 
@@ -68,7 +68,7 @@ service deployed
 
 ## Correct file permissions
 
-If you run the command ==`ls -a -l`== on `/home/<username>/install/phpMyAdmin/public` directory, you can check correct files permissions (allow only read access except for the owner) of the **phpMyAdmin** application kit. The listing should be as follows:
+If you run the command ==`ls -a -l`== on `/home/<username>/install/phpMyAdmin/public` directory, you can check correct file permissions (allow only read access except for the owner) of the **phpMyAdmin** application kit. The listing should be as follows:
 
 ```bash
 drwxr-xr-x 11 <username> <username>   4096 Jul 31 10:32 .
@@ -103,7 +103,7 @@ drwxr-xr-x 17 <username> <username>   4096 Jun  4 00:19 vendor
 
 ## Incorrect file permissions
 
-If you use only the Windows environment to prepare the **phpMyAdmin** application kit (without WSL2), the listing should be as follows (read, write and execute of everything), which is incorrect:
+If you only use the Windows environment to prepare the **phpMyAdmin** application kit (without WSL2), the listing should be as follows (read, write and execute of everything), which is incorrect:
 
 ```bash
 drwxrwxrwx 11 <username> <username>   4096 Jul 31 10:32 .
@@ -138,7 +138,7 @@ drwxrwxrwx 17 <username> <username>   4096 Jun  4 00:19 vendor
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Wrong permissions warning
-If the permissions are set to allow more than only read access for all except the owner in the **phpMyAdmin** application kit, the error message **`Wrong permissions on configuration file, should not be world-writable!`** will be shown when trying to run **phpMyAdmin**.
+If permissions are set to allow more than just read access for all except the owner in the **phpMyAdmin** application kit, the error message **`Wrong permissions on configuration file, should not be world-writable!`** will be shown when trying to run **phpMyAdmin**.
 
 ![phpMyAdmin](./images/phpMyAdmin-Error.png "phpMyAdmin Login")
 
