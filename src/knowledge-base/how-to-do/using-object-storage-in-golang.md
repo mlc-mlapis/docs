@@ -581,7 +581,7 @@ if storeCredentials != nil {
 
 ## Getting an existing bucket object (with body or a file)
 
-Once you have the `getCredentials`, `getUniqueBucketName`, and `getS3Client` functions from the previous code snippet (supposing all declared variables are also accessible), you can get an object that already exists back from a bucket. You have to have at least have READ permissions on a bucket to retrieve an object from it.
+Once you have the `getCredentials`, `getUniqueBucketName`, and `getS3Client` functions from the previous code snippet (supposing all declared variables are also accessible), you can get an object that already exists back from a bucket. You have to have at least READ permissions on a bucket to retrieve an object from it.
 
 ```go
 import (
