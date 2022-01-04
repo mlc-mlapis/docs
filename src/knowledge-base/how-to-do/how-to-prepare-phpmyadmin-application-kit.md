@@ -68,7 +68,7 @@ service deployed
 
 ## Correct file permissions
 
-If you run the command ==`ls -a -l`== on `/home/<username>/install/phpMyAdmin/public` directory, you can check correct files permissions (allow only read access except for the owner) of the **phpMyAdmin** application kit. The listing should be as follows:
+If you run the command ==`ls -a -l`== on `/home/<username>/install/phpMyAdmin/public` directory, you can check that the file permissions are correct (allow only read access except for the owner) for the **phpMyAdmin** application kit. The listing should be as follows:
 
 ```bash
 drwxr-xr-x 11 <username> <username>   4096 Jul 31 10:32 .
