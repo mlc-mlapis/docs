@@ -2,4 +2,4 @@
 
 https://docs.zerops.io
 
-2020 - 2021
+2020 - 2022
