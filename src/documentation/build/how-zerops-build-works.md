@@ -1,27 +1,52 @@
 # How Zerops Build Works
 
-By adding [`zerops.yml`](/documentation/build/build-config.html) to your application source code (we look for it at the root), you let Zerops know which steps to [`run`](/documentation/build/build-config.html#run) to build your application runtime, which technology your build [`uses`](/documentation/build/build-config.html#uses) and which files to [`deploy`](/documentation/build/build-config.html#deploy) when the build is done.
+Adding [zerops.yml](/documentation/build/build-config.html) to your application source code (Zerops looks for it at the **root directory**), lets Zerops know which [base](/documentation/build/build-config.html#uses) technology should be used, and which steps to invoke during the application [build](/documentation/build/build-config.html#run) phase to produce a final application runtime. The [deploy](/documentation/build/build-config.html#deploy) part specifies which files will be copied to a runtime service container(s) when the build is successfully done. Each build process always takes place in a newly created and independent container, which does not affect the existing running application in any way.
 
-Build can be triggered either by using a [CLI](/documentation/cli/installation-authorization.html) or by connecting a Zerops service to a [GitHub repository](/documentation/github/github-integration.html) or a [GitLab repository](/documentation/gitlab/gitlab-integration.html).
+Internally, Zerops creates a new temporal build container inside your project that does not affect the existing running application in any way. Every step of the ongoing build process (and its [log](/documentation/zerops-logs/build-logs.html)) can be monitored within the Zerops GUI.
 
-Internally, Zerops creates a new temporal build service inside your project, runs the defined commands and uses [deploy](/documentation/deploy/how-deploy-works.html) to deploy the result to your runtime service. Running build (and its [log](/documentation/zerops-logs/build-logs.html)) can be monitored within our application.
+The same [zerops.yml](/documentation/build/build-config.html) file is also used to define steps that Zerops has to invoke to [run](/documentation/build/build-config.html#run) the application runtime after a successful deployment.
 
-Build service has access to the project's [environment variables](/documentation/environment-variables/how-to-access.html), so you can utilize them.
+A new build can be triggered either by using the Zerops [zcli](/documentation/cli/installation-authorization.html) or connecting a Zerops service to a [GitHub repository](/documentation/github/github-integration.html) or a [GitLab repository](/documentation/gitlab/gitlab-integration.html).
 
-### Example
+The build process has access to all [environment variables](/documentation/environment-variables/how-to-access.html) of the project's services so that you can utilize them.
 
-- Runtime Service — [nginx static](/documentation/services/static-servers.html) (to serve static files)
-- Application source code to build and [deploy](/documentation/deploy/how-deploy-works.html) - Angular (using nodejs and npm)
+## Examples
+
+### Angular (using Node.js and Npm)
 
 ```yaml
-# select what technology your build uses
-use: [ nodejs@14 ]
-# which commands to run to build
-run:
-  - npm i
-  - npm run build:production
-# which files / folders to deploy after build
-deploy: [ dist, node_modules, package.json ]
+# Service hostname to which the application will be deployed.
+nodejsapp:
+  build:
+    # What technology should be used as a base one for creating a build container.
+    base: [nodejs@14]
+    # What commands should be run to build the application.
+    build:
+      - npm i
+      - npm run build:production
+    # What files and directories should be copied from a build container into a runtime container.
+    deploy: ["dist", "node_modules", "package.json"]
+  run:
+    # A command that should start your service.
+    start: npm start
 ```
 
-See the full [zerops.yml documentation](/documentation/build/build-config.html).
+### Golang
+
+```yaml
+# Service hostname to which the application will be deployed.
+goapp:
+  build:
+    # What technology should be used as a base one for creating a build container.
+    base: [go@1]
+    # What commands should be run to build the application.
+    build:
+      - go build -o ./bin/server ./app/server.go
+    # What files and directories should be copied from a build container into a runtime container.
+    deploy: ["./bin/server"]
+  run:
+    # A command that should start your service.
+    start: ./bin/server
+```
+
+See the full [zerops.yml](/documentation/build/build-config.html) documentation.
