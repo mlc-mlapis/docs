@@ -25,7 +25,7 @@ nodejsapp:
       - npm i
       - npm run build:production
     # What files and directories should be copied from a build container into a runtime container.
-    deploy: ["dist", "node_modules", "package.json"]
+    deploy: [dist, node_modules, package.json]
   run:
     # A command that should start your service.
     start: npm start
@@ -43,7 +43,7 @@ goapp:
     build:
       - go build -o ./bin/server ./app/server.go
     # What files and directories should be copied from a build container into a runtime container.
-    deploy: ["./bin/server"]
+    deploy: [./bin/server]
   run:
     # A command that should start your service.
     start: ./bin/server
