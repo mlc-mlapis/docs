@@ -198,15 +198,15 @@ services:
       server {
           listen 80 default_server;
           listen [::]:80 default_server;
-
+          
           server_name _;
           # Be sure that you set up a correct document root!
           root /var/www/public;
-
+          
           location / {
               try_files $uri $uri/ =404;
           }
-
+          
           access_log syslog:server=unix:/dev/log,facility=local1 default_short;
           error_log syslog:server=unix:/dev/log,facility=local1;
       }
@@ -236,7 +236,7 @@ Related only to [Node.js](/documentation/services/runtimes/nodejs.html#how-to-de
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Secure access from the external Internet
-Before allowing access to a service from the external Internet, it is necessary to be aware of potential security risks if this service **does not have an authentication mechanism** implemented, preventing anonymous user accidental access. Remember that it's possible to use the Zerops [zcli VPN](/documentation/cli/vpn.html) and securely access such a service through a URL `http://<hostname>:<port>` inside your Zerops project network without allowing external access at all.
+Before allowing access to a service from the external Internet, it is necessary to be aware of potential security risks if this service **does not have implemented an authentication mechanism**, preventing anonymous user accidental access. Remember that it's possible to use the Zerops [zcli VPN](/documentation/cli/vpn.html) and securely access such a service through a URL `http://<hostname>:<port>` inside your Zerops project network without allowing external access at all.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
