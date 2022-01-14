@@ -45,7 +45,7 @@
 
     <!-- discord link -->
     <a
-      href="https://app.zerops.dev"
+      href="https://app.zerops.io"
       class="repo-link"
       target="_blank"
       rel="noopener noreferrer"
