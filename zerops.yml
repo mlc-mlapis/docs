@@ -8,7 +8,7 @@ stage:
       - npm i -g vuepress
       - vuepress build src
     # which files / folders to deploy after build
-    deploy: [ 'src/.vuepress/*dist' ]
+    deploy: [ 'src/.vuepress/~dist' ]
 prod:
   build:
     # select what technology your build uses
@@ -19,4 +19,4 @@ prod:
       - npm i -g vuepress
       - vuepress build src
     # which files / folders to deploy after build
-    deploy: [ 'src/.vuepress/*dist' ]
+    deploy: [ 'src/.vuepress/~dist' ]
