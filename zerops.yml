@@ -1,9 +1,20 @@
-# select what technology your build uses
-use: [ nodejs@14 ]
-# which commands to run to build
-run:
-  - npm i
-  - npm i -g vuepress
-  - vuepress build src
-# which files / folders to deploy after build
-deploy: [ src/.vuepress/*dist ]
+stage:
+  # select what technology your build uses
+  base: [ nodejs@14 ]
+  # which commands to run to build
+  build:
+    - npm i
+    - npm i -g vuepress
+    - vuepress build src
+  # which files / folders to deploy after build
+  deploy: [ src/.vuepress/*dist ]
+prod:
+  # select what technology your build uses
+  base: [ nodejs@14 ]
+  # which commands to run to build
+  build:
+    - npm i
+    - npm i -g vuepress
+    - vuepress build src
+  # which files / folders to deploy after build
+  deploy: [ src/.vuepress/*dist ]
