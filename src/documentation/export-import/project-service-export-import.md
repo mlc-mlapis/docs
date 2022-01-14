@@ -47,7 +47,6 @@ services:
     content: M3rW31Ne%T@bRk
   - key: CONNECTION_STRING
     content: ${db_connectionString}
-  startCommand: npm start
 - hostname: db
   type: mariadb@10.4
   mode: HA
@@ -110,7 +109,7 @@ Affects whether a service should be run in ==**`HA`**== (High Availability) mode
 
 A sequence of service ports (1~N). Each one contains `port`, `protocol`, and `httpSupport` items.
 
-Related only to the [Node.js](/documentation/services/runtimes/nodejs.html#port) and [Golang](/documentation/services/runtimes/golang.html#port) runtime environment services, where you can set or change it. **You have to enter at least one port.** The rest of the services have preset ports which can't be changed. That's why this part is not included at the service level, and if entered, is ignored.
+Required only for the [Node.js](/documentation/services/runtimes/nodejs.html#port) and [Golang](/documentation/services/runtimes/golang.html#port) runtime environment services, where you can set or change it. **You have to enter at least one port.** The rest of the services have preset ports which can't be changed. That's why this part is not included at the service level, and if entered, is ignored.
 
 ##### port
 
@@ -148,19 +147,13 @@ An environment variable key.
 
 An environment variable content.
 
-#### documentRoot
-
-`documentRoot`: string (optional)
-
-This is related only to the [PHP/Apache](/documentation/services/runtimes/php.html#setting-php-apache-document-root) service. The value represents a folder name used as the root of the publicly accessible web server content, usually the location of your `index.php`. The document root is set to the `public` name when you create the service manually in the Zerops GUI. **When used with the import functionality, you have to enter a value.**
-
 #### nginxConfig
 
 `nginxConfig`: string (optional)
 
-This is related only to the [PHP/Nginx](/documentation/services/runtimes/php.html#default-nginx-config) and static [Nginx](/documentation/services/static-servers/nginx.html#default-nginx-config) services. The value represents the required content of the configuration `nginx.conf` file used by the Nginx server. Part of that configuration is also setting a document root value. **When used with the import functionality, you also have to enter the same, or your customized config.**
+This is required only for the [PHP+Nginx](/documentation/services/runtimes/php.html#default-nginx-config) and the Nginx [Static server](/documentation/services/static-servers/nginx.html#default-nginx-config) services. The value represents the required content of the configuration `nginx.conf` file used by the Nginx server. Part of that configuration is also setting a document root value.
 
-For example, this could be the exported value if a user accepts the default setting when creating the PHP/Nginx service in the Zerops GUI.
+For example, this could be the exported value if a user accepts the default setting when creating the PHP+Nginx service in the Zerops GUI.
 
 ```yaml
 services:
@@ -194,25 +187,42 @@ services:
       }
 ```
 
-#### startCommand
+And this is an example for the same when creating the Nginx Static server service in the Zerops GUI.
 
-`startCommand`: string
+```yaml
+services:
+  - hostname: nginx
+    type: nginx@1.18
+    mode: NON_HA
+    nginxConfig: |
+      server {
+          listen 80 default_server;
+          listen [::]:80 default_server;
 
-A command that starts your service. It will be triggered after each deployment or after you manually start or re-start it.
+          server_name _;
+          # Be sure that you set up a correct document root!
+          root /var/www/public;
 
-Related only to [Node.js](/documentation/services/runtimes/nodejs.html#start-command) and [Golang](/documentation/services/runtimes/golang.html#start-command) runtime environment services, where you can specify it.
+          location / {
+              try_files $uri $uri/ =404;
+          }
+
+          access_log syslog:server=unix:/dev/log,facility=local1 default_short;
+          error_log syslog:server=unix:/dev/log,facility=local1;
+      }
+```
 
 #### objectStorageDiskGBytes
 
 `objectStorageDiskGBytes`: integer (optional)
 
-This is related only to the [Object Storage](/documentation/services/storage/s3.html#required-disk-capacity) service. The value represents the required maximum amount of data in GB the Object Storage Service should be capable of holding. **When used with the import functionality, you have to enter a value.** The preset value, when working in the Zerops GUI, is ==`2`== GB.
+This is required only for the [Object Storage](/documentation/services/storage/s3.html#required-disk-capacity) service. The value represents the required maximum amount of data in GB the Object Storage Service should be capable of holding. The preset value in the Zerops GUI is ==`2`== GB.
 
 #### buildFromGit
 
 `buildFromGit`: string (optional)
 
-A public Git URL of a repository should be cloned by Zerops and used for building such a service, including the branch name. It allows for fully automatic processing of the same steps that can be taken manually by a user in the Zerops GUI (including selecting the `Build immediately after the service creation` checkbox). **There is a strict condition for using this. The repository has to be public.**
+A public Git URL of a repository should be cloned by Zerops and used for building such a service, including the branch name. It allows for fully automatic processing of the same steps that can be taken manually by a user in the Zerops GUI (including selecting the `Build immediately after the service creation` checkbox). **There is a strict condition: The repository has to be public.**
 
 The format of the URL should be: `https://<domain>@<branchName>`
 
