@@ -218,15 +218,17 @@ The format of the URL should be: `https://<domain>@<branchName>`
 
 Related only to [Node.js](/documentation/services/runtimes/nodejs.html#how-to-deploy-application-code), [Golang](/documentation/services/runtimes/golang.html#how-to-deploy-application-code), and [PHP](/documentation/services/runtimes/php.html#how-to-deploy-application-code) runtime environment services.
 
-## Secure access through VPN
-
-Option to use the [Zerops VPN](/documentation/cli/vpn.html) and securely access such a service through a URL `http://<hostname>:<port>` inside your Zerops project network.
-
 ## Current known limitations
 
 1. It's not possible to use private repositories in combination with the `buildFromGit` item. If you want to import a service related to a private repository, you have to connect it manually in the Zerops GUI.
 
 2. You have to configure your [domain](/documentation/routing/using-your-domain.html), or [Zerops subdomain](/documentation/routing/zerops-subdomain.html) access directly in the Zerops GUI.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Secure access from the external Internet
+Before allowing access to a service from the external Internet, it is necessary to be aware of potential security risks if this service **does not have an authentication mechanism** implemented, preventing anonymous user accidental access. Remember that it's possible to use the Zerops [zcli VPN](/documentation/cli/vpn.html) and securely access such a service through a URL `http://<hostname>:<port>` inside your Zerops project network without allowing external access at all.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
 
 3. When using shared storage services, neither the export nor the import is able to process the [storage mounting points](/documentation/services/storage/shared.html#storage-mounting) in relation to [Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-shared-storage), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-shared-storage), and [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage) runtime environment services.
 
