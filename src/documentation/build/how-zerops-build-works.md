@@ -49,4 +49,22 @@ goapp:
     start: ./bin/server
 ```
 
+### PHP (using Composer)
+
+```yaml
+# Service hostname to which the application will be deployed.
+phpapp:
+  build:
+    # What container type should be used as a base one for creating a build container.
+    base: [php@8.0]
+    build:
+      # What tasks should be run to build the application.
+      - composer install
+    # What files and directories should be copied from a build container into a runtime container.
+    deploy: ['vendor', 'public']
+  run:
+    # Folder name used as the root of the publicly accessible web server content.
+    documentRoot: public
+```
+
 See the full [zerops.yml](/documentation/build/build-config.html) documentation.
