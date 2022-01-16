@@ -2,6 +2,12 @@
 
 Adding [zerops.yml](/documentation/build/build-config.html) to your application source code (Zerops looks for it at the **root directory**), lets Zerops know which [base](/documentation/build/build-config.html#uses) technology should be used, and which steps to invoke during the application [build](/documentation/build/build-config.html#run) phase to produce a final application runtime. The [deploy](/documentation/build/build-config.html#deploy) part specifies which files will be copied to a runtime service container(s) when the build is successfully done.
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Applications in monorepo environment
+Each `zerops.yml` can contain definitions for one or more applications. It is especially valuable for a monorepo when one repository contains source code for many applications. The appropriate service hostname to which the application will be deployed is used to select a correct definition from the `zerops.yml`.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 Internally, Zerops creates a new temporal build container inside your project that does not affect the existing running application in any way. Every step of the ongoing build process (and its [log](/documentation/zerops-logs/build-logs.html)) can be monitored within the Zerops GUI.
 
 The same [zerops.yml](/documentation/build/build-config.html) file is also used to define steps that Zerops has to invoke to [run](/documentation/build/build-config.html#run) the application runtime after a successful deployment.
@@ -12,7 +18,7 @@ The build process has access to all [environment variables](/documentation/envir
 
 ## Examples
 
-### Angular (using Node.js and Npm)
+### Node.js (using Npm)
 
 ```yaml
 # Service hostname to which the application will be deployed.
