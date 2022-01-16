@@ -17,8 +17,9 @@ nodejsapp:
     base: [nodejs@14]
     # What commands should be run to install additional or custom dependencies.
     prepare:
-      - install svg super tool
-      - add another cool tool
+      - apt-get [options] command [pkg]
+      - curl [options] url
+      - npm i -g package
     # What commands should be run to build the application.
     build:
       - npm i
@@ -100,13 +101,13 @@ Determines directories and files produced by your build, which should be deploye
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Using a tilda character to strip a path directory
-The standard behavior is that the directories and files are copied exactly with the same path as they are placed in the build container. If you want to strip the path from the left side, use tilda (**~**) character.
+The standard behavior is that the directories and files are copied exactly with the same path as they are placed in the build container. If you want to strip the path from the left side, use the tilda (**~**) character.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 #### Examples of different deploy settings
 
-##### Deploys a folder and a file from the project root directory
+##### Deploys a folder, and a file from the project root directory
 
 ```yaml
 deploy: [dist, package.json]
@@ -121,14 +122,14 @@ deploy: [.]
 ##### Deploys a single file on a path
 
 ```yaml
-# Deploys `path/to/file.txt` including the path directories.
+# Deploys `path/to/file.txt`, including the path directories.
 deploy: [./path/to/file.txt]
 ```
 
 ##### Deploys all files in a directory on a path
 
 ```yaml
-# Deploys everything inside `path/to/dir` including the path directories.
+# Deploys everything inside `path/to/dir`, including the path directories.
 deploy: [./path/to/dir/]
 ```
 
