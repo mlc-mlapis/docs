@@ -149,6 +149,6 @@ deploy: [./path/to/~/]
 
 ## Run part and its properties
 
-Used to run the application runtime after its successful deployment.
+It is used to run the application runtime after its successful deployment.
 
 ### `run`
