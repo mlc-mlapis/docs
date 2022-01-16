@@ -67,16 +67,16 @@ base: [php@7.3]
 
 ### `prepare` (optional)
 
-Specify which commands to invoke to install additional or custom dependencies beyond Zerops base technologies needed by your application build process. The commands usually run only with the first application build. Before running the prepare commands, the application's source code is downloaded into the build container. After the build and the application runtime deployment, your application project is removed, except for the parts defined by the `cache` property, if used. What remains will become the **custom base pack**. It is compared with the previous one, and if not identical, it will become a new one for the next build cycle.
+Specify which commands to run to install additional or custom dependencies on top of the Zerops [base](#base-optional) technologies needed by your application build process. The **custom base pack** originating from the **Zerops base pack** and the results of **prepare** commands will be used for the next build pipeline, unless:
 
-The commands will run again (on top of the original Zerops base pack) with the next build if:
+* content of the `base` or `prepare` property has been changed,
+* you invalidated the existed **custom base pack** through the Zerops GUI (not implemented yet).
 
-* content of the `prepare` or `cache` properties have been changed,
-* you invalidated the existed **custom base pack** through the Zerops GUI.
+If it happens, the latest **Zerops base pack** is used, and the **prepare** commands run again.
 
 ### `build`
 
-Specify which commands to invoke to produce the final application runtime deployed into a Zerops service. These commands run during each build process from the first to the last.
+Specify which commands to run to produce the final application runtime deployed into a Zerops service. These commands run during each build process from the first to the last.
 
 #### Example using a single shell instance
 
@@ -94,60 +94,60 @@ build:
   - npm run build
 ```
 
+### `deploy`
+
+Determines directories and files produced by your build, which should be deployed to your runtime service container. **The path starts from the root directory of your project** (the location of `zerops.yml`).
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Using a tilda character to strip a path directory
+The standard behavior is that the directories and files are copied exactly with the same path as they are placed in the build container. If you want to strip the path from the left side, use tilda (**~**) character.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+#### Examples of different deploy settings
+
+##### Deploys a folder and a file from the project root directory
+
+```yaml
+deploy: [dist, package.json]
+```
+
+##### Deploys everything
+
+```yaml
+deploy: [.]
+```
+
+##### Deploys a single file on a path
+
+```yaml
+# Deploys `path/to/file.txt` including the path directories.
+deploy: [./path/to/file.txt]
+```
+
+##### Deploys all files in a directory on a path
+
+```yaml
+# Deploys everything inside `path/to/dir` including the path directories.
+deploy: [./path/to/dir/]
+```
+
+##### Deploys a single file on a path, with the path directory stripping
+
+```yaml
+# Deploys only `file.txt` without its path directory.
+deploy: [./path/to/~/file.txt]
+```
+
+##### Deploy all files in a directory, with the path directory stripping
+
+```yaml
+# Deploys everything inside `path/to` without the path directories.
+deploy: [./path/to/~/]
+```
 
 ## Run part and its properties
 
 Used to run the application runtime after its successful deployment.
 
 ### `run`
-
-### `deploy`
-
-Directories and files, produced by your build, which should be deployed to your runtime service. The path starts from the root of your project (location of zerops.yml).
-
-Quotes have to be used when using the `*` syntax to strip paths.
-
-#### Examples of different deploy settings
-
-##### Deploy folder and a file:
-
-```yaml
-deploy: [ dist, package.json ]
-```
-
-##### Deploy **everything**
-
-```yaml
-# deploys everything
-deploy: [ '.' ]
-```
-
-##### Deploy single file
-
-```yaml
-# deploys `path/to/file.txt` including path directories
-deploy: [ './path/to/file.txt' ]
-```
-
-##### Deploy all files in directory
-
-```yaml
-# deploys everything inside `path/to/dir`
-# includes the path directories
-deploy: [ './path/to/dir/' ]
-```
-
-##### Deploy single file, strip directory
-
-```yaml
-# deploys `file.txt`
-deploy: [ './path/to/*/file.txt' ]
-```
-
-##### Deploy all files in directory, strip directory path
-
-```yaml
-# deploys everything inside `path/to`
-# strip the path directories
-deploy: [ './path/to/*' ]
-```

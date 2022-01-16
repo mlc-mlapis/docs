@@ -1,6 +1,6 @@
 # How Zerops Build Works
 
-Adding [zerops.yml](/documentation/build/build-config.html) to your application source code (Zerops looks for it at the **root directory**), lets Zerops know which [base](/documentation/build/build-config.html#uses) technology should be used, and which steps to invoke during the application [build](/documentation/build/build-config.html#run) phase to produce a final application runtime. The [deploy](/documentation/build/build-config.html#deploy) part specifies which files will be copied to a runtime service container(s) when the build is successfully done.
+Adding [zerops.yml](/documentation/build/build-config.html) to your application source code (Zerops looks for it at the **root directory**), lets Zerops know which [base](/documentation/build/build-config.html#uses) technology should be used, and which steps to run during the application [build](/documentation/build/build-config.html#run) phase to produce a final application runtime. The [deploy](/documentation/build/build-config.html#deploy) part specifies which files will be copied to a runtime service container(s) when the build is successfully done.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Applications in monorepo environment
