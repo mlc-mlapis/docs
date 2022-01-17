@@ -30,6 +30,11 @@ nodejsapp:
     deploy: [dist, node_modules, package.json]
   # The part used to run the application runtime after a successful deployment.
   run:
+    # What commands should be run to install additional libraries or tools.
+    prepare:
+      - apt-get [options] command [pkg]
+      - curl [options] url
+      - npm i -g package
     # A command that should start your service.
     start: npm start
 ```
