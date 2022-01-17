@@ -40,7 +40,7 @@ It is used for the build phase to produce a final application runtime.
 
 ### `base` (optional)
 
-List the technologies your build uses as the **Zerops build base image** for the build container. **You can skip it if you'd rather install everything yourself or don't need any technology at all.** For example, you can look at the Zerops recipe phpPgAdmin [zerops.yml](https://github.com/zeropsio/recipe-phppgadmin/blob/main/zerops.yml), where the build doesn't need any base technology, just a shell script, to prepare the **phpPgAdmin** runtime that is deployed into a Zerops PHP+Apache service.
+List Zerops technologies your build uses as the **Zerops build base image** for the build container. **You can skip it if you'd rather install everything yourself or don't need any technology at all.** For example, you can look at the Zerops recipe phpPgAdmin [zerops.yml](https://github.com/zeropsio/recipe-phppgadmin/blob/main/zerops.yml), where the build doesn't need any base technology, just a shell script, to prepare the **phpPgAdmin** runtime that is deployed into a Zerops PHP+Apache service.
 
 #### Supported base images
 
