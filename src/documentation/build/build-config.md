@@ -192,3 +192,7 @@ Specify which commands to run to install additional libraries or tools on top of
 * you invalidated the existed **custom runtime image** through the Zerops GUI (not implemented yet).
 
 If it happens, the latest **Zerops runtime image** is used, and the **prepare** commands run again.
+
+### `init` (optional for all services)
+
+
