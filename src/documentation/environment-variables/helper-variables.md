@@ -20,7 +20,7 @@ use. They cannot be deleted, their keys cannot be changed and those marked with 
 #### `startCommand`
 Command used for running the user defined application which corresponds to the command filled when creating a service.
 
-###  PHP+Nginx
+###  PHP/Nginx
 
 #### `hostname`
 🔒 Service hostname.
@@ -35,7 +35,7 @@ Command used for running the user defined application which corresponds to the c
 Folder from which php scripts should be executed. Deployed files are unpacked at `/var/www`.
 
 
-###  PHP+Apache
+###  PHP/Apache
 
 #### `hostname`
 🔒 Service hostname.

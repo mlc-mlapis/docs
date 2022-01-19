@@ -69,7 +69,7 @@ Using a subdirectory like ==**/var/www/public**== for a document root is always 
 
 You set it through a separate input.
 
-![PHP+Apache](./images/PHP-Apache-Document-Root.png "Document root")
+![PHP/Apache](./images/PHP-Apache-Document-Root.png "Document root")
 
 It is also possible to make changes to the **document root** later, you make them by editing the **`documentRoot`** environment variable.
 
@@ -86,7 +86,7 @@ You can also make changes to the **document root** later, just do so through a s
 
 ### Default Nginx config
 
-![PHP+Nginx](./images/PHP-Nginx-Document-Root.png "Document root")
+![PHP/Nginx](./images/PHP-Nginx-Document-Root.png "Document root")
 
 * You can adjust the default config (with the pre-defined content specific for each PHP engine version) as you wish, as long as you respect the correct syntax and valid paths. However, there are two exceptions. First, **==don't modify port 80==** at the point marked <span style="background-color: #ff8080">&nbsp;[**1**]&nbsp;</span>. If you do, you will break your project.
 

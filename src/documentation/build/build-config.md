@@ -1,5 +1,7 @@
 # Configuration: zerops.yml
 
+[[toc]]
+
 Zerops uses a YAML definition file to build your application. This file, `zerops.yml`, has to be placed at the root directory of your project.
 
 Each `zerops.yml` can contain definitions for one or more applications. It is especially valuable for a monorepo when one repository contains source code for many applications. The appropriate **service hostname** to which the application will be deployed is used to select a correct definition from the `zerops.yml`.
@@ -15,26 +17,29 @@ nodejsapp:
   build:
     # What technology should be used as a base one for creating a build container.
     base: [nodejs@14]
-    # What commands should be run to install additional or custom dependencies.
+    # Which commands should be run to install additional or custom dependencies.
     prepare:
       - apt-get [options] command [pkg]
       - curl [options] url
       - npm i -g package
-    # What commands should be run to build the application.
+    # Which commands should be run to build the application.
     build:
       - npm i
       - npm run build:production
-    # What files or directories of the application build should be stored for the next build.
+    # Which files or directories of the application build should be stored for the next build.
     cache: [node_modules]
-    # What files and directories should be copied from a build container into a runtime container.
+    # Which files and directories should be copied from a build container into a runtime container.
     deploy: [dist, node_modules, package.json]
   # The part used to run the application runtime after a successful deployment.
   run:
-    # What commands should be run to install additional libraries or tools.
+    # Which commands should be run to install additional libraries or tools.
     prepare:
       - apt-get [options] command [pkg]
       - curl [options] url
       - npm i -g package
+    # Which commands to run after a launch or each restart of a runtime container instance.
+    init:
+      - <command> <options>
     # A command that should start your service.
     start: npm start
 ```
@@ -45,7 +50,7 @@ It is used for the build phase to produce a final application runtime.
 
 ### `base` (optional)
 
-List Zerops technologies your build uses as the **Zerops build base image** for the build container. **You can skip it if you'd rather install everything yourself or don't need any technology at all.** For example, you can look at the Zerops recipe phpPgAdmin [zerops.yml](https://github.com/zeropsio/recipe-phppgadmin/blob/main/zerops.yml), where the build doesn't need any base technology, just a shell script, to prepare the **phpPgAdmin** runtime that is deployed into a Zerops PHP+Apache service.
+List Zerops technologies your build uses as the **Zerops build base image** for the build container. **You can skip it if you'd rather install everything yourself or don't need any technology at all.** For example, you can look at the Zerops recipe phpPgAdmin [zerops.yml](https://github.com/zeropsio/recipe-phppgadmin/blob/main/zerops.yml), where the build doesn't need any base technology, just a shell script, to prepare the **phpPgAdmin** runtime that is deployed into a Zerops PHP/Apache service.
 
 #### Supported base images
 
@@ -195,4 +200,12 @@ If it happens, the latest **Zerops runtime image** is used, and the **prepare** 
 
 ### `init` (optional for all services)
 
+Specify which commands to run after a launch or each restart of a runtime container instance and after `prepare` commands if they exist, for example, initialization or removing a custom application cache.
 
+### `start` (required only for Node.js or Golang services)
+
+A command that should start your service. This command will be executed in each container after finishing all `init` commands. This is related only to the [Node.js](/documentation/services/runtimes/nodejs.html) and [Golang](/documentation/services/runtimes/golang.html) service.
+
+### `documentRoot` (required only for PHP/Apache service)
+
+The value represents a folder name used as the root of the publicly accessible web server content, usually the location of your `index.php`. This is related only to the [PHP/Apache](/documentation/services/runtimes/php.html) service.
