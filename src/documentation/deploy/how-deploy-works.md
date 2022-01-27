@@ -7,7 +7,7 @@ While it's certainly possible for you to deploy to Zerops, we recommend you run 
 
 <br />
 
-Deploy is triggered automatically at the end of the [Zerops build pipeline](/documentation/build/build-config.html#run) but you can trigger it manually too by using the `deploy` command in zerops [zcli](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories).
+Deploy is triggered automatically at the end of the [Zerops build pipeline](/documentation/build/build-config.html#run) but you can trigger it manually too by using the `deploy` command in the Zerops [zcli](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories).
 
 Each deployed application is then saved and you can switch freely between any of the previously deployed versions.
 
