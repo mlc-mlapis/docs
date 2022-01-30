@@ -132,6 +132,12 @@ Standard behavior is to copy the directories and files with exactly the same pat
 
 #### Examples of different deploy settings
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Using quotes
+You must enclose the pattern into quotes if the directory path contains a space.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ##### Deploys a folder, and a file from the project root directory
 
 ```yaml

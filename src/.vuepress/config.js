@@ -177,7 +177,7 @@ module.exports = {
           ]
         },
         {
-          title: 'CLI',
+          title: 'zCLI',
           collapsable: false,
           children: [
             'cli/installation',
