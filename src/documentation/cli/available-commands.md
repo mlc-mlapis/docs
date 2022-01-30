@@ -62,7 +62,7 @@ It can be used to trigger the [build pipeline](/documentation/build/how-zerops-b
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Using quotes
-You must enclose the project name into quotes if the it contains a space.
+You must enclose the project name into quotes if it contains a space.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -84,7 +84,7 @@ It is used to deploy directories and files to the Zerops service as an alternati
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Using quotes
-You must enclose the project name into quotes if the it contains a space.
+You must enclose the project name into quotes if it contains a space.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -116,7 +116,7 @@ Used to establish a secure connection to your protected project network. Require
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Using quotes
-You must enclose the project name into quotes if the it contains a space.
+You must enclose the project name into quotes if it contains a space.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
