@@ -134,7 +134,7 @@ Standard behavior is to copy the directories and files with exactly the same pat
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Using quotes
-You must enclose the pattern into quotes if the directory path contains a space.
+You must enclose the pattern in quotes if the directory path contains a space.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
