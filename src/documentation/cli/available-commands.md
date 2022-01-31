@@ -12,7 +12,7 @@ All login parameters can be used as command line parameters `--parameterName` or
 
 #### `--zeropsToken`
 
-The personal token you created in the Zerops GUI. The token should be passed preferably as the `ZEROPSTOKEN` environment variable, so that it doesn't show up in logs.
+The personal token you created in the Zerops GUI. It's preferable that the token is passed as the `ZEROPSTOKEN` environment variable, so that it doesn't show up in logs.
 
 ```bash
 zcli login --zeropsToken=AC750cs64sas897sabs65sasbbas9asbdbasd65sadNa
@@ -39,7 +39,7 @@ zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
 
 #### `--zeropsPassword`
 
-The password you used to register your account. Use with your `--zeropsLogin`. The password should be passed preferably as the `ZEROPSPASSWORD` environment variable, so that it doesn't show up in logs.
+The password you used to register your account. Use with your `--zeropsLogin`. It is preferable that the password is passed as the `ZEROPSPASSWORD` environment variable, so that it doesn't show up in logs.
 
 ```bash
 zcli login --zeropsLogin=my@mail.com --zeropsPassword=foobar123
@@ -58,17 +58,17 @@ zcli login my@mail.com foobar123
 
 ## `push [project name] [service name]`
 
-It can be used to trigger the [build pipeline](/documentation/build/how-zerops-build-works.html) defined in the project's `zerops.yml`. **By default, it will take into account your `.gitignore`**, so the same files you are tracking in your repository will be used to build the application from your local environment.
+It can be used to trigger the [build pipeline](/documentation/build/how-zerops-build-works.html) defined in the project's `zerops.yml`. **By default, it will take into account your `.gitignore`**, so the same files that you are tracking in your repository will be used to build the application from your local environment.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Using quotes
-You must enclose the project name into quotes if it contains a space.
+You must enclose the project name in quotes if it contains a space.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ### Push parameters
 
-The only one **push** parameter is optional and can be used both as parameter `--parameterName` or be put inside your environment variable as `PARAMETERNAME`. A command parameter has priority over an environment variable if both equivalents exist.
+Only one **push** parameter is optional and can be used both as a parameter `--parameterName` or can be put inside your environment variable as `PARAMETERNAME`. A command parameter has priority over an environment variable if both equivalents exist.
 
 #### `--versionName`
 
@@ -80,11 +80,11 @@ zcli push myproject myservice --versionName="v0.0.1"
 
 ## `deploy [project name] [service name] [space separated files or directories]`
 
-It is used to deploy directories and files to the Zerops service as an alternative to the [push](#push-project-name-service-name) command. Use when you want to deploy files that are already built by any way directly into a Zerops service.
+It is used to deploy directories and files to the Zerops service as an alternative to the [push](#push-project-name-service-name) command. Use when you want to deploy files that have already built by any means directly into a Zerops service.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Using quotes
-You must enclose the project name into quotes if it contains a space.
+You must enclose the project name in quotes if it contains a space.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -96,7 +96,7 @@ Standard behavior is to copy the directories and files with exactly the same pat
 
 ### Example
 
-If, for example, your already built application is located in the folder `dist/app` and you want to deploy the files inside it without the directory path, you can use ==`./dist/app/~/`== pattern.
+If, for example, your built application is located in the folder `dist/app` and you want to deploy the files inside it without the directory path, you can use ==`./dist/app/~/`== pattern.
 
 ```bash
 zcli deploy myproject myservice ./dist/app/~/
@@ -104,11 +104,11 @@ zcli deploy myproject myservice ./dist/app/~/
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Using quotes
-You must enclose the pattern into quotes if the directory path contains a space.
+You must enclose the pattern in quotes if the directory path contains a space.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-You can see more pattern examples in the `zerops.yml` [deploy property](/documentation/build/build-config.html#examples-of-different-deploy-settings) documentation. Here, you can use the same patterns (without the enclosed array but with the space as a separator).
+You can see more pattern examples in the `zerops.yml` [deploy property](/documentation/build/build-config.html#examples-of-different-deploy-settings) documentation. Here, you can use the same patterns (without the enclosed array but with a space as a separator).
 
 ## `vpn start [project name]`
 
@@ -116,7 +116,7 @@ Used to establish a secure connection to your protected project network. Require
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Using quotes
-You must enclose the project name into quotes if it contains a space.
+You must enclose the project name in quotes if it contains a space.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -126,7 +126,7 @@ zcli vpn start myproject
 
 ## `vpn stop`
 
-Disconnects the already established VPN connection.
+Disconnects the established VPN connection.
 
 ```bash
 zcli vpn stop
