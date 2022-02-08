@@ -199,7 +199,7 @@ It is either used to customize one of the Zerops runtime services [Node.js](/doc
 
 ### `prepare` (optional for all services)
 
-Specify which commands to run to install additional libraries or tools on top of the selected Zerops runtime service technology. The **custom runtime image** originating from the **Zerops runtime image** and the results of **prepare** commands will be used as the next runtime environment, unless:
+Specify which commands to run to install additional libraries or tools on top of the selected Zerops runtime service technology. The **custom runtime image** originating from the **Zerops runtime image** and the results of **prepare** commands will be used as the source of truth for any new runtime container, unless:
 
 * the content of the `prepare` property has been changed,
 * you invalidated the existed **custom runtime image** through the Zerops GUI (not yet implemented).
