@@ -12,6 +12,8 @@ Information on the compatibility of MariaDB software with similar, competing sof
 
 ## Adding the MariaDB Service in Zerops
 
+Zerops MariaDB service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
+
 ### Which version to choose
 
 You can currently choose **v10.4** or **v10.3**. The chosen version of the database **can't be changed afterwards**.
@@ -81,7 +83,7 @@ The database service is not configured to support direct access using SSL/TLS or
 
 ### From other services inside the project
 
-Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using the HA mode, as it makes sure to include all the information required for HA. Find out more in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also the list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#mariadb) for the MariaDB Service.
+Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using the HA mode, as it makes sure to include all the information required for HA. Find out more in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also the list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#mariadb) for the MariaDB service.
 
 For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#mariadb)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplicity and increased flexibility. Another reason not to hard-code the values inside your applications is that it can be dangerous because it is easy to commit them (like your credentials) into a repository, potentially exposing them to more people than intended.
 

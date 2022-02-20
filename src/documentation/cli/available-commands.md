@@ -74,8 +74,14 @@ Only one **push** parameter is optional and can be used both as a parameter `--p
 
 Will be used to name the resulting [deployed](/documentation/deploy/how-deploy-works.html) application version.
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Using quotes
+You must enclose the version name in quotes if it contains a space.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ```bash
-zcli push myproject myservice --versionName="v0.0.1"
+zcli push myproject myservice --versionName=v0.0.1
 ```
 
 ## `deploy [project name] [service name] [space separated files or directories]`
