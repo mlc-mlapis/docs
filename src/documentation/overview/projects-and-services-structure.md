@@ -58,7 +58,7 @@ A project can contain an [unlimited number of services](/documentation/overview/
 
 ### Database services
 
-[MariaDB (MySQL)](/documentation/services/databases/mariadb.html), [MongoDB](/documentation/services/databases/mongodb.html), [Redis](/documentation/services/databases/redis.html)
+[MariaDB (MySQL)](/documentation/services/databases/mariadb.html), [MongoDB](/documentation/services/databases/mongodb.html), [KeyDB (Redis)](/documentation/services/databases/keydb.html)
 
 ### Search engine services
 

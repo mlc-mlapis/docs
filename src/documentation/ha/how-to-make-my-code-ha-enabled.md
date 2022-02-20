@@ -20,7 +20,7 @@ There are situations when it's ok to use a local filesystem, just always have in
 - temp data will not survive service restart (Zerops will never restart itself, only when requested by the user)
 - php applications can utilize `/var/tmp` which has tmpfs filesystem mounted, but these are saved to memory and will not survive restart
 - if any of the containers fail, Zerops will launch a new one using the latest deployed application version artifact with an empty filesystem
-- sessions should be saved to, for example, [Redis](/documentation/services/databases/redis.html)
+- sessions should be saved to, for example, [KeyDB](/documentation/services/databases/keydb.html)
 
 
 
