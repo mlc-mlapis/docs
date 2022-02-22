@@ -113,6 +113,107 @@ To understand this better, take a look at the section [With external access](/do
 * Each KeyDB container (1 in non-HA, 2 in HA) starts with 1 vCPU, 0.25 GB RAM, and 5 GB of disk space.
 * Zerops will automatically scale the HW resources both in non-HA and HA mode only [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling).
 
+## Database data persistence
+
+KeyDB is an in-memory but persistent on-disk database, so it represents a different trade-off where very high write and read speed is achieved with the **limitation of data sets that can't be larger than memory**. Being the main data representation on memory, operations must be carefully handled to ensure an updated version of the data set on disk.
+
+KeyDB provides a different range of [persistence options](https://docs.keydb.dev/docs/persistence). There are primarily RDB (Redis Database Backup) and AOF (Append Only File) options or their combinations.
+
+The RDB persistence performs point-in-time snapshots of your dataset at specified intervals. The AOF persistence logs every write operation received by the server, that will be played again at server startup, reconstructing the original dataset. It is possible to combine both AOF and RDB in the same instance.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Zerops default setting
+The default setting of the Zerops KeyDB service uses only the RDB option with the configuration:
+
+* save 900 1
+* save 300 10
+* save 60 10000
+  
+It means that a new snapshot of the database to the rdb file is performed every 900 seconds if at least 1 key is changed, every 300 seconds if at least 10 keys are changed, and every 60 seconds if at least 10000 keys are changed.
+
+However, in case of KeyDB stops working without a correct shutdown for any reason, you should be prepared to lose the latest minutes of data. The probability of it is minuscule by using [HA mode](#keydb-in-ha-mode).
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+## How to backup / restore database data
+
+### Using your favorite database management tool
+
+Install any of your favorite database administration tools locally. KeyDB is compatible with all Redis [clients and tools](https://redis.io/clients). For example, you can use [RedisInsight](https://redis.com/redis-enterprise/redis-insight) or [RESP.app](https://resp.app) multi-platform GUI tools, [Red](https://echodot.com/red) GUI tool on the Mac platform, [phpRedisAdmin](https://github.com/ErikDubbelboer/phpRedisAdmin) web interface or many others.
+
+First, connect to your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then you can use ==`db:6379`== as the endpoint. After that, connect to the database service from your installed database management tool, as in the example below with **RedisInsight**:
+
+![RedisInsight](./images/Add-Database-Redis-Insight.png "RedisInsight Add Database")
+
+![RedisInsight](./images/Login-Page-Redis-Insight.png "RedisInsight Connect Dialog")
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Connection security settings
+As you are already using a secure VPN channel, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For these reasons, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+Now you can easily use the built-in export/restore RDB functions to save/load database data to/from your local file system.
+
+![RedisInsight](./images/Export-Redis-Insight.png "RedisInsight Backup")
+
+### Using KeyDB CLI
+
+Again, first access your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `keydb-cli` KeyDB CLI client needs to be already installed locally. It comes with each local installation of a [KeyDB server](https://keydb.dev/downloads). There is the [Homebrew formula](https://formulae.brew.sh/formula/keydb) `brew install keydb` for the Mac platform. It's possible to install also the [keydb-tools](https://docs.keydb.dev/docs/ppa-deb#installation) (Debian, Ubuntu) that contains the `keydb-cli` binaries only (or equivalently `redis-tools`).
+
+#### Alternative Redis CLI
+
+The [redis-rdb-cli](https://github.com/leonchen83/redis-rdb-cli) advanced tool, based on Java (JDK 1.8+ requirement), is multi-platform, including the Windows operating system. It is a tool that can parse, filter, split, merge rdb and analyze memory usage offline. It can also sync two KeyDB (Redis) datasets and allow users to define their own sink service to **migrate data between different database instances, either local or remote**.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: info Select the appropriate logical database
+Each KeyDB instance supports 16 logical databases. These databases are effectively siloed off from one another. When you run a command in one database, it doesn’t affect any data stored in other databases in your KeyDB instance. The databases are numbered from 0 to 15, and by default, you connect to database 0 when you connect to your KeyDB instance.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning KeyDB on the Windows platform
+Currently KeyDB is not ported on any Windows platform. You have to use the standard installation of the Windows Subsystem for Linux (WSL2) according to the official procedure on [Microsoft website](https://docs.microsoft.com/windows/wsl/install-win10). Then you can  install and use `keydb-tools` by the same way as on Linux.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+#### Logical database backup
+
+KeyDB CLI provides the [bgsave command](https://docs.keydb.dev/docs/commands/#bgsave) to help you create a new rdb snapshot at that moment. This tells the server to fork the database process when the parent continues to serve clients while the child saves the database rdb file before exiting. If clients add or modify data while the `bgsave` operation occurs, these changes won’t be captured in the snapshot. The snapshot is saved in the same path as the [automatic scheduled process](/documentation/services/databases/keydb.html#database-data-persistence) uses.
+
+```bash
+keydb-cli -h [hostname] -p [port] bgsave
+```
+
+Used values:
+
+* hostname = **==db==** ([specified](#hostname-and-ports) when KeyDB Service was created)
+* port = **==6379==** (the [default port](#hostname-and-ports))
+
+```bash
+keydb-cli -h db -p 6379 bgsave
+```
+
+If you want to get that **rdb** file at your local environment manually or using a cron job, use the [following command](https://docs.keydb.dev/docs/keydbcli#remote-backups-of-rdb-files):
+
+```bash
+keydb-cli -h [hostname] -p [port] --rdb [filename].rdb
+```
+
+Used values:
+
+* hostname = **==db==** ([specified](#hostname-and-ports) when KeyDB Service was created)
+* port = **==6379==** (the [default port](#hostname-and-ports))
+* filename = **==db==** (specified filename to store the local database rdb backup)
+
+```bash
+keydb-cli -h db -p 6379 --rdb db.rdb
+```
+
+#### Logical database restore
+
+RDB is a very compact single-file point-in-time representation of your KeyDB data. This allows you to restore different versions of the data set easily. You can use either your [favorite database administration](#using-your-favorite-database-management-tool) tools or the alternative Redis [redis-rdb-cli](#alternative-redis-cli) CLI tool mentioned above.
+
 ## What you should remember when using HA mode
 
 ### Asynchronous behavior
