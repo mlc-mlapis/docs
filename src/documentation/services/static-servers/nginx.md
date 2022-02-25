@@ -8,13 +8,13 @@ This service is usually used as a web server for serving static files (index.htm
 
 ## Adding the Nginx Service in Zerops
 
-Zerops Nginx service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers). It has the Git version control system pre-installed.
+The Zerops Nginx service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers). It has the Git version control system pre-installed.
 
 ### Two ways to do it
 
 There are two possible ways to create a new Nginx service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-#### Simple import example in the YAML syntax
+#### A simple import example in the YAML syntax
 
 Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
 
@@ -22,7 +22,7 @@ Zerops uses a YAML definition format to describe the structure. To import a serv
 services:
   # Service will be accessible through zcli VPN under: http://web
   - hostname: web
-    # Type and version of a used service.
+    # Type and version of service used.
     type: nginx@1.18
     # Whether the service will be run on one or multiple containers.
     # Since this is a simple example, using only one container is fine.
