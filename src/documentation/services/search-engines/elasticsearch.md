@@ -6,13 +6,13 @@ Zerops provides a fully managed and scaled [Elasticsearch](https://www.elastic.c
 
 ## Adding the Elasticsearch Service in Zerops
 
-Zerops Elasticsearch service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
+The Zerops Elasticsearch service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
 
 ### Two ways to do it
 
 There are two possible ways to create a new Nginx service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-#### Simple import example in the YAML syntax
+#### A simple import example in the YAML syntax
 
 Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
 
@@ -20,7 +20,7 @@ Zerops uses a YAML definition format to describe the structure. To import a serv
 services:
   # Service will be accessible through zcli VPN under: http://es
   - hostname: es
-    # Type and version of a used service.
+    # Type and version of service used.
     type: elasticsearch@7
     # Whether the service will be run on one or multiple containers.
     # Since this is a simple example, using only one container is fine.
@@ -97,7 +97,7 @@ The Elasticsearch service is not configured to support direct access using SSL/T
 
 ### From other services inside the project
 
-Other services can access the database using its **hostname** and **port**, as they are part of the same private project network (for example, `http://es:9200`). It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each service, especially when using HA mode, as it makes sure to include all the information required for HA. More information can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#elasticsearch) for the Elasticsearch service.
+Other services can access the database using its **hostname** and **port**, as they are part of the same private project network (for example, `http://es:9200`). It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each service, especially when using HA mode, as it makes sure to include all the information required for HA. More information related to **connectionString** can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#elasticsearch) for the Elasticsearch service.
 
 For more flexibility surrounding future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#mariadb)) separately in each project service. This allows you to eliminate all direct dependencies in the application code, which in turn results in simplification and increased flexibility. Another reason not to hard-code the values inside your applications is that there is a danger of easily committing them (like your credentials) into a repository, potentially exposing them to more people than intended.
 
@@ -138,7 +138,7 @@ First, connect to your Zerops project using [zcli](/documentation/cli/installati
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Connection security settings
-As you are using a secure VPN channel already, and the Elasticsearch service is located on the internal Zerops project private secured network, it's unnecessary to apply any additional security layers such as SSH or SSL/TLS. For these reasons, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Here's more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
+As you are using a secure VPN channel already, and the Elasticsearch service is located on the internal Zerops project private secured network, it's unnecessary to apply any additional security layers such as SSH or SSL/TLS. For this reason, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Here's more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 

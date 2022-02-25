@@ -12,7 +12,7 @@ Information on the compatibility of MariaDB software with similar, competing sof
 
 ## Adding the MariaDB Service in Zerops
 
-Zerops MariaDB service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
+The Zerops MariaDB service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
 
 ### Which version to choose
 
@@ -32,7 +32,7 @@ Choose a short and descriptive URL-friendly name, for example, **db**. The follo
 
 * maximum length **==25==** characters,
 * only lowercase ASCII letters **==a-z==** and numbers **==0-9==**,
-* **==has to be unique==** in relation to other existing project's hostnames,
+* **==has to be unique==** in relation to other existing project hostnames,
 * the hostname **==can't be changed==** later.
 
 The port will automatically be set to the value of **==3306==** and can't be changed.
@@ -131,7 +131,7 @@ First, connect to your Zerops project using [zcli](/documentation/cli/installati
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Connection security settings
-As you are using a secure VPN channel already, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For these reasons, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
+As you are using a secure VPN channel already, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For this reason, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -185,7 +185,7 @@ You can also use the Zerops [import functionality](/documentation/export-import/
 services:
   # Service will be accessible through zcli VPN under: http://adminer
 - hostname: adminer
-  # Type and version of a used service.
+  # Type and version of service used.
   type: php-apache@8.0
   # Whether the service will be run on one or multiple containers.
   # Since this is a utility service, using only one container is fine.

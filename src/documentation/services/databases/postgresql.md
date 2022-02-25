@@ -6,21 +6,21 @@ Zerops provides a fully managed and scaled PostgreSQL database service, suitable
 
 ## Adding the PostgreSQL Service in Zerops
 
-Zerops PostgreSQL service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
+The Zerops PostgreSQL service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
 
 ### Two ways to do it
 
-There are two possible ways to create a new PostgreSQL service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+There are two possible ways to create a new PostgreSQL service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-#### Simple import example in the YAML syntax
+#### A simple import example in the YAML syntax
 
-Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following.
+Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
 
 ```yaml
 services:
   # Service will be accessible through zcli VPN under: http://db
   - hostname: db
-    # Type and version of a used service.
+    # Type and version of service used.
     type: postgresql@12
     # Whether the service will be run on one or multiple containers.
     # Since this is a simple example, using only one container is fine.
@@ -31,7 +31,7 @@ A complete specification of the [import/export syntax in the YAML format](/docum
 
 ### Which version to choose
 
-You can currently choose PostgreSQL version **v12** (the 12.7 version to be precise).
+You can currently choose PostgreSQL version **v12** (version 12.7 to be precise).
 
 Used as the export & import type: ==`postgresql@12`== .
 
@@ -41,7 +41,7 @@ Choose a short and descriptive URL-friendly name, for example, **db**. The follo
 
 * maximum length **==25==** characters,
 * only lowercase ASCII letters **==a-z==** and numbers **==0-9==**,
-* **==has to be unique==** in relation to other existing project's hostnames,
+* **==has to be unique==** in relation to other existing project hostnames,
 * the hostname **==can't be changed==** later.
 
 The port will automatically be set to the value of **==5432==** and can't be changed. It's important to mention that when HA mode is chosen, the additional port of **==5433==** is also automatically set. It allows you to send read-only requests to all members of the PostgreSQL cluster. If a data change request is sent to this port by mistake or because of an error and it will be directed to a standby replica member of the HA cluster, then the statement will be rejected.
@@ -91,7 +91,7 @@ The database service is not configured to support direct access using SSL/TLS or
 
 ### From other services inside the project
 
-Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended that you utilize the **==connectionString==** environment variable that Zerops creates automatically for the database in non-HA mode. See also the explanation of environment variables specifics for HA mode below. More information can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#postgresql) for the PostgreSQL service.
+Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended that you utilize the **==connectionString==** environment variable that Zerops creates automatically for the database in non-HA mode. See also the explanation of environment variables specifics for HA mode below. More information related to **connectionString** can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#postgresql) for the PostgreSQL service.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Environment variables specifics for HA mode
@@ -170,7 +170,7 @@ First, connect to your Zerops project using [zcli](/documentation/cli/installati
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Connection security settings
-As you are already using a secure VPN channel, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For these reasons, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
+As you are already using a secure VPN channel, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For this reason, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -180,7 +180,7 @@ Now you can easily use the built-in backup/restore functions to save/load databa
 
 ### Using libpg CLI
 
-Again, first access your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `libpg` PostgreSQL CLI client needs to be already installed locally. It comes with each local installation of a [PostgreSQL server](https://www.postgresql.org/download) or a [pgAdmin client](https://www.pgadmin.org).
+Again, first access your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `libpg` PostgreSQL CLI client needs to already be installed locally. It comes with each local installation of a [PostgreSQL server](https://www.postgresql.org/download) or a [pgAdmin client](https://www.pgadmin.org).
 
 On the Windows platform you can selectively install just the **Command Line Tools** if you wish.
 
@@ -249,7 +249,7 @@ You can use the Zerops [import functionality](/documentation/export-import/proje
 services:
   # Service will be accessible through zcli VPN under: http://phppgadmin
 - hostname: phppgadmin
-  # Type and version of a used service.
+  # Type and version of service used.
   type: php-apache@7.4
   # Whether the service will be run on one or multiple containers.
   # Since this is a utility service, using only one container is fine.
