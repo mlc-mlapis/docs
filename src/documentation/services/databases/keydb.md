@@ -8,21 +8,21 @@ Zerops provides a fully managed and scaled KeyDB (Redis) key-value database serv
 
 ## Adding the KeyDB Service in Zerops
 
-Zerops KeyDB service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
+The Zerops KeyDB service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
 
 ### Two ways to do it
 
-There are two possible ways to create a new KeyDB service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+There are two possible ways to create a new KeyDB service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-#### Simple import example in the YAML syntax
+#### A simple import example in the YAML syntax
 
-Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following.
+Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
 
 ```yaml
 services:
   # Service will be accessible through zcli VPN under: http://db
   - hostname: db
-    # Type and version of a used service.
+    # Type and version of service used.
     type: redis@6
     # Whether the service will be run on one or multiple containers.
     # Since this is a simple example, using only one container is fine.
@@ -33,7 +33,7 @@ A complete specification of the [import/export syntax in the YAML format](/docum
 
 ### Which version to choose
 
-You can currently choose KeyDB version **v6** (the 6.0.16 version to be precise).
+You can currently choose KeyDB version **v6** (version 6.0.16 to be precise).
 
 Used as the export & import type: ==`redis@6`== .
 
@@ -43,7 +43,7 @@ Choose a short and descriptive URL-friendly name, for example, **db**. The follo
 
 * maximum length **==25==** characters,
 * only lowercase ASCII letters **==a-z==** and numbers **==0-9==**,
-* **==has to be unique==** in relation to other existing project's hostnames,
+* **==has to be unique==** in relation to other existing project hostnames,
 * the hostname **==can't be changed==** later.
 
 The port will automatically be set to the value of **==6379==** and can't be changed.
@@ -86,7 +86,7 @@ The database service is not configured to support direct access using SSL/TLS or
 
 ### From other services inside the project
 
-Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended that you utilize the **==connectionString==** environment variable that Zerops creates automatically. More information can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#keydb-redis) for the KeyDB service.
+Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended that you utilize the **==connectionString==** environment variable that Zerops creates automatically. More information related to **connectionString** can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#keydb-redis) for the KeyDB service.
 
 For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#postgresql)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility. Another reason not to hard-code the values inside your applications is that it can be dangerous because it is easy to commit them (like your credentials) into a repository, potentially exposing them to more people than intended.
 
@@ -117,9 +117,9 @@ To understand this better, take a look at the section [With external access](/do
 
 KeyDB is an in-memory but persistent on-disk database, so it represents a different trade-off where very high write and read speed is achieved with the **limitation of data sets that can't be larger than memory**. Being the main data representation on memory, operations must be carefully handled to ensure an updated version of the data set on disk.
 
-KeyDB provides a different range of [persistence options](https://docs.keydb.dev/docs/persistence). There are primarily RDB (Redis Database Backup) and AOF (Append Only File) options or their combinations.
+KeyDB provides a different range of [persistence options](https://docs.keydb.dev/docs/persistence). These are primarily RDB (Redis Database Backup) and AOF (Append Only File) options or combinations thereof.
 
-The RDB persistence performs point-in-time snapshots of your dataset at specified intervals. The AOF persistence logs every write operation received by the server, that will be played again at server startup, reconstructing the original dataset. It is possible to combine both AOF and RDB in the same instance.
+The RDB persistence performs point-in-time snapshots of your dataset at specified intervals. The AOF persistence logs every write operation received by the server which will be played again at server startup, reconstructing the original dataset. It is possible to combine both AOF and RDB in the same instance.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Zerops default setting
@@ -129,9 +129,9 @@ The default setting of the Zerops KeyDB service uses only the RDB option with th
 * save 300 10
 * save 60 10000
   
-It means that a new snapshot of the database to the rdb file is performed every 900 seconds if at least 1 key is changed, every 300 seconds if at least 10 keys are changed, and every 60 seconds if at least 10000 keys are changed.
+This means that a new snapshot of the database to the rdb file is taken every 900 seconds if at least 1 key is changed, every 300 seconds if at least 10 keys are changed, and every 60 seconds if at least 10000 keys are changed.
 
-However, in case of KeyDB stops working without a correct shutdown for any reason, you should be prepared to lose the latest minutes of data. The probability of it is minuscule by using [HA mode](#keydb-in-ha-mode).
+However, if KeyDB stops working without a correct shutdown for any reason, you should be prepared to lose your most recent minutes of data. The probability of this is minuscule by using [HA mode](#keydb-in-ha-mode).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -149,7 +149,7 @@ First, connect to your Zerops project using [zcli](/documentation/cli/installati
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: info Connection security settings
-As you are already using a secure VPN channel, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For these reasons, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
+As you are already using a secure VPN channel, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For this reason, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -159,7 +159,7 @@ Now you can easily use the built-in export/restore RDB functions to save/load da
 
 ### Using KeyDB CLI
 
-Again, first access your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `keydb-cli` KeyDB CLI client needs to be already installed locally. It comes with each local installation of a [KeyDB server](https://keydb.dev/downloads). There is the [Homebrew formula](https://formulae.brew.sh/formula/keydb) `brew install keydb` for the Mac platform. It's possible to install also the [keydb-tools](https://docs.keydb.dev/docs/ppa-deb#installation) (Debian, Ubuntu) that contains the `keydb-cli` binaries only (or equivalently `redis-tools`).
+Again, first access your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `keydb-cli` KeyDB CLI client needs to already be installed locally. It comes with each local installation of a [KeyDB server](https://keydb.dev/downloads). There is the [Homebrew formula](https://formulae.brew.sh/formula/keydb) `brew install keydb` for the Mac platform. It's also possible to install the [keydb-tools](https://docs.keydb.dev/docs/ppa-deb#installation) (Debian, Ubuntu) that contains the `keydb-cli` binaries only (or equivalently `redis-tools`).
 
 #### Alternative Redis CLI
 
@@ -194,7 +194,7 @@ Used values:
 keydb-cli -h db -p 6379 bgsave
 ```
 
-If you want to get that **rdb** file at your local environment manually or using a cron job, use the [following command](https://docs.keydb.dev/docs/keydbcli#remote-backups-of-rdb-files):
+If you want to get this **rdb** file at your local environment manually or using a cron job, use the [following command](https://docs.keydb.dev/docs/keydbcli#remote-backups-of-rdb-files):
 
 ```bash
 keydb-cli -h [hostname] -p [port] --rdb [filename].rdb
