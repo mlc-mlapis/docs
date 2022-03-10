@@ -33,6 +33,9 @@ project:
   - DEMO
   - ZEROPS
 services:
+- hostname: sharedstorage
+  type: shared-storage@1
+  mode: NON_HA
 - hostname: db
   type: mariadb@10.4
   priority: 1
@@ -52,9 +55,6 @@ services:
     content: M3rW31Ne%T@bRk
   - key: CONNECTION_STRING
     content: ${db_connectionString}
-- hostname: sharedstorage
-  type: shared-storage@1
-  mode: NON_HA
 ```
 
 ### project
