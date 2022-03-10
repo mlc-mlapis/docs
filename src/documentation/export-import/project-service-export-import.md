@@ -33,8 +33,13 @@ project:
   - DEMO
   - ZEROPS
 services:
+- hostname: db
+  type: mariadb@10.4
+  priority: 1
+  mode: HA
 - hostname: app
   type: nodejs@14
+  priority: 2
   mode: HA
   ports:
   - port: 3000
@@ -47,9 +52,6 @@ services:
     content: M3rW31Ne%T@bRk
   - key: CONNECTION_STRING
     content: ${db_connectionString}
-- hostname: db
-  type: mariadb@10.4
-  mode: HA
 - hostname: sharedstorage
   type: shared-storage@1
   mode: NON_HA
@@ -96,6 +98,18 @@ A chosen short and descriptive, URL-friendly unique service name. Related to [Ma
 `type`: dictionary
 
 A service type and its chosen version. Each of the following service documentation specifies the options available: [MariaDB](/documentation/services/databases/mariadb.html#version-to-choose), [MongoDB](/documentation/services/databases/mongodb.html#version-to-choose), [KeyDB](/documentation/services/databases/keydb.html#version-to-choose), [Node.js](/documentation/services/runtimes/nodejs.html#version-to-choose), [Golang](/documentation/services/runtimes/golang.html#version-to-choose), [PHP](/documentation/services/runtimes/php.html#version-to-choose), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#version-to-choose), and [Shared Storage](/documentation/services/storage/shared.html#version-to-choose).
+
+#### priority
+
+`priority`: integer [>= 0] (optional)
+
+It allows to precisely control the order in which the services will be created when the import YML definition is processed. There are situations, for example, when a database service (as MariaDB or PostgreSQL) has to be already running before a new application build phase of a runtime (Node.js, Golang, PHP) is started. The following rules are applied:
+
+* services without the explicit `priority` option are grouped and created first,
+* services with the explicit `priority` option are ordered in an ascending manner,
+* `priority` values may not be unique and do not have to represent a continuous numerical series.
+
+If more of the same `priority` values exist (including none priorities), the order is decided according to their occurrence in the YML definition.
 
 #### mode
 
