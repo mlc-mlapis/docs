@@ -107,9 +107,10 @@ It allows to precisely control the order in which the services will be created w
 
 * services without the explicit `priority` option are grouped and created first,
 * services with the explicit `priority` option are ordered in an ascending manner,
-* `priority` values may not be unique and do not have to represent a continuous numerical series.
+* `priority` values may not be unique and do not have to represent a continuous numerical series,
+* higher priority services will not be created until all lower priority ones are available.
 
-If more of the same `priority` values exist (including none priorities), the order is decided according to their occurrence in the YML definition.
+If more of the same `priority` values exist (including none priorities), the order of the services is decided according to their occurrence in the YML definition. Their creation is invoked quickly, one by one, and within this group, the final availability of services is not explicitly controlled.
 
 #### mode
 
