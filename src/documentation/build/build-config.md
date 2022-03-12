@@ -228,7 +228,7 @@ Specify one or more files/folders in which Zerops searches for combinations of d
 
 #### delimiter
 
-Specify one or more delimiters that Zerops uses to create the searched patterns in combination with environment variable keys. If the delimiter is one of special YAML characters (`{`, `}`, `[`, `]`, `&`, `*`, `#`, `?`, `|`, `-`, `<`, `>`, `=`, `!`, `%`, `@`, `:`, `,`), remember to quote it.
+Specify one or more delimiters that Zerops uses to create the searched patterns in combination with environment variable keys. The delimiter marks both the beginning and end of the pattern. If the delimiter is one of special YAML characters (`{`, `}`, `[`, `]`, `&`, `*`, `#`, `?`, `|`, `-`, `<`, `>`, `=`, `!`, `%`, `@`, `:`, `,`), remember to quote it.
 
 #### Examples of different replacement settings
 
