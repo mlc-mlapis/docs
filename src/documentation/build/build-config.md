@@ -42,6 +42,12 @@ nodejsapp:
     # Which commands to run after a launch or each restart of a runtime container instance.
     init:
       - <command> <options>
+    # Replacement of template patterns in static files with environment variable values.
+    envReplace:
+      # Specification of files / folders to search for delimiters.
+      target: [<file>, <folder>]
+      # Specification of one or more delimiters (quote YAML special characters).
+      delimiter: [$$, "%%"]
     # A command that should start your service.
     start: npm start
 ```
@@ -134,7 +140,7 @@ Standard behavior is to copy the directories and files with exactly the same pat
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Using quotes
-You must enclose the pattern in quotes if the directory path contains a space.
+You must enclose the pattern in quotes if the directory path or the file name contains a space.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -209,6 +215,49 @@ If one of the above happens, the latest **Zerops runtime image** is used, and th
 ### `init` (optional for all services)
 
 Specify which commands to run after a launch or each restart of a runtime container instance and after `prepare` commands (if they exist), for example, initialization or removing a custom application cache.
+
+### envReplace (optional for all services)
+
+It allows you to replace marked places in static files of deployed runtime applications (Node.js, Golang, PHP) with environment variable values. Those marked places are combinations of defined delimiters and environment variable keys and represent the searched patterns that should be replaced.
+
+Zerops will execute the pattern search and replace when creating, starting, and restarting runtime containers. If a user wants to change the rules for replacing environment variables, a new deployment with updated `zerops.yml` is needed. If a user only changes a value of any environment variable or makes any other change in the variable list, restarting the service is sufficient for the changes to take effect.
+
+#### target
+
+Specify one or more files/folders in which Zerops searches for combinations of defined delimiters and environment variable keys. If it finds any of them, it replaces the found pattern with a current environment variable value if the corresponding variable key exists.
+
+#### delimiter
+
+Specify one or more delimiters that Zerops uses to create the searched patterns in combination with environment variable keys. If the delimiter is one of special YAML characters (`{`, `}`, `[`, `]`, `&`, `*`, `#`, `?`, `|`, `-`, `<`, `>`, `=`, `!`, `%`, `@`, `:`, `,`), remember to quote it.
+
+#### Examples of different replacement settings
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Using quotes
+You must enclose the pattern in quotes if the directory path or the file name contains a space.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+##### Replacing in a single file located in the project root directory
+
+```yaml
+# Zerops is looking for any of the $$<environmentVariableKey>$$ patterns in the config.yml file.
+# If found, it's replaced by the current value of the <environmentVariableKey> variable when it exists.
+envReplace:
+  target: config.yml
+  delimiter: $$
+```
+
+##### Replacing in files or folders, using multiple delimiters
+
+```yaml
+# Zerops is looking for any of the $$<environmentVariableKey>$$ or %%<environmentVariableKey>%% patterns
+# in the ./path/to/setting.yml file or in any file in the ./path/to/dir directory.
+# If found, it's replaced by the current value of the <environmentVariableKey> variable when it exists.
+envReplace:
+  target: [./path/to/setting.yml, ./path/to/dir/]
+  delimiter: [$$, "%%"]
+```
 
 ### `start` (required only for Node.js or Golang services)
 
