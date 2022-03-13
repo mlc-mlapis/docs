@@ -226,6 +226,12 @@ Zerops will execute the pattern search and replace when creating, starting, and 
 
 Specify one or more files/folders in which Zerops searches for combinations of defined delimiters and environment variable keys. If it finds any of them, it replaces the found pattern with a current environment variable value if the corresponding variable key exists.
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning What is processed in a specified folder
+Only files directly located in the given directory are processed and not in sub-directories.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 #### delimiter
 
 Specify one or more delimiters that Zerops uses to create the searched patterns in combination with environment variable keys. The delimiter marks both the beginning and end of the pattern. If the delimiter is one of special YAML characters (`{`, `}`, `[`, `]`, `&`, `*`, `#`, `?`, `|`, `-`, `<`, `>`, `=`, `!`, `%`, `@`, `:`, `,`), remember to quote it.
