@@ -2,7 +2,7 @@
 
 ## Project
 
-Zerops structure has three levels. At the top is a project, which can have services made of containers. It can, for example, consist of a NodeJS [runtime environment](/documentation/services/runtimes.html), a MongoDB [database](/documentation/services/databases/mongodb.html), and an S3 [object storage](/documentation/services/storage.html) service.
+Zerops structure has three levels. At the top is a project, which can have services made of containers. It can, for example, consist of a NodeJS [runtime environment](/documentation/services/runtimes.html), a PostgreSQL [database](/documentation/services/databases/postgresql.html), and an S3 [object storage](/documentation/services/storage.html) service.
 
 You can create a separate project for any environment (development, stage, production) or even for each developer if you so wish. Alternatively, you can benefit from a single project shared among all developers reducing the overall cost. Either way, developers can still utilize our powerful [dev tools](/documentation/cli/vpn.html).
 
@@ -11,12 +11,12 @@ All services within a project share a [dedicated private network](/documentation
 **By default, nothing outside the project can access any of the services inside.** Each [runtime environment](/documentation/services/runtimes.html) or [static web server](/documentation/services/static-servers.html) services can be made publicly accessible through Zerops subdomains (*.app.zerops.io) or [domains](/documentation/routing/using-your-domain.html), pointing your DNS records to the [IPv6](/documentation/routing/unique-ipv4-ipv6-addresses.html) or [IPv4](/documentation/overview/pricing.html#project-add-ons) addresses assigned to the project, or by setting up direct access by [opening public ports](/documentation/routing/access-through-ip-and-firewall.html) on the assigned IP addresses. A built-in optional [firewall](/documentation/routing/access-through-ip-and-firewall.html) can manage the direct access by defining a list of allowed and denied IP addresses for each open public port. For the remaining services ([databases](/documentation/services/databases.html), [search engines](/documentation/services/search-engines.html), [message-brokers](/documentation/services/message-brokers.html)), you have to use our [dev tools](/documentation/cli/vpn.html) (VPN access and Zerops CLI). [Storage](/documentation/services/storage.html) services have a specific status and need to be approached with knowledge of their properties.
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Communication between different Zerops projects
+::: tip Communication between different Zerops projects
 Any communication between the various Zerops projects at service level is in principle identical to accessing directly from the Internet (the same features and rules), and there are no exceptions or specifics. More about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-The screenshot below shows an example of a project, our own website. The project is called **zerops-web-prod**, and it consists of 2 runtimes (Node.js and Golang), a static web server (Nginx), a database (MongoDB), and an S3 object storage services. It is made accessible to the public through our domain (`zerops.io`).
+The screenshot below shows an example of a project, our own website. The project is called **zerops-web-prod**, and it consists of 2 runtimes (Node.js and Golang), a static web server (Nginx), a database (PostgreSQL), and an S3 object storage services. It is made accessible to the public through our domain (`zerops.io`).
 
 <!-- markdownlint-disable DOCSMD004 -->
 :::: tabs
@@ -58,7 +58,7 @@ A project can contain an [unlimited number of services](/documentation/overview/
 
 ### Database services
 
-[MariaDB (MySQL)](/documentation/services/databases/mariadb.html), [MongoDB](/documentation/services/databases/mongodb.html), [KeyDB (Redis)](/documentation/services/databases/keydb.html)
+[MariaDB (MySQL)](/documentation/services/databases/mariadb.html), [PostgreSQL](/documentation/services/databases/postgresql.html), [KeyDB (Redis)](/documentation/services/databases/keydb.html)
 
 ### Search engine services
 

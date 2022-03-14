@@ -13,7 +13,7 @@ Service environment variables are available via environment variables inside run
 - Golang — `os.LookupEnv('key')`
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info The default value of the [variables_order] PHP directive
+::: tip The default value of the [variables_order] PHP directive
 The [variables_order](https://www.php.net/manual/en/ini.core.php#ini.variables-order) directive is set by default to the value of ==`GPCS`== in the `php.ini` for Zerops PHP services. It means that the super-global variable `$_ENV` is not populated.
 :::
 <!-- markdownlint-enable DOCSMD004 -->

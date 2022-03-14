@@ -94,7 +94,7 @@ The database service is not configured to support direct access using SSL/TLS or
 Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended that you utilize the **==connectionString==** environment variable that Zerops creates automatically for the database in non-HA mode. See also the explanation of environment variables specifics for HA mode below. More information related to **connectionString** can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#postgresql) for the PostgreSQL service.
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Environment variables specifics for HA mode
+::: tip Environment variables specifics for HA mode
 Due to the Patroni cluster functionality, you can use an additional connection string to connect to the database in HA mode. It is ==**connectionStringReplicas**== , used to connect to any member (all standby replica instances + the current primary instance) of the database cluster to retrieve already existing data (only reading operations via SQL SELECT queries). The corresponding  ==**portReplicas**== environment variable value is used under the hood.
 
 The names of ==**connectionString**== and ==**port**== are kept the same, but in HA mode, using them is reserved for creating a connection to the current primary instance and mainly processing all data modification requests (via SQL INSERT, UPDATE, and DELETE statements). And of course, any SELECT statement can also be sent, nothing prevents this from happening.
@@ -142,7 +142,7 @@ The image below represents the state of environment variables available in non-H
 <!-- markdownlint-enable DOCSMD004 -->
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Default Zerops maintenance user
+::: tip Default Zerops maintenance user
 For system maintenance reasons, the `zps` user is also automatically created with all privileges (super-user). It's vital not to change this in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode. The password for this user can be taken via the `zeropsPassword` environment variable (not presented in the Zerops GUI).
 
 Suppose you log in as the `zps` super-user and make inappropriate changes to the system configuration (especially in the HA cluster setting). You are fully responsible for any system or application failures that may lead to complete data loss.
@@ -169,7 +169,7 @@ First, connect to your Zerops project using [zcli](/documentation/cli/installati
 ![pgAdmin](./images/Login-Page-pgAdmin.png "pgAdmin Connect Dialog")
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Connection security settings
+::: tip Connection security settings
 As you are already using a secure VPN channel, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For this reason, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -212,7 +212,7 @@ pg_dump -U db -h db -p 5432 -F c -W db > db.dump
 ```
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Passing a secure password in batch jobs and scripts
+::: tip Passing a secure password in batch jobs and scripts
 To eliminate the need to interactively enter a password you can use ==`.pgpass`== [file](https://www.postgresql.org/docs/current/libpq-pgpass.html) located in a user's home directory. In such a case, use **pg_dump** with the parameter `-w` instead of `-W`. This file should contain lines of the following format: `<hostname>:<port>:<database>:<user>:<password>`. Each of the first four fields can be a literal value, or *, which matches anything. The line of `*:*:*:*:<password>` allows to use the same password for any database connection. On Linux or Mac systems, set the file's mode to `0600` by `chmod 600 ~/.pgpass`. Otherwise, it will be ignored.
 :::
 <!-- markdownlint-enable DOCSMD004 -->

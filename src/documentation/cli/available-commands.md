@@ -95,7 +95,7 @@ You must enclose the project name in quotes if it contains a space.
 <!-- markdownlint-enable DOCSMD004 -->
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Using a tilda character to strip a path directory of deployed files
+::: tip Using a tilda character to strip a path directory of deployed files
 Standard behavior is to copy the directories and files with exactly the same path as they are placed in the source location. If you want to strip the path from the left side, use the tilda (**~**) character. You can strip the entire directory path or only its part from the left.
 :::
 <!-- markdownlint-enable DOCSMD004 -->

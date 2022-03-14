@@ -3,7 +3,7 @@
 Here is a basic example of how to create a Nginx static web server (with only a trivial `index.html` as its content) and deploy it to Zerops without any source repository to demonstrate the basic principles of using the Zerops [zcli](/documentation/cli/installation.html).
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info When using only the Windows platform
+::: tip When using only the Windows platform
 If you can't get a native Linux or Mac platform, or if you're not familiar with them, you will probably welcome using standard installation of the Windows Subsystem for Linux (WSL2) according to the official procedure on [Microsoft website](https://docs.microsoft.com/windows/wsl/install-win10). You will also need to install [Node.js](https://docs.microsoft.com/windows/dev-environment/javascript/nodejs-on-wsl) on WSL2. **The reason for using WSL2 comes from issues related to unwanted file permission changes when doing this natively on the Windows platform.**
 :::
 <!-- markdownlint-enable DOCSMD004 -->
