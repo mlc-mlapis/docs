@@ -103,7 +103,7 @@ A service type and its chosen version. Each of the following service documentati
 
 `priority`: integer [>= 0] (optional)
 
-It allows to precisely control the order in which the services will be created when the import YML definition is processed. There are situations, for example, when a database service (as MariaDB or PostgreSQL) has to be already running before a new application build phase of a runtime (Node.js, Golang, PHP) is started. The following rules are applied:
+This allows you to control precisely the order in which the services will be created when the import YML definition is processed. There are situations, for example, when a database service (as MariaDB or PostgreSQL) has to already be running before a new application build phase of a runtime (Node.js, Golang, PHP) is started. The following rules are applied:
 
 * services without the explicit `priority` option are grouped and created first,
 * services with the explicit `priority` option are ordered in an ascending manner,
