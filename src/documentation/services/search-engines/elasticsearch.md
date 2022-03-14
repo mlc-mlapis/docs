@@ -36,7 +36,7 @@ You can currently choose **v7.12** or **v6.8**. The chosen version of the databa
 Used as the export & import types: ==`elasticsearch@7`== or ==`elasticsearch@6`== .
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Changing version
+::: tip Changing version
 Switching must be done manually by creating a new service with another version and migrating data using a [snapshot](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) backup / restore pattern.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -137,7 +137,7 @@ First, connect to your Zerops project using [zcli](/documentation/cli/installati
 ![Spectre ES](./images/Spectre-ES-Login.png "Spectre ES Connect Dialog")
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Connection security settings
+::: tip Connection security settings
 As you are using a secure VPN channel already, and the Elasticsearch service is located on the internal Zerops project private secured network, it's unnecessary to apply any additional security layers such as SSH or SSL/TLS. For this reason, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Here's more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -159,7 +159,7 @@ In the Zerops environment, the Elasticsearch service uses two load [Nginx Layer 
 It would be a mistake for the client application to get a list of data nodes to communicate (sniffing). The point is that, on the one hand, it makes no sense from a performance point of view, and in the event of any change in the cluster arrangement (e.g. failure of one data node and its replacement by another), such a list would not even correspond to reality.
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Authentication is not required
+::: tip Authentication is not required
 It's unnecessary to use any authentication because the Elasticsearch service is [fully accessible inside](#hostname-and-port) the Zerops project private network.
 :::
 <!-- markdownlint-enable DOCSMD004 -->

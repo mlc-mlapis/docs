@@ -64,7 +64,7 @@ You can activate the following paid add-ons:
 |add-on IPv4      |                                |    $0.0111|    $0.2667|      $8.00|
 |HA Nginx         |3x vCPU + 3x250 MB + 3x5 GB Disk|    $0.0208|    $0.5000|     $15.00|
 |HA NodeJS        |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0271|    $0.6500|     $19.50|
-|HA MongoDB       |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0271|    $0.6500|     $19.50|
+|HA PostgreSQL    |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0271|    $0.6500|     $19.50|
 |                 |                      **Total**:|**$0.0931**|**$2.2333**| **$67.00**|
 
 #### Development / Stage application
@@ -74,7 +74,7 @@ You can activate the following paid add-ons:
 |basic package    |                                |    $0.0069|    $0.1667|      $5.00|
 |non-HA Nginx     |1x vCPU + 1x250 MB + 1x5 GB Disk|    $0.0069|    $0.1667|      $5.00|
 |non-HA NodeJS    |1x vCPU + 1x250 MB + 1x5 GB Disk|    $0.0069|    $0.1667|      $5.00|
-|HA MongoDB       |3x vCPU + 3x250 MB + 3x5 GB Disk|    $0.0208|    $0.5000|     $15.00|
+|HA PostgreSQL    |3x vCPU + 3x250 MB + 3x5 GB Disk|    $0.0208|    $0.5000|     $15.00|
 |                 |                      **Total**:|**$0.0417**|**$1.0000**| **$30.00**|
 
 ___

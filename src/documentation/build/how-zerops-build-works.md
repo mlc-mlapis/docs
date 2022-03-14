@@ -3,7 +3,7 @@
 Adding [zerops.yml](/documentation/build/build-config.html) to your application source code (Zerops looks for it in the **root directory**), lets Zerops know which [base](/documentation/build/build-config.html#base-optional) technologies should be used, and which steps to run during the application [build](/documentation/build/build-config.html#build) phase to produce a final application runtime. The [deploy](/documentation/build/build-config.html#deploy) specifies which files will be copied to a runtime service container(s) when the build is successfully completed.
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Applications in monorepo environment
+::: tip Applications in monorepo environment
 Each `zerops.yml` can contain definitions for one or more applications. It is especially valuable for a monorepo when one repository contains source code for various applications. The appropriate service hostname to which the application will be deployed is used to select a correct definition from the `zerops.yml`.
 :::
 <!-- markdownlint-enable DOCSMD004 -->

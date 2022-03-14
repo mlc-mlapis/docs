@@ -211,7 +211,7 @@ When you configure and run a web server (for example, [Gin](https://github.com/g
 What's important in such cases is choosing **facility number 17** ( ==`local1`== ) as the configuration option. This is because the dedicated switch ==**`Show web server logs`**== in the **Runtime log** view that allows you to show web access & error logs separately from standard application logs. It's important, especially from an access log point of view, because there could be thousands and thousands of records.
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Stdout & Stderr output streams
+::: tip Stdout & Stderr output streams
 **In the Zerops environment, the output is piped to a logger controller of the Project Core Service, so that the logging operations are processed asynchronously** (see the [Detail of Project Core Service](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html) tab). The environment was tested for throughput of around ~50K logs/second.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
