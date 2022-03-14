@@ -218,9 +218,9 @@ Specify which commands to run after a launch or each restart of a runtime contai
 
 ### envReplace (optional for all services)
 
-It allows you to replace marked places in static files of deployed runtime applications (Node.js, Golang, PHP) with environment variable values. Those marked places are combinations of defined delimiters and environment variable keys and represent the searched patterns that should be replaced.
+This allows you to replace marked places in static files of deployed runtime applications (Node.js, Golang, PHP) with environment variable values. Those marked places are combinations of defined delimiters and environment variable keys and represent the searched patterns that should be replaced.
 
-Zerops will execute the pattern search and replace when creating, starting, and restarting runtime containers. If a user wants to change the rules for replacing environment variables, a new deployment with updated `zerops.yml` is needed. If a user only changes a value of any environment variable or makes any other change in the variable list, restarting the service is sufficient for the changes to take effect.
+Zerops will execute the pattern search and replace when creating, starting, and restarting runtime containers. If a user wants to change the rules for replacing environment variables, a new deployment with an updated `zerops.yml` is needed. If a user only changes the value of an environment variable or makes any other change in the variable list, restarting the service is sufficient for the changes to take effect.
 
 #### target
 
@@ -234,13 +234,13 @@ Only files directly located in the given directory are processed and not in sub-
 
 #### delimiter
 
-Specify one or more delimiters that Zerops uses to create the searched patterns in combination with environment variable keys. The delimiter marks both the beginning and end of the pattern. If the delimiter is one of special YAML characters (`{`, `}`, `[`, `]`, `&`, `*`, `#`, `?`, `|`, `-`, `<`, `>`, `=`, `!`, `%`, `@`, `:`, `,`), remember to quote it.
+Specify one or more delimiters that Zerops uses to create the searched patterns in combination with environment variable keys. The delimiter marks both the beginning and the end of the pattern. If the delimiter is one of the following special YAML characters (`{`, `}`, `[`, `]`, `&`, `*`, `#`, `?`, `|`, `-`, `<`, `>`, `=`, `!`, `%`, `@`, `:`, `,`), remember to quote it.
 
 #### Examples of different replacement settings
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Using quotes
-You must enclose the pattern in quotes if the directory path or the file name contains a space.
+You must enclose the pattern in quotation marks if the directory path or the file name contains a space.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -267,8 +267,8 @@ envReplace:
 
 ### `start` (required only for Node.js or Golang services)
 
-A command that should start your service. This command will be executed in each container after finishing all `init` commands. This is only related to the [Node.js](/documentation/services/runtimes/nodejs.html) and [Golang](/documentation/services/runtimes/golang.html) service.
+A command to start your service. This command will be executed in each container after finishing all `init` commands. This is only related to the [Node.js](/documentation/services/runtimes/nodejs.html) and [Golang](/documentation/services/runtimes/golang.html) service.
 
 ### `documentRoot` (required only for PHP/Apache service)
 
-The value represents a folder name used as the root of the publicly accessible web server content, usually the location of your `index.php`. This is related only to the [PHP/Apache](/documentation/services/runtimes/php.html) service.
+The value represents the folder name used as the root of the publicly accessible web server content, usually the location of your `index.php`. This is related only to the [PHP/Apache](/documentation/services/runtimes/php.html) service.
