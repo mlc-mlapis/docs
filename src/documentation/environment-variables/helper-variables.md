@@ -129,20 +129,6 @@ Database admin password (changing it won't affect the value in database settings
 
 🔒 Content of the server configuration located in most cases at `/etc/nginx/sites-available` used to define how the request should be handled by the php runtime.
 
-## MongoDB
-
-* `port`
-
-🔒 Port on which the database server runs.
-
-* `hostname`
-
-🔒 Service hostname.
-
-* `connectionString`
-
-🔒 Connection string.
-
 ## KeyDB (Redis)
 
 * `port`

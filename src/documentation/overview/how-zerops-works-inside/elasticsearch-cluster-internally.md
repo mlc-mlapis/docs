@@ -19,7 +19,7 @@ The purpose of replication is both to ensure high availability and to improve se
 Regarding the possible [ES versions](/documentation/services/search-engines/elasticsearch.html#version-to-choose) when creating a new service, Elasticsearch **v7** is configured by default in a variant with **one shard and two replicas** and **v6** with **five shards and two replicas**.
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Changing the number of shards
+::: tip Changing the number of shards
 You can change the default setting by explicitly specifying the **number_of_shards** option while creating a new index.
 :::
 ::: warning Changing the number of replicas

@@ -21,7 +21,7 @@ You can currently choose **v10.4** or **v10.3**. The chosen version of the datab
 Used as the export & import types: ==`mariadb@10.4`== or ==`mariadb@10.3`== .
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Changing version
+::: tip Changing version
 Switching must be done manually by creating a new service with another version and migrating data using a [backup / restore](#how-to-backup-restore-database-data) pattern.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -108,7 +108,7 @@ If you change your password inside the MariaDB database directly, the change is 
 <!-- markdownlint-enable DOCSMD004 -->
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Default Zerops maintenance user
+::: tip Default Zerops maintenance user
 For system maintenance reasons, the `zps` user is also automatically created with all privileges. It's important not to change it in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -130,7 +130,7 @@ First, connect to your Zerops project using [zcli](/documentation/cli/installati
 ![Querious](./images/Querious-Connect.png "Querious Connect Dialog")
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Connection security settings
+::: tip Connection security settings
 As you are using a secure VPN channel already, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For this reason, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -168,7 +168,7 @@ mysql -h [hostname] -u [user] -p[password] [database] < [filename].dump
 ```
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Available aliases in the command-line client
+::: tip Available aliases in the command-line client
 Starting with MariaDB 10.4.6, `mariadb` is a [symlink](https://mariadb.com/kb/en/mariadb-command-line-client) to `mysql`. The same is true for `mariadb-dump` as a [symlink](https://mariadb.com/kb/en/mariadb-dump) to `mysqldump`.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -199,7 +199,7 @@ services:
 After that you can use **Adminer** either using [Zerops VPN](/documentation/cli/vpn.html) built into the [zcli](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://adminer`) or enable Zerops [subdomain access](/documentation/routing/zerops-subdomain.html).
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Explanation of the phpMyAdmin security warning
+::: tip Explanation of the phpMyAdmin security warning
 Zerops Routing Service (see the schema of a Zerops project with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access)) takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP for all project services. This is why **phpMyAdmin** can see the difference between using HTTPS protocol on a client-side and HTTP protocol on a server-side. **From a Zerops point of view, it's not a security risk**. It's the only positive falsy notification from the phpMyAdmin side (not supporting the `HTTP_X_FORWARDED_PROTO` HTTP header that says it has happened).
 :::
 <!-- markdownlint-enable DOCSMD004 -->

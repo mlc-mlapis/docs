@@ -38,7 +38,7 @@ Using the following function, ==`getCredentials`== , you can get an object which
 Assuming that the code is associated with access to the Zerops Object Storage Service, the [object storage name](/documentation/services/storage/s3.html#object-storage-name) of which was chosen as the ==**`store`**== . The necessary [Storage access details](/documentation/services/storage/s3.html#from-local-environment) values **Access Key Id** and **Secret Access Key** are then taken from the [environment variables](/documentation/environment-variables/how-to-access.html).
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info
+::: tip
 The unique generated id of the created Zerops Object Storage Service instance is used as the value of the **accessKeyId** environment variable. The value of **secretAccessKey** is a 16-character-long random string.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -236,7 +236,7 @@ if storeCredentials != nil {
 ```
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info New bucket URL created
+::: tip New bucket URL created
 As the S3 path-style addressing model is used, the bucket's effective URL is:
 
 ```url
@@ -298,7 +298,7 @@ if storeCredentials != nil {
 ```
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Grants setting for Default buckets
+::: tip Grants setting for Default buckets
 As mentioned in the documentation [Object storage owner identity](/documentation/services/storage/s3.html#object-storage-owner-identity), there is only the one grantee, equal to the owner, with the same name as the chosen [Object storage name](#object-storage-name) (for example, ==`store`== ).
 
 ```json
@@ -318,7 +318,7 @@ As mentioned in the documentation [Object storage owner identity](/documentation
 <!-- markdownlint-enable DOCSMD004 -->
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Default bucket's @metadata headers
+::: tip Default bucket's @metadata headers
 It's also worth listing the default setting of a bucket's headers related to the HTTPS public read/write access (authenticated access is not currently available through RESTful interface):
 
 ```json
@@ -405,7 +405,7 @@ Setting the ACL as ==`public-read`== adds another `Grantee` to the bucket's `Gra
 ```
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Public read access to a bucket
+::: tip Public read access to a bucket
 Setting the ACL to ==`public-read`== means that the URL `https://s3.app.zerops.io/records` will be accessible with read access to anyone.
 :::
 <!-- markdownlint-enable DOCSMD004 -->

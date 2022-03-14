@@ -3,7 +3,7 @@
 If you are used to using **phpMyAdmin** for the administration of MariaDB (MySQL) databases, you will probably be interested in how to install it within the Zerops [PHP service](/documentation/services/runtimes/php.html) to administrate the Zerops [MariaDB (MySQL) service](/documentation/services/databases/mariadb.html).
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info When only using the Windows platform
+::: tip When only using the Windows platform
 if you can't get a native Linux or Mac platform, or if you're not familiar with them, you will probably welcome using standard installation of the Windows Subsystem for Linux (WSL2) according to the official procedure on [Microsoft website](https://docs.microsoft.com/windows/wsl/install-win10). You will also need to install [Node.js](https://docs.microsoft.com/windows/dev-environment/javascript/nodejs-on-wsl) on WSL2. **The reason for using WSL2 comes from issues related to unwanted file permission changes when doing this natively on the Windows platform.**
 :::
 <!-- markdownlint-enable DOCSMD004 -->

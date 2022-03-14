@@ -148,7 +148,7 @@ First, connect to your Zerops project using [zcli](/documentation/cli/installati
 ![RedisInsight](./images/Login-Page-Redis-Insight.png "RedisInsight Connect Dialog")
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Connection security settings
+::: tip Connection security settings
 As you are already using a secure VPN channel, and the database service is located on the internal Zerops project private secured network, you don't need to apply any additional security layers such as SSH or SSL/TLS. For this reason, the database service is not configured to support access using SSL/TLS or SSH protocols for internal communication inside a Zerops project. Find out more about how the Zerops project works with [external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access).
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -166,7 +166,7 @@ Again, first access your Zerops project using [zcli](/documentation/cli/installa
 The [redis-rdb-cli](https://github.com/leonchen83/redis-rdb-cli) advanced tool, based on Java (JDK 1.8+ requirement), is multi-platform, including the Windows operating system. It is a tool that can parse, filter, split, merge rdb and analyze memory usage offline. It can also sync two KeyDB (Redis) datasets and allow users to define their own sink service to **migrate data between different database instances, either local or remote**.
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Select the appropriate logical database
+::: tip Select the appropriate logical database
 Each KeyDB instance supports 16 logical databases. These databases are effectively siloed off from one another. When you run a command in one database, it doesn’t affect any data stored in other databases in your KeyDB instance. The databases are numbered from 0 to 15, and by default, you connect to database 0 when you connect to your KeyDB instance.
 :::
 <!-- markdownlint-enable DOCSMD004 -->

@@ -3,7 +3,7 @@
 Zerops provides a fully managed and scaled **shared storage** service (replicated volume) based on the [GlusterFS](https://docs.gluster.org) cluster technology, suitable for both development and production projects using any load. You can choose any option you wish in the knowledge that it will work.
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info When and why using Zerops Shared or Object Storage
+::: tip When and why using Zerops Shared or Object Storage
 If you are not sure what storage type to choose, take a look at [the best practices](/knowledge-base/best-practices/when-and-why-use-shared-or-object-storage.html) to help with your decision.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -28,7 +28,7 @@ Choose a short and descriptive URL-friendly name, for example, **disk**. The fol
 * the shared storage name **==can't be changed==** later.
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Relation between shared storage names and hostnames
+::: tip Relation between shared storage names and hostnames
 There's only one namespace for all service hostnames, shared storage names, and object storage names. Each one of them has to be unique.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -44,7 +44,7 @@ The mounting is done automatically by **enabling** the corresponding switch for 
 The figure above shows that the path to the root of a mounted shared storage disk in the PHP service is ==`/mnt/app`== . If you also enable the switch for **api** (Node.js service), the path will be ==`/mnt/api`== . Here, your application code can create any directory structure and content you need. Access rights are slightly different for each runtime environment. See the details for [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage), Node.js, or Golang.
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info 
+::: tip 
 If you would like to learn more about the technical details and how this service is built internally, take a look at the [Shared Storage Service, Internal](/documentation/overview/how-zerops-works-inside/glusterfs-cluster-internally.html) section of the documentation.
 :::
 <!-- markdownlint-enable DOCSMD004 -->

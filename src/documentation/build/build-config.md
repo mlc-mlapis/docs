@@ -131,7 +131,7 @@ cache: [node_modules]
 Determines directories and files produced by your build, which should be deployed to your runtime service container. **The path starts from the root directory of your project** (the location of `zerops.yml`).
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Using a tilda character to strip a path directory
+::: tip Using a tilda character to strip a path directory
 Standard behavior is to copy the directories and files with exactly the same path as they are placed in the build container. If you want to strip the path from the left side, use the tilda (**~**) character. You can strip the entire directory path or only its part from the left.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -220,7 +220,7 @@ Specify which commands to run after a launch or each restart of a runtime contai
 
 This allows you to replace marked places in static files of deployed runtime applications (Node.js, Golang, PHP) with environment variable values. Those marked places are combinations of defined delimiters and environment variable keys and represent the searched patterns that should be replaced.
 
-Zerops will execute the pattern search and replace when creating, starting, and restarting runtime containers. If a user wants to change the rules for replacing environment variables, a new deployment with an updated `zerops.yml` is needed. If a user only changes the value of an environment variable or makes any other change in the variable list, restarting the service is sufficient for the changes to take effect.
+Zerops will execute the pattern search and replace when starting and restarting runtime containers. If a user wants to change the rules for replacing environment variables, a new deployment with an updated `zerops.yml` is needed. If a user only changes the value of an environment variable or makes any other change in the variable list, restarting the service is sufficient for the changes to take effect.
 
 #### target
 

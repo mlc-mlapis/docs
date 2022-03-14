@@ -44,7 +44,7 @@ You can currently choose Node.js version **v14.17**, **v12.13**, or **v10.17**. 
 Used as the export & import types: ==`nodejs@14`== , ==`nodejs@13`== , and ==`nodejs@10`== .
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Changing versions
+::: tip Changing versions
 Switching must be done manually by creating a new service with another version and migrating service code using a new [deploy](/documentation/deploy/how-deploy-works.html) or [build & deploy](/documentation/build/how-zerops-build-works.html) process.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -215,7 +215,7 @@ When you configure and run a web server (for example, [Express](https://www.npmj
 What's important in such cases is choosing **facility number 17** ( ==`local1`== ) as the configuration option. This is because the dedicated switch ==**`Show web server logs`**== in the **Runtime log** view that allows you to show web access & error logs separately from standard application logs. It's important, especially from an access log point of view, because there could be thousands and thousands of records.
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Console methods
+::: tip Console methods
 
 * Console methods do not support log severity levels, despite methods like console.warn(), console.error(), and console.debug(), respectively. These are simply functions that print to the standard output or standard error without indicating log severity.
 
