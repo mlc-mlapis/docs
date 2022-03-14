@@ -13,7 +13,7 @@ The figure also supposes that the chosen [shared storage name](/documentation/se
 An independent **scaling controller** monitors and controls [vertical scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (vCPU, RAM, Disk) for all brick containers. To ensure optimal performance, the cluster is configured and run with 3 brick instances, and [horizontal scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) (number of containers) doesn't play a role in this case. An independent **repair controller** is then responsible for removing any containers that exhibit abnormal behavior and subsequently replacing them with new ones.
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: info Used ports
+::: tip Used ports
 The TCP/UDP ports 24007-24008 are required for Gluster daemon communication and management, and each brick requires another TCP port starting at 49152. Here, 3 bricks are used, which means the 49152-49154 range.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
