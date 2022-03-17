@@ -17,7 +17,7 @@
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "1.9.7",
     "@vuepress/plugin-medium-zoom": "1.9.7",
-    "vuepress": "1.9.6",
+    "vuepress": "1.9.7",
     "vuepress-plugin-element-tabs": "0.2.8",
     "vuepress-plugin-md-enhance": "1.26.0",
     "vuepress-plugin-zooming": "1.1.8"
