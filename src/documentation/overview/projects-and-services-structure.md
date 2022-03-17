@@ -19,11 +19,11 @@ Any communication between the various Zerops projects at service level is in pri
 The screenshot below shows an example of a project, our own website. The project is called **zerops-web-prod**, and it consists of 2 runtimes (Node.js and Golang), a static web server (Nginx), a database (PostgreSQL), and an S3 object storage services. It is made accessible to the public through our domain (`zerops.io`).
 
 <!-- markdownlint-disable DOCSMD004 -->
-:::: tabs
-::: tab Zerops Web Project in GUI
+:::: code-group
+::: code-group-item Zerops Web Project in GUI
 ![Zerops Web Project](./images/Zerops-Web-Production.png "Zerops Web Project in GUI")
 :::
-::: tab Schema of Zerops Web Project
+::: code-group-item Schema of Zerops Web Project
 ![Zerops Web Project](./images/Zerops-Web-Production-Schema.png "Schema of Zerops Web Project")
 :::
 ::::
