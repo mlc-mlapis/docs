@@ -10,7 +10,7 @@ The Zerops Elasticsearch service is based on a [Linux LXD container](/documentat
 
 ### Two ways to do it
 
-There are two possible ways to create a new Nginx service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+There are two possible ways to create a new Elasticsearch service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
 #### A simple import example in the YAML syntax
 
@@ -31,7 +31,7 @@ A complete specification of the [import/export syntax in the YAML format](/docum
 
 ### Which version to choose
 
-You can currently choose **v7.12** or **v6.8**. The chosen version of the database **can't be changed afterwards**.
+You can currently choose version **v7.12** or **v6.8**. The chosen version of the database **can't be changed afterwards**.
 
 Used as the export & import types: ==`elasticsearch@7`== or ==`elasticsearch@6`== .
 

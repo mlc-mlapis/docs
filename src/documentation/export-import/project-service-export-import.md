@@ -33,16 +33,13 @@ project:
   - DEMO
   - ZEROPS
 services:
-- hostname: sharedstorage
-  type: shared-storage@1
-  mode: NON_HA
 - hostname: db
   type: mariadb@10.4
-  priority: 1
+  priority: 2
   mode: HA
 - hostname: app
   type: nodejs@14
-  priority: 2
+  priority: 1
   mode: HA
   ports:
   - port: 3000
@@ -55,6 +52,9 @@ services:
     content: M3rW31Ne%T@bRk
   - key: CONNECTION_STRING
     content: ${db_connectionString}
+- hostname: sharedstorage
+  type: shared-storage@1
+  mode: NON_HA
 ```
 
 ### project
@@ -101,16 +101,18 @@ A service type and its chosen version. Each of the following service documentati
 
 #### priority
 
-`priority`: integer [>= 0] (optional)
+`priority`: integer [>= 1] (optional)
 
 This allows you to control precisely the order in which the services will be created when the import YML definition is processed. There are situations, for example, when a database service (as MariaDB or PostgreSQL) has to already be running before a new application build phase of a runtime (Node.js, Golang, PHP) is started. The following rules are applied:
 
-* services without the explicit `priority` option are grouped and created first,
-* services with the explicit `priority` option are ordered in an ascending manner,
+* services without the explicit `priority` option are grouped (`priority: 0`) and created last,
+* services with the explicit `priority` option are ordered in an descending manner,
 * `priority` values may not be unique and do not have to represent a continuous numerical series,
-* higher priority services will not be created until all lower priority ones are available.
+* lower priority services will not be created until all higher priority ones are available.
 
 If more of the same `priority` values exist (including none priorities), the creation of all services within the same priority group is invoked at the exact moment, and the final availability of these services is not explicitly controlled (depends on the service type and other parameters).
+
+![Zerops import priorities](./images/Timeline_Servics_Priorities.png "Zerops import priorities")
 
 #### mode
 
