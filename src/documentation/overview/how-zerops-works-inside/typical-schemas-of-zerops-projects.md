@@ -8,11 +8,11 @@ This means no access from outside of the Zerops project infrastructure, such as 
 
 The essential components are two running instances of a **project balancer** (one in an active state and the other in a standby backup state) through which all communication passes.
 
-:::: code-group
-::: code-group-item Schema of Zerops Project
+:::: tabs
+::: tab Schema of Zerops Project
 ![Without external access](./images/Zerops-Project-Base-NoAccess.png "Project without external access")
 :::
-::: code-group-item Detail of Project Core Service
+::: tab Detail of Project Core Service
 
 Technically, the project balancer is a Layer 3 balancer (establishing connections only on the transport layer, i.e., TCP, UDP). An independent **scaling controller** monitors and controls [vertical scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (vCPU, RAM, Disk) for both project balancer containers. An independent **repair controller** is then responsible for removing any container that exhibits abnormal behavior and subsequently replacing them with a new one.
 
@@ -32,21 +32,20 @@ As mentioned earlier, the optional [firewall](/documentation/routing/access-thro
 
 In addition, as a general principle, you can use activated Zerops [subdomains](/documentation/routing/zerops-subdomain.html) (`*.app.zerops.io`) or [your public domains](/documentation/routing/using-your-domain.html) if you have pointed their DNS A or AAAA records to those assigned IPv4 or IPv6 addresses on HTTP (80) or HTTPS (443) ports. **Zerops Routing Service** is started with defining the first of these public routing rules. This service, among other things, also takes care of SSL certificate management and internal translation of HTTPS protocol to HTTP.
 
-:::: code-group
-::: code-group-item Schema of Zerops Project
+:::: tabs
+::: tab Schema of Zerops Project
 ![With external access](./images/Zerops-Project-Base-Internet.png "Project with external access")
 :::
-::: code-group-item Detail of Project Core Service
+::: tab Detail of Project Core Service
 
 The functionality is principally the same as in the case of Project Core Service without external access. The only additional part is an optional firewall.
 
 ![With external access](./images/Zerops-Project-Core-Detail-Internet.png "Project with external access")
 :::
-::: code-group-item Detail of Routing Service
+::: tab Detail of Routing Service
 
 Technically, the **http balancers** (both in an active state) are Layer 7 balancers (handling all HTTP/S traffic for your project from outside environments). Again, a **scaling controller** manages [vertical scaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (vCPU, RAM, Disk) for both http balancer containers and a **repair controller** is responsible for fixing any abnormal behavior.
 
 ![With external access](./images/Zerops-Project-Routing-Detail-Internet.png "Project with external access")
 :::
 ::::
-
