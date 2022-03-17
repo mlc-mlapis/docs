@@ -33,7 +33,7 @@ A complete specification of the [import/export syntax in the YAML format](/docum
 
 ### Which version to choose
 
-You can currently choose KeyDB version **v6** (version 6.0.16 to be precise).
+You can currently only choose version **v6** (version 6.0.16 to be precise).
 
 Used as the export & import type: ==`redis@6`== .
 

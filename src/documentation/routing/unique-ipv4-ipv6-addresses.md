@@ -8,7 +8,7 @@ Another alternative is using **a free** [shared IPv4 address](/documentation/rou
 
 If you need to access your development/stage/preview projects, you should use the [Zerops sub-domains']() free functionality.
 
-\
+
 ![IP Addresses](/ip-address.png "IP Addresses")
 
 ![IP open](/ip-open.png "IP open")
