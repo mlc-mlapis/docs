@@ -4,7 +4,7 @@ stage:
     base: [ nodejs@14 ]
     # which commands to run to build
     build:
-      - ls node_modules
+      - ls -l
       - rm -rf node_modules
       - npm i
       - npm i -g vuepress
