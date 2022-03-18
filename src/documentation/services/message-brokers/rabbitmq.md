@@ -18,7 +18,7 @@ Zerops uses a YAML definition format to describe the structure. To import a serv
 
 ```yaml
 services:
-  # Service will be accessible through zcli VPN under: http://mq
+  # Service will be accessible through zcli VPN under <protocol>://mq:<port>
   - hostname: mq
     # Type and version of service used.
     type: rabbitmq@3.7
@@ -59,3 +59,4 @@ All services inside a Zerops project share a [dedicated private network](/docume
 The RabbitMQ service is configured to **allow access** only from the project internal network environment, including access to the web management portal. In practice, this means that this service can only be accessed either programmatically through the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), and [PHP](/documentation/services/runtimes/php.html#hostname-and-port), which should implement their authentication logic not to allow anonymous access to the RabbitMQ service) or using [zcli](/documentation/cli/installation-authorization.html) and [vpn](/documentation/cli/vpn.html) from your local environment, nothing else.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
+

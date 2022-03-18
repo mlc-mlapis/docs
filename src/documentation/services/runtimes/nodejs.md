@@ -18,7 +18,7 @@ Zerops uses a YAML definition format to describe the structure. To import a serv
 
 ```yaml
 services:
-# Service will be accessible through zcli VPN under: http://app
+# Service will be accessible through zcli VPN under <protocol>://app:<port>
 - hostname: app
   # Type and version of service used.
   type: nodejs@14

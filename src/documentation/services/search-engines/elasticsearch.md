@@ -18,7 +18,7 @@ Zerops uses a YAML definition format to describe the structure. To import a serv
 
 ```yaml
 services:
-  # Service will be accessible through zcli VPN under: http://es
+  # Service will be accessible through zcli VPN under <protocol>://es:<port>
   - hostname: es
     # Type and version of service used.
     type: elasticsearch@7
