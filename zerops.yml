@@ -4,8 +4,6 @@ stage:
     base: [ nodejs@14 ]
     # which commands to run to build
     build:
-      - ls -l
-      - rm -rf node_modules
       - npm cache clean --force
       - npm i
       - npm i -g vuepress
@@ -18,6 +16,7 @@ prod:
     base: [ nodejs@14 ]
     # which commands to run to build
     build:
+      - npm cache clean --force
       - npm i
       - npm i -g vuepress
       - vuepress build src
