@@ -18,7 +18,7 @@ Zerops uses a YAML definition format to describe the structure. To import a serv
 
 ```yaml
 services:
-  # Service will be accessible through zcli VPN under: http://mq
+  # Service will be accessible through zcli VPN under <protocol>://mq:<port>
   - hostname: mq
     # Type and version of service used.
     type: rabbitmq@3.7

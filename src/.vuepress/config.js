@@ -228,7 +228,14 @@ module.exports = {
                 'services/search-engines/elasticsearch'
               ]
             },
-            'services/message-brokers',
+            {
+              "type": "group",
+              "title": "Message brokers",
+              "collapsable": false,
+              "children": [
+                'services/message-brokers/rabbitmq'
+              ]
+            },
             {
               "type": "group",
               "title": "Storage",
