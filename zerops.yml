@@ -6,6 +6,7 @@ stage:
     build:
       - ls -l
       - rm -rf node_modules
+      - npm cache clean --force
       - npm i
       - npm i -g vuepress
       - vuepress build src
