@@ -74,3 +74,27 @@ phpapp:
 ```
 
 See the full [zerops.yml](/documentation/build/build-config.html) documentation.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Problems with Node.js dependency modules
+Sometimes strange errors can happen when Node.js applications are built, and it looks that they are related to the dependency tree in the `node_modules` directory. Before trying to explain what it could be and spending your time on it, add this command into the `build` section: `npm cache clean --force` as you can see below:
+
+```yaml
+nodejsapp:
+  build:
+    # What technology should be used as a base one for creating a build container.
+    base: [nodejs@14]
+    # Which commands should be run to build the application.
+    build:
+      - npm cache clean --force
+      - npm i
+      - npm run build:production
+    # Which files and directories should be copied from a build container into a runtime container.
+    deploy: [dist, node_modules, package.json]
+  run:
+    # A command that should start your service.
+    start: npm start
+```
+
+:::
+<!-- markdownlint-enable DOCSMD004 -->
