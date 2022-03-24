@@ -24,7 +24,7 @@ The build process has access to all of the project service [environment variable
 # Service hostname to which the application will be deployed.
 nodejsapp:
   build:
-    # What technology should be used as a base one for creating a build container.
+    # Which technology should be used as a base one for creating a build container.
     base: [nodejs@14]
     # Which commands should be run to build the application.
     build:
