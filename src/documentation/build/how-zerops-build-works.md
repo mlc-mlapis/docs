@@ -24,7 +24,7 @@ The build process has access to all of the project service [environment variable
 # Service hostname to which the application will be deployed.
 nodejsapp:
   build:
-    # What technology should be used as a base one for creating a build container.
+    # Which technology should be used as a base one for creating a build container.
     base: [nodejs@14]
     # Which commands should be run to build the application.
     build:
@@ -77,12 +77,12 @@ See the full [zerops.yml](/documentation/build/build-config.html) documentation.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Problems with Node.js dependency modules
-Sometimes strange errors can happen when Node.js applications are built, and it looks that they are related to the dependency tree in the `node_modules` directory. Before trying to explain what it could be and spending your time on it, add this command into the `build` section: `npm cache clean --force` as you can see below:
+Sometimes strange errors can happen when Node.js applications are built, and it looks as if they are related to the dependency tree in the `node_modules` directory. Before trying to investigate what it could be and spending time on it, add this command into the `build` section: `npm cache clean --force` as shown below:
 
 ```yaml
 nodejsapp:
   build:
-    # What technology should be used as a base one for creating a build container.
+    # Which technology should be used as a base one for creating a build container.
     base: [nodejs@14]
     # Which commands should be run to build the application.
     build:
