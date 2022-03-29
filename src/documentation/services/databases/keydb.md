@@ -23,7 +23,7 @@ services:
   # Service will be accessible through zcli VPN under <protocol>://db:<port>
   - hostname: db
     # Type and version of service used.
-    type: redis@6
+    type: keydb@6
     # Whether the service will be run on one or multiple containers.
     # Since this is a simple example, using only one container is fine.
     mode: NON_HA
@@ -33,9 +33,9 @@ A complete specification of the [import/export syntax in the YAML format](/docum
 
 ### Which version to choose
 
-You can currently only choose version **v6** (version 6.0.16 to be precise).
+You can currently only choose version **v6** (version 6.2.2 to be precise).
 
-Used as the export & import type: ==`redis@6`== .
+Used as the export & import type: ==`keydb@6`== .
 
 ### Hostname and ports
 

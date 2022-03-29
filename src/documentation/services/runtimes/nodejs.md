@@ -39,9 +39,9 @@ You can also read the complete specification of the [import/export syntax in the
 
 ### Which version to choose
 
-You can currently choose Node.js version **v14.17**, **v12.13**, or **v10.17**. The chosen version **can't be changed afterwards**.
+You can currently choose Node.js version **v16** (version v16.14.0 to be precise), **v14** (version 14.19.0 to be precise), or **v12** (version 12.22.10 to be precise). The chosen version **can't be changed afterwards**.
 
-Used as the export & import types: ==`nodejs@14`== , ==`nodejs@13`== , and ==`nodejs@10`== .
+Used as the export & import types: ==`nodejs@16`== , ==`nodejs@14`== , or ==`nodejs@12`== .
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Changing versions

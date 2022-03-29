@@ -16,9 +16,9 @@ The Zerops MariaDB service is based on a [Linux LXD container](/documentation/ov
 
 ### Which version to choose
 
-You can currently choose **v10.4** or **v10.3**. The chosen version of the database **can't be changed afterwards**.
+You can currently only choose MariaDB version **v10.4** (version 10.4.24 to be precise).
 
-Used as the export & import types: ==`mariadb@10.4`== or ==`mariadb@10.3`== .
+Used as the export & import type: ==`mariadb@10.4`== .
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Changing version

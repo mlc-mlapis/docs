@@ -1,6 +1,6 @@
 # Export & import of Zerops projects and services structure
 
-Zerops export and import functionality can be used to make a copy of an existing project/service or as an alternative to adding a new project/service manually through the Zerops GUI. It is important to note that only structure, configuration, and environment variables are exported/imported. Restoring application data related to databases ([MariaDB](/documentation/services/databases/mariadb.html#how-to-backup-restore-database-data), [PostgreSQL](/documentation/services/databases/postgresql.html#how-to-backup-restore-database-data), [KeyDB](/documentation/services/databases/keydb.html#how-to-backup-restore-database-data)), storage ([Object Storage](/documentation/services/storage/s3.html#using-rclone-as-a-local-management-tool), Shared Storage), and engines (Elasticsearch, RabbitMQ), deploying applications, and setting up [public routing](/documentation/routing/using-your-domain.html) is up to the specific user.
+Zerops export and import functionality can be used to make a copy of an existing project/service or as an alternative to adding a new project/service manually through the Zerops GUI. It is important to note that only structure, configuration, and environment variables are exported/imported. Restoring application data related to databases ([PostgreSQL](/documentation/services/databases/postgresql.html#how-to-backup-restore-database-data), [MariaDB](/documentation/services/databases/mariadb.html#how-to-backup-restore-database-data), [KeyDB](/documentation/services/databases/keydb.html#how-to-backup-restore-database-data)), storage ([Object Storage](/documentation/services/storage/s3.html#using-rclone-as-a-local-management-tool), Shared Storage), and engines ([RabbitMQ](/documentation/services/message-brokers/rabbitmq.html#how-to-backup-restore-queues-data)), deploying applications, and setting up [public routing](/documentation/routing/using-your-domain.html) is up to the specific user.
 
 [[TOC]]
 
@@ -53,7 +53,7 @@ services:
   - key: CONNECTION_STRING
     content: ${db_connectionString}
 - hostname: sharedstorage
-  type: shared-storage@1
+  type: shared-storage
   mode: NON_HA
 ```
 
@@ -91,13 +91,13 @@ A sequence of project services (1~N). Several general items are shared across al
 
 `hostname`: string
 
-A chosen short and descriptive, URL-friendly unique service name. Related to [MariaDB](/documentation/services/databases/mariadb.html#hostname-and-port), [KeyDB](/documentation/services/databases/keydb.html#hostname-and-port), [Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), [PHP](/documentation/services/runtimes/php.html#hostname-and-port), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#object-storage-name), and [Shared Storage](/documentation/services/storage/shared.html#shared-storage-name).
+A chosen short and descriptive, URL-friendly unique service name. Related to [PostgreSQL](/documentation/services/databases/postgresql.html#hostname-and-port), [MariaDB](/documentation/services/databases/mariadb.html#hostname-and-port), [KeyDB](/documentation/services/databases/keydb.html#hostname-and-port), [Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), [PHP](/documentation/services/runtimes/php.html#hostname-and-port), [RabbitMQ](/documentation/services/message-brokers/rabbitmq.html#hostname-and-port), [Object Storage](/documentation/services/storage/s3.html#object-storage-name), and [Shared Storage](/documentation/services/storage/shared.html#shared-storage-name).
 
 #### type
 
 `type`: dictionary
 
-A service type and its chosen version. Each of the following service documentation specifies the options available: [MariaDB](/documentation/services/databases/mariadb.html#version-to-choose), [KeyDB](/documentation/services/databases/keydb.html#version-to-choose), [Node.js](/documentation/services/runtimes/nodejs.html#version-to-choose), [Golang](/documentation/services/runtimes/golang.html#version-to-choose), [PHP](/documentation/services/runtimes/php.html#version-to-choose), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#version-to-choose), and [Shared Storage](/documentation/services/storage/shared.html#version-to-choose).
+A service type and its chosen version. Each of the following service documentation specifies the options available: [PostgreSQL](/documentation/services/databases/postgresql.html#which-version-to-choose), [MariaDB](/documentation/services/databases/mariadb.html#which-version-to-choose), [KeyDB](/documentation/services/databases/keydb.html#which-version-to-choose), [Node.js](/documentation/services/runtimes/nodejs.html#which-version-to-choose), [Golang](/documentation/services/runtimes/golang.html#which-version-to-choose), [PHP](/documentation/services/runtimes/php.html#which-version-to-choose), [RabbitMQ](/documentation/services/message-brokers/rabbitmq.html#which-version-to-choose), [Object Storage](/documentation/services/storage/s3.html#which-version-to-choose), and [Shared Storage](/documentation/services/storage/shared.html#which-version-to-choose).
 
 #### priority
 
@@ -118,7 +118,7 @@ If more of the same `priority` values exist (including none priorities), the cre
 
 `mode`: dictionary
 
-Affects whether a service should be run in ==**`HA`**== (High Availability) mode, using 3 or more containers, or ==**`NON_HA`**== mode, using only 1 container. Related to [MariaDB](/documentation/services/databases/mariadb.html#ha-non-ha-database-mode), [KeyDB](/documentation/services/databases/keydb.html#ha-non-ha-database-mode), [Node.js](/documentation/services/runtimes/nodejs.html#ha-non-ha-runtime-environment-mode), [Golang](/documentation/services/runtimes/golang.html#ha-non-ha-runtime-environment-mode)), [PHP](/documentation/services/runtimes/php.html#ha-non-ha-runtime-environment-mode), Elasticsearch, RabbitMQ, [Object Storage](/documentation/services/storage/s3.html#used-technology) (**always runs in HA mode**), and [Shared Storage](/documentation/services/storage/shared.html#default-hardware-configuration-and-autoscaling).
+Affects whether a service should be run in ==**`HA`**== (High Availability) mode, using 3 or more containers, or ==**`NON_HA`**== mode, using only 1 container. Related to [PostgreSQL](/documentation/services/databases/postgresql.html#ha-non-ha-database-mode), [MariaDB](/documentation/services/databases/mariadb.html#ha-non-ha-database-mode), [KeyDB](/documentation/services/databases/keydb.html#ha-non-ha-database-mode), [Node.js](/documentation/services/runtimes/nodejs.html#ha-non-ha-runtime-environment-mode), [Golang](/documentation/services/runtimes/golang.html#ha-non-ha-runtime-environment-mode), [PHP](/documentation/services/runtimes/php.html#ha-non-ha-runtime-environment-mode), [RabbitMQ](/documentation/services/message-brokers/rabbitmq.html#ha-non-ha-mode), [Object Storage](/documentation/services/storage/s3.html#used-technology) (**always runs in HA mode**), and [Shared Storage](/documentation/services/storage/shared.html#default-hardware-configuration-and-autoscaling) (**always runs in HA mode**).
 
 #### ports
 

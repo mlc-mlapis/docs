@@ -21,7 +21,7 @@ services:
   # Service will be accessible through zcli VPN under <protocol>://mq:<port>
   - hostname: mq
     # Type and version of service used.
-    type: rabbitmq@3.7
+    type: rabbitmq@3
     # Whether the service will be run on one or multiple containers.
     # Since this is a simple example, using only one container is fine.
     mode: NON_HA
@@ -31,9 +31,9 @@ A complete specification of the [import/export syntax in the YAML format](/docum
 
 ### Which version to choose
 
-You can currently only choose version **v3.7** (version 3.8.14 to be precise).
+You can currently only choose version **v3** (version 3.9.13 to be precise).
 
-Used as the export & import types: ==`rabbitmq@3.7`== .
+Used as the export & import types: ==`rabbitmq@3`== .
 
 ### Hostname and port
 
@@ -60,7 +60,7 @@ The RabbitMQ service is configured to **allow access** only from the project int
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-### HA / non-HA database mode
+### HA / non-HA mode
 
 When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, using 3 containers, or **non-HA mode**, using only 1 container. ==**The chosen database mode can't be changed later.**== If you would like to learn more about the technical details and how this service is built internally, take a look at the [RabbitMQ Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/rabbitmq-cluster-internally.html).
 
