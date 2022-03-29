@@ -14,9 +14,9 @@ If you are not sure what storage type to choose, take a look at [the best practi
 
 ### Which version to choose
 
-You can currently only choose version **v1.0**. The chosen version **can't be changed afterwards**.
+The service is completely a managed technology from the Zerops side, and it's not directly related to any publicly distributed version number. Therefore, you do not have to select any specific version.
 
-Used as the export & import type: ==`shared-storage@1`== .
+Used as the export & import type: ==`shared-storage`== .
 
 ### Shared storage name
 

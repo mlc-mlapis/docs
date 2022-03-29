@@ -31,7 +31,7 @@ A complete specification of the [import/export syntax in the YAML format](/docum
 
 ### Which version to choose
 
-You can currently choose PostgreSQL version **v12** (version 12.7 to be precise).
+You can currently only choose PostgreSQL version **v12** (version 12.10 to be precise).
 
 Used as the export & import type: ==`postgresql@12`== .
 

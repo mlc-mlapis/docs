@@ -40,7 +40,7 @@ You can also read the complete specification of the [import/export syntax in the
 
 ### Which version to choose
 
-You can currently only choose Golang version **v1.16**.
+You can currently only choose Golang version **v1** (version v1.17.8 to be precise).
 
 Used as the export & import type: ==`golang@1`== .
 
