@@ -99,6 +99,22 @@ A chosen short and descriptive, URL-friendly unique service name. Related to [Po
 
 A service type and its chosen version. Each of the following service documentation specifies the options available: [PostgreSQL](/documentation/services/databases/postgresql.html#which-version-to-choose), [MariaDB](/documentation/services/databases/mariadb.html#which-version-to-choose), [KeyDB](/documentation/services/databases/keydb.html#which-version-to-choose), [Node.js](/documentation/services/runtimes/nodejs.html#which-version-to-choose), [Golang](/documentation/services/runtimes/golang.html#which-version-to-choose), [PHP](/documentation/services/runtimes/php.html#which-version-to-choose), [RabbitMQ](/documentation/services/message-brokers/rabbitmq.html#which-version-to-choose), [Object Storage](/documentation/services/storage/s3.html#which-version-to-choose), and [Shared Storage](/documentation/services/storage/shared.html#which-version-to-choose).
 
+Comprehensive table of available types:
+
+|Service        |Types                                         |
+|:--------------|:---------------------------------------------|
+|PostgreSQL     |postgresql@12                                 |
+|MariaDB        |mariadb@10.4                                  |
+|KeyDB          |keydb@6                                       |
+|Node.js        |nodejs@16, nodejs@14, nodejs@12               |
+|Golang         |golang@1                                      |
+|PHP+Apache     |php-apache@8.1, php-apache@8.0, php-apache@7.4|
+|PHP+Nginx      |php-nginx@8.1, php-nginx@8.0, php-nginx@7.4   |
+|Static server  |nginx@1.20                                    |
+|RabbitMQ       |rabbitmq@3                                    |
+|Object storage |object-storage                                |
+|Shared storage |shared-storage                                |
+
 #### priority
 
 `priority`: integer [>= 1] (optional)
@@ -119,6 +135,22 @@ If more of the same `priority` values exist (including none priorities), the cre
 `mode`: dictionary
 
 Affects whether a service should be run in ==**`HA`**== (High Availability) mode, using 3 or more containers, or ==**`NON_HA`**== mode, using only 1 container. Related to [PostgreSQL](/documentation/services/databases/postgresql.html#ha-non-ha-database-mode), [MariaDB](/documentation/services/databases/mariadb.html#ha-non-ha-database-mode), [KeyDB](/documentation/services/databases/keydb.html#ha-non-ha-database-mode), [Node.js](/documentation/services/runtimes/nodejs.html#ha-non-ha-runtime-environment-mode), [Golang](/documentation/services/runtimes/golang.html#ha-non-ha-runtime-environment-mode), [PHP](/documentation/services/runtimes/php.html#ha-non-ha-runtime-environment-mode), [RabbitMQ](/documentation/services/message-brokers/rabbitmq.html#ha-non-ha-mode), [Object Storage](/documentation/services/storage/s3.html#used-technology) (**always runs in HA mode**), and [Shared Storage](/documentation/services/storage/shared.html#default-hardware-configuration-and-autoscaling) (**always runs in HA mode**).
+
+Comprehensive table of available modes:
+
+|Service        |Modes      |
+|:--------------|:----------|
+|PostgreSQL     |NON_HA, HA |
+|MariaDB        |NON_HA, HA |
+|KeyDB          |NON_HA, HA |
+|Node.js        |NON_HA, HA |
+|Golang         |NON_HA, HA |
+|PHP+Apache     |NON_HA, HA |
+|PHP+Nginx      |NON_HA, HA |
+|Static server  |NON_HA, HA |
+|RabbitMQ       |NON_HA, HA |
+|Object storage |HA         |
+|Shared storage |HA         |
 
 #### ports
 

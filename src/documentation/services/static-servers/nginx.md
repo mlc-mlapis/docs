@@ -23,7 +23,7 @@ services:
   # Service will be accessible through zcli VPN under http://web
   - hostname: web
     # Type and version of service used.
-    type: nginx@1.18
+    type: nginx@1.20
     # Whether the service will be run on one or multiple containers.
     # Since this is a simple example, using only one container is fine.
     mode: NON_HA
@@ -50,9 +50,9 @@ A complete specification of the [import/export syntax in the YAML format](/docum
 
 ### Which version to choose
 
-You can currently only choose Nginx version **v1.18**.
+You can currently only choose Nginx version **v1.20** (version 1.20.1 to be precise).
 
-Used as the export & import type: ==`nginx@1.18`== .
+Used as the export & import type: ==`nginx@1.20`== .
 
 ### Hostname and port
 
