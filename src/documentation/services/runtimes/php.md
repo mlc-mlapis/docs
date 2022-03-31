@@ -33,10 +33,9 @@ You can also read the complete specification of the [import/export syntax in the
 
 ### Which version to choose
 
-You can currently choose PHP version **v8.0**, **v7.4**, or **v7.3**. The chosen version **can't be changed afterwards**. The service is always combined with a web server. It can be either **Apache v2.4** or **Nginx v1.18**. The differences and configuration specifics for each web server are listed below.
+You can currently choose PHP version **v8.1** (version v8.1.3 to be precise), **v8.0** (version v8.0.16 to be precise), or **v7.4** (version v7.4.28 to be precise). The chosen version **can't be changed afterwards**. The service is always combined with a web server. It can be either **Apache v2.4** (version 2.4.29 to be precise) or **Nginx v1.20** (version 1.20.1 to be precise). The differences and configuration specifics for each web server are listed below.
 
-Used as the export & import types: ==`php-apache@8.0`== , ==`php-apache@7.4`== , ==`php-apache@7.3`== ,
-==`php-nginx@8.0`== , ==`php-nginx@7.4`== , and ==`php-nginx@7.3`== .
+Used as the export & import types: ==`php-apache@8.1`== , ==`php-apache@8.0`== , ==`php-apache@7.4`== , ==`php-nginx@8.1`== , ==`php-nginx@8.0`== , ==`php-nginx@7.4`== .
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Changing versions
