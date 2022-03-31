@@ -75,7 +75,9 @@ module.exports = {
                 'overview/how-zerops-works-inside/mariadb-galera-cluster-internally',
                 'overview/how-zerops-works-inside/postgresql-patroni-cluster-internally',
                 'overview/how-zerops-works-inside/keydb-ha-internally',
-                'overview/how-zerops-works-inside/elasticsearch-cluster-internally',
+                /**
+                 * 'overview/how-zerops-works-inside/elasticsearch-cluster-internally',
+                 */
                 'overview/how-zerops-works-inside/rabbitmq-cluster-internally',
                 'overview/how-zerops-works-inside/ceph-cluster-internally',
                 'overview/how-zerops-works-inside/glusterfs-cluster-internally'
@@ -221,14 +223,16 @@ module.exports = {
                 'services/databases/keydb'
               ]
             },
-            {
-              "type": "group",
-              "title": "Search engines",
-              "collapsable": false,
-              "children": [
-                'services/search-engines/elasticsearch'
-              ]
-            },
+            /**
+             * {
+             * "type": "group",
+             * "title": "Search engines",
+             * "collapsable": false,
+             * "children": [
+             *   'services/search-engines/elasticsearch'
+             * ]
+             * },
+             */
             {
               "type": "group",
               "title": "Message brokers",

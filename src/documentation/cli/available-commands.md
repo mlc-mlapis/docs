@@ -70,7 +70,7 @@ You must enclose the project name in quotes if it contains a space.
 
 Only one **push** parameter is optional and can be used both as a parameter `--parameterName` or can be put inside your environment variable as `PARAMETERNAME`. A command parameter has priority over an environment variable if both equivalents exist.
 
-#### `--versionName`
+#### `--versionName` for the push command
 
 Will be used to name the resulting [deployed](/documentation/deploy/how-deploy-works.html) application version.
 
@@ -115,6 +115,24 @@ You must enclose the pattern in quotes if the directory path contains a space.
 <!-- markdownlint-enable DOCSMD004 -->
 
 You can see more pattern examples in the `zerops.yml` [deploy property](/documentation/build/build-config.html#examples-of-different-deploy-settings) documentation. Here, you can use the same patterns (without the enclosed array but with a space as a separator).
+
+### Deploy parameters
+
+Only one **deploy** parameter is optional and can be used both as a parameter `--parameterName` or can be put inside your environment variable as `PARAMETERNAME`. A command parameter has priority over an environment variable if both equivalents exist.
+
+#### `--versionName` for the deploy command
+
+Will be used to name the resulting [deployed](/documentation/deploy/how-deploy-works.html) application version.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Using quotes
+You must enclose the version name in quotes if it contains a space.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+```bash
+zcli deploy myproject myservice --versionName=v0.0.1 ./dist/app/~/
+```
 
 ## `vpn start [project name]`
 
