@@ -6,7 +6,7 @@ Zerops provides a fully managed and scaled PostgreSQL database service, suitable
 
 ## Adding the PostgreSQL Service in Zerops
 
-The Zerops PostgreSQL service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
+The Zerops PostgreSQL service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**.
 
 ### Two ways to do it
 

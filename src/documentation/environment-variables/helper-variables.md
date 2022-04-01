@@ -147,7 +147,27 @@ Database admin password (changing it won't affect the value in database settings
 
 * `port`
 
-🔒 Port on which the database server runs.
+🔒 Port on which the message broker server is accessible on the `amqp` protocol.
+
+* `portMqtt`
+
+🔒 Port on which the message broker server is accessible on the `mqtt` protocol.
+
+* `portWsMqtt`
+
+🔒 Port on which the message broker server is accessible on the web socket `mqtt` protocol.
+
+* `portStomp`
+
+🔒 Port on which the message broker server is accessible on the `stomp` protocol.
+
+* `portWsStomp`
+
+🔒 Port on which the message broker server is accessible on the web socket `stomp` protocol.
+
+* `managementPort`
+
+🔒 Port to the web management portal service.
 
 * `hostname`
 
@@ -155,11 +175,23 @@ Database admin password (changing it won't affect the value in database settings
 
 * `connectionString`
 
-🔒 Connection string.
+🔒 Connection string for the `amqp` protocol.
 
-* `managementPort`
+* `connectionStringMqtt`
 
-🔒 Port to the RabbitMQ management service.
+🔒 Connection string for the `mqtt` protocol.
+
+* `connectionStringStomp`
+
+🔒 Connection string for the `stomp` protocol.
+
+* `user`
+
+Message broker admin username (changing it won't affect the value in engine settings, that needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
+
+* `password`
+
+Message broker admin password (changing it won't affect the value in engine settings, that needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
 
 ## Object Storage
 

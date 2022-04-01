@@ -91,7 +91,7 @@ A sequence of project services (1~N). Several general items are shared across al
 
 `hostname`: string
 
-A chosen short and descriptive, URL-friendly unique service name. Related to [PostgreSQL](/documentation/services/databases/postgresql.html#hostname-and-port), [MariaDB](/documentation/services/databases/mariadb.html#hostname-and-port), [KeyDB](/documentation/services/databases/keydb.html#hostname-and-port), [Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), [PHP](/documentation/services/runtimes/php.html#hostname-and-port), [RabbitMQ](/documentation/services/message-brokers/rabbitmq.html#hostname-and-port), [Object Storage](/documentation/services/storage/s3.html#object-storage-name), and [Shared Storage](/documentation/services/storage/shared.html#shared-storage-name).
+A chosen short and descriptive, URL-friendly unique service name. Related to [PostgreSQL](/documentation/services/databases/postgresql.html#hostname-and-ports), [MariaDB](/documentation/services/databases/mariadb.html#hostname-and-port), [KeyDB](/documentation/services/databases/keydb.html#hostname-and-port), [Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), [PHP](/documentation/services/runtimes/php.html#hostname-and-port), [RabbitMQ](/documentation/services/message-brokers/rabbitmq.html#hostname-and-ports), [Object Storage](/documentation/services/storage/s3.html#object-storage-name), and [Shared Storage](/documentation/services/storage/shared.html#shared-storage-name).
 
 #### type
 
