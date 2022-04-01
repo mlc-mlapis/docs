@@ -8,7 +8,7 @@ Zerops provides a fully managed and scaled KeyDB (Redis) key-value database serv
 
 ## Adding the KeyDB Service in Zerops
 
-The Zerops KeyDB service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
+The Zerops KeyDB service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**.
 
 ### Two ways to do it
 

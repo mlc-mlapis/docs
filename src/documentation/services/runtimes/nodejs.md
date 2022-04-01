@@ -6,7 +6,7 @@ Zerops provides a fully managed and scaled Node.js runtime service, suitable for
 
 ## Adding the Node.js Service in Zerops
 
-The Zerops Node.js service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers). It has pre-installed NPM and YARN package managers, allowing you to install any package you want during the build stage, together with the Git version control system.
+The Zerops Node.js service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**. It has pre-installed NPM and YARN package managers, allowing you to install any package you want during the build stage, together with the Git version control system.
 
 ### Two ways to do it
 

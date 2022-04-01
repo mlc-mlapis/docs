@@ -8,7 +8,7 @@ This service is usually used as a web server for serving static files (index.htm
 
 ## Adding the Nginx Service in Zerops
 
-The Zerops Nginx service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers). It has the Git version control system pre-installed.
+The Zerops Nginx service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**. It has the Git version control system pre-installed.
 
 ### Two ways to do it
 

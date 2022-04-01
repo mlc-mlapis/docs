@@ -6,7 +6,7 @@ Zerops provides a fully managed and scaled PHP runtime service, suitable for bot
 
 ## Adding the PHP Service in Zerops
 
-The Zerops PHP service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers). It has the [Composer dependency manager](#pre-installed-php-composer), a lot of popular [PHP modules and extensions](#pre-installed-php-modules-and-extensions), together with the Git version control system pre-installed.
+The Zerops PHP service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**. It has the [Composer dependency manager](#pre-installed-php-composer), a lot of popular [PHP modules and extensions](#pre-installed-php-modules-and-extensions), together with the Git version control system pre-installed.
 
 ### Two ways to do it
 
