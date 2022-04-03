@@ -12,7 +12,7 @@ Internally, Zerops creates a new temporal build container inside your project th
 
 The same [zerops.yml](/documentation/build/build-config.html) file is also used to define the steps that Zerops has to invoke to [run](/documentation/build/build-config.html#run-part-and-its-properties) the application runtime after a successful deployment.
 
-A new build can be triggered by using the Zerops [zcli](/documentation/cli/installation-authorization.html) or connecting a Zerops service to a [GitHub](/documentation/github/github-integration.html) / [GitLab](/documentation/gitlab/gitlab-integration.html) repository.
+A new build can be triggered by using the Zerops [zCLI](/documentation/cli/installation-authorization.html) or connecting a Zerops service to a [GitHub](/documentation/github/github-integration.html) / [GitLab](/documentation/gitlab/gitlab-integration.html) repository.
 
 The build process has access to all of the project service [environment variables](/documentation/environment-variables/how-to-access.html) so that you can utilize them.
 

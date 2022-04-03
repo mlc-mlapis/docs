@@ -1,6 +1,6 @@
 # Preparing and deploying a simple Nginx web
 
-Here is a basic example of how to create a Nginx static web server (with only a trivial `index.html` as its content) and deploy it to Zerops without any source repository to demonstrate the basic principles of using the Zerops [zcli](/documentation/cli/installation.html).
+Here is a basic example of how to create a Nginx static web server (with only a trivial `index.html` as its content) and deploy it to Zerops without any source repository to demonstrate the basic principles of using the Zerops [zCLI](/documentation/cli/installation.html).
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip When using only the Windows platform
@@ -46,7 +46,7 @@ The following step-by-step instructions can help you through the process with ea
 
 11. Check the permissions of the file `index.html` with the command ==`ls -l`== . It should be `-rw-r--r--` (allowing only read access except for the owner). If not, change the file permissions using the command ==`chmod 644 index.html`== .
 
-12. Deploy the web kit prepared in this way to the Zerops [Nginx service](/documentation/services/static-servers/nginx.html) using the [Zerops zcli](/documentation/cli/installation.html) via the [deploy command](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) ==`zcli deploy "<project name>" <service hostname> "."`== (after using the [login command](/documentation/cli/available-commands.html#login)). This command creates a zipped file from the [current directory content](/documentation/build/build-config.html#deploy-everything) first and then deploys it to Zerops via an HTTPS protocol (without triggering a build pipeline).
+12. Deploy the web kit prepared in this way to the Zerops [Nginx service](/documentation/services/static-servers/nginx.html) using the [Zerops zCLI](/documentation/cli/installation.html) via the [deploy command](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) ==`zcli deploy "<project name>" <service hostname> "."`== (after using the [login command](/documentation/cli/available-commands.html#login)). This command creates a zipped file from the [current directory content](/documentation/build/build-config.html#deploy-everything) first and then deploys it to Zerops via an HTTPS protocol (without triggering a build pipeline).
 
 13. You should see the following output when the deployment process is working:
 

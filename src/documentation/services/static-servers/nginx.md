@@ -20,7 +20,7 @@ Zerops uses a YAML definition format to describe the structure. To import a serv
 
 ```yaml
 services:
-  # Service will be accessible through zcli VPN under http://web
+  # Service will be accessible through zCLI VPN under http://web
   - hostname: web
     # Type and version of service used.
     type: nginx@1.20
@@ -132,7 +132,7 @@ Conceptually, you can either use Zerops deploy functionality to upload applicati
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-There are **two ways** you can physically deliver application code to the service. Either via a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or by using the Zerops **zcli** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
+There are **two ways** you can physically deliver application code to the service. Either via a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or by using the Zerops **zCLI** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
 
 When a Zerops service has been connected to a GitHub or GitLab repository, you can select the checkbox `Build immediately after the service creation` to run the first build immediately after the service creation. Otherwise, you have to make a **new commit/tag** to invoke that first [build & deploy](http://localhost:8081/documentation/build/how-zerops-build-works.html) pipeline task.
 
@@ -144,8 +144,8 @@ When the build process has been successfully finished, you can download the enti
 ![Build Artifact](./images/Download-Build-Artefact-Nginx-App-Version.png "Download build artifact")
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: tip A simple project and how to deploy the code using the Zerops zcli
-You can look at this elementary project a step-by-step description. Take a look at how you can create and deploy it with the Zerops [zcli](/documentation/cli/installation.html). It's assumed that you have already created your project in Zerops GUI and an empty Nginx service (not connected to any repository).  You can use a [service import](#simple-import-example-in-the-yaml-syntax) functionality for it.
+::: tip A simple project and how to deploy the code using the Zerops zCLI
+You can look at this elementary project a step-by-step description. Take a look at how you can create and deploy it with the Zerops [zCLI](/documentation/cli/installation.html). It's assumed that you have already created your project in Zerops GUI and an empty Nginx service (not connected to any repository).  You can use a [service import](#simple-import-example-in-the-yaml-syntax) functionality for it.
 
 * [Preparing and deploying a simple Nginx web](/knowledge-base/how-to-do/how-to-prepare-simple-nginx-web.html)
 :::
@@ -163,13 +163,13 @@ The **`zeropsSharedStorageMounts`** environment variable allows you to get the l
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Security protocols for internal communication
-The static Nginx service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+The static Nginx service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zCLI](/documentation/cli/installation.html) through a secure VPN channel.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ### From other services inside the project
 
-Other services can access the Nginx static server using its **hostname** and **port**, as they are part of the same private project network (for example, `http://web`, where the port `:80` is implicit).
+Other services can access the Nginx static server using its **hostname** and **port** environment variables, as they are part of the same private project network (for example, `http://web`, where the port `:80` is implicit).
 
 ### From other Zerops projects
 
@@ -177,9 +177,9 @@ Zerops always sets up a [private dedicated network](/documentation/overview/proj
 
 ### From your local environment
 
-The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
+The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
 
-You can access the Zerops Nginx Service from your local workspace by using the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as mentioned above. This might come in handy if you, for example, use the service as a REST API and you don’t want it publicly available (via [public domains](/documentation/routing/using-your-domain.html) or Zerops [subdomains](/documentation/routing/zerops-subdomain.html)), so you connect to the project using **zcli VPN** and use ==`web:80`== as your API endpoint.
+You can access the Zerops Nginx Service from your local workspace by using the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), as mentioned above. This might come in handy if you, for example, use the service as a REST API and you don’t want it publicly available (via [public domains](/documentation/routing/using-your-domain.html) or Zerops [subdomains](/documentation/routing/zerops-subdomain.html)), so you connect to the project using **zCLI VPN** and use ==`web:80`== as your API endpoint.
 
 You can also run an application fully in your local workspace and access other services in the Zerops project using the VPN. However, you cannot use references to the environment variables because you are outside of the project's network. Therefore, you should copy the values manually if you need some of them and use them in your private local configuration strategy.
 

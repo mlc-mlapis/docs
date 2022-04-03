@@ -10,7 +10,7 @@ To be able to fully utilize Zerops, each developer should have their own account
 
 ### Empower you local development
 
-Using our [zcli](/documentation/cli/installation-authorization.html#installation), you can connect securely to your project using a built in [VPN](/documentation/cli/vpn.html). This means you can connect locally to a database running on Zerops, so you don't need to have it running locally. Each developer can have their own copy of the project. This can also be used to securely import data to a database - any service running inside the project will instantaneously become available securely on your computer.
+Using our [zCLI](/documentation/cli/installation-authorization.html#installation), you can connect securely to your project using a built in [VPN](/documentation/cli/vpn.html). This means you can connect locally to a database running on Zerops, so you don't need to have it running locally. Each developer can have their own copy of the project. This can also be used to securely import data to a database - any service running inside the project will instantaneously become available securely on your computer.
 
 ### Always open to new ideas
 

@@ -1,9 +1,9 @@
 # Installation
 
-Zerops **zcli** is an open-sourced command-line client based on Node.js that is hosted on GitHub ([github.com/zeropsio/zcli](https://github.com/zeropsio/zcli)), built and published to package managers through a [GitHub Action](https://github.com/zeropsio/zcli/actions?query=workflow%3A%22Upload+build+asset%22). Currently, the **zcli** is supported on **Linux** (x86 & x64 architecture), **macOS**, and **Windows** (x64 architecture only).
+Zerops **zCLI** is an open-sourced command-line client based on Node.js that is hosted on GitHub ([github.com/zeropsio/zcli](https://github.com/zeropsio/zcli)), built and published to package managers through a [GitHub Action](https://github.com/zeropsio/zcli/actions?query=workflow%3A%22Upload+build+asset%22). Currently, the **zCLI** is supported on **Linux** (x86 & x64 architecture), **macOS**, and **Windows** (x64 architecture only).
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: tip Built-in VPN functionality is not available in zcli on Windows
+::: tip Built-in VPN functionality is not available in zCLI on Windows
  The implementation of a WireGuard based VPN built-in protocol is not yet ready. All data transfer between the local client environment and **Zerops** is encrypted using the secured HTTPS protocol.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
@@ -12,7 +12,7 @@ Zerops **zcli** is an open-sourced command-line client based on Node.js that is 
 
 ### Using npm
 
-The Zerops **zcli** command-line client can be installed using **npm**
+The Zerops **zCLI** command-line client can be installed using **npm**
 
 ```bash
 npm i -g @zerops/zcli
@@ -22,7 +22,7 @@ and it will be available under the ==`zcli`== command.
 
 ### Static binary
 
-Alternatively, the **zcli** binary can be downloaded from [GitHub releases](https://github.com/zeropsio/zcli/releases). You have to select the appropriate version corresponding to the system you want to run it on.
+Alternatively, the **zCLI** binary can be downloaded from [GitHub releases](https://github.com/zeropsio/zcli/releases). You have to select the appropriate version corresponding to the system you want to run it on.
 
 #### macOS x64
 

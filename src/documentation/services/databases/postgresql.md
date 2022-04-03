@@ -18,7 +18,7 @@ Zerops uses a YAML definition format to describe the structure. To import a serv
 
 ```yaml
 services:
-  # Service will be accessible through zcli VPN under <protocol>://db:<port>
+  # Service will be accessible through zCLI VPN under <protocol>://db:<port>
   - hostname: db
     # Type and version of service used.
     type: postgresql@12
@@ -85,13 +85,13 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Don't use additional security protocols for internal communication
-The database service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+The database service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zCLI](/documentation/cli/installation.html) through a secure VPN channel.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ### From other services inside the project
 
-Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended that you utilize the **==connectionString==** environment variable that Zerops creates automatically for the database in non-HA mode. See also the explanation of environment variables specifics for HA mode below. More information related to **connectionString** can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#postgresql) for the PostgreSQL service.
+Other services can access the database using its **hostname** and **port** environment variables, as they are part of the same private project network. It’s highly recommended that you utilize the **==connectionString==** environment variable that Zerops creates automatically for the database in non-HA mode. See also the explanation of environment variables specifics for HA mode below. More information related to **connectionString** can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#postgresql) for the PostgreSQL service.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Environment variables specifics for HA mode
@@ -109,9 +109,9 @@ Zerops always sets up a [private dedicated network](/documentation/overview/proj
 
 ### From your local environment
 
-The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
+The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
 
-To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as previously mentioned. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need some of them you should copy the values manually through the **How To Access** / **Database access details** section of the service detail in your application and use them in your private local configuration strategy.
+To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), as previously mentioned. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need some of them you should copy the values manually through the **How To Access** / **Database access details** section of the service detail in your application and use them in your private local configuration strategy.
 
 The following picture shows how it looks in non-HA mode.
 
@@ -164,7 +164,7 @@ A new database with the name based on the selected **hostname** is created durin
 
 Install any of your favorite database administration tools locally. For example, you can use [DataGrip](https://www.jetbrains.com/datagrip), [DbVisualizer](https://www.dbvis.com), [DBeaver](https://dbeaver.io), or [pgAdmin](https://www.pgadmin.org). They are all multi-platform database administration tools.
 
-First, connect to your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then you can use ==`db:5432`== as the endpoint. After that, connect to the database service from your installed database management tool, as in the example below with **pgAdmin**:
+First, connect to your Zerops project using [zCLI](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then you can use ==`db:5432`== as the endpoint. After that, connect to the database service from your installed database management tool, as in the example below with **pgAdmin**:
 
 ![pgAdmin](./images/Login-Page-pgAdmin.png "pgAdmin Connect Dialog")
 
@@ -180,7 +180,7 @@ Now you can easily use the built-in backup/restore functions to save/load databa
 
 ### Using libpg CLI
 
-Again, first access your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `libpg` PostgreSQL CLI client needs to already be installed locally. It comes with each local installation of a [PostgreSQL server](https://www.postgresql.org/download) or a [pgAdmin client](https://www.pgadmin.org).
+Again, first access your Zerops project using [zCLI](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `libpg` PostgreSQL CLI client needs to already be installed locally. It comes with each local installation of a [PostgreSQL server](https://www.postgresql.org/download) or a [pgAdmin client](https://www.pgadmin.org).
 
 On the Windows platform you can selectively install just the **Command Line Tools** if you wish.
 
@@ -247,7 +247,7 @@ You can use the Zerops [import functionality](/documentation/export-import/proje
 ```yaml
 # Import syntax for creating a phpPgAdmin instance.
 services:
-  # Service will be accessible through zcli VPN under: http://phppgadmin
+  # Service will be accessible through zCLI VPN under: http://phppgadmin
 - hostname: phppgadmin
   # Type and version of service used.
   type: php-apache@7.4
@@ -267,7 +267,7 @@ services:
     content: db
 ```
 
-After that you can either use **phpPgAdmin** either using [Zerops VPN](/documentation/cli/vpn.html) built into the [zcli](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://phppgadmin`) or enable Zerops [subdomain access](/documentation/routing/zerops-subdomain.html).
+After that you can either use **phpPgAdmin** either using [Zerops VPN](/documentation/cli/vpn.html) built into the [zCLI](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://phppgadmin`) or enable Zerops [subdomain access](/documentation/routing/zerops-subdomain.html).
 
 ![phpPgAdmin](./images/Login-Page-phpPgAdmin.png "Login-Page-phpPgAdmin.png Login")
 

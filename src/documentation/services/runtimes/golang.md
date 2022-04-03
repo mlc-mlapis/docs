@@ -18,7 +18,7 @@ Zerops uses a YAML definition format to describe the structure. To import a serv
 
 ```yaml
 services:
-# Service will be accessible through zcli VPN under <protocol>://app:<port>
+# Service will be accessible through zCLI VPN under <protocol>://app:<port>
 - hostname: app
   # Type and version of service used.
   type: golang@1
@@ -101,7 +101,7 @@ Conceptually, you can either use Zerops deploy functionality to upload applicati
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-There are **two ways** you can physically deliver application code to the service. Either via a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or by using the Zerops **zcli** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
+There are **two ways** you can physically deliver application code to the service. Either via a direct connection to a [GitHub](/documentation/github/github-integration.html) or [GitLab](/documentation/gitlab/gitlab-integration.html) repository or by using the Zerops **zCLI** [push](/documentation/cli/available-commands.html#push-project-name-service-name) or [deploy](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories) commands.
 
 When a Zerops service has been connected to a GitHub or GitLab repository, you can select the checkbox `Build immediately after the service creation` to run the first build immediately after the service creation. Otherwise, you have to make a **new commit/tag** to invoke that first [build & deploy](http://localhost:8081/documentation/build/how-zerops-build-works.html) pipeline task.
 
@@ -134,13 +134,13 @@ If it would be beneficial, you can also use the Elasticsearch [REST API](https:/
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Don't use additional security protocols for internal communication
-The runtime environment service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+The runtime environment service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zCLI](/documentation/cli/installation.html) through a secure VPN channel.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ### From other services inside the project
 
-Other services can access the Golang application using its **hostname** and **port**, as they are part of the same private project network (for example, `http://app:8080`).
+Other services can access the Golang application using its **hostname** and **port** environment variables, as they are part of the same private project network (for example, `http://app:8080`).
 
 It's always recommended to not set the configuration values as constants directly into the application code. It is preferable to use them indirectly, for example, via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), referencing Zerops [implicit environment variables](/documentation/environment-variables/helper-variables.htm) and given that [all environment variables](/documentation/environment-variables/how-to-access.html) are shared within the project across all services.
 
@@ -150,9 +150,9 @@ Zerops always sets up a [private dedicated network](/documentation/overview/proj
 
 ### From your local environment
 
-The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
+The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
 
-You can access the Zerops Golang Service from your local workspace by using the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as mentioned above. This might come in handy if you, for example, use the service as a REST API and you don’t want it publicly available (via [public domains](/documentation/routing/using-your-domain.html) or Zerops [subdomains](/documentation/routing/zerops-subdomain.html)), so you connect to the project using **zcli VPN** and use ==`app:8080`== as your API endpoint.
+You can access the Zerops Golang Service from your local workspace by using the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), as mentioned above. This might come in handy if you, for example, use the service as a REST API and you don’t want it publicly available (via [public domains](/documentation/routing/using-your-domain.html) or Zerops [subdomains](/documentation/routing/zerops-subdomain.html)), so you connect to the project using **zCLI VPN** and use ==`app:8080`== as your API endpoint.
 
 You can also run an application fully in your local workspace and access other services in the Zerops project using the VPN. However, you cannot use references to the environment variables because you are outside the project's network. Therefore, you should copy the values manually if you need some of them and use them in your private local configuration strategy.
 

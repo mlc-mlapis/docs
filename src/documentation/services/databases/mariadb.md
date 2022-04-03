@@ -77,21 +77,21 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Don't use additional security protocols for internal communication
-The database service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+The database service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zCLI](/documentation/cli/installation.html) through a secure VPN channel.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ### From other services inside the project
 
-Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using the HA mode, as it makes sure to include all the information required for HA. Find out more in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also the list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#mariadb) for the MariaDB service.
+Other services can access the database using its **hostname** and **port** environment variables, as they are part of the same private project network. It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each database, especially when using the HA mode, as it makes sure to include all the information required for HA. Find out more in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section, related to **connectionString**. See also the list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#mariadb) for the MariaDB service.
 
 For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#mariadb)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplicity and increased flexibility. Another reason not to hard-code the values inside your applications is that it can be dangerous because it is easy to commit them (like your credentials) into a repository, potentially exposing them to more people than intended.
 
 ### From the local environment
 
-The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
+The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
 
-To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as previously mentioned. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need to use them, you should copy the values manually through the **How To Access** / **Database access details** section of the service detail in your application and use them in your private local configuration strategy.
+To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), as previously mentioned. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need to use them, you should copy the values manually through the **How To Access** / **Database access details** section of the service detail in your application and use them in your private local configuration strategy.
 
 ![MariaDB Service](./images/MariaDB-Database-Access-Details.png "Database Access Details")
 
@@ -125,7 +125,7 @@ For system maintenance reasons, the `zps` user is also automatically created wit
 
 Install any of your favorite database administration tools locally. For example, you can use [DataGrip](https://www.jetbrains.com/datagrip), [DbVisualizer](https://www.dbvis.com), [MySQL Workbench](https://dev.mysql.com/downloads/workbench) multi-platform database administration tools, or [Sequel Pro](https://www.sequelpro.com), [Querious](https://www.araelium.com/querious), specifically on the Mac platform. You can find the list with many others on the [Graphical and Enhanced Clients](https://mariadb.com/kb/en/graphical-and-enhanced-clients) page.
 
-First, connect to your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then you can use ==`db:3306`== as the endpoint. After that, connect to the database service from your installed database management tool, as in the example below with the **Querious**:
+First, connect to your Zerops project using [zCLI](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then you can use ==`db:3306`== as the endpoint. After that, connect to the database service from your installed database management tool, as in the example below with the **Querious**:
 
 ![Querious](./images/Querious-Connect.png "Querious Connect Dialog")
 
@@ -141,7 +141,7 @@ Now you can easily use the export/import built-in functions to backup/restore da
 
 ### Using mariadb/mysql CLI
 
-Again, first access your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `mariadb`/`mysql` CLI client need to be already installed locally. It comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version). The client CLI is a part of [MySQL Workbench](https://dev.mysql.com/downloads/workbench) as well.
+Again, first access your Zerops project using [zCLI](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `mariadb`/`mysql` CLI client need to be already installed locally. It comes with each local installation of a MariaDB server either on the [Mac platform with Homebrew](https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew) or [Linux](https://mariadb.com/downloads). You can also use a multi-platform [MySQL Shell](https://dev.mysql.com/downloads/shell), `mysql-client` on [Mac](https://formulae.brew.sh/formula/mysql-client), or `mysql-client` / `mysql` on Linux (where concrete steps depend on each distribution version). The client CLI is a part of [MySQL Workbench](https://dev.mysql.com/downloads/workbench) as well.
 
 #### Logical database backup
 
@@ -183,7 +183,7 @@ You can also use the Zerops [import functionality](/documentation/export-import/
 
 ```yaml
 services:
-  # Service will be accessible through zcli VPN under: http://adminer
+  # Service will be accessible through zCLI VPN under: http://adminer
 - hostname: adminer
   # Type and version of service used.
   type: php-apache@8.0
@@ -196,7 +196,7 @@ services:
   buildFromGit: https://github.com/zeropsio/recipe-adminer@main
 ```
 
-After that you can use **Adminer** either using [Zerops VPN](/documentation/cli/vpn.html) built into the [zcli](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://adminer`) or enable Zerops [subdomain access](/documentation/routing/zerops-subdomain.html).
+After that you can use **Adminer** either using [Zerops VPN](/documentation/cli/vpn.html) built into the [zCLI](/documentation/cli/installation.html) through URL `http://<hostname>:<port>` (here, it means: `http://adminer`) or enable Zerops [subdomain access](/documentation/routing/zerops-subdomain.html).
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Explanation of the phpMyAdmin security warning
