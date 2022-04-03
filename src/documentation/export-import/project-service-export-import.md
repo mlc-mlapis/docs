@@ -285,7 +285,7 @@ Related only to [Node.js](/documentation/services/runtimes/nodejs.html#how-to-de
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Secure access from the external Internet
-Before allowing access to a service from the external Internet, it's important to be aware of potential security risks if this service **doesn't have an authentication mechanism implemented** to prevent accidental anonymous user access. Remember that it's possible to use the Zerops [zcli VPN](/documentation/cli/vpn.html) and access a service like this securely through the URL `http://<hostname>:<port>` inside your Zerops project network without allowing external access at all.
+Before allowing access to a service from the external Internet, it's important to be aware of potential security risks if this service **doesn't have an authentication mechanism implemented** to prevent accidental anonymous user access. Remember that it's possible to use the Zerops [zCLI VPN](/documentation/cli/vpn.html) and access a service like this securely through the URL `http://<hostname>:<port>` inside your Zerops project network without allowing external access at all.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 

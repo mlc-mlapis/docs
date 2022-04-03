@@ -2,7 +2,7 @@
 
 The following figure shows a simplified schema of a standalone shared [Zerops S3 compatible Object Storage Service](/documentation/services/storage/s3.html) based on the [Ceph cluster](https://docs.ceph.com/en/latest/architecture) technology. At the heart of the Ceph storage cluster is the **CRUSH** algorithm. It calculates which **Storage node** needs to be contacted to retrieve or store data.
 
-The Zerops Object Storage Service is directly accessible from everywhere using its public [API URL endpoint](/documentation/services/storage/s3.html#api-url-endpoint-and-port) through an HTTPS protocol in the same way. So in this unique case you don't need to utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), unlike all other Zerops services.
+The Zerops Object Storage Service is directly accessible from everywhere using its public [API URL endpoint](/documentation/services/storage/s3.html#api-url-endpoint-and-port) through an HTTPS protocol in the same way. So in this unique case you don't need to utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), unlike all other Zerops services.
 
 Data that are stored in a cluster are put into **pools**. Pools are logical representations of the cluster to the outside world. For each pool, a set of rules can be defined, for example, how **many replicas** of each object must exist. **The usual number is three or more replicas.**
 

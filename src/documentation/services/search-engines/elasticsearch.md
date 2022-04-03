@@ -18,7 +18,7 @@ Zerops uses a YAML definition format to describe the structure. To import a serv
 
 ```yaml
 services:
-  # Service will be accessible through zcli VPN under <protocol>://es:<port>
+  # Service will be accessible through zCLI VPN under <protocol>://es:<port>
   - hostname: es
     # Type and version of service used.
     type: elasticsearch@7
@@ -56,7 +56,7 @@ The port will automatically be set to the value of **==9200==** and can't be cha
 ::: warning Security inside a private project network
 All services inside a Zerops project share a [dedicated private network](/documentation/routing/routing-between-project-services.html) and can see and reference [environment variables](/documentation/environment-variables/how-to-access.html) from other services. This means that, by default, nothing outside the project can access any of the services inside.
 
-The Elasticsearch service is configured to **allow full and unrestricted access without user authentication** only from the project internal network environment. In practice, this means that this service can only be accessed either programmatically through the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), and [PHP](/documentation/services/runtimes/php.html#hostname-and-port), which should implement their authentication logic not to allow anonymous access to the Elasticsearch service) or using [zcli](/documentation/cli/installation-authorization.html) and [vpn](/documentation/cli/vpn.html) from your local environment, nothing else.
+The Elasticsearch service is configured to **allow full and unrestricted access without user authentication** only from the project internal network environment. In practice, this means that this service can only be accessed either programmatically through the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), and [PHP](/documentation/services/runtimes/php.html#hostname-and-port), which should implement their authentication logic not to allow anonymous access to the Elasticsearch service) or using [zCLI](/documentation/cli/installation-authorization.html) and [vpn](/documentation/cli/vpn.html) from your local environment, nothing else.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -91,13 +91,13 @@ Even when using non-HA mode for a production project, we recommend you implement
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Don't use additional security protocols for internal communication
-The Elasticsearch service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+The Elasticsearch service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zCLI](/documentation/cli/installation.html) through a secure VPN channel.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ### From other services inside the project
 
-Other services can access the database using its **hostname** and **port**, as they are part of the same private project network (for example, `http://es:9200`). It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each service, especially when using HA mode, as it makes sure to include all the information required for HA. More information related to **connectionString** can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#elasticsearch) for the Elasticsearch service.
+Other services can access the database using its **hostname** and **port** environment variables, as they are part of the same private project network (for example, `http://es:9200`). It’s highly recommended to utilize the **==connectionString==** environment variable that Zerops creates automatically for each service, especially when using HA mode, as it makes sure to include all the information required for HA. More information related to **connectionString** can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#elasticsearch) for the Elasticsearch service.
 
 For more flexibility surrounding future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#mariadb)) separately in each project service. This allows you to eliminate all direct dependencies in the application code, which in turn results in simplification and increased flexibility. Another reason not to hard-code the values inside your applications is that there is a danger of easily committing them (like your credentials) into a repository, potentially exposing them to more people than intended.
 
@@ -107,9 +107,9 @@ Zerops always sets up a [private dedicated network](/documentation/overview/proj
 
 ### From your local environment
 
-The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
+The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
 
-To connect to the Elasticsearch from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as mentioned above. This allows you to access the search engine the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need them, you should copy the values manually through the **How To Access** / **Search engine access details** section of the service detail in your application and use them in your private local configuration strategy.
+To connect to the Elasticsearch from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), as mentioned above. This allows you to access the search engine the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need them, you should copy the values manually through the **How To Access** / **Search engine access details** section of the service detail in your application and use them in your private local configuration strategy.
 
 ![Elasticsearch Service](./images/Elasticsearch-Access-Details.png "Search Engine Access Details")
 
@@ -132,7 +132,7 @@ Zerops uses [Elasticsearch snapshots](https://www.elastic.co/guide/en/elasticsea
 
 Install any of your favorite data management tools locally. For example, you can use [Spectre ES GUI](https://spectregui.com/elasticsearch-gui.html), a standalone installable tool on Windows, Linux, and Mac platforms. There is also a browser extension-only solution, like [Elasticvue](https://elasticvue.com), a free and open-source Elasticsearch GUI for Firefox, Chrome, Edge browsers. You can try others from the list on the [Best Elasticsearch GUI Clients](https://www.slant.co/topics/11537/~elasticsearch-gui-clients) page.
 
-First, connect to your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then use ==`http://es:9200`== as the endpoint ([without authentication](#hostname-and-port) on the project private network). After that, connect to the Elasticsearch service from the data management tool, as in the example below which shows **Spectre ES**:
+First, connect to your Zerops project using [zCLI](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then use ==`http://es:9200`== as the endpoint ([without authentication](#hostname-and-port) on the project private network). After that, connect to the Elasticsearch service from the data management tool, as in the example below which shows **Spectre ES**:
 
 ![Spectre ES](./images/Spectre-ES-Login.png "Spectre ES Connect Dialog")
 

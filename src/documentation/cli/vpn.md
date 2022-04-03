@@ -5,7 +5,7 @@ The [zcli](/documentation/cli/installation-authorization.html) command-line clie
 [**WireGuard**](https://www.wireguard.com) needs to be installed for **zcli vpn** to work. The installation guide for each system can be found on the [WireGuard website](https://www.wireguard.com/install/). **VPN works as a secure alternative to SSH tunnels.**
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: tip Built-in VPN functionality is not available in zcli on Windows
+::: tip Built-in VPN functionality is not available in zCLI on Windows
  The implementation of a WireGuard based VPN built-in protocol is not ready yet. All data transfer between a local client environment and **Zerops** is encrypted using the secured HTTPS protocol.
 :::
 <!-- markdownlint-enable DOCSMD004 -->

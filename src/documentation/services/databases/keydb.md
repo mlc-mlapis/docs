@@ -20,7 +20,7 @@ Zerops uses a YAML definition format to describe the structure. To import a serv
 
 ```yaml
 services:
-  # Service will be accessible through zcli VPN under <protocol>://db:<port>
+  # Service will be accessible through zCLI VPN under <protocol>://db:<port>
   - hostname: db
     # Type and version of service used.
     type: keydb@6
@@ -52,7 +52,7 @@ The port will automatically be set to the value of **==6379==** and can't be cha
 ::: warning Security inside a private project network
 All services inside a Zerops project share a [dedicated private network](/documentation/routing/routing-between-project-services.html) and can see and reference [environment variables](/documentation/environment-variables/how-to-access.html) from other services. This means that, by default, nothing outside the project can access any of the services inside.
 
-The KeyDB service is configured to **allow full and unrestricted access without user authentication** only from the project internal network environment. In practice, this means that this service can only be accessed either programmatically through the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), and [PHP](/documentation/services/runtimes/php.html#hostname-and-port), which should implement their authentication logic not to allow anonymous access to the KeyDB service) or using [zcli](/documentation/cli/installation-authorization.html) and [vpn](/documentation/cli/vpn.html) from your local environment, nothing else.
+The KeyDB service is configured to **allow full and unrestricted access without user authentication** only from the project internal network environment. In practice, this means that this service can only be accessed either programmatically through the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), and [PHP](/documentation/services/runtimes/php.html#hostname-and-port), which should implement their authentication logic not to allow anonymous access to the KeyDB service) or using [zCLI](/documentation/cli/installation-authorization.html) and [vpn](/documentation/cli/vpn.html) from your local environment, nothing else.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
@@ -80,13 +80,13 @@ When creating a new service, you can choose whether the database should be run i
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Don't use additional security protocols for internal communication
-The database service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zcli](/documentation/cli/installation.html) through a secure VPN channel.
+The database service is not configured to support direct access using SSL/TLS or SSH protocols for internal communication inside a Zerops project private secured network. This is also the case for access using the Zerops [zCLI](/documentation/cli/installation.html) through a secure VPN channel.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ### From other services inside the project
 
-Other services can access the database using its **hostname** and **port**, as they are part of the same private project network. It’s highly recommended that you utilize the **==connectionString==** environment variable that Zerops creates automatically. More information related to **connectionString** can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#keydb-redis) for the KeyDB service.
+Other services can access the database using its **hostname** and **port** environment variables, as they are part of the same private project network. It’s highly recommended that you utilize the **==connectionString==** environment variable that Zerops creates automatically. More information related to **connectionString** can be found in the dedicated [environment variables](/documentation/environment-variables/how-to-access.html) section. See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#keydb-redis) for the KeyDB service.
 
 For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#postgresql)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility. Another reason not to hard-code the values inside your applications is that it can be dangerous because it is easy to commit them (like your credentials) into a repository, potentially exposing them to more people than intended.
 
@@ -96,9 +96,9 @@ Zerops always sets up a [private dedicated network](/documentation/overview/proj
 
 ### From your local environment
 
-The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zcli VPN.
+The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
 
-To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zcli](/documentation/cli/installation.html), as previously mentioned. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need some of them you should copy the values manually through the **How To Access** / **Database access details** section of the service detail in your application and use them in your private local configuration strategy.
+To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), as previously mentioned. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need some of them you should copy the values manually through the **How To Access** / **Database access details** section of the service detail in your application and use them in your private local configuration strategy.
 
 ![KeyDB Service](./images/KeyDB-Database-Access-Details.png "Database Access Details")
 
@@ -141,7 +141,7 @@ However, if KeyDB stops working without a correct shutdown for any reason, you s
 
 Install any of your favorite database administration tools locally. KeyDB is compatible with all Redis [clients and tools](https://redis.io/clients). For example, you can use [RedisInsight](https://redis.com/redis-enterprise/redis-insight) or [RESP.app](https://resp.app) multi-platform GUI tools, [Red](https://echodot.com/red) GUI tool on the Mac platform, [phpRedisAdmin](https://github.com/ErikDubbelboer/phpRedisAdmin) web interface or many others.
 
-First, connect to your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then you can use ==`db:6379`== as the endpoint. After that, connect to the database service from your installed database management tool, as in the example below with **RedisInsight**:
+First, connect to your Zerops project using [zCLI](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html) and then you can use ==`db:6379`== as the endpoint. After that, connect to the database service from your installed database management tool, as in the example below with **RedisInsight**:
 
 ![RedisInsight](./images/Add-Database-Redis-Insight.png "RedisInsight Add Database")
 
@@ -159,7 +159,7 @@ Now you can easily use the built-in export/restore RDB functions to save/load da
 
 ### Using KeyDB CLI
 
-Again, first access your Zerops project using [zcli](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `keydb-cli` KeyDB CLI client needs to already be installed locally. It comes with each local installation of a [KeyDB server](https://keydb.dev/downloads). There is the [Homebrew formula](https://formulae.brew.sh/formula/keydb) `brew install keydb` for the Mac platform. It's also possible to install the [keydb-tools](https://docs.keydb.dev/docs/ppa-deb#installation) (Debian, Ubuntu) that contains the `keydb-cli` binaries only (or equivalently `redis-tools`).
+Again, first access your Zerops project using [zCLI](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html). The `keydb-cli` KeyDB CLI client needs to already be installed locally. It comes with each local installation of a [KeyDB server](https://keydb.dev/downloads). There is the [Homebrew formula](https://formulae.brew.sh/formula/keydb) `brew install keydb` for the Mac platform. It's also possible to install the [keydb-tools](https://docs.keydb.dev/docs/ppa-deb#installation) (Debian, Ubuntu) that contains the `keydb-cli` binaries only (or equivalently `redis-tools`).
 
 #### Alternative Redis CLI
 
