@@ -91,12 +91,6 @@ When creating a new service, you can choose whether the database should be run i
 * with two load balancers ([HAProxy](http://www.haproxy.org)) (no additional cost),
 * recommended for production projects.
 
-<!-- markdownlint-disable DOCSMD004 -->
-::: tip Default Zerops maintenance user
-For system maintenance reasons, the `zps` user is also automatically created with all privileges. It's important not to change it in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode.
-:::
-<!-- markdownlint-enable DOCSMD004 -->
-
 ## How to access a RabbitMQ message broker
 
 <!-- markdownlint-disable DOCSMD004 -->
@@ -132,6 +126,26 @@ You can's access the RabbitMQ service native protocols (`amqp`, `mqtt`, `stomp`)
 To understand this better, take a look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
 
 To get the advantage of the direct access to the RabbitMQ [web management portal](https://www.rabbitmq.com/management.html) (port 15672) or transmit messages using WebSockets and the RabbitMQ [STOMP](https://www.rabbitmq.com/web-stomp.html) (port 15674) and [MQTT](https://www.rabbitmq.com/web-mqtt.html) (port 15675) plugins, see the [Selective access to the internal ports](#selective-access-to-the-internal-ports) section.
+
+## Default RabbitMQ user and password
+
+Zerops automatically creates a user with all privileges and grant options when creating the service, where the name of **==user==** is based on the selected **hostname**, and the **==password==** is randomly generated. These are saved to the environment variables **user** and **password** and can be referenced from other services the same way as **connectionString**, for example.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Zerops doesn’t keep both places in sync
+If you change your password inside the RabbitMQ broker directly, the change is not reflected in the environment variable and vice versa. It’s up to you to keep these up to date through the **Service env. Variables** section of the service detail in your application.
+
+![RabbitMQ Service](./images/RabbitMQ-Message-Broker-Access-Change-Password.png "Message Broker Access Change Password")
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Default Zerops maintenance user
+For system maintenance reasons, the `zps` user is also automatically created with all privileges. It's vital not to change this in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode. The password for this user can be taken via the `zeropsPassword` environment variable (not presented in the Zerops GUI).
+
+Suppose you log in as the `zps` user and make inappropriate changes to the system configuration (especially in the HA cluster setting). You are fully responsible for any system or application failures that may lead to complete data loss.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
 
 ## Default hardware configuration and autoscaling
 
