@@ -60,9 +60,7 @@ module.exports = {
             'overview/projects-and-services-structure',
             'overview/users',
             'overview/pricing',
-            'overview/made-for-developers',
-            'overview/roadmap',
-            'overview/release-log',
+            'overview/made-for-developers'
             {
               "type": "group",
               "title": "How Zerops works inside",
