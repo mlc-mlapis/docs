@@ -8,13 +8,13 @@ Zerops provides a fully managed and scaled [RabbitMQ](https://www.rabbitmq.com) 
 
 The Zerops RabbitMQ service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**.
 
-### Two ways to do it
-
 There are two possible ways to create a new RabbitMQ service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-#### A simple import example in the YAML syntax
+### Using import functionality
 
-Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
+Zerops uses a YAML definition format to describe the structure. A complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+
+To import a RabbitMQ service, you can use something similar to the following:
 
 ```yaml
 services:
@@ -27,15 +27,15 @@ services:
     mode: NON_HA
 ```
 
-A complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+### Through the Zerops GUI interface
 
-### Which version to choose
+#### Which version to choose
 
 You can currently only choose version **v3** (version 3.9.13 to be precise).
 
 Used as the export & import types: ==`rabbitmq@3`== .
 
-### Hostname and ports
+#### Hostname and ports
 
 Choose a short and descriptive URL-friendly name, for example, **mq**. The following rules apply:
 
@@ -60,7 +60,7 @@ The RabbitMQ service is configured to **allow access** for native `mqtt`, `amqp`
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-#### Selective access to the internal ports
+##### Selective access to the internal ports
 
 You can use the Zerops HTTP routing feature for browser access to the RabbitMQ [web management portal](https://www.rabbitmq.com/management.html) (port 15672) or transmit messages using WebSockets and the RabbitMQ [STOMP](https://www.rabbitmq.com/web-stomp.html) (port 15674) and [MQTT](https://www.rabbitmq.com/web-mqtt.html) (port 15675) plugins. This access is disabled by default from the outside Internet, but you can enable it if necessary using the RabbitMQ **Internal ports** section:
 
@@ -72,18 +72,18 @@ The following image shows the case of the `management.ikbase.eu` public domain i
 
 ![Public Routing](./images/RabbitMQ-Public-Access-Internal-Ports.png "Public Routing Overview")
 
-### HA / non-HA message broker mode
+#### HA / non-HA message broker mode
 
 When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, using 3 containers, or **non-HA mode**, using only 1 container. ==**The chosen database mode can't be changed later.**== If you would like to learn more about the technical details and how this service is built internally, take a look at the [RabbitMQ Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/rabbitmq-cluster-internally.html).
 
-#### RabbitMQ in non-HA mode
+##### RabbitMQ in non-HA mode
 
 * great for local development to save money,
 * queues data are stored only in a single container, higher risk of loss,
 * all queues data changes since the last backup are not recoverable,
 * not recommended for production projects.
 
-#### RabbitMQ in HA mode
+##### RabbitMQ in HA mode
 
 * will run on three containers as a [cluster](https://www.rabbitmq.com/clustering.html), each on a **different physical machine**,
 * so the queues data are stored redundantly in three places, with no risk of loss,
@@ -119,6 +119,18 @@ To connect to the message broker from your local workspace, you can utilize the 
 
 ![RabbitMQ Service](./images/RabbitMQ-Message-Broker-Access-Details.png "Message Broker Access Details")
 
+After the zCLI [login](/documentation/cli/available-commands.html#login) and establishing a [VPN channel](/documentation/cli/available-commands.html#vpn-start-project-name), you can use the URL `http://mq:15672` to access the RabbitMQ web management portal.
+
+![RabbitMQ Service](./images/RabbitMQ-Web-Management-Portal.png "Message Broker Web Management Portal")
+
+The alternative way is to download [rabbitmqadmin](https://www.rabbitmq.com/management-cli.html) from `http://mq:15672/rabbit1/cli/rabbitmqadmin` or directly from [GitHub](https://raw.githubusercontent.com/rabbitmq/rabbitmq-server/v3.9.13/deps/rabbitmq_management/bin/rabbitmqadmin). It's a CLI version that can perform the same actions as the web-based management portal. The tool requires a supported version of Python 3 to be installed.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Using custom path prefix for all HTTP requests
+Zerops uses the custom path prefix configuration `management.path_prefix = /rabbit1` for a standalone node in non HA mode. The configuration cluster's node values in HA mode are `/rabbit1`, `/rabbit2`, and `/rabbit3` then.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ### From your public domains (common Internet environment)
 
 You can's access the RabbitMQ service native protocols (`amqp`, `mqtt`, `stomp`) directly in any way. You have to use one of the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html), [Golang](/documentation/services/runtimes/golang.html), or [PHP](/documentation/services/runtimes/php.html)) and go indirectly through them in a programmatic way. They should implement either their custom authentication logic and access the RabbitMQ service under a system shared account or use personalized authentication mechanisms that RabbitMQ supports internally.
@@ -152,3 +164,67 @@ Suppose you log in as the `zps` user and make inappropriate changes to the syste
 * Each RabbitMQ container (1 in non-HA, 3 in HA) starts with the technological minimum of vCPUs (allowing a meaningful initial start and response time), 0.5 GB RAM, and 5 GB of disk space.
 * Zerops will only automatically scale the database [vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html#vertical-scaling) (both in non-HA and HA mode).
 * The [horizontal autoscaling](/documentation/automatic-scaling/how-automatic-scaling-works.html#horizontal-scaling) in HA mode is not applied because of optimal performance.
+
+## Backup and Restore
+
+Every RabbitMQ node has a data directory that stores all the information that resides on that node. A data directory contains two types of data: **definitions** (metadata, schema/topology) and **messages data**. Definitions (mostly static) can be [exported](https://www.rabbitmq.com/definitions.html#export) and [imported](https://www.rabbitmq.com/definitions.html#import) as JSON files from/to any cluster node with the same result. Messages data can be backed up/restored only on a stopped node. In the case of a cluster, the entire cluster has to be stopped to take a backup/restore.
+
+### How to backup / restore definitions
+
+Definitions are stored in an internal database and replicated across all cluster nodes. Every node in a cluster has its own replica of all definitions. When a part of definitions changes, the update is performed on all nodes in a single transaction.
+
+#### Using rabbitmqadmin CLI
+
+Connect to your Zerops project using [zCLI](/documentation/cli/installation.html) & [VPN](/documentation/cli/vpn.html), and then you can use the URL ==`http://mq:15672/rabbit1/cli/rabbitmqadmin`== to download **rabbitmqadmin** CLI. Alternatively, you can get the same also from [GitHub](https://raw.githubusercontent.com/rabbitmq/rabbitmq-server/v3.9.13/deps/rabbitmq_management/bin/rabbitmqadmin). The tool requires a supported version of Python 3 to be installed.
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Setting permissions for rabbitmqadmin
+Remember to set the executable rights on the Linux or Mac platform using `chmod 755 rabbitmqadmin`.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
+##### Logical definitions backup
+
+```bash
+rabbitmqadmin -H [hostname] -P [port] -u [user] -p [password] --path-prefix=[prefix] export [filename].json
+```
+
+And when used values:
+
+* hostname = **==mq==** (specified when RabbitMQ Service was created)
+* port = **==15672==** (automatically set as a default value)
+* user = **==mq==** (automatically created with the same name as the hostname)
+* password = **==xxxxxxxxxxxxxxxx==** (automatically created as a random value)
+* prefix = ==**/rabbit1**== (also ==**/rabbit2**== , or ==**/rabbit3**== in HA mode)
+* filename = **==definitions==** (specified filename to store the definitions backup)
+
+```bash
+rabbitmqadmin -H mq -P 15672 -u mq -p xxxxxxxxxxxxxxxx --path-prefix=/rabbit1 export definitions.json
+```
+
+##### Logical definitions restore
+
+```bash
+rabbitmqadmin -H [hostname] -P [port] -u [user] -p [password] --path-prefix=[prefix] import [filename].json
+```
+
+And when used values:
+
+* hostname = **==mq==** (specified when RabbitMQ Service was created)
+* port = **==15672==** (automatically set as a default value)
+* user = **==mq==** (automatically created with the same name as the hostname)
+* password = **==xxxxxxxxxxxxxxxx==** (automatically created as a random value)
+* prefix = ==**/rabbit1**== (also ==**/rabbit2**== , or ==**/rabbit3**== in HA mode)
+* filename = **==definitions==** (specified filename to store the definitions backup)
+
+```bash
+rabbitmqadmin -H mq -P 15672 -u mq -p xxxxxxxxxxxxxxxx --path-prefix=/rabbit1 import definitions.json
+```
+
+#### Using RabbitMQ web management portal
+
+![RabbitMQ Service](./images/RabbitMQ-Web-Management-Portal-Backup-Restore.png "Message Broker Web Management Portal Backup/Restore")
+
+### How to backup / restore messages data
+
+Messages are often short-lived and possibly transient, backing them up from under a running node is highly discouraged and can lead to an inconsistent snapshot of the data. Because of these reasons, it's not recommended to make any messages backup/restore from a user side. Zerops takes [daily snapshots](/documentation/backup-restore/snapshot-backup.html) instead.

@@ -48,10 +48,8 @@ services:
     protocol: UDP
     httpSupport: false
   envVariables:
-  - key: jwt_token_secret
-    content: M3rW31Ne%T@bRk
-  - key: CONNECTION_STRING
-    content: ${db_connectionString}
+    jwt_token_secret: M3rW31Ne%T@bRk
+    CONNECTION_STRING: ${db_connectionString}
 - hostname: sharedstorage
   type: shared-storage
   mode: NON_HA
@@ -101,19 +99,19 @@ A service type and its chosen version. Each of the following service documentati
 
 Comprehensive table of available types:
 
-|Service        |Types                                         |
-|:--------------|:---------------------------------------------|
-|PostgreSQL     |postgresql@12                                 |
-|MariaDB        |mariadb@10.4                                  |
-|KeyDB          |keydb@6                                       |
-|Node.js        |nodejs@16, nodejs@14, nodejs@12               |
-|Golang         |golang@1                                      |
-|PHP+Apache     |php-apache@8.1, php-apache@8.0, php-apache@7.4|
-|PHP+Nginx      |php-nginx@8.1, php-nginx@8.0, php-nginx@7.4   |
-|Static server  |nginx@1.20                                    |
-|RabbitMQ       |rabbitmq@3                                    |
-|Object storage |object-storage                                |
-|Shared storage |shared-storage                                |
+|Service        |Types                                                      |
+|:--------------|:----------------------------------------------------------|
+|PostgreSQL     |postgresql@12                                              |
+|MariaDB        |mariadb@10.4                                               |
+|KeyDB          |keydb@6                                                    |
+|Node.js        |nodejs@16, nodejs@14, nodejs@12                            |
+|Golang         |golang@1                                                   |
+|PHP+Apache     |php-apache@8.1+2.4, php-apache@8.0+2.4, php-apache@7.4+2.4 |
+|PHP+Nginx      |php-nginx@8.1+1.20, php-nginx@8.0+1.20, php-nginx@7.4+1.20 |
+|Static server  |nginx@1.20                                                 |
+|RabbitMQ       |rabbitmq@3                                                 |
+|Object storage |object-storage                                             |
+|Shared storage |shared-storage                                             |
 
 #### priority
 
@@ -180,9 +178,9 @@ The default value ==`true`== indicates if a web server runs on the port (HTTP ap
 
 #### envVariables
 
-`envVariables`: Array[EnvironmentVariable] (optional)
+`envVariables`: Map[EnvironmentVariable] (optional)
 
-A sequence of [service environment variables](/documentation/environment-variables/how-to-access.html) (0~N). Each one contains `key` and `content` items.
+A sequence of [service environment variables](/documentation/environment-variables/how-to-access.html) (0~N). Each one is defined by a `key:value` format.
 
 ##### key
 
@@ -190,11 +188,23 @@ A sequence of [service environment variables](/documentation/environment-variabl
 
 An environment variable key.
 
-##### content
+##### value
 
-`content`: string
+`value`: string
 
 An environment variable content.
+
+```yaml
+- hostname: app
+  type: nodejs@14
+  mode: NON_HA
+  ports:
+  - port: 3000
+    httpSupport: true
+  envVariables:
+    jwt_token_secret: M3rW31Ne%T@bRk
+    CONNECTION_STRING: ${db_connectionString}
+```
 
 #### nginxConfig
 
@@ -207,7 +217,7 @@ For example, this could be the exported value if a user accepts the default sett
 ```yaml
 services:
   - hostname: phpnginx
-    type: php-nginx@8.0
+    type: php-nginx@8.0+1.20
     mode: NON_HA
     nginxConfig: |
       server {
@@ -241,7 +251,7 @@ And this is an example for the same when creating the Nginx Static server servic
 ```yaml
 services:
   - hostname: nginx
-    type: nginx@1.18
+    type: nginx@1.20
     mode: NON_HA
     nginxConfig: |
       server {
