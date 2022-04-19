@@ -131,7 +131,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 
 * will start to run on three containers, each on a **different physical machine**,
 * with increasing operating load, the number of containers can reach up to 64,
-* so the application runs redundantly in 3 or more places, with no risk of total failure,
+* therefore the application runs redundantly in 3 or more places, with no risk of total failure,
 * when one container fails, it's automatically replaced with a new one,
 * it's necessary to respect all of the [specifics](#what-you-should-remember-when-using-ha-mode) related to a PHP cluster,
 * recommended for production projects.
@@ -198,11 +198,11 @@ It's always recommended to not set the configuration values as constants directl
 
 ### From other Zerops projects
 
-Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, cross project communication can be done precisely in the same ways described in the section [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. The projects are not directly interconnected.
+Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, cross project communication can be done precisely in the same ways described in the following section: [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. These projects are not directly interconnected.
 
 ### From your local environment
 
-The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
+The local environment offers ==**not only options for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
 
 You can access the Zerops PHP Service from your local workspace by using the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), as mentioned above. This might come in handy if you, for example, use the service as a REST API and you don’t want it publicly available (via [public domains](/documentation/routing/using-your-domain.html) or Zerops [subdomains](/documentation/routing/zerops-subdomain.html)), so you connect to the project using **zCLI VPN** and use ==`app:80`== as your API endpoint.
 
@@ -214,7 +214,7 @@ The Zerops [routing system](/documentation/routing/using-your-domain.html) allow
 
 **The web server** always runs on that internal port, and it means that you can map [public Internet domains](/documentation/routing/using-your-domain.html) with the option of automatic support for SSL certificates (this also works for Zerops [subdomains](/documentation/routing/zerops-subdomain.html)).
 
-To understand this better, take a look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
+To understand this better, take a look at the following section: [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
 
 ## Default hardware configuration and autoscaling
 

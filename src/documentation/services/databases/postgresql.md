@@ -27,7 +27,7 @@ services:
     mode: NON_HA
 ```
 
-A complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
 
 ### Which version to choose
 
@@ -74,9 +74,9 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 #### PostgreSQL in HA mode
 
 * will run on three containers as a [Patroni cluster](https://patroni.readthedocs.io), each on a **different physical machine**,
-* so the data is stored redundantly in three places, with no risk of data loss,
+* therefore the data is stored redundantly in three places, with no risk of data loss,
 * when one container fails, it's automatically replaced with a new one,
-* with two load balancers ([HAProxy](http://www.haproxy.org)) (no additional cost),
+* come with two load balancers ([HAProxy](http://www.haproxy.org)) (no additional cost),
 * [asynchronous behavior](#asynchronous-behavior) of a Patroni HA cluster,
 * the need to respect all of the [specifics](#what-you-should-remember-when-using-ha-mode) related to a Patroni HA cluster,
 * recommended for production projects.
@@ -101,15 +101,15 @@ The names of ==**connectionString**== and ==**port**== are kept the same, but in
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#postgresql)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplification and increased flexibility. Another reason not to hard-code the values inside your applications is that it can be dangerous because it is easy to commit them (like your credentials) into a repository, potentially exposing them to more people than intended.
+For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#postgresql)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn provides simplification and increased flexibility. Another reason not to hard-code the values inside your applications is that it can be dangerous because it is easy to commit them (like your credentials) into a repository, potentially exposing them to more people than intended.
 
 ### From other Zerops projects
 
-Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, cross projects communication can be done precisely in the same ways described in the section [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. The projects are not directly interconnected.
+Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, cross project communication can be done precisely in the same ways described in the following section: [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. These projects are not directly interconnected.
 
 ### From your local environment
 
-The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
+The local environment offers ==**not only options for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
 
 To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), as previously mentioned. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need some of them you should copy the values manually through the **How To Access** / **Database access details** section of the service detail in your application and use them in your private local configuration strategy.
 
@@ -125,11 +125,11 @@ The following picture shows how it looks in HA mode.
 
 You can't access the PostgreSQL service directly in any way. You have to use one of the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html), [Golang](/documentation/services/runtimes/golang.html), or [PHP](/documentation/services/runtimes/php.html)) and go indirectly through them in a programmatic way. They should implement their authentication logic to access the PostgreSQL service.
 
-To understand this better, take a look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
+To understand this better, take a look at the following section: [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
 
 ## Default PostgreSQL user and password
 
-Zerops automatically creates a user with all privileges and grant options when creating the service, where the name of **==user==** is based on the selected **hostname**, and the **==password==** is randomly generated. These are saved to the environment variables **user** and **password** and can be referenced from other services the same way as **connectionString**.
+Zerops automatically creates a user with all privileges and grant options when creating the service, where the name of **==user==** is based on the selected **hostname**, and the **==password==** is randomly generated. These are saved to the environment variables **user** and **password** and can be referenced from other services the same way as with a **connectionString**.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Zerops doesn’t keep both places in sync
@@ -143,9 +143,9 @@ The image below represents the state of environment variables available in non-H
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Default Zerops maintenance user
-For system maintenance reasons, the `zps` user is also automatically created with all privileges (super-user). It's vital not to change this in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode. The password for this user can be taken via the `zeropsPassword` environment variable (not presented in the Zerops GUI).
+For system maintenance reasons, the `zps` user is also automatically created with all privileges (super-user). It's important not to change this in any way. Otherwise, there is a risk of disrupting the correct functionality, especially in HA mode. The password for this user can be taken via the `zeropsPassword` environment variable (not presented in the Zerops GUI).
 
-Suppose you log in as the `zps` super-user and make inappropriate changes to the system configuration (especially in the HA cluster setting). You are fully responsible for any system or application failures that may lead to complete data loss.
+If you log in as the `zps` super-user and make inappropriate changes to the system configuration (especially in the HA cluster setting), then you are fully responsible for any system or application failures that may lead to complete data loss.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 

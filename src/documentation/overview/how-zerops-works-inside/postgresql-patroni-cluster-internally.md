@@ -10,7 +10,7 @@ The following picture shows a simplified schema of a standalone [Zerops PostgreS
 
 The primary database instance [streams WAL](https://www.postgresql.org/docs/9.6/runtime-config-replication.html) (Write-Ahead-Logs) records in chunks to replica instances to ensure that the data is always in-sync across the whole cluster. The replicas instances receive the WAL chunks by establishing a connection with the primary instance. The advantage of streaming WAL records is that they are streamed quickly and immediately. Streaming replication is set asynchronous.
 
-Both load balancers or PostgreSQL database containers are located on **different physical computers** to prevent service outages in the event of a fatal failure on a single physical computer. Below, you can see the same schema as before, this time including all relations among the internal parts.
+Both load balancers or PostgreSQL database containers are located on **different physical computers** to prevent service outages in the event of a fatal failure on a single physical computer. Below, you can see the same schema as before, this time including all relations between the internal parts.
 
 ## Extended schema (no external access)
 

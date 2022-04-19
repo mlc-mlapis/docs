@@ -65,9 +65,9 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 #### MariaDB in HA mode
 
 * will run on three containers as a [Galera cluster](https://mariadb.com/kb/en/galera-cluster), each on a **different physical machine**,
-* so the data is stored redundantly in three places, with no risk of data loss,
+* therefore the data is stored redundantly in three places, with no risk of data loss,
 * when one container fails, it's automatically replaced with a new one,
-* with two load balancers ([MaxScale](https://mariadb.com/kb/en/maxscale)) in [readwritesplit](https://mariadb.com/kb/en/mariadb-maxscale-25-readwritesplit) mode (no additional cost),
+* come with two load balancers ([MaxScale](https://mariadb.com/kb/en/maxscale)) in [readwritesplit](https://mariadb.com/kb/en/mariadb-maxscale-25-readwritesplit) mode (no additional cost),
 * [asynchronous behavior](#asynchronous-behavior) of a Galera HA cluster,
 * only InnoDB storage engine is supported,
 * the need to respect all of the [specifics](#what-to-bear-in-mind-when-using-HA-mode) related to a Galera HA cluster,
@@ -89,7 +89,7 @@ For more flexibility with future potential hostname changes, it's always recomme
 
 ### From the local environment
 
-The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
+The local environment offers ==**not only options for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
 
 To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), as previously mentioned. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need to use them, you should copy the values manually through the **How To Access** / **Database access details** section of the service detail in your application and use them in your private local configuration strategy.
 
@@ -97,7 +97,7 @@ To connect to the database from your local workspace, you can utilize the [VPN](
 
 ## Default MariaDB user and password
 
-Zerops automatically creates a user with all privileges and grant options when creating the service, where the name of **==user==** is based on the selected **hostname**, and the **==password==** is randomly generated. These are saved to the environment variables **user** and **password** and can be referenced from other services the same way as **connectionString**.
+Zerops automatically creates a user with all privileges and grant options when creating the service, where the name of **==user==** is based on the selected **hostname**, and the **==password==** is randomly generated. These are saved to the environment variables **user** and **password** and can be referenced from other services the same way as with a **connectionString**.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Zerops doesn’t keep both places in sync
