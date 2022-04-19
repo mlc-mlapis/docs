@@ -27,7 +27,7 @@ services:
     mode: NON_HA
 ```
 
-A complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
 
 ### Which version to choose
 
@@ -54,7 +54,7 @@ The port will automatically be set to the value of **==9200==** and can't be cha
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: warning Security inside a private project network
-All services inside a Zerops project share a [dedicated private network](/documentation/routing/routing-between-project-services.html) and can see and reference [environment variables](/documentation/environment-variables/how-to-access.html) from other services. This means that, by default, nothing outside the project can access any of the services inside.
+All services inside a Zerops project share a [dedicated private network](/documentation/routing/routing-between-project-services.html) and can see and reference [environment variables](/documentation/environment-variables/how-to-access.html) from other services. This means that, by default, nothing outside the project can access any of the services inside it.
 
 The Elasticsearch service is configured to **allow full and unrestricted access without user authentication** only from the project internal network environment. In practice, this means that this service can only be accessed either programmatically through the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html#port), [Golang](/documentation/services/runtimes/golang.html#port), and [PHP](/documentation/services/runtimes/php.html#hostname-and-port), which should implement their authentication logic not to allow anonymous access to the Elasticsearch service) or using [zCLI](/documentation/cli/installation-authorization.html) and [vpn](/documentation/cli/vpn.html) from your local environment, nothing else.
 :::
@@ -103,11 +103,11 @@ For more flexibility surrounding future potential hostname changes, it's always 
 
 ### From other Zerops projects
 
-Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, cross project communication can be done precisely in the same ways described in the section [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. The projects are not directly interconnected.
+Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, cross project communication can be done precisely in the same ways described in the following section: [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. These projects are not directly interconnected.
 
 ### From your local environment
 
-The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
+The local environment offers ==**not only options for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
 
 To connect to the Elasticsearch from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), as mentioned above. This allows you to access the search engine the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need them, you should copy the values manually through the **How To Access** / **Search engine access details** section of the service detail in your application and use them in your private local configuration strategy.
 
@@ -117,7 +117,7 @@ To connect to the Elasticsearch from your local workspace, you can utilize the [
 
 You can't access the Elasticsearch service directly in any way. You have to use one of the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-elasticsearch-service), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-elasticsearch-service), or [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-elasticsearch-service)) and go indirectly through them in a programmatic way. They should implement their authentication logic not to allow anonymous access to the Elasticsearch service.
 
-To understand this better, take a look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
+To understand this better, take a look at the following section: [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
 
 ## Default hardware configuration and autoscaling
 

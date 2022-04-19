@@ -58,7 +58,7 @@ zcli login my@mail.com foobar123
 
 ## `push [project name] [service name]`
 
-It can be used to trigger the [build pipeline](/documentation/build/how-zerops-build-works.html) defined in the project's `zerops.yml`. **By default, it will take into account your `.gitignore`**, so the same files that you are tracking in your repository will be used to build the application from your local environment.
+It can be used to trigger the [build pipeline](/documentation/build/how-zerops-build-works.html) defined in the project's `zerops.yml`. **By default, it will take into account your `.gitignore`**, therefore the same files that you are tracking in your repository will be used to build the application from your local environment.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Using quotes

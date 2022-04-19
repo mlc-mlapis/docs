@@ -64,7 +64,7 @@ The **Node.js** service is one of the Zerops services that allows you to use **a
 
 ![Custom Port](./images/Edit-Custom-Port-3000.png "Edit Custom Port")
 
-Because public domain access or Zerops subdomains can only be enabled for **tcp** ports with support for HTTP, the checkbox **HTTP protocol support** allows you to mark such instances. In turn, Zerops uses this flag to optimize its internal logic to only offer this option and SSL certificates in useful places. These ports are used to set up public Internet access as described in the section [From the external Internet environment](#from-your-public-domains-common-internet-environment).
+Because public domain access or Zerops subdomains can only be enabled for **tcp** ports with support for HTTP, the checkbox **HTTP protocol support** allows you to mark such instances. In turn, Zerops uses this flag to optimize its internal logic to only offer this option and SSL certificates in useful places. These ports are used to set up public Internet access as described in the following section: [From the external Internet environment](#from-your-public-domains-common-internet-environment).
 
 ![Public Routing](./images/Public-Routing-Overview-NodeJS.png "Public Routing Overview")
 
@@ -101,7 +101,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 
 * will start to run on three containers, each on a **different physical machine**,
 * with increasing operating load, the number of containers can reach up to 64,
-* so the application runs redundantly in 3 or more places, with no risk of total failure,
+* therefore the application runs redundantly in 3 or more places, with no risk of total failure,
 * when one container fails, it's automatically replaced with a new one,
 * the need to respect all of the [specifics](#what-you-should-remember-when-using-the-ha-mode) related to a Node.js cluster,
 * recommended for production projects.
@@ -159,11 +159,11 @@ It's always recommended to not set the configuration values as constants directl
 
 ### From other Zerops projects
 
-Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, cross project communication can be done precisely in the same ways described in the section [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. The projects are not directly interconnected.
+Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, cross project communication can be done precisely in the same ways described in the following section: [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. These projects are not directly interconnected.
 
 ### From your local environment
 
-The local environment offers ==**not only possibilities for local development**== but also a general ability to ==**manage all Zerops development or production services**== using zCLI VPN.
+The local environment offers ==**not only options for local development**== but also a general ability to ==**manage all Zerops development or production services**== using zCLI VPN.
 
 You can access the Zerops Node.js Service from your local workspace by using the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), as mentioned above. This might come in handy if you, for example, use the service as a REST API and you don’t want it publicly available (via [public domains](/documentation/routing/using-your-domain.html) or Zerops [subdomains](/documentation/routing/zerops-subdomain.html)), so you connect to the project using **zCLI VPN** and use ==`app:3000`== as your API endpoint.
 
@@ -177,7 +177,7 @@ If you run **a web server** on that internal port (HTTP protocol support checkbo
 
 You can also [open public ports](/documentation/routing/access-through-ip-and-firewall.html) on the [IP addresses](/documentation/routing/unique-ipv4-ipv6-addresses.html) assigned to the project and point them to a service and its internal port. Each public port on the IP address can be protected with a built-in [firewall](/documentation/routing/access-through-ip-and-firewall.html#firewall).
 
-To understand this better, take a look at the section [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
+To understand this better, take a look at the following section: [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
 
 ## Default hardware configuration and autoscaling
 
