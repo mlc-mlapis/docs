@@ -1,3 +1,3 @@
 # Message brokers
 
-## RabbitMQ
+* [RabbitMQ](/documentation/services/message-brokers/rabbitmq.html)
