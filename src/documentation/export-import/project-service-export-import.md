@@ -206,6 +206,39 @@ An environment variable content.
     CONNECTION_STRING: ${db_connectionString}
 ```
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip Using modificators for environment variables
+Sometimes is helpful to have additional functionality to transform the environment variable values. Especially in cases when you would like to enter a value most readily, but in the end, you need a result in another, more complicated syntax.
+
+The typical example of such a case is the easiness of defining an environment variable with a value specified in a plain JSON object/array form but automatically generating its stringified version and using it in another place through another variable.
+
+It's worth remembering that the environment variable value is represented only as a string data type. When you need to parse it as a plain JSON value in a consumer service, it has to be represented by a stringified value. Otherwise, it fails.
+
+That's why Zerops offers the `stringify` modificator that can be used in the following ways:
+
+```yaml
+# Transforming the CONFIG environment variable into a stringified JSON value in the CONFIG_JSON variable.
+envVariables:
+    CONFIG: {"version": 1.0, "mode": "P", "debug": null}
+    CONFIG_JSON: ${CONFIG|stringify}
+# The result contained in CONFIG_JSON variable: {\"version\":1.0,\"mode\":\"P\",\"debug\":null}
+```
+
+```yaml
+# Transforming the CONFIG environment variable into a stringified JSON value in the CONFIG_JSON variable.
+envVariables:
+    CONFIG: |
+      {
+        "version": 1.0,
+        "mode": "P",
+        "debug": null
+      }
+    CONFIG_JSON: ${CONFIG|stringify}
+# The result contained in CONFIG_JSON variable: {\"version\":1.0,\"mode\":\"P\",\"debug\":null}
+```
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 #### nginxConfig
 
 `nginxConfig`: string (optional)
