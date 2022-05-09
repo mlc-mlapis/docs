@@ -8,13 +8,13 @@ Zerops provides a fully managed and scaled PHP runtime service, suitable for bot
 
 The Zerops PHP service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**. It has the [Composer dependency manager](#pre-installed-php-composer), a lot of popular [PHP modules and extensions](#pre-installed-php-modules-and-extensions), together with the Git version control system pre-installed.
 
-### Two ways to do it
+There are two possible ways to create a new PHP service. Either manually in the [Zerops GUI](#through-the-zerops-gui-interface), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-There are two possible ways to create a new PHP service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+### Using the import functionality
 
-#### A simple import example in the YAML syntax
+Zerops uses a YAML definition format to describe the structure. View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
 
-Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following. This is the case for when the Apache web server is used, but similar syntax can also be used for the Nginx web server.
+To import a PHP service when the Apache web server is used (similar syntax can also be used for the Nginx web server), you can use something similar to the following:
 
 ```yaml
 services:
@@ -29,9 +29,9 @@ services:
   documentRoot: public
 ```
 
-You can also read the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+### Through the Zerops GUI interface
 
-### Which version to choose
+#### Which version to choose
 
 You can currently choose PHP version **v8.1** (version v8.1.3 to be precise), **v8.0** (version v8.0.16 to be precise), or **v7.4** (version v7.4.28 to be precise). The chosen version **can't be changed afterwards**. The service is always combined with a web server. It can be either **Apache v2.4** (version 2.4.29 to be precise) or **Nginx v1.20** (version 1.20.1 to be precise). The differences and configuration specifics for each web server are listed below.
 
@@ -43,7 +43,7 @@ Switching must be done manually by creating a new service with another version a
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-### Hostname and port
+#### Hostname and port
 
 Choose a short and descriptive URL-friendly name, for example, **app**. The following rules apply:
 
@@ -54,7 +54,7 @@ Choose a short and descriptive URL-friendly name, for example, **app**. The foll
 
 The port will be automatically set to the value of **==80==** and can't be changed.
 
-### Application code root and document root
+#### Application code root and document root
 
 The application code you deploy will always be placed in the ==**/var/www**== **code root** folder. You can choose a **document root** (the publicly accessible folder, usually the location of your ==index.php==). By default, the document root is set to the folder ==**/var/www/public**== , which you can change.
 
@@ -64,7 +64,7 @@ Using a subdirectory like ==**/var/www/public**== for a document root is always 
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-#### Setting PHP/Apache document root
+##### Setting PHP/Apache document root
 
 You set it through a separate input.
 
@@ -72,7 +72,7 @@ You set it through a separate input.
 
 It is also possible to make changes to the **document root** later, you make them by editing the **`documentRoot`** environment variable.
 
-#### Setting PHP/Nginx document root
+##### Setting PHP/Nginx document root
 
 You set it through a service Nginx configuration file in the following section (see below). For more on what this config looks like and what it means, see the [Default Nginx config](#default-nginx-config) part of the documentation.
 
@@ -83,7 +83,7 @@ root /var/www/public;
 
 You can also make changes to the **document root** later, just do so through a separate **Nginx configuration** service card.
 
-### Default Nginx config
+#### Default Nginx config
 
 ![PHP/Nginx](./images/PHP-Nginx-Document-Root.png "Document root")
 
@@ -110,11 +110,11 @@ location ^~ /uploads/ {
 
 * The configuration syntax is validated on saving with `nginx -t` command.
 
-### HA / non-HA runtime environment mode
+#### HA / non-HA runtime environment mode
 
 When creating a new service, you can choose whether the runtime environment should be run in **HA** (High Availability) mode, using 3 or more containers, or **non-HA mode**, only using 1 container. ==**The chosen runtime environment mode can't be changed later.**== If you would like to learn more about the technical details and how this service is built internally, take a look at the [PHP Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/php-cluster-internally.html) part of the documentation.
 
-#### PHP runtime in non-HA mode
+##### PHP runtime in non-HA mode
 
 * great for local development to save money,
 * doesn’t require any changes to the existing code,
@@ -127,7 +127,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-#### PHP runtime in HA mode
+##### PHP runtime in HA mode
 
 * will start to run on three containers, each on a **different physical machine**,
 * with increasing operating load, the number of containers can reach up to 64,

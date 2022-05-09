@@ -8,13 +8,13 @@ Zerops provides a fully managed and scaled Golang runtime service, suitable for 
 
 The Zerops Golang service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**. It has the Git version control system pre-installed.
 
-### Two ways to do it
+There are two possible ways to create a new Golang service. Either manually in the [Zerops GUI](#through-the-zerops-gui-interface), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-There are two possible ways to create a new Golang service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+### Using the import functionality
 
-#### A simple import example in the YAML syntax
+Zerops uses a YAML definition format to describe the structure. View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
 
-Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
+To import a Golang service, you can use something similar to the following:
 
 ```yaml
 services:
@@ -36,15 +36,15 @@ services:
   startCommand: ./bin/server
 ```
 
-You can also read the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+### Through the Zerops GUI interface
 
-### Which version to choose
+#### Which version to choose
 
 You can currently only choose Golang version **v1** (version v1.17.8 to be precise).
 
 Used as the export & import type: ==`golang@1`== .
 
-### Hostname
+#### Hostname
 
 Choose a short and descriptive URL-friendly name, for example, **app**. The following rules apply:
 
@@ -53,7 +53,7 @@ Choose a short and descriptive URL-friendly name, for example, **app**. The foll
 * **==has to be unique==** in relation to other existing project hostnames,
 * the hostname **==can't be changed==** later.
 
-### Port
+#### Port
 
 The **Golang** service is one of the Zerops services that allows you to use **any port number** you want. The service can even have [multiple internal ports](/documentation/routing/routing-between-project-services.html) open (**1** - **65535**), running on **tcp** or **udp** protocols. The port will be preset to the **==tcp==** protocol and the value of **==8080==**. You can change it immediately or anytime after that.
 
@@ -63,15 +63,15 @@ Because domain access or subdomains can only be enabled for **tcp** ports with s
 
 ![Public Routing](./images/Public-Routing-Overview-Golang.png "Public Routing Overview")
 
-### Start Command
+#### Start Command
 
 A command to start your service will be triggered after each deployment or after you manually start or re-start it. For example, if the result of your Golang application build command ==`go build -o ./bin/server ./app/server.go`== is an executable deployed via the [zerops.yml](/documentation/build/build-config.html#deploy) `deploy: [ "./bin/server" ]` directive, then the start command should be ==`./bin/server`== .
 
-### HA / non-HA runtime environment mode
+#### HA / non-HA runtime environment mode
 
 When creating a new service, you can choose whether the runtime environment should be run in **HA** (High Availability) mode, using 3 or more containers, or **non-HA mode**, using only 1 container. ==**The chosen runtime environment mode can't be changed later.**== If you would like to learn more about the technical details and how this service is built internally, take a look at the [Golang Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/golang-cluster-internally.html) part of the documentation.
 
-#### Golang runtime in non-HA mode
+##### Golang runtime in non-HA mode
 
 * great for local development to save money,
 * doesn’t require any changes to the existing code,
@@ -84,7 +84,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-#### Golang runtime in HA mode
+##### Golang runtime in HA mode
 
 * will start to run on three containers, each on a **different physical machine**,
 * with increasing operating load, the number of containers can reach up to 64,

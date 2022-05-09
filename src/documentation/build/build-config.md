@@ -62,11 +62,11 @@ List the Zerops technologies your build uses as the **Zerops build base image** 
 
 #### Supported base images
 
-##### `nodejs@<10, 12, 14>`
+##### `nodejs@<12, 14, 16>`
 
 Includes `npm`, `yarn`, `git`, `npx`.
 
-##### `php@<7.3, 7.4, 8.0>`
+##### `php@<7.4, 8.0, 8.1>`
 
 Includes `composer`, `git`, `php`.
 
@@ -83,7 +83,7 @@ base: [nodejs@14, go@1]
 #### Example of using a single base image
 
 ```yaml
-base: [php@7.3]
+base: [php@7.4]
 ```
 
 ### `prepare` (optional)

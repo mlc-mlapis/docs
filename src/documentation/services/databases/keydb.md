@@ -10,13 +10,13 @@ Zerops provides a fully managed and scaled KeyDB (Redis) key-value database serv
 
 The Zerops KeyDB service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**.
 
-### Two ways to do it
+There are two possible ways to create a new KeyDB service. Either manually in the [Zerops GUI](#through-the-zerops-gui-interface), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-There are two possible ways to create a new KeyDB service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+### Using the import functionality
 
-#### A simple import example in the YAML syntax
+Zerops uses a YAML definition format to describe the structure. View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
 
-Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
+To import a KeyDB service, you can use something similar to the following:
 
 ```yaml
 services:
@@ -29,15 +29,15 @@ services:
     mode: NON_HA
 ```
 
-View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+### Through the Zerops GUI interface
 
-### Which version to choose
+#### Which version to choose
 
 You can currently only choose version **v6** (version 6.2.2 to be precise).
 
 Used as the export & import type: ==`keydb@6`== .
 
-### Hostname and ports
+#### Hostname and ports
 
 Choose a short and descriptive URL-friendly name, for example, **db**. The following rules apply:
 
@@ -56,18 +56,18 @@ The KeyDB service is configured to **allow full and unrestricted access without 
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-### HA / non-HA database mode
+#### HA / non-HA database mode
 
 When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, using 2 containers, or **non-HA mode**, using only 1 container. ==**The chosen database mode can't be changed later.**== If you would like to learn more about the technical details and how this service is built internally, take a look at the [KeyDB Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/keydb-ha-internally.html).
 
-#### KeyDB in non-HA mode
+##### KeyDB in non-HA mode
 
 * great for local development to save money,
 * data is stored only in a single container, higher risk of data loss,
 * all data changes since the last backup are not recoverable,
 * not recommended for production projects.
 
-#### KeyDB in HA mode
+##### KeyDB in HA mode
 
 * will run on two containers, each on a **different physical machine**,
 * therefore the data is stored redundantly in two places, with no risk of data loss,

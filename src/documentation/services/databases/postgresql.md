@@ -8,13 +8,13 @@ Zerops provides a fully managed and scaled PostgreSQL database service, suitable
 
 The Zerops PostgreSQL service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**.
 
-### Two ways to do it
+There are two possible ways to create a new PostgreSQL service. Either manually in the [Zerops GUI](#through-the-zerops-gui-interface), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-There are two possible ways to create a new PostgreSQL service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+### Using the import functionality
 
-#### A simple import example in the YAML syntax
+Zerops uses a YAML definition format to describe the structure. View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
 
-Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
+To import a PostgreSQL service, you can use something similar to the following:
 
 ```yaml
 services:
@@ -27,15 +27,15 @@ services:
     mode: NON_HA
 ```
 
-View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+### Through the Zerops GUI interface
 
-### Which version to choose
+#### Which version to choose
 
 You can currently only choose PostgreSQL version **v12** (version 12.10 to be precise).
 
 Used as the export & import type: ==`postgresql@12`== .
 
-### Hostname and ports
+#### Hostname and ports
 
 Choose a short and descriptive URL-friendly name, for example, **db**. The following rules apply:
 
@@ -52,11 +52,11 @@ The chosen **hostname** is automatically used to create an [admin user account](
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-### HA / non-HA database mode
+#### HA / non-HA database mode
 
 When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, using 3 containers, or **non-HA mode**, using only 1 container. ==**The chosen database mode can't be changed later.**== If you would like to learn more about the technical details and how this service is built internally, take a look at the [PostgreSQL Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/postgresql-patroni-cluster-internally.html).
 
-#### PostgreSQL in non-HA mode
+##### PostgreSQL in non-HA mode
 
 * great for local development to save money,
 * doesn’t require any changes to the existing code,
@@ -71,7 +71,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-#### PostgreSQL in HA mode
+##### PostgreSQL in HA mode
 
 * will run on three containers as a [Patroni cluster](https://patroni.readthedocs.io), each on a **different physical machine**,
 * therefore the data is stored redundantly in three places, with no risk of data loss,

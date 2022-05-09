@@ -12,9 +12,30 @@ Information on the compatibility of MariaDB software with similar, competing sof
 
 ## Adding the MariaDB Service in Zerops
 
-The Zerops MariaDB service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers).
+The Zerops MariaDB service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**.
 
-### Which version to choose
+There are two possible ways of creating a new MariaDB service. Either manually in the [Zerops GUI](#through-the-zerops-gui-interface), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+
+### Using the import functionality
+
+Zerops uses a YAML definition format to describe the structure. View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+
+To import a MariaDB service, you can use something similar to the following:
+
+```yaml
+services:
+  # Service will be accessible through zCLI VPN under <protocol>://db:<port>
+  - hostname: db
+    # Type and version of service used.
+    type: mariadb@10.4
+    # Whether the service will be run on one or multiple containers.
+    # Since this is a simple example, using only one container is fine.
+    mode: NON_HA
+```
+
+### Through the Zerops GUI interface
+
+#### Which version to choose
 
 You can currently only choose MariaDB version **v10.4** (version 10.4.24 to be precise).
 
@@ -26,7 +47,7 @@ Switching must be done manually by creating a new service with another version a
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-### Hostname and port
+#### Hostname and port
 
 Choose a short and descriptive URL-friendly name, for example, **db**. The following rules apply:
 
@@ -43,11 +64,11 @@ The chosen **hostname** is automatically used to create an [admin user account](
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-### HA / non-HA database mode
+#### HA / non-HA database mode
 
 When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, using 3 containers, or **non-HA mode**, using only 1 container. ==**The chosen database mode can't be changed later.**== If you would like to learn more about the technical details and how this service is built internally, take a look at the [MariaDB Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/mariadb-galera-cluster-internally.html).
 
-#### MariaDB in non-HA mode
+##### MariaDB in non-HA mode
 
 * great for local development to save money,
 * doesn’t require any changes to the existing code,
@@ -62,7 +83,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-#### MariaDB in HA mode
+##### MariaDB in HA mode
 
 * will run on three containers as a [Galera cluster](https://mariadb.com/kb/en/galera-cluster), each on a **different physical machine**,
 * therefore the data is stored redundantly in three places, with no risk of data loss,
@@ -87,13 +108,23 @@ Other services can access the database using its **hostname** and **port** envir
 
 For more flexibility with future potential hostname changes, it's always recommended to use them indirectly via [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html) (referencing implicit Zerops environment [variables](/documentation/environment-variables/helper-variables.html#mariadb)) in each project service separately. This allows you to eliminate all direct dependencies in the application code, which in turn means simplicity and increased flexibility. Another reason not to hard-code the values inside your applications is that it can be dangerous because it is easy to commit them (like your credentials) into a repository, potentially exposing them to more people than intended.
 
-### From the local environment
+### From other Zerops projects
+
+Zerops always sets up a [private dedicated network](/documentation/overview/projects-and-services-structure.html#project) for each project. From this point of view, cross project communication can be done precisely in the same ways described in the following section: [From your public domains (common Internet environment)](#from-your-public-domains-common-internet-environment). There isn't any other specific way. These projects are not directly interconnected.
+
+### From your local environment
 
 The local environment offers ==**not only options for local development**== but also a general ability to ==**manage all Zerops development or production services**== , using zCLI VPN.
 
 To connect to the database from your local workspace, you can utilize the [VPN](/documentation/cli/vpn.html) functionality of our [Zerops zCLI](/documentation/cli/installation.html), as previously mentioned. This allows you to access the database the same way other services inside the project can, but unlike those services, you cannot use references to the environment variables. Therefore, if you need to use them, you should copy the values manually through the **How To Access** / **Database access details** section of the service detail in your application and use them in your private local configuration strategy.
 
 ![MariaDB Service](./images/MariaDB-Database-Access-Details.png "Database Access Details")
+
+### From your public domains (common Internet environment)
+
+You can't access the MariaDB service directly in any way. You have to use one of the runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html), [Golang](/documentation/services/runtimes/golang.html), or [PHP](/documentation/services/runtimes/php.html)) and go indirectly through them in a programmatic way. They should implement their authentication logic to access the MariaDB service.
+
+To understand this better, take a look at the following section: [With external access](/documentation/overview/how-zerops-works-inside/typical-schemas-of-zerops-projects.html#with-external-access) of **Typical schemas of Zerops Projects**.
 
 ## Default MariaDB user and password
 
