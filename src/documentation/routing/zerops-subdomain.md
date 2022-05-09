@@ -8,6 +8,10 @@ The Zerops subdomain can't be modified at the moment.
 
 The Zerops subdomain is also stored under a `zeropsSubdomain` key in [environment variables](/documentation/environment-variables/how-to-access.html) of the given service.
 
+<!-- markdownlint-disable DOCSMD004 -->
 ::: warning NOT FOR PRODUCTION
 You **shouldn't** use Zerops subdomain as CNAME for production as it will prevent autoscaling, since the traffic goes through a global Zerops L7 HTTP Balancer and not directly to your [project](/documentation/overview/projects-and-services-structure.html#project) infrastructure. Use an [IPv6 address](/documentation/routing/unique-ipv4-ipv6-addresses.html) instead or request an [IPv4 address](/documentation/routing/unique-ipv4-ipv6-addresses.html).
+
+You should also be aware of the file **HTTP UPLOAD** transfer limit, set to **20 MB** when accessing Zerops subdomains. When this limit is reached, the operation is terminated.
 :::
+<!-- markdownlint-enable DOCSMD004 -->
