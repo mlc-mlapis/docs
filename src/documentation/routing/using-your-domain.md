@@ -13,3 +13,9 @@ All you need to do is point your domain A / AAAA records to one of the [unique I
 **Domain access can only be enabled for services running on an HTTP protocol**. Internally, Zerops points all traffic to an L7 HTTP Balancer that takes care of SSL certificate installation and load balancing traffic to the selected container which is running your app.
 
 ![L7 balancer](/l7balancer.png "L7 balancer")
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning HTTP UPLOAD limit
+The file **HTTP UPLOAD** transfer limit is set to **512 MB** for domain access. When this limit is reached, the operation is terminated.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
