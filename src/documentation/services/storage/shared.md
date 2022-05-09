@@ -12,13 +12,35 @@ If you are not sure what storage type to choose, take a look at [the best practi
 
 ## Adding the Shared Storage Service in Zerops
 
-### Which version to choose
+The Zerops Shared Storage service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**.
+
+There are two possible ways of creating a new Shared Storage service. Either manually in the [Zerops GUI](#through-the-zerops-gui-interface), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+
+### Using the import functionality
+
+Zerops uses a YAML definition format to describe the structure. View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+
+To import a Shared Storage service, you can use something similar to the following:
+
+```yaml
+services:
+  # Service will be able to mount using the path /mnt/disk
+  - hostname: disk
+    # Type of service used (the version is generic and not necessary to enter).
+    type: shared-storage
+    # This service is available only in HA mode and will be run on multiple containers.
+    mode: HA
+```
+
+### Through the Zerops GUI interface
+
+#### Which version to choose
 
 The service is completely a managed technology from the Zerops side, and it's not directly related to any publicly distributed version number. Therefore, you do not have to select any specific version.
 
 Used as the export & import type: ==`shared-storage`== .
 
-### Shared storage name
+#### Shared storage name
 
 Choose a short and descriptive URL-friendly name, for example, **disk**. The following rules apply:
 
@@ -33,7 +55,7 @@ There's only one namespace for all service hostnames, shared storage names, and 
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-### Storage mounting
+## Storage mounting
 
 A shared storage disk can only be mounted to runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-shared-storage), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-shared-storage), and [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage)).
 

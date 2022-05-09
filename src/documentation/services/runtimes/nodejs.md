@@ -8,13 +8,13 @@ Zerops provides a fully managed and scaled Node.js runtime service, suitable for
 
 The Zerops Node.js service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**. It has pre-installed NPM and YARN package managers, allowing you to install any package you want during the build stage, together with the Git version control system.
 
-### Two ways to do it
+There are two possible ways to create a new Node.js service. Either manually in the [Zerops GUI](#through-the-zerops-gui-interface), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-There are two possible ways to create a new Node.js service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+### Using the import functionality
 
-#### A simple import example in the YAML syntax
+Zerops uses a YAML definition format to describe the structure. View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
 
-Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
+To import a Node.js service, you can use something similar to the following:
 
 ```yaml
 services:
@@ -35,9 +35,9 @@ services:
   startCommand: npm start
 ```
 
-You can also read the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+### Through the Zerops GUI interface
 
-### Which version to choose
+#### Which version to choose
 
 You can currently choose Node.js version **v16** (version v16.14.0 to be precise), **v14** (version 14.19.0 to be precise), or **v12** (version 12.22.10 to be precise). The chosen version **can't be changed afterwards**.
 
@@ -49,7 +49,7 @@ Switching must be done manually by creating a new service with another version a
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-### Hostname
+#### Hostname
 
 Choose a short and descriptive URL-friendly name, for example, **app**. The following rules apply:
 
@@ -58,7 +58,7 @@ Choose a short and descriptive URL-friendly name, for example, **app**. The foll
 * **==has to be unique==** in relation to other existing project hostnames,
 * the hostname **==can't be changed==** later.
 
-### Port
+#### Port
 
 The **Node.js** service is one of the Zerops services that allows you to use **any port number** you want. The service can even have [multiple internal ports](/documentation/routing/routing-between-project-services.html) open (**1** - **65535**), running on **tcp** or **udp** protocols. The port will be preset to the **==tcp==** protocol and the value of **==3000==**. You can change it immediately or anytime after that.
 
@@ -68,7 +68,7 @@ Because public domain access or Zerops subdomains can only be enabled for **tcp*
 
 ![Public Routing](./images/Public-Routing-Overview-NodeJS.png "Public Routing Overview")
 
-### Start Command
+#### Start Command
 
 A command to start your service will be triggered after each deployment or after you manually start or re-start it. For example, if you have a `scripts` section defined in your project's `package.json` such as:
 
@@ -80,11 +80,11 @@ A command to start your service will be triggered after each deployment or after
 
 you can then use the command ==`npm start`== .
 
-### HA / non-HA runtime environment mode
+#### HA / non-HA runtime environment mode
 
 When creating a new service, you can choose whether the runtime environment should be run in **HA** (High Availability) mode, using 3 or more containers, or **non-HA mode**, using only 1 container. ==**The chosen runtime environment mode can't be changed later.**== If you would like to learn more about the technical details and how this service is built internally, take a look at the [Node.js Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/nodejs-cluster-internally.html) part of the documentation.
 
-#### Node.js runtime in non-HA mode
+##### Node.js runtime in non-HA mode
 
 * great for local development to save money,
 * doesn’t require any changes to the existing code,
@@ -97,7 +97,7 @@ Even when using the non-HA mode for a production project, we nonetheless recomme
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-#### Node.js runtime in HA mode
+##### Node.js runtime in HA mode
 
 * will start to run on three containers, each on a **different physical machine**,
 * with increasing operating load, the number of containers can reach up to 64,

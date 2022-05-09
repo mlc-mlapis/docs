@@ -8,13 +8,13 @@ Zerops provides a fully managed and scaled [Elasticsearch](https://www.elastic.c
 
 The Zerops Elasticsearch service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**.
 
-### Two ways to do it
+There are two possible ways to create a new Elasticsearch service. Either manually in the [Zerops GUI](#through-the-zerops-gui-interface), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-There are two possible ways to create a new Elasticsearch service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+### Using the import functionality
 
-#### A simple import example in the YAML syntax
+Zerops uses a YAML definition format to describe the structure. View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
 
-Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
+To import a Elasticsearch service, you can use something similar to the following:
 
 ```yaml
 services:
@@ -27,9 +27,9 @@ services:
     mode: NON_HA
 ```
 
-View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+### Through the Zerops GUI interface
 
-### Which version to choose
+#### Which version to choose
 
 You can currently choose version **v7.12** or **v6.8**. The chosen version of the database **can't be changed afterwards**.
 
@@ -41,7 +41,7 @@ Switching must be done manually by creating a new service with another version a
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-### Hostname and port
+#### Hostname and port
 
 Choose a short and descriptive URL-friendly name, for example, **es**. The following rules apply:
 
@@ -60,11 +60,11 @@ The Elasticsearch service is configured to **allow full and unrestricted access 
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-### HA/non-HA mode
+#### HA/non-HA mode
 
 When creating a new service, you can choose whether the database should be run in **HA** (High Availability) mode, initially using 3 containers by default, or **non-HA mode**, using only 1 container. ==**The chosen mode can't be changed later.**== If you would like to learn more about the technical details and how this service is built internally, take a look at the [Elasticsearch Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/elasticsearch-cluster-internally.html).
 
-#### Elasticsearch in non-HA mode
+##### Elasticsearch in non-HA mode
 
 * great for local development to save money,
 * data is only stored in a single container, higher risk of data loss,
@@ -78,7 +78,7 @@ Even when using non-HA mode for a production project, we recommend you implement
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-#### Elasticsearch in HA mode
+##### Elasticsearch in HA mode
 
 * will run initially on three containers as an [Elasticsearch cluster](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery.html) with standard vendor functionality provided, each on a **different physical machine**,
 * therefore data is stored redundantly (by default in three places), with no risk of data loss,

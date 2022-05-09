@@ -10,13 +10,13 @@ This service is usually used as a web server for serving static files (index.htm
 
 The Zerops Nginx service is based on a [Linux LXD container](/documentation/overview/projects-and-services-structure.html#services-containers) with **Ubuntu** **==v18.04.06==**. It has the Git version control system pre-installed.
 
-### Two ways to do it
+There are two possible ways to create a new Nginx service. Either manually in the [Zerops GUI](#through-the-zerops-gui-interface), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
 
-There are two possible ways to create a new Nginx service. Either manually in the Zerops GUI, as described in the [rest of this document](#which-version-to-choose), or using the Zerops [import functionality](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project).
+### Using the import functionality
 
-#### A simple import example in the YAML syntax
+Zerops uses a YAML definition format to describe the structure. View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
 
-Zerops uses a YAML definition format to describe the structure. To import a service, you can use something similar to the following:
+To import a Nginx service, you can use something similar to the following:
 
 ```yaml
 services:
@@ -46,15 +46,15 @@ services:
       }
 ```
 
-View the complete specification of the [import/export syntax in the YAML format](/documentation/export-import/project-service-export-import.html#used-yaml-specification).
+### Through the Zerops GUI interface
 
-### Which version to choose
+#### Which version to choose
 
 You can currently only choose Nginx version **v1.20** (version 1.20.1 to be precise).
 
 Used as the export & import type: ==`nginx@1.20`== .
 
-### Hostname and port
+#### Hostname and port
 
 Choose a short and descriptive URL-friendly name, for example, **web**. The following rules apply:
 
@@ -65,7 +65,7 @@ Choose a short and descriptive URL-friendly name, for example, **web**. The foll
 
 The port will be automatically set to the value of **==80==** and can't be changed.
 
-### Document root
+#### Document root
 
 You can choose a **document root** (the publicly accessible folder, usually the location of your ==index.html==). By default, the document root is set to the folder ==**/var/www**== , which you can change. You set it through a service Nginx configuration in the following section, see the [Default Nginx config](#default-nginx-config). Any subsequent changes you can make through a separate **Nginx configuration** service card.
 
@@ -73,7 +73,7 @@ You can choose a **document root** (the publicly accessible folder, usually the 
 root /var/www;
 ```
 
-#### Default Nginx config
+##### Default Nginx config
 
 ![Nginx](./images/Nginx-Default-Config.png "Default Config")
 
@@ -87,7 +87,7 @@ root /var/www;
 
 * The configuration syntax is validated upon saving with `nginx -t` command.
 
-#### Nginx config tips for SPA applications
+##### Nginx config tips for SPA applications
 
 1. A static server should always return `index.html` as the response for any request that asks for a non-existent file or resource. The `location` section for the root can be used as the following code:
 
@@ -106,17 +106,17 @@ location = /index.html {
 }
 ```
 
-### HA / non-HA mode
+#### HA / non-HA mode
 
 When creating a new service, you can choose whether the runtime environment should be run in **HA** (High Availability) mode, using 3 or more containers, or **non-HA mode**, using only 1 container. ==**The chosen runtime environment mode can't be changed later.**== If you would like to learn more about the technical details and how this service is  built internally, take a look at the [PHP Service in HA Mode, Internal](/documentation/overview/how-zerops-works-inside/php-cluster-internally.html) part of the documentation. Although the specific text is focused on the PHP environment (running in combination with the Apache or Nginx webserver), in terms of logic and functionality, the situation is entirely identical, which also applies to a separate static Nginx web server.
 
-#### Nginx static server in non-HA mode
+##### Nginx static server in non-HA mode
 
 * great for local development to save money,
 * doesn’t require any changes to the existing code,
 * not recommended for production projects.
 
-#### Nginx static server in HA mode
+##### Nginx static server in HA mode
 
 * will start to run on three containers, each on a **different physical machine**,
 * with increasing operating load, the number of containers can reach up to 64,
