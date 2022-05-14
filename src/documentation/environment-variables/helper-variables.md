@@ -1,4 +1,4 @@
-# Automatically Generated Helper Variables
+# Automatically generated helper variables
 
 Zerops automatically adds a number of utility variables, for both internal and your own
 use. They cannot be deleted, their keys cannot be changed and those marked with 🔒 cannot have their value edited.
