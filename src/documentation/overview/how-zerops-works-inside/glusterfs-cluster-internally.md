@@ -1,6 +1,6 @@
 # Shared Storage Service, Internal
 
-The following figure shows a simplified schema of a [Zerops Shared Storage Service](/documentation/services/storage/shared.html) based on the [GlusterFS cluster](https://docs.gluster.org/en/latest/Quick-Start-Guide/Architecture) technology.
+The following figure shows a simplified schema of a [Zerops Shared Storage Service](/documentation/services/storage/shared.html) in HA mode based on the [GlusterFS cluster](https://docs.gluster.org/en/latest/Quick-Start-Guide/Architecture) technology.
 
 A **gluster volume** in Zerops is a collection of 3 [containers](https://linuxcontainers.org/#LXD). Management **Gluster daemons** run on each container and manage brick processes (**GlusterFS daemons**), which in turn export the underlying data on disk storage (XFS filesystem).
 

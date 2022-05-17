@@ -132,7 +132,7 @@ If more of the same `priority` values exist (including none priorities), the cre
 
 `mode`: dictionary
 
-Affects whether a service should be run in ==**`HA`**== (High Availability) mode, using 3 or more containers, or ==**`NON_HA`**== mode, using only 1 container. Related to [PostgreSQL](/documentation/services/databases/postgresql.html#ha-non-ha-database-mode), [MariaDB](/documentation/services/databases/mariadb.html#ha-non-ha-database-mode), [KeyDB](/documentation/services/databases/keydb.html#ha-non-ha-database-mode), [Node.js](/documentation/services/runtimes/nodejs.html#ha-non-ha-runtime-environment-mode), [Golang](/documentation/services/runtimes/golang.html#ha-non-ha-runtime-environment-mode), [PHP](/documentation/services/runtimes/php.html#ha-non-ha-runtime-environment-mode), [RabbitMQ](/documentation/services/message-brokers/rabbitmq.html#ha-non-ha-mode), [Object Storage](/documentation/services/storage/s3.html#used-technology) (**always runs in HA mode**), and [Shared Storage](/documentation/services/storage/shared.html#default-hardware-configuration-and-autoscaling) (**always runs in HA mode**).
+Affects whether a service should be run in ==**`HA`**== (High Availability) mode, using 3 or more containers, or ==**`NON_HA`**== mode, using only 1 container. Related to [PostgreSQL](/documentation/services/databases/postgresql.html#ha-non-ha-database-mode), [MariaDB](/documentation/services/databases/mariadb.html#ha-non-ha-database-mode), [KeyDB](/documentation/services/databases/keydb.html#ha-non-ha-database-mode), [Node.js](/documentation/services/runtimes/nodejs.html#ha-non-ha-runtime-environment-mode), [Golang](/documentation/services/runtimes/golang.html#ha-non-ha-runtime-environment-mode), [PHP](/documentation/services/runtimes/php.html#ha-non-ha-runtime-environment-mode), [RabbitMQ](/documentation/services/message-brokers/rabbitmq.html#ha-non-ha-mode), [Object Storage](/documentation/services/storage/s3.html#used-technology) (**always runs in HA mode**), and [Shared Storage](/documentation/services/storage/shared.html#ha-non-ha-shared-storage-mode).
 
 Comprehensive table of available modes:
 
@@ -148,7 +148,7 @@ Comprehensive table of available modes:
 |Static server  |NON_HA, HA |
 |RabbitMQ       |NON_HA, HA |
 |Object storage |HA         |
-|Shared storage |HA         |
+|Shared storage |NON_HA, HA |
 
 #### ports
 
@@ -333,9 +333,7 @@ Before allowing access to a service from the external Internet, it's important t
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-3. When using shared storage services, neither the export nor the import is able to process the [storage mounting points](/documentation/services/storage/shared.html#storage-mounting) in relation to [Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-shared-storage), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-shared-storage), and [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage) runtime environment services.
-
-4. When importing several services, they are created in parallel and asynchronously, without a specific order. You can't affect which one will be instantiated as the first or last.
+3. When using shared storage services, neither the export nor the import doesn't support the [storage mounting points](/documentation/services/storage/shared.html#storage-mounting) in relation to [Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-shared-storage), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-shared-storage), and [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage) runtime environment services. It means that the export doesn't publish already mounted shared storage services, and the import doesn't allow to specify which ones should be enabled on which runtime services. Mounting them to the existing runtime services must be done later manually in the Zerops GUI.
 
 ## Zerops recipes
 

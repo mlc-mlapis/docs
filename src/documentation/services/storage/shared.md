@@ -25,11 +25,13 @@ To import a Shared Storage service, you can use something similar to the followi
 ```yaml
 services:
   # Service will be able to mount using the path /mnt/disk
+  # The mounting point is always derived from the chosen service hostname.
   - hostname: disk
     # Type of service used (the version is generic and not necessary to enter).
     type: shared-storage
-    # This service is available only in HA mode and will be run on multiple containers.
-    mode: HA
+    # Whether the service will be run on one or multiple containers.
+    # Since this is a simple example, using only one container is fine.
+    mode: NON_HA
 ```
 
 ### Through the Zerops GUI interface
@@ -55,6 +57,24 @@ There's only one namespace for all service hostnames, shared storage names, and 
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
+#### HA / non-HA shared storage mode
+
+When creating a new service, you can choose whether the shared storage should be run in **HA** (High Availability) mode, using 3 containers, or **non-HA mode**, using only a single container. ==**The chosen mode can't be changed later.**== If you would like to learn more about the technical details and how this service is built internally, take a look at the [Shared Storage Service, Internal](/documentation/overview/how-zerops-works-inside/glusterfs-cluster-internally.html) part of the documentation.
+
+##### Shared storage in non-HA mode
+
+* great for local development to save money,
+* data is stored only in a single container, higher risk of data loss,
+* all data changes since the last backup are not recoverable,
+* not recommended for production projects.
+
+##### Shared storage in HA mode
+
+* will run always on three containers, each on a **different physical machine**,
+* therefore the data are stored redundantly always in 3 places, with no risk of total failure,
+* when one container fails, it's automatically replaced with a new one,
+* recommended for production projects.
+
 ## Storage mounting
 
 A shared storage disk can only be mounted to runtime environment services ([Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-shared-storage), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-shared-storage), and [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage)).
@@ -63,19 +83,22 @@ The mounting is done automatically by **enabling** the corresponding switch for 
 
 ![Shared Storage](./images/Mount-Shared-Storage.png "Mount a Shared Storage")
 
-The figure above shows that the path to the root of a mounted shared storage disk in the PHP service is ==`/mnt/app`== . If you also enable the switch for **api** (Node.js service), the path will be ==`/mnt/api`== . Here, your application code can create any directory structure and content you need. Access rights are slightly different for each runtime environment. See the details for [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage), Node.js, or Golang.
+The figure above shows that the shared storage is enabled for mounting in the **PHP** service with the `app` hostname. The mounting point will be ==`/mnt/disk`== (based on the chosen shared service hostname `disk`). If you enable also the switch for the **Node.js** service with the `api` hostname, the mounting point for it will be the same ==`/mnt/disk`== (as in the PHP service). Here, your application code can create any directory structure and content you need. Access rights are slightly different for each runtime environment. See the details for [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage), [Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-shared-storage), or [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-shared-storage).
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: tip 
-If you would like to learn more about the technical details and how this service is built internally, take a look at the [Shared Storage Service, Internal](/documentation/overview/how-zerops-works-inside/glusterfs-cluster-internally.html) section of the documentation.
+::: warning Mounting points and the import YAML scripts
+Zerops is able to create shared storage services found in the [import YAML scripts](#using-the-import-functionality), but mounting them to the existing runtime services must be done manually in the Zerops GUI.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
 ## Default hardware configuration and autoscaling
 
-* The Shared storage service is always instantiated in HA mode only with **3 containers**. This means that any files are always replicated through 3 different physical places. A non-HA version isn't available.
+* In HA mode, the Shared storage service is instantiated always with **3 containers**. This means that any files are always replicated through 3 different physical places. In non-HA mode, only **1 container** is used.
 * Each of them runs in a different container located on a **different physical machine** and starts with 1 vCPU, 0.25 GB RAM, and 5 GB of disk space.
-* Zerops will automatically scale the resources **vertically only** (up to 32 vCPU, 64 GB RAM, 1 TB disk space).
+* Zerops will automatically scale the container resources only **vertically** (up to 20 vCPU, 32 GB RAM, 100 GB disk space).
+* You can also manually adjust those resources' custom upper limit manually in the Zerops GUI.
+
+![Shared Storage](./images/Shared-Storage-Autoscaling-Vertical-Limits.png "Autoscaling Upper Limits")
 
 ## How to browse the content
 
