@@ -132,23 +132,23 @@ If more of the same `priority` values exist (including none priorities), the cre
 
 `mode`: dictionary
 
-Affects whether a service should be run in ==**`HA`**== (High Availability) mode, using 3 or more containers, or ==**`NON_HA`**== mode, using only 1 container. Related to [PostgreSQL](/documentation/services/databases/postgresql.html#ha-non-ha-database-mode), [MariaDB](/documentation/services/databases/mariadb.html#ha-non-ha-database-mode), [KeyDB](/documentation/services/databases/keydb.html#ha-non-ha-database-mode), [Node.js](/documentation/services/runtimes/nodejs.html#ha-non-ha-runtime-environment-mode), [Golang](/documentation/services/runtimes/golang.html#ha-non-ha-runtime-environment-mode), [PHP](/documentation/services/runtimes/php.html#ha-non-ha-runtime-environment-mode), [RabbitMQ](/documentation/services/message-brokers/rabbitmq.html#ha-non-ha-mode), [Object Storage](/documentation/services/storage/s3.html#used-technology) (**always runs in HA mode**), and [Shared Storage](/documentation/services/storage/shared.html#ha-non-ha-shared-storage-mode).
+Affects whether a service should be run in ==**`HA`**== (High Availability) mode, using 3 or more containers, or ==**`NON_HA`**== mode, using only 1 container. Related to [PostgreSQL](/documentation/services/databases/postgresql.html#ha-non-ha-database-mode), [MariaDB](/documentation/services/databases/mariadb.html#ha-non-ha-database-mode), [KeyDB](/documentation/services/databases/keydb.html#ha-non-ha-database-mode), [Node.js](/documentation/services/runtimes/nodejs.html#ha-non-ha-runtime-environment-mode), [Golang](/documentation/services/runtimes/golang.html#ha-non-ha-runtime-environment-mode), [PHP](/documentation/services/runtimes/php.html#ha-non-ha-runtime-environment-mode), [RabbitMQ](/documentation/services/message-brokers/rabbitmq.html#ha-non-ha-mode), and [Shared Storage](/documentation/services/storage/shared.html#ha-non-ha-shared-storage-mode). The [Object Storage](/documentation/services/storage/s3.html#used-technology) service is the fully managed service and the `mode` property is **Not Available** to set from a user side.
 
 Comprehensive table of available modes:
 
-|Service        |Modes      |
-|:--------------|:----------|
-|PostgreSQL     |NON_HA, HA |
-|MariaDB        |NON_HA, HA |
-|KeyDB          |NON_HA, HA |
-|Node.js        |NON_HA, HA |
-|Golang         |NON_HA, HA |
-|PHP+Apache     |NON_HA, HA |
-|PHP+Nginx      |NON_HA, HA |
-|Static server  |NON_HA, HA |
-|RabbitMQ       |NON_HA, HA |
-|Object storage |HA         |
-|Shared storage |NON_HA, HA |
+|Service        |Modes      |Comment                            |
+|:--------------|:----------|:----------------------------------|
+|PostgreSQL     |NON_HA, HA |                                   |
+|MariaDB        |NON_HA, HA |                                   |
+|KeyDB          |NON_HA, HA |                                   |
+|Node.js        |NON_HA, HA |                                   |
+|Golang         |NON_HA, HA |                                   |
+|PHP+Apache     |NON_HA, HA |                                   |
+|PHP+Nginx      |NON_HA, HA |                                   |
+|Static server  |NON_HA, HA |                                   |
+|RabbitMQ       |NON_HA, HA |                                   |
+|Object storage |N/A        |Fully managed by Zerops. Don't use.|
+|Shared storage |NON_HA, HA |                                   |
 
 #### ports
 
@@ -305,9 +305,9 @@ services:
       }
 ```
 
-#### objectStorageDiskGBytes
+#### objectStorageSize
 
-`objectStorageDiskGBytes`: integer (optional)
+`objectStorageSize`: integer (optional)
 
 This is required only for the [Object Storage](/documentation/services/storage/s3.html#required-disk-capacity) service. The value represents the required maximum amount of data in GB the Object Storage Service should be capable of holding. The preset value in the Zerops GUI is ==`2`== GB.
 
