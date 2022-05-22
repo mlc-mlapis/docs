@@ -95,6 +95,8 @@ Specify which commands to run to install additional or custom dependencies on to
 
 If one of the above happens, the latest **Zerops build base image** is used, and the **prepare** commands run again.
 
+There is no access either to the application sources or any previous **custom build image** during the `prepare` phase, but only to the **Zerops build base image**.
+
 ### `build`
 
 Specify which commands to run to produce the final application runtime deployed into a Zerops service. These commands run during each build process from the first to the last.
@@ -211,6 +213,8 @@ Specify which commands to run to install additional libraries or tools on top of
 * you invalidated the existed **custom runtime image** through the Zerops GUI (not yet implemented).
 
 If one of the above happens, the latest **Zerops runtime image** is used, and the **prepare** commands run again.
+
+There is no access to the application sources, the code being deployed, or any previous **custom runtime image** during the `prepare` phase, but only to the **Zerops runtime image**.
 
 ### `init` (optional for all services)
 
