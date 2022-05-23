@@ -8,6 +8,12 @@ While it's certainly possible for you to deploy to Zerops, we recommend you run 
 
 Deploy is triggered automatically at the end of the [Zerops build pipeline](/documentation/build/build-config.html#run), but you can invoke it manually, too, by using the `deploy` command in the Zerops [zCLI](/documentation/cli/available-commands.html#deploy-project-name-service-name-space-separated-files-or-directories). In such a case, [zerops.yml](/documentation/build/build-config.html#run-part-and-its-properties) has to be also added to your application source code (Zerops looks for it in the root directory) if it's not there already.
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip When zerops.yml is not required
+If you don't need to use any Zerops functionality related to the [run](/documentation/build/build-config.html#run-part-and-its-properties) phase of the deployment process, then the only services that don't need any `zerops.yml` are the PHP/Nginx and Static server (Nginx) ones.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 The following example for the Node.js service below shows that only the [run](/documentation/build/build-config.html#run-part-and-its-properties) section is required. The [build](/documentation/build/build-config.html#build-part-and-its-properties) section is related exclusively to the build pipeline, and it's omitted.
 
 ```yaml
