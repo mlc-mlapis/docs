@@ -10,7 +10,7 @@ Everything starts with an idea. To make it a reality, you need a team of co-deve
 
 ## Credit and free Zerops credit
 
-To begin with, you'll get \$100 worth of Zerops credit. This is a stress-free way to start off and gives you the freedom to explore all the features which could provide added value for you and your team. This credit can be used for everything except for certain add-ons, such as the dedicated IPv4 address. After using up the \$100, you can manually top up your credit using a credit card or set up weekly/monthly automatic payments. At the same time, you can also set up a daily project cost limit to ensure that you don't run over your budget. The VAT rate is 21% for EU countries. We will also notify you by e-mail when your credit is too low (i.e., less than calculated 10%).
+To begin with, you'll get \$100 worth of Zerops credit. This is a stress-free way to start off and gives you the freedom to explore all the features which could provide added value for you and your team. This credit can be used for everything including specific add-ons, such as the dedicated IPv4 address. After using up the \$100, you can manually top up your credit using a credit card or set up weekly/monthly automatic payments. At the same time, you can also set up a daily project cost limit to ensure that you don't run over your budget. The VAT rate is 21% for EU countries. We will also notify you by e-mail when your credit is too low (i.e., less than calculated 10%).
 
 ## Projects
 
@@ -41,8 +41,8 @@ All services (except S3 object storage) are [automatically scaled](/documentatio
 
 |Hardware       |Scaling| [30 days]|   [day]|  [hour]|          Multiplier|
 |:--------------|------:|---------:|-------:|-------:|-------------------:|
-|vCPU           | 1 unit|  **$2.5**|$0.08333|$0.00347|number of containers|
-|RAM            | 250 MB|  **$1.5**|$0.05000|$0.00208|number of containers|
+|vCPU           | 1 unit|  **$1.0**|$0.03333|$0.00139|number of containers|
+|RAM            | 250 MB|**$1.125**|$0.03750|$0.00156|number of containers|
 |Disk space     | 0.5 GB|  **$0.1**|$0.00333|$0.00014|number of containers|
 |S3 Object store| 1.0 GB| **$0.02**|$0.00067|$0.00003|                   1|
 
@@ -50,7 +50,7 @@ All services (except S3 object storage) are [automatically scaled](/documentatio
 
 You can activate the following paid add-ons:
 
-- [a unique IPv4 address](/documentation/routing/unique-ipv4-ipv6-addresses.html): **\$8 per 30 days**
+- [a unique IPv4 address](/documentation/routing/unique-ipv4-ipv6-addresses.html): **\$4 per 30 days**
 
 ## Examples (on a regular basis)
 
@@ -61,21 +61,21 @@ You can activate the following paid add-ons:
 |Package / Service|Hardware resources              |     [hour]|      [day]|  [30 days]|
 |:----------------|:-------------------------------|----------:|----------:|----------:|
 |basic package    |                                |    $0.0069|    $0.1667|      $5.00|
-|add-on IPv4      |                                |    $0.0111|    $0.2667|      $8.00|
-|HA Nginx         |3x vCPU + 3x250 MB + 3x5 GB Disk|    $0.0208|    $0.5000|     $15.00|
-|HA NodeJS        |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0271|    $0.6500|     $19.50|
-|HA PostgreSQL    |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0271|    $0.6500|     $19.50|
-|                 |                      **Total**:|**$0.0931**|**$2.2333**| **$67.00**|
+|add-on IPv4      |                                |    $0.0056|    $0.1333|      $4.00|
+|HA Nginx         |3x vCPU + 3x250 MB + 3x5 GB Disk|    $0.0130|    $0.3125|      $9.38|
+|HA NodeJS        |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0177|    $0.4250|     $12.75|
+|HA PostgreSQL    |3x vCPU + 3x500 MB + 3x5 GB Disk|    $0.0177|    $0.4250|     $12.75|
+|                 |                      **Total**:|**$0.0609**|**$1.4625**| **$43.88**|
 
 #### Development / Stage application
 
 |Package / Service|Hardware resources              |     [hour]|      [day]|  [30 days]|
 |:----------------|:-------------------------------|----------:|----------:|----------:|
 |basic package    |                                |    $0.0069|    $0.1667|      $5.00|
-|non-HA Nginx     |1x vCPU + 1x250 MB + 1x5 GB Disk|    $0.0069|    $0.1667|      $5.00|
-|non-HA NodeJS    |1x vCPU + 1x250 MB + 1x5 GB Disk|    $0.0069|    $0.1667|      $5.00|
-|HA PostgreSQL    |3x vCPU + 3x250 MB + 3x5 GB Disk|    $0.0208|    $0.5000|     $15.00|
-|                 |                      **Total**:|**$0.0417**|**$1.0000**| **$30.00**|
+|non-HA Nginx     |1x vCPU + 1x250 MB + 1x5 GB Disk|    $0.0043|    $0.1042|      $3.13|
+|non-HA NodeJS    |1x vCPU + 1x250 MB + 1x5 GB Disk|    $0.0043|    $0.1042|      $3.13|
+|HA PostgreSQL    |3x vCPU + 3x250 MB + 3x5 GB Disk|    $0.0130|    $0.3125|      $9.38|
+|                 |                      **Total**:|**$0.0286**|**$0.6875**| **$20.63**|
 
 ___
 > *The list of add-ons will grow in time. Next up: longer-stored and more frequent backups.*

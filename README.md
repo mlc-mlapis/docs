@@ -1,5 +1,3 @@
-# Zerops.io documentation
+# Zerops documentation
 
-https://docs.zerops.io
-
-2020 - 2022
+© 2020 - 2022
