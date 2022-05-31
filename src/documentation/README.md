@@ -21,7 +21,7 @@ All the databases Zerops manages are running on at least [three hardware separat
 
 Each service is automatically set up to be able to [securely communicate](/documentation/routing/routing-between-project-services.html) with other services inside the same project using their hostnames and ports, i.e. your Golang app service (`myapp:3000`) can access a PostgreSQL database service(`mydatabase:5432`) using `postgresql://mydatabase:5432` connection string. You can manage which ports are open inside the Zerops app.
 
-If your application needs to be publicly accesible, Zerops can easily set up access from your [domains](/documentation/routing/using-your-domain.html), as well as direct access through a [unique IPv4 or IPv6 address](/documentation/routing/unique-ipv4-ipv6-addresses.html), with the ability to setup [firewall](/documentation/routing/access-through-ip-and-firewall.html) rules. Zerops also generates a [*.zerops.io subdomain](/documentation/routing/zerops-subdomain.html) if you just need to do some testing.
+If your application needs to be publicly accessible, Zerops can easily set up access from your [domains](/documentation/routing/using-your-domain.html), as well as direct access through a [unique IPv4 or IPv6 address](/documentation/routing/unique-ipv4-ipv6-addresses.html), with the ability to setup [firewall](/documentation/routing/access-through-ip-and-firewall.html) rules. You can also enable a [Zerops subdomain](/documentation/routing/zerops-subdomain.html) if you just need to do some testing.
 
 
 ### 4. Automatically scale from 0 to ∞
