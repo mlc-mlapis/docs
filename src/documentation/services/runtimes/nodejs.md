@@ -137,11 +137,13 @@ Because Node.js code runs under the **`root`** user account, any saved file has 
 
 The **`zeropsSharedStorageMounts`** environment variable allows you to get the list of mounted shared storage services (separated by a pipe, if there are more than only one). For more flexibility, it's always recommended to use such environment variables indirectly, as shown in this example of [custom environment variables](/knowledge-base/best-practices/how-to-use-environment-variables-efficiently.html), in each project service separately.
 
+<!--
 ## Accessing a Zerops Elasticsearch service
 
 Look at the Zerops repository [recipe-es-nodejs-basic](https://github.com/zeropsio/recipe-es-nodejs-basic) for how to do this. There is a simple code example of inserting a new document from the Node.js environment into the Elasticsearch service. You can use the <span style="background-color: #80ff80"><b>&nbsp;Import service&nbsp;</b></span> functionality of the [Zerops import](/documentation/export-import/project-service-export-import.html#how-to-export-import-a-project) to create a working demo in your existing Zerops project with just a few clicks.
 
 If it would be beneficial, you can also use the Elasticsearch [REST API](https://www.elastic.co/guide/en/elasticsearch/reference/current/rest-apis.html) in a standard way in different places, for example, through the [cURL](https://curl.se) utility.
+-->
 
 ## How to access a Node.js runtime environment
 

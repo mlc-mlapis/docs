@@ -169,7 +169,7 @@ The static Nginx service is not configured to support direct access using SSL/TL
 
 ### From other services inside the project
 
-Other services can access the Nginx static server using its **hostname** and **port** environment variables, as they are part of the same private project network (for example, `http://web`, where the port `:80` is implicit).
+Other services can access the Nginx static server using its **hostname** and **port** environment variables, as they are part of the same private project network (for example, `http://web`, where the port `:80` is implicit). See also a list of all automatically generated [environment variables](/documentation/environment-variables/helper-variables.html#static-nginx-server) for the Static Nginx Server service.
 
 ### From other Zerops projects
 

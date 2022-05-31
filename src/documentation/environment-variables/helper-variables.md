@@ -105,6 +105,7 @@ Database admin username (changing it won't affect the value in database settings
 
 Database admin password (changing it won't affect the value in database settings, that needs to be updated manually, see [VPN](/documentation/cli/vpn.html)).
 
+<!--
 ## Elasticsearch
 
 * `port`
@@ -118,8 +119,13 @@ Database admin password (changing it won't affect the value in database settings
 * `connectionString`
 
 🔒 Connection string.
+-->
 
-## Nginx Static
+## Static Nginx Server
+
+* `port`
+
+🔒 Port on which the static server runs.
 
 * `hostname`
 
