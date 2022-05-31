@@ -4,7 +4,7 @@ Zerops is a cloud **Platform-as-a-Service** (PaaS) made [by developers for devel
 
 **Here are the main things Zerops offers you:**
 
-### 1. Build, deploy, and run your applications or serve static files
+## 1. Build, deploy, and run your applications or serve static files
 
 A good build and deploy setup is hard, so we try to make it easy no matter your use case. You can [connect your service with a GitHub repository](/documentation/github/github-integration.html) to automatically trigger a [build and deploy](/documentation/build/how-zerops-build-works.html) pipeline using the [`zerops.yml`](/documentation/build/build-config.html) build definition file.
 
@@ -12,24 +12,21 @@ Alternatively, you can use [Zerops CLI](/documentation/cli/installation.html) to
 
 Whether you need to serve a [JAMSTACK](https://jamstack.org/) app or run an environment, we have you covered. Serve a static Angular, Vue or React app from our [Nginx server](/documentation/services/static-servers.html), run multiple [Node.js](/documentation/services/runtimes.html#node-js), [Golang](/documentation/services/runtimes.html#golang) or [PHP](/documentation/services/runtimes.html#php) applications on Zerops [runtime services](/documentation/services/runtimes.html).
 
-
-### 2. Operate fully administered databases
+## 2. Operate fully administered databases
 
 All the databases Zerops manages are running on at least [three hardware separated nodes](/documentation/ha/why-should-i-want-high-availability.html) to ensure the highest possible data [security and reliability](/documentation/ha/zerops-enterprise-grade-reliability.html). Each of [MariaDB (MySQL)](/documentation/services/databases/mariadb.html), [KeyDB (Redis)](/documentation/services/databases/keydb.html), [RabbitMQ](/documentation/services/message-brokers.html#rabbitmq) is fine-tuned to be as performant as possible at any given [automatic scaling state](/documentation/automatic-scaling/how-automatic-scaling-works.html). Everything is fully managed by Zerops with [backups](/documentation/backup-restore/snapshot-backup.html) at various geographical locations.
 
-### 3. Manage internal and public routing
+## 3. Manage internal and public routing
 
 Each service is automatically set up to be able to [securely communicate](/documentation/routing/routing-between-project-services.html) with other services inside the same project using their hostnames and ports, i.e. your Golang app service (`myapp:3000`) can access a PostgreSQL database service(`mydatabase:5432`) using `postgresql://mydatabase:5432` connection string. You can manage which ports are open inside the Zerops app.
 
 If your application needs to be publicly accessible, Zerops can easily set up access from your [domains](/documentation/routing/using-your-domain.html), as well as direct access through a [unique IPv4 or IPv6 address](/documentation/routing/unique-ipv4-ipv6-addresses.html), with the ability to setup [firewall](/documentation/routing/access-through-ip-and-firewall.html) rules. You can also enable a [Zerops subdomain](/documentation/routing/zerops-subdomain.html) if you just need to do some testing.
 
+## 4. Automatically scale from 0 to ∞
 
-### 4. Automatically scale from 0 to ∞
+Zerops is able to [scale your services both horizontally and vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html), whether it's a runtime, database or storage. A service can easily go from **the lower initial setting** to **the upper limits** and back down in matter of seconds, all scaling operations optimized for the technology in question and its specific version.
 
-Zerops is able to [scale your sevices both horizontally and vertically](/documentation/automatic-scaling/how-automatic-scaling-works.html), whether it's a runtime, database or storage. A service can easily go **from** `1x CPU`, `1 GB ram` on `3 containers` **to** `96x CPU`, `2 TB RAM` on `64 containers` and back down in matter of seconds, all scaling operations optimized for the technology in question and its specific version.
-
-
-### 5. Focus on development, we do the rest
+## 5. Focus on development, we do the rest
 
 We try not to get in your way. We know that for a good dev experience you might want a separate infrastructure for each environment (stage, prod), or even each developer, that's why Zerops places no limits on the number of projects or team members. Each service can start with minimum HW resources or be stopped entirely if you don't need them. Alternatively, it can run in HA mode and support thousands of users 24 hours a day.
 
