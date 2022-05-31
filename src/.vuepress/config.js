@@ -50,7 +50,7 @@ module.exports = {
         link: '/knowledge-base/',
       }
     ],
-    sidebar: process.env.zeropsRegion === 'PRG1' ? {
+    sidebar: process.env.ZEROPS_REGION === 'PRG1' ? {
       '/documentation/': [
         {
           title: 'Zerops Overview',
