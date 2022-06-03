@@ -13,7 +13,7 @@ See full [zCLI](/documentation/cli/available-commands.html) [login](/documentati
 :::
 
 ```yaml
-name: Build and then deploy to zerops.io
+name: Build and then deploy to Zerops
 
 on:
   push:
