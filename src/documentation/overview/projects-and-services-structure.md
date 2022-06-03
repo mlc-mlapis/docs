@@ -67,4 +67,3 @@ A project can contain an [unlimited number of services](/documentation/overview/
 ### Storage services
 
 [Shared storage](/documentation/services/storage.html#shared-storage), [S3 compatible Object Storage](/documentation/services/storage/s3.html)
-
