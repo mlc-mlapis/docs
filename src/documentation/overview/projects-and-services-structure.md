@@ -8,7 +8,7 @@ You can create a separate project for any environment (development, stage, produ
 
 All services within a project share a [dedicated private network](/documentation/routing/routing-between-project-services.html) and can see and reference [environment variables](/documentation/environment-variables/how-to-access.html) from other services.
 
-**By default, nothing outside the project can access any of the services inside.** Each [runtime environment](/documentation/services/runtimes.html) or [static web server](/documentation/services/static-servers.html) services can be made publicly accessible through Zerops subdomains (*.app.zerops.io) or [domains](/documentation/routing/using-your-domain.html), pointing your DNS records to the [IPv6](/documentation/routing/unique-ipv4-ipv6-addresses.html) or [IPv4](/documentation/overview/pricing.html#project-add-ons) addresses assigned to the project, or by setting up direct access by [opening public ports](/documentation/routing/access-through-ip-and-firewall.html) on the assigned IP addresses. A built-in optional [firewall](/documentation/routing/access-through-ip-and-firewall.html) can manage the direct access by defining a list of allowed and denied IP addresses for each open public port. For the remaining services ([databases](/documentation/services/databases.html), [message-brokers](/documentation/services/message-brokers.html)), you have to use our [dev tools](/documentation/cli/vpn.html) (VPN access and Zerops CLI). [Storage](/documentation/services/storage.html) services have a specific status and need to be approached with knowledge of their properties.
+**By default, nothing outside the project can access any of the services inside.** Each [runtime environment](/documentation/services/runtimes.html) or [static web server](/documentation/services/static-servers.html) services can be made publicly accessible through Zerops [subdomains](/documentation/routing/zerops-subdomain.html) or [domains](/documentation/routing/using-your-domain.html), pointing your DNS records to the [IPv6](/documentation/routing/unique-ipv4-ipv6-addresses.html) or [IPv4](/documentation/overview/pricing.html#project-add-ons) addresses assigned to the project, or by setting up direct access by [opening public ports](/documentation/routing/access-through-ip-and-firewall.html) on the assigned IP addresses. A built-in optional [firewall](/documentation/routing/access-through-ip-and-firewall.html) can manage the direct access by defining a list of allowed and denied IP addresses for each open public port. For the remaining services ([databases](/documentation/services/databases.html), [message-brokers](/documentation/services/message-brokers.html)), you have to use our [dev tools](/documentation/cli/vpn.html) (VPN access and Zerops CLI). [Storage](/documentation/services/storage.html) services have a specific status and need to be approached with knowledge of their properties.
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip Communication between different Zerops projects
@@ -16,7 +16,7 @@ Any communication between the various Zerops projects at service level is in pri
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
-The screenshot below shows an example of a project. The project is called **zerops-web-prod**, and it consists of 2 runtimes (Node.js and Golang), a static web server (Nginx), a database (PostgreSQL), and an S3 object storage services. It is made accessible to the public through our domain (`zerops.io`).
+The screenshot below shows an example of a project. The project is called **zerops-web-prod**, and it consists of 2 runtimes (Node.js and Golang), a static web server (Nginx), and a database (PostgreSQL), and object storage (S3 compatible) services. It is made accessible to the public through a domain.
 
 <!-- markdownlint-disable DOCSMD004 -->
 :::: tabs
@@ -67,4 +67,3 @@ A project can contain an [unlimited number of services](/documentation/overview/
 ### Storage services
 
 [Shared storage](/documentation/services/storage.html#shared-storage), [S3 compatible Object Storage](/documentation/services/storage/s3.html)
-

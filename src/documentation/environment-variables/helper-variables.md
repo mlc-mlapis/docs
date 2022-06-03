@@ -15,7 +15,7 @@ use. They cannot be deleted, their keys cannot be changed and those marked with 
 
 * `zeropsSubdomain`
 
-🔒 Unique subdomain of zerops.io, i.e. `my-app-30001.app.zerops.io`, this variable is always available, but subdomain access has to be enabled inside the service routing settings.
+🔒 Unique subdomain of Zerops, i.e. `my-app-30001.app.zerops.io`, this variable is always available, but subdomain access has to be enabled inside the service routing settings.
 
 * `startCommand`
 
@@ -29,7 +29,7 @@ Command used for running the user defined application which corresponds to the c
 
 * `zeropsSubdomain`
 
-🔒 Unique subdomain of zerops.io, i.e. `my-app-30001.app.zerops.io`, this variable is always available, but subdomain access has to be enabled inside the service routing settings.
+🔒 Unique subdomain of Zerops, i.e. `my-app-30001.app.zerops.io`, this variable is always available, but subdomain access has to be enabled inside the service routing settings.
 
 * `nginxConfig`
 
@@ -47,7 +47,7 @@ Folder from which php scripts should be executed. Deployed files are unpacked at
 
 * `zeropsSubdomain`
 
-🔒 Unique subdomain of zerops.io, ie `my-app-30001.app.zerops.io`, this variable is always available, but subdomain access has to be enabled inside the service routing settings.
+🔒 Unique subdomain of Zerops, ie `my-app-30001.app.zerops.io`, this variable is always available, but subdomain access has to be enabled inside the service routing settings.
 
 * `documentRoot`
 
