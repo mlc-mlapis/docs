@@ -45,7 +45,7 @@
 
     <!-- Zerops link -->
     <a
-      href="https://app.zerops.io"
+      href="https://usc1.contabozerops.com"
       class="repo-link"
       target="_blank"
       rel="noopener noreferrer"
