@@ -43,9 +43,9 @@
       <OutboundLink />
     </a>
 
-    <!-- discord link -->
+    <!-- Zerops link -->
     <a
-      href="https://usc1.contabozerops.com"
+      href="https://app.zerops.io"
       class="repo-link"
       target="_blank"
       rel="noopener noreferrer"
