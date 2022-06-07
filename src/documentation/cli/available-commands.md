@@ -144,6 +144,12 @@ You must enclose the project name in quotes if it contains a space.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Other WireGuard running processes
+The command `zcli vpn start` should only be run in an environment where no other WireGuard processes are running, otherwise we do not guarantee proper functionality.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ```bash
 zcli vpn start myproject
 ```
