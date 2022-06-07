@@ -10,6 +10,12 @@ The [zcli](/documentation/cli/installation-authorization.html) command-line clie
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: warning Other WireGuard running processes
+The command `zcli vpn start` should only be run in an environment where no other WireGuard processes are running, otherwise we do not guarantee proper functionality.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 ## Use cases
 
 - Create a clone of your project as your personal development environment. Use **vpn** to access your databases locally without having to have them run locally, which is especially hard if you are developing [high availability](/documentation/ha/why-should-i-want-high-availability.html) enabled applications.
