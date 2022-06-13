@@ -126,7 +126,7 @@ This allows you to control precisely the order in which the services will be cre
 
 If more of the same `priority` values exist (including none priorities), the creation of all services within the same priority group is invoked at the exact moment, and the final availability of these services is not explicitly controlled (depends on the service type and other parameters).
 
-![Zerops import priorities](./images/Timeline_Servics_Priorities.png "Zerops import priorities")
+![Zerops import priorities](./images/Timeline_Services_Priorities.png "Zerops import priorities")
 
 #### mode
 
@@ -376,7 +376,9 @@ Before allowing access to a service from the external Internet, it's important t
 :::
 <!-- markdownlint-enable DOCSMD004 -->
 
+<!-- markdownlint-disable MD029 -->
 3. When using shared storage services, neither the export nor the import doesn't support the [storage mounting points](/documentation/services/storage/shared.html#storage-mounting) in relation to [Node.js](/documentation/services/runtimes/nodejs.html#accessing-a-zerops-shared-storage), [Golang](/documentation/services/runtimes/golang.html#accessing-a-zerops-shared-storage), and [PHP](/documentation/services/runtimes/php.html#accessing-a-zerops-shared-storage) runtime environment services. It means that the export doesn't publish already mounted shared storage services, and the import doesn't allow to specify which ones should be enabled on which runtime services. Mounting them to the existing runtime services must be done later manually in the Zerops GUI.
+<!-- markdownlint-enable MD029 -->
 
 ## Zerops recipes
 
