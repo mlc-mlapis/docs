@@ -10,7 +10,7 @@ Whether the service is created in the Zerops GUI or via an [import YAML script](
 
 Be careful because each service environment variable set is being adjusted from the registry only in a moment when such a service starts or is restarted. This means that until this restart takes place, the service doesn't have access to such changes.
 
-It is essential to be aware of this, especially when using [YAML import scripts](/documentation/export-import/project-service-export-import.html) that create multiple services. The order in which they are successfully created directly affects the accessibility of their environment variable sets from the services that are just being created yet. You can use the [`priority` property](/documentation/export-import/project-service-export-import.html#priority) to exactly control that order.
+It is essential to be aware of this, especially when using [YAML import scripts](/documentation/export-import/project-service-export-import.html) that create multiple services. The order in which they are successfully created directly affects the accessibility of their environment variable sets from the services that are still being created. You can use the [`priority` property](/documentation/export-import/project-service-export-import.html#priority) to exactly control that order.
 
 If the services are created manually from the Zerops GUI, their order and the logic is more evident, and it's clear that you can't assume the accessibility of environment variables for not instantiated services yet.
 
@@ -44,7 +44,7 @@ Accessibility of environment variables inside runtime services depends on the us
 - [Golang](/documentation/services/runtimes/golang.html) — `os.LookupEnv('key')`
 - [PHP](/documentation/services/runtimes/php.html) — `getenv("key")`
 
-where `key` is directly the environment variable name (like `port`) or the name prefixed by a service hostname, where the environment variable is defined (like `db_connectionString`).
+As the key , you can either directly use an environment variable name (such as port) or a composite key <prefix_name>, where the prefix is the service hostname, in which the environment variable name is defined followed by “_” and the name itself (such as db_connectionString).
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip The default value of the [variables_order] PHP directive
