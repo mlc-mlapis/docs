@@ -18,7 +18,7 @@ The Zerops **zCLI** command-line client can be installed using **npm**
 npm i -g @zerops/zcli
 ```
 
-and it will be available under the ==`zcli`== command.
+and it will be available under the **`zcli`** command.
 
 ### Download the zCLI static binary
 
