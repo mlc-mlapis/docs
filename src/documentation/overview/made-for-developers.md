@@ -14,5 +14,5 @@ Using our [zCLI](/documentation/cli/installation-authorization.html#installation
 
 ### Always open to new ideas
 
-You can find our entire team on the [community Discord](https://discord.gg/WDvCZ54). Feel free to start discussions, ask questions, and offer suggestions.
+You can find our entire team on the [community Discord](https://discord.com/invite/WDvCZ54). Feel free to start discussions, ask questions, and offer suggestions.
 
