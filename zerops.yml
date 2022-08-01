@@ -5,7 +5,7 @@ stage:
     # which commands to run to build
     build:
       - npm cache clean --force
-      - npm i
+      - npm i --unsafe-perm
       - npm i -g vuepress
       - vuepress build src
     # which files / folders to deploy after build
