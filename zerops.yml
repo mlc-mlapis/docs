@@ -4,9 +4,8 @@ stage:
     base: [ nodejs@16 ]
     # which commands to run to build
     build:
-      - rm -rf node_modules
       - npm cache clean --force
-      - npm i --legacy-peer-deps
+      - npm i
       - npm i -g vuepress
       - vuepress build src
     # which files / folders to deploy after build
