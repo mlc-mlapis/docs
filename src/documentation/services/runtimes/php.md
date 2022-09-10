@@ -253,7 +253,7 @@ Zerops PHP service includes the most used PHP extensions by default. If you need
 
 ## How to enable/disable installed PHP modules through PHP CLI
 
-You can install any other PHP module not listed in the [pre-installed module table](/documentation/services/runtimes/php.html#pre-installed-php-modules-and-extensions) above using the [build.prepare](/documentation/build/build-config.html#prepare-optional), [run.prepare](/documentation/build/build-config.html#prepare-optional-for-all-services) or [run.init](/documentation/build/build-config.html#init-optional-for-all-services) commands in the `yerops.yml` configuration. After that you need to enable such an installed module in `php.ini` using the PHP CLI command.
+You can install any other PHP module not listed in the [pre-installed module table](/documentation/services/runtimes/php.html#pre-installed-php-modules-and-extensions) above using the [build.prepare](/documentation/build/build-config.html#prepare-optional), [run.prepare](/documentation/build/build-config.html#prepare-optional-for-all-services) or [run.init](/documentation/build/build-config.html#init-optional-for-all-services) commands in the `zerops.yml` configuration. After that you need to enable such an installed module in `php.ini` using the PHP CLI command.
 
 ```bash
 <hostname>:
