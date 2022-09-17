@@ -10,7 +10,7 @@ Lists all available Zerops regions, i.e., the location of data centers where Zer
 
 ## `login`
 
-Should be used after you install **zcli**. You usually only need to log in once per device.
+Should be used after you install **zcli**. You usually only need to log in once per device. You can use one of the two equivalent ways: a personal access token or your registered email address and a password.
 
 ### Login parameters
 
@@ -18,14 +18,16 @@ All login parameters can be used as command line parameters `--parameterName` or
 
 #### `--zeropsToken`
 
-The personal token you created in the Zerops GUI. It's preferable that the token is passed as the `ZEROPSTOKEN` environment variable, so that it doesn't show up in logs.
+The personal access token you created in the Zerops GUI. It's preferable that the token is passed as the `ZEROPSTOKEN` environment variable, so that it doesn't show up in logs for security reasons.
+
+![Access Tokens](./images/Personal_Access_Token.png "Personal Access Token")
 
 ```bash
 zcli login --zeropsToken=AC750cs64sas897sabs65sasbbas9asbdbasd65sadNa
 ```
 
 <!-- markdownlint-disable DOCSMD004 -->
-::: tip Personal token value without its flag
+::: tip Personal access token value without its flag
 You can also use the token value directly without the flag `--zeropsToken=`. zCLI recognizes this case correctly.
 
 ```bash
