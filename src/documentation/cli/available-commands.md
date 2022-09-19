@@ -18,9 +18,7 @@ All login parameters can be used as command line parameters `--parameterName` or
 
 #### `--zeropsToken`
 
-The personal access token you created in the Zerops GUI. It's preferable that the token is passed as the `ZEROPSTOKEN` environment variable, so that it doesn't show up in logs for security reasons.
-
-![Access Tokens](./images/Personal_Access_Token.png "Personal Access Token")
+The [personal access token](/documentation/cli/authorization.html#login-using-personal-access-token) you created in the Zerops GUI. It's preferable that the token is passed as the `ZEROPSTOKEN` environment variable, so that it doesn't show up in logs for security reasons.
 
 ```bash
 zcli login --zeropsToken=AC750cs64sas897sabs65sasbbas9asbdbasd65sadNa
