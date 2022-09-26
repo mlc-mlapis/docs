@@ -10,6 +10,16 @@ zcli vpn start <projectName>
 > dns is working properly
 ```
 
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip When to use a SSH connection
+It is essential to properly understand why Zerops offers the option to access the runtime container via SSH connection directly. The primary reason is to provide the user with the possibility of interactive debugging of the preparation of some procedures, which, however, should finally be carried out fully automatically, mainly through [build.prepare](/documentation/build/build-config.html#prepare-optional), [run.prepare](/documentation/build/build-config.html#prepare-optional-for-all-services) or [run.init](/documentation/build/build-config.html#init-optional-for-all-services) scripts.
+
+**Runtime containers are inherently volatile**, and their instances can be replaced by others at any time, either for vertical scaling of their resources or for horizontal scaling of overall performance using the total number of their instances. Another reason may be the automatic repair of non-functional containers.
+
+For these reasons, the creation and configuration of runtime containers **should always occur via the standard build and deploy pipelines** because manual changes are only temporary and can disappear anytime.
+:::
+<!-- markdownlint-enable DOCSMD004 -->
+
 The rules you have to understand to correctly establish an SSH connection to a Zerops's container:
 
 * it's necessary to specify a full container's domain address inside the project's private network,
@@ -34,10 +44,18 @@ Each SSH tool can have a few different switches or their order, but the two most
 ssh -p 65437 node-id-13.runtime.api.zerops
 # or
 ssh node-id-13.runtime.api.zerops 65437
+> Host 'node-id-13.runtime.api.zerops' resolved to 2a02:1360:3:4e00::a00:7.
+> Connecting to 2a02:1360:3:4e00::a00:7:65437...
+> Connection established.
+> Welcome to a Zerops container SSH session. You are logged in as root.
 ```
+
+Your SSH tool may inform you that the container's host key is not registered in the local host key database. You can accept it for one use or accept and save it for the next time. If you don't choose a `root` user name as a switch, the `root` user will be used automatically by default.
+
+![SSH Access](./images/Unknown_Host_Key_User_Name.png "Host Key & User Name")
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip SSH connections inside a project's private network
-You always need an established WireGuard VPN tunnel to create an SSH connection. Suppose you would like to connect from one project's container to another. In that case, you don't need to install [Zerops zcli](/documentation/cli/installation.html#download-the-zcli-static-binary) or [WireGuard](https://www.wireguard.com/install) package for Ubuntu inside such a container. Both are already pre-installed.
+You always need an established WireGuard VPN tunnel to create an SSH connection. Suppose you would like to connect from one project's container to another. In that case, you don't need to install [Zerops zCLI](/documentation/cli/installation.html#download-the-zcli-static-binary) or [WireGuard](https://www.wireguard.com/install) package for Ubuntu inside such a container. Both are already pre-installed.
 :::
 <!-- markdownlint-enable DOCSMD004 -->
