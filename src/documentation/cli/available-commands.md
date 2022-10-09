@@ -14,6 +14,16 @@ Should be used after you install **zcli**. You usually only need to log in once 
 
 ### login flags
 
+```bash
+zcli login --zeropsToken=<token>
+```
+
+or
+
+```bash
+zcli login --zeropsLogin=<email> --zeropsPassword=<password>
+```
+
 All login flags can be used as command line parameters `--flagName` or environment variables as `FLAGNAME`. A command flag has priority over an environment variable if both equivalents exist.
 
 #### `--zeropsToken`
