@@ -90,7 +90,7 @@ Reserved characters `\<>|` have to be escaped using the `\` backslash to print t
 
 ⚠️ There is one caveat with our processing of the YAML import script because we are parsing the script twice. The first time when evaluating functions and string constants, and the second time when parsing the final YAML composed structure. In each phase, one escaping level of the backslash is done, meaning that each removes one `\`. That's why the `\` character has to be escaped twice (`\\\\` instead of `\\`) to print out `\` on the output finally.
 
-It means that if `ESCAPED_VALUE = <\\\\>` is used, the final value stored in the environment variable will be just `\`.
+It means that if `ESCAPED_VALUE = <\\\\>` is used, the final value stored in the environment variable will be just `\`. The same is true for any value with backslashes, like `ESCAPED_VALUE = True\\\\False`, where the stored result will be `True\False`.
 
 ### Examples of correct function expressions
 
