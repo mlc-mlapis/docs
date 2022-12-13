@@ -163,7 +163,7 @@ module.exports = {
           collapsable: false,
           children: [
             'export-import/project-service-export-import',
-            'export-import/import-functions-modifiers'
+            'export-import/import-script-pre-processing'
           ]
         },
         {
@@ -409,7 +409,7 @@ module.exports = {
           collapsable: false,
           children: [
             'export-import/project-service-export-import',
-            'export-import/import-functions-modifiers'
+            'export-import/import-script-pre-processing'
           ]
         },
         {

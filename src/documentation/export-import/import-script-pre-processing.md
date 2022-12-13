@@ -1,12 +1,32 @@
-# Import functions and modifiers
+# Pre-processing of import YAML scripts
 
 The Zerops [YAML import scripts](/documentation/export-import/project-service-export-import.html#yaml-specification) allow you to create and instantiate the entire Zerops projects or selected services with one click in Zerops GUI or even fully automate necessary steps via the [zCLI import command](/documentation/cli/available-commands.html#path-to-import-script-file-for-the-import-command). They are certainly simple and great ways to manage many real cases effectively.
 
-But there could be moments when you either need to dynamically generate some extra data, like random values, passwords, and public/private keys and store them for later reuse in the script or somehow transform already existing values.
+But there could be moments when you either need to dynamically generate some extra data, like **random values**, **passwords**, and **public/private keys** and store them for later reuse in the script or somehow **transform already existing values**.
 
-For such cases, Zerops offers to use a pre-defined set of import functions and modifiers.
+For such cases, Zerops offers additional advanced functionality that allows you to use an extra set of pre-defined [import functions](#import-functions) and [import modifiers](#import-modifiers).
 
 [[TOC]]
+
+## Enabling the pre-processor functionality
+
+To enable it, you have to place, as the first line of an import YAML script, the `#yamlPreprocessor=on` line.
+
+```yaml
+#yamlPreprocessor=on
+project:
+  name: Example
+  tags:
+  - DEMO
+  - ZEROPS
+services:
+- hostname: db
+  type: mariadb@10.4
+  mode: HA
+```
+
+This enablement means that the import YAML script will be parsed in **two turns** instead of one. The new additional turn, processed first, looks for the specific syntax of the Zerops [import functions](#import-functions) and [import modifiers](#import-modifiers), evaluates them, and finally replaces them with the obtained results. This achieves a new form of the import YAML script, which will be parsed and processed in the second standard turn. All that is kept just in the memory. That standard turn, will create an entire [imported project](/documentation/export-import/project-service-export-import.html#yaml-specification) and instantiate all required services, including evaluating environment variables or creating new ones if required.
+
 
 ## Import functions
 
@@ -90,7 +110,7 @@ Reserved characters `\<>|` have to be escaped using the `\` backslash to print t
 
 ⚠️ There is one caveat with our processing of the YAML import script because we are parsing the script twice. The first time when evaluating functions and string constants, and the second time when parsing the final YAML composed structure. In each phase, one escaping level of the backslash is done, meaning that each removes one `\`. That's why the `\` character has to be escaped twice (`\\\\` instead of `\\`) to print out `\` on the output finally.
 
-It means that if `ESCAPED_VALUE = <\\\\>` is used, the final value stored in the environment variable will be just `\`. The same is true for any value with backslashes, like `ESCAPED_VALUE = True\\\\False`, where the stored result will be `True\False`.
+It means that if `ESCAPED_VALUE: <\\\\>` is used, the final value stored in the environment variable will be just `\`. The same is true for any value with backslashes, like `ESCAPED_VALUE: True\\\\False`, where the stored result will be `True\False`.
 
 ### Examples of correct function expressions
 
@@ -576,3 +596,5 @@ services:
       A0bX/JM8kHjLlJNrtioxcT+dX4lL6/zT
       -----END PRIVATE KEY-----
 ```
+
+## Import modifiers
