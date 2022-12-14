@@ -171,8 +171,8 @@ The **string** is the only data type of all input parameters. Those input parame
 |----------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------|
 |        Syntax example:|`<@generateRandomInt(<200>, <1000>)>`                                                                                                         |
 |            Parameters:|                                                                                                                                              |
-|               `<min>`:|Required minimum (inclusive) as a big signed integer (from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807).                          |
-|               `<max>`:|Required maximum (inclusive) as a big signed integer (from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807).                          |
+|               `<min>`:|Required minimum (inclusive) as a signed integer (from -4,611,686,018,427,387,903 to 4,611,686,018,427,387,903).                              |
+|               `<max>`:|Required maximum (inclusive) as a signed integer (from -4,611,686,018,427,387,903 to 4,611,686,018,427,387,903).                              |
 |        Returned value:|823                                                                                                                                           |
 
 #### pickRandom
@@ -604,3 +604,4 @@ services:
 ```
 
 ## Import modifiers
+
