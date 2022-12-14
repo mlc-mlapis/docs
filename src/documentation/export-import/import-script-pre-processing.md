@@ -27,23 +27,21 @@ services:
 
 This enablement means that the import YAML script will be parsed in **two turns** instead of one. The new additional turn, processed first, looks for the specific syntax of the Zerops [import functions](#import-functions) and [import modifiers](#import-modifiers), evaluates them, and finally replaces them with the obtained results. This achieves a new form of the import YAML script, which will be parsed and processed in the second standard turn. All that is kept just in the memory. That standard turn, will create an entire [imported project](/documentation/export-import/project-service-export-import.html#yaml-specification) and instantiate all required services, including evaluating environment variables or creating new ones if required.
 
-
 ## Import functions
 
 ### Building blocks of the syntax notation of function expressions
 
-| Sequence|Description                                                                  |
-|--------:|:----------------------------------------------------------------------------|
-|     `<@`|Identifier of the beginning of the function expression syntax.               |
-|      `(`|Identifier of the beginning of the function parameters.                      |
-|      `)`|Identifier of the end of the function parameters.                            |
-|      `,`|Function parameters delimiter.                                               |
-|      `<`|Identifier of the beginning of a string constant (without @).                |
-|      `>`|Identifier of the end of a string constant or the function expression syntax.|
-|     `${`|Identifier of the beginning of an environment variable reference.            |
-|      `}`|Identifier of the end of an environment variable reference.                  |
-|      `\`|Escaping character.                                                          |
-|   `\<>|`|Characters that need to be escaped to print them out.                        |
+| Sequence|Description                                                                           |
+|--------:|:-------------------------------------------------------------------------------------|
+|     `<@`|Identifier of the beginning of a function expression syntax.                          |
+|      `(`|Identifier of the beginning of the function parameters.                               |
+|      `)`|Identifier of the end of the function parameters.                                     |
+|      `,`|Function parameters delimiter.                                                        |
+|      `<`|Identifier of the beginning of a string constant (without @).                         |
+|      `>`|Identifier of the end of a string constant or a function expression syntax.           |
+|      `|`|Identifier separating a string constant or a function expression from a modifier name.|
+|      `\`|Escaping character.                                                                   |
+|   `\<>|`|Characters that need to be escaped to print them out.                                 |
 
 ### Data types of function parameters
 
@@ -108,7 +106,7 @@ services:
 
 Reserved characters `\<>|` have to be escaped using the `\` backslash to print them out. It's mandatory to escape the `\` character itself.
 
-⚠️ There is one caveat with our processing of the YAML import script because we are parsing the script twice. The first time when evaluating functions and string constants, and the second time when parsing the final YAML composed structure. In each phase, one escaping level of the backslash is done, meaning that each removes one `\`. That's why the `\` character has to be escaped twice (`\\\\` instead of `\\`) to print out `\` on the output finally.
+⚠️ There is one caveat with our pre-processing step of the YAML import script because we are parsing the script twice. The first time when evaluating import functions, string constants, modificators and the second time when parsing the final YAML composed structure. In each phase, one escaping level of the backslash is done, meaning that each removes one `\`. That's why the `\` character has to be escaped twice (`\\\\` instead of `\\`) to print out `\` on the output finally.
 
 It means that if `ESCAPED_VALUE: <\\\\>` is used, the final value stored in the environment variable will be just `\`. The same is true for any value with backslashes, like `ESCAPED_VALUE: True\\\\False`, where the stored result will be `True\False`.
 
@@ -116,31 +114,39 @@ It means that if `ESCAPED_VALUE: <\\\\>` is used, the final value stored in the 
 
 ```yaml
 # Function will receive one parameter as the string constant value of: 30
-<@functionName(<30>)>
+<@generateRandomString(<30>)>
 # Function will receive two parameters as the string constant values of: 200 and 1000
-<@functionName(<200>, <1000>)>
+<@generateRandomInt(<200>, <1000>)>
 # It's possible to nest functions one into the other.
-<@functionName(<@functionName(<200>, <1000>)>)>
+<@generateRandomString(<@generateRandomInt(<200>, <1000>)>)>
 # Using commas inside a string constant passed as the parameter is possible.
-<@functionName(<By the way, this is text passed over as a value.>)>
-# Referenced environment variables will be evaluated before the parameter is composed.
-# If the environment variable envName contains the value: STAGE,
-# the passed value of the parameter is a string constant.
-<@functionName(<DB_${envName}_HOST>)> # Evaluated to: <@functionName(<DB_STAGE_HOST>)>
-# Function will receive one parameter as the internal variable reference: DB_HOST
-# Its value is passed as a string if such an internal variable exists. If not, an error returns.
-<@functionName(DB_HOST)>
-# Referenced environment variables will be evaluated before the parameter is composed.
-# If the environment variable envName contains the value: STAGE,
-# the passed value of the parameter is a reference to the internal variable.
-<@functionName(DB_${envName}_HOST)> # Evaluated to: <@functionName(DB_STAGE_HOST)>
+# The passed value is stored as internal variable under the name: commentValue
+<@setVar(<commentValue>, <By the way, this is the text passed over as a value.>)>
+# Function will receive one parameter as the internal variable reference: commentValue
+# Its value is returned as a string if such an internal variable exists. If not, an error returns.
+<@getVar(commentValue)>
 # Examples of escaped function expressions:
-\<@functionName(30)\>                  # Output: <@functionName(30)>
-\<@functionName(\<30\>)\>              # Output: <@functionName(<30>)>
-\<@functionName(\<30\>, \<80\>)\>      # Output: <@functionName(<30>, <80>)>
-\<@functionName(\<30\>\, \<80\>)\>     # Output: <@functionName(<30>, <80>)>
-\<@functionName(<30>, <80>)\>          # Output: <@functionName(30, 80)>
+\<@generateRandomString(30)\>               # Output: <@generateRandomString(30)>
+\<@generateRandomString(\<30\>)\>           # Output: <@generateRandomString(<30>)>
+\<@generateRandomInt(\<30\>, \<80\>)\>      # Output: <@generateRandomInt(<30>, <80>)>
+\<@generateRandomInt(\<30\>\, \<80\>)\>     # Output: <@generateRandomInt(<30>, <80>)>
+\<@generateRandomInt(<30>, <80>)\>          # Output: <@generateRandomInt(30, 80)>
 ```
+
+<!-- markdownlint-disable DOCSMD004 -->
+::: tip What happens with environment variable references
+Environment variable reference might need to be used as a part of a string constant or a function parameter. From the parsing point of view on the pre-processing level, they have not been recognized as something special but just a regular string, and they will be transparently passed without any modification. The second standard parsing turn only evaluates them.
+
+```yaml
+# The part ${ITEM_VALUE} is taken as a regular text when storing a string value as an internal variable.
+<@setVar(<commentValue>, <By the way, this ${ITEM_VALUE} is text passed over as a value.>)>
+# The returned value will be exactly the same when retrieving the previously stored value.
+<@getVar(<commentValue>)>
+# The returned value will be: By the way, this ${ITEM_VALUE} is text passed over as a value.
+```
+
+:::
+<!-- markdownlint-enable DOCSMD004 -->
 
 ### List of import functions
 
