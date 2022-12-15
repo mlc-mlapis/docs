@@ -635,8 +635,11 @@ The elegance of using modifiers lies in their simplified syntax for transforming
 
 #### Converting a string to upper-case, lover-case, and title-case variants
 
-|                                   Input|Output                       |
-|---------------------------------------:|:----------------------------|
-|`<sTATic StrINg wiTH a mOdifIER| upper>`|STATIC STRING WITH A MODIFIER|
-|`<sTATic StrINg wiTH a mOdifIER| lower>`|static string with a modifier|
-|`<sTATic StrINg wiTH a mOdifIER| title>`|Static String With A Modifier|
+|                                                          Input|Output                           |
+|--------------------------------------------------------------:|:--------------------------------|
+|                       `<sTATic StrINg wiTH a mOdifIER| upper>`|STATIC STRING WITH A MODIFIER    |
+|                       `<sTATic StrINg wiTH a mOdifIER| lower>`|static string with a modifier    |
+|               `<sTATic StrINg wiTH a mOdifIER| upper | lower>`|static string with a modifier    |
+|                       `<sTATic StrINg wiTH a mOdifIER| title>`|Static String With A Modifier    |
+|                         `<@generateRandomString(<30>)| upper>`|7A14C8E74BC98A0D74253B1D1A4EF6   |
+|`<@setVar(<bucketName>, <@generateRandomString(<10>)| lower>)>`|h73ep149sd                       |
