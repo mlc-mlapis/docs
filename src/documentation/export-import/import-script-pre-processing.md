@@ -33,13 +33,13 @@ This enablement means that the import YAML script will be parsed in **two turns*
 
 | Sequence|Description                                                                           |
 |--------:|:-------------------------------------------------------------------------------------|
-|     `<@`|Identifier of the beginning of a function expression syntax.                          |
-|      `(`|Identifier of the beginning of the function parameters.                               |
-|      `)`|Identifier of the end of the function parameters.                                     |
-|      `,`|Function parameters delimiter.                                                        |
-|      `<`|Identifier of the beginning of a string constant (without @).                         |
-|      `>`|Identifier of the end of a string constant or a function expression syntax.           |
-|      `|`|Identifier separating a string constant or a function expression from a modifier name.|
+|     `<@`|The identifier of the beginning of a function expression syntax.                      |
+|      `(`|The identifier of the beginning of the function parameters.                           |
+|      `)`|The identifier of the end of the function parameters.                                 |
+|      `,`|A function parameters delimiter.                                                      |
+|      `<`|Identifier of the beginning of a string expression (without @).                       |
+|      `>`|The identifier of the end of a string expression or a function expression syntax.     |
+|      `|`|The separator between a string or a function expression content and a modifier name.  |
 |      `\`|Escaping character.                                                                   |
 |   `\<>|`|Characters that need to be escaped to print them out.                                 |
 
@@ -47,11 +47,11 @@ This enablement means that the import YAML script will be parsed in **two turns*
 
 Functions generally support 2 types of parameters.
 
-#### Static string constants
+#### String expressions
 
 * Value is enclosed in `<` and `>` characters.
 * Spaces between `<` and `>` are NOT trimmed.
-* The value is passed into the function always as a string.
+* When the value is passed as a function parameter, it's always a string.
 
 #### Variable reference names (previously stored as internal variables)
 
@@ -66,11 +66,11 @@ Functions generally support 2 types of parameters.
 
 The **string** is the only data type of all function output values.
 
-### Nesting of string constants and function calls
+### Nesting of string and function expressions
 
-Function calls and string constants may be nested even multiple layers deep.
+Function and string expressions may be nested even multiple layers deep.
 
-#### Examples of nesting used in environment variable expressions
+#### Examples of nesting used with imported environment variables
 
 ```yaml
 services:
@@ -86,7 +86,7 @@ services:
     EVEN_MORE_NESTING: <@setVar(<refVarName>, <@generateRandomString(<@generateRandomInt(<20>, <30>)>)>)>
 ```
 
-#### Outputs of nesting used in environment variable expressions
+#### Outputs of nesting used with imported environment variables
 
 ```yaml
 services:
@@ -106,7 +106,7 @@ services:
 
 Reserved characters `\<>|` have to be escaped using the `\` backslash to print them out. It's mandatory to escape the `\` character itself.
 
-⚠️ There is one caveat with our pre-processing step of the YAML import script because we are parsing the script twice. The first time when evaluating import functions, string constants, modificators and the second time when parsing the final YAML composed structure. In each phase, one escaping level of the backslash is done, meaning that each removes one `\`. That's why the `\` character has to be escaped twice (`\\\\` instead of `\\`) to print out `\` on the output finally.
+⚠️ There is one caveat with our pre-processing step of the YAML import script because we are parsing the script twice. The first time when evaluating import function expressions, string expressions, and applied modificators, and the second time, when parsing the final YAML composed structure. In each phase, one escaping level of the backslash is done, meaning that each removes one `\`. That's why the `\` character has to be escaped twice (`\\\\` instead of `\\`) to print out `\` on the output finally.
 
 It means that if `ESCAPED_VALUE: <\\\\>` is used, the final value stored in the environment variable will be just `\`. The same is true for any value with backslashes, like `ESCAPED_VALUE: True\\\\False`, where the stored result will be `True\False`.
 
@@ -135,7 +135,7 @@ It means that if `ESCAPED_VALUE: <\\\\>` is used, the final value stored in the 
 
 <!-- markdownlint-disable DOCSMD004 -->
 ::: tip What happens with environment variable references
-Environment variable reference might need to be used as a part of a string constant or a function parameter. From the parsing point of view on the pre-processing level, they have not been recognized as something special but just a regular string, and they will be transparently passed without any modification. The second standard parsing turn only evaluates them.
+Environment variable reference might need to be used as a part of string expressions. From the parsing point of view on the pre-processing level, they have not been recognized as something special but just a regular string, and they will be transparently passed without any modification. The second standard parsing turn only evaluates them.
 
 ```yaml
 # The part ${ITEM_VALUE} is taken as a regular text when storing a string value as an internal variable.
@@ -605,3 +605,38 @@ services:
 
 ## Import modifiers
 
+The elegance of using modifiers lies in their simplified syntax for transforming an incoming value to the desired result and their ability to chain them one after the other (in comparison to using only function syntax). They can be used inside any string or function expression (between `<` ... `>` identifiers), separated by the `|` identifier at the end of the expression (just before the closing `>` identifier).
+
+### List of import modifiers
+
+|Name    | Description                                                                                                  |
+|-------:|:-------------------------------------------------------------------------------------------------------------|
+|  sha256|Generate a hash of the incoming string using [sha256](https://en.wikipedia.org/wiki/SHA-2) algorithm.         |
+|  sha512|Generate a hash of the incoming string using [sha512](https://en.wikipedia.org/wiki/SHA-2) algorithm.         |
+|  bcrypt|Generate a hash of the incoming string using [bcrypt](https://en.wikipedia.org/wiki/Bcrypt) algorithm.        |
+|        |Fix configuration: Number of cycles = 11                                                                      |
+|argon2id|Generate a hash of the incoming string using [argon2id](https://en.wikipedia.org/wiki/Argon2) algorithm.      |
+|        |Fix configuration: Memory = 64MiB, Iterations = 4, Parallelism = 4, SaltLen = 16B, KeyLength = 32B            |
+|   upper|Converts all Unicode string letters to their upper-case variants.                                             |
+|   lower|Converts all Unicode string letters to their lower-case variants.                                             |
+|   title|Converts all existing words to the title-case convention (the first letter to upper-case, rest to lower-case).|
+
+### Examples of correct using of import modifiers
+
+#### Generating a plain password and related hashes
+
+|                                            Input|Output                                                                                                                          |
+|------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------|
+| `<@generateRandomStringVar(<myPassword>, <30>)>`|7a14c8e74bc98a0d74253b1d1a4ef6                                                                                                  |
+|                 `<@getVar(myPassword)| sha256>`|081b91d6dff5036229a92e2442fb65d7c8124571d4e70a2ac4729aeb86957407                                                                |
+|                 `<@getVar(myPassword)| sha512>`|89c05547de0aa4926512a958f95ab8bf4096ceec63ad5aad4266890bfa059e0cc98917c54276ba4cd61f1dde4c8efda948fc967885c9dd50558ed939722ca10c|
+|                 `<@getVar(myPassword)| bcrypt>`|$2a$10$CxKZX0yIxdc7ts6eI5aBu.g.heAsFcePdMDEpnlViTlo3vGc//PXe                                                                    |
+|               `<@getVar(myPassword)| argon2id>`|$argon2id$v=19$m=98304,t=1,p=3$uWBpmoUT3sfckXHyRF9hlg$8bGtNffuHxaRIgN99zCmJeGEYJF5BY2J9TwzqmezP28                               |
+
+#### Converting a string to upper-case, lover-case, and title-case variants
+
+|                                   Input|Output                       |
+|---------------------------------------:|:----------------------------|
+|`<sTATic StrINg wiTH a mOdifIER| upper>`|STATIC STRING WITH A MODIFIER|
+|`<sTATic StrINg wiTH a mOdifIER| lower>`|static string with a modifier|
+|`<sTATic StrINg wiTH a mOdifIER| title>`|Static String With A Modifier|
